@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-laowupaiqian-xukezheng",
+  "title": "劳务派遣行政许可实施办法",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第19号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/gongbao/content/2013/content_2466579.htm",
+  "promulgationDate": "2013-06-20",
+  "effectiveDate": "2013-07-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "65c57a195457e1d390bb5b1651dae27758d8f451840911647db5eb37d4fbce3d",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "labor-dispatch",
+    "contract-performance",
+    "working-hours-leave",
+    "wage-arrears",
+    "social-insurance",
+    "arbitration-procedure",
+    "arbitration-limitation",
+    "labor-relationship-recognition"
+  ],
+  "provisions": [
+    {
+      "provisionId": "laowupaiqian-xukezheng-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了规范劳务派遣，根据《中华人民共和国劳动合同法》《中华人民共和国行政许可法》等法律，制定本办法。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "9bb62651d75b422c57042f4baec7e6626388b247e5552be806d6d23ef18979c4"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-2",
+      "locator": "第二条",
+      "sourceText": "第二条 劳务派遣行政许可的申请受理、审查批准以及相关的监督检查等，适用本办法。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "f9a805404de9270ff04662df0dfb9f2581fec7be82c0b56bd19f6df55db03623"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-3",
+      "locator": "第三条",
+      "sourceText": "第三条 人力资源社会保障部负责对全国的劳务派遣行政许可工作进行监督指导。 县级以上地方人力资源社会保障行政部门按照省、自治区、直辖市人力资源社会保障行政部门确定的许可管辖分工，负责实施本行政区域内劳务派遣行政许可工作以及相关的监督检查。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "ce6d892e6eb4f60caef52b58ab487efb5a4cec1b3251ef92cff619b333baa1a2"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-4",
+      "locator": "第四条",
+      "sourceText": "第四条 人力资源社会保障行政部门实施劳务派遣行政许可，应当遵循权责统一、公开公正、优质高效的原则。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "8d279f4ae688520a6226124dd9c38735c9170580c663be37954eb48a6762ea11"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-5",
+      "locator": "第五条",
+      "sourceText": "第五条 人力资源社会保障行政部门应当在本行政机关办公场所、网站上公布劳务派遣行政许可的依据、程序、期限、条件和需要提交的全部材料目录以及监督电话，并在本行政机关网站和至少一种全地区性报纸上向社会公布获得许可的劳务派遣单位名单及其许可变更、延续、撤销、吊销、注销等情况。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "7eb498c3f53efa0e8e5d176eb717d89413495a56bb9b4592bd1a1376db739428"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-6",
+      "locator": "第六条",
+      "sourceText": "第六条 经营劳务派遣业务，应当向所在地有许可管辖权的人力资源社会保障行政部门（以下称许可机关）依法申请行政许可。 未经许可，任何单位和个人不得经营劳务派遣业务。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "a28de38463f04ee87555c2ceee69988aca312b7b9cde0946ebadc02ee5a0bda0"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-7",
+      "locator": "第七条",
+      "sourceText": "第七条 申请经营劳务派遣业务应当具备下列条件： （一）注册资本不得少于人民币200万元； （二）有与开展业务相适应的固定的经营场所和设施； （三）有符合法律、行政法规规定的劳务派遣管理制度； （四）法律、行政法规规定的其他条件。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "c7eb4c7fbc3e84e391489366e529d3b3799084aec35a9210fce12d5b527db3b8"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-8",
+      "locator": "第八条",
+      "sourceText": "第八条 申请经营劳务派遣业务的，申请人应当向许可机关提交下列材料： （一）劳务派遣经营许可申请书； （二）营业执照或者《企业名称预先核准通知书》； （三）公司章程以及验资机构出具的验资报告或者财务审计报告； （四）经营场所的使用证明以及与开展业务相适应的办公设施设备、信息管理系统等清单； （五）法定代表人的身份证明； （六）劳务派遣管理制度，包括劳动合同、劳动报酬、社会保险、工作时间、休息休假、劳动纪律等与劳动者切身利益相关的规章制度文本；拟与用工单位签订的劳务派遣协议样本。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "contract-performance",
+        "social-insurance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "6b563c7b3c6caa6b62eb9edf2e5151b208df94f0ee83967948e788f88d647a97"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-9",
+      "locator": "第九条",
+      "sourceText": "第九条 许可机关收到申请材料后，应当根据下列情况分别作出处理： （一）申请材料存在可以当场更正的错误的，应当允许申请人当场更正； （二）申请材料不齐全或者不符合法定形式的，应当当场或者在5个工作日内一次告知申请人需要补正的全部内容，逾期不告知的，自收到申请材料之日起即为受理； （三）申请材料齐全、符合法定形式，或者申请人按照要求提交了全部补正申请材料的，应当受理行政许可申请。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "e9e161b70fc8520822cad16bb3e7a176a00ba2e32a37fd06d32b0c3cf19223c4"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-10",
+      "locator": "第十条",
+      "sourceText": "第十条 许可机关对申请人提出的申请决定受理的，应当出具《受理决定书》；决定不予受理的，应当出具《不予受理决定书》，说明不予受理的理由，并告知申请人享有依法申请行政复议或者提起行政诉讼的权利。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "f5ef2442987eda0f8721d76d3ae0c4d76160594e0c16b2cdbfd7da3b82a07ae2"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 许可机关决定受理申请的，应当对申请人提交的申请材料进行审查。根据法定条件和程序，需要对申请材料的实质内容进行核实的，许可机关应当指派2名以上工作人员进行核查。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "244cccb7ac38b17360043b0fc0bbb23db4304355cd78cb4b1b03d52a55c82dd7"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 许可机关应当自受理之日起20个工作日内作出是否准予行政许可的决定。20个工作日内不能作出决定的，经本行政机关负责人批准，可以延长10个工作日，并应当将延长期限的理由告知申请人。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "9ba9350b1d5bfe4b1bd1929105f1c375a4e9df3872f935d7967930ceb65ab471"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 申请人的申请符合法定条件的，许可机关应当依法作出准予行政许可的书面决定，并自作出决定之日起5个工作日内通知申请人领取《劳务派遣经营许可证》。 申请人的申请不符合法定条件的，许可机关应当依法作出不予行政许可的书面决定，说明不予行政许可的理由，并告知申请人享有依法申请行政复议或者提起行政诉讼的权利。",
+      "topicIds": [
+        "labor-dispatch",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "bddbd8dfe3b62293720960b7ec2020cc5f124dee45095d6f217b81a17a559d88"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 《劳务派遣经营许可证》应当载明单位名称、住所、法定代表人、注册资本、许可经营事项、有效期限、编号、发证机关以及发证日期等事项。《劳务派遣经营许可证》分为正本、副本。正本、副本具有同等法律效力。 《劳务派遣经营许可证》有效期为3年。 《劳务派遣经营许可证》由人力资源社会保障部统一制定样式，由各省、自治区、直辖市人力资源社会保障行政部门负责印制、免费发放和管理。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "86f9e23d3bbbbb561a760b516313ce0ee90c1adc6436e4525aee8dfffa60014b"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 劳务派遣单位取得《劳务派遣经营许可证》后，应当妥善保管，不得涂改、倒卖、出租、出借或者以其他形式非法转让。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "e673c33e600ea8f2db64d67c3d89d463bec5fc2cb9ff7a4e996ebf35903d3d63"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 劳务派遣单位名称、住所、法定代表人或者注册资本等改变的，应当向许可机关提出变更申请。符合法定条件的，许可机关应当自收到变更申请之日起10个工作日内依法办理变更手续，并换发新的《劳务派遣经营许可证》或者在原《劳务派遣经营许可证》上予以注明；不符合法定条件的，许可机关应当自收到变更申请之日起10个工作日内作出不予变更的书面决定，并说明理由。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "551f7bda3cd01830a37f4107b9cf19556f34bea42d22ba764631931414281cd1"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 劳务派遣单位分立、合并后继续存续，其名称、住所、法定代表人或者注册资本等改变的，应当按照本办法第十六条规定执行。 劳务派遣单位分立、合并后设立新公司的，应当按照本办法重新申请劳务派遣行政许可。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "04750c61a6dedaa5351b6b57ab32cfa2e5cd2087c82732547e37d43893e46000"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 劳务派遣单位需要延续行政许可有效期的，应当在有效期届满60日前向许可机关提出延续行政许可的书面申请，并提交3年以来的基本经营情况；劳务派遣单位逾期提出延续行政许可的书面申请的，按照新申请经营劳务派遣行政许可办理。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "c6722350a76b02a194c90010b778d4d8d74858d72e0a89ee730ca507561e9f4e"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 许可机关应当根据劳务派遣单位的延续申请，在该行政许可有效期届满前作出是否准予延续的决定；逾期未作决定的，视为准予延续。 准予延续行政许可的，应当换发新的《劳务派遣经营许可证》。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "65a6b32c950e7accbc0474e1d19d701cbc77117d0757a2197b902780ac3ec564"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 劳务派遣单位有下列情形之一的，许可机关应当自收到延续申请之日起10个工作日内作出不予延续书面决定，并说明理由： （一）逾期不提交劳务派遣经营情况报告或者提交虚假劳务派遣经营情况报告，经责令改正，拒不改正的； （二）违反劳动保障法律法规，在一个行政许可期限内受到2次以上行政处罚的。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "ddf71a951a6b8184bfc17dba4031eba95195d9bb44c3fd60227265202f2d7a34"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 劳务派遣单位设立子公司经营劳务派遣业务的，应当由子公司向所在地许可机关申请行政许可；劳务派遣单位设立分公司经营劳务派遣业务的，应当书面报告许可机关，并由分公司向所在地人力资源社会保障行政部门备案。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "fb0e878942e79807d6d3d1263d75668801d04e1007601ae98f945ffe4a2a8681"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 劳务派遣单位应当于每年3月31日前向许可机关提交上一年度劳务派遣经营情况报告，如实报告下列事项： （一）经营情况以及上年度财务审计报告； （二）被派遣劳动者人数以及订立劳动合同、参加工会的情况； （三）向被派遣劳动者支付劳动报酬的情况； （四）被派遣劳动者参加社会保险、缴纳社会保险费的情况； （五）被派遣劳动者派往的用工单位、派遣数量、派遣期限、用工岗位的情况； （六）与用工单位订立的劳务派遣协议情况以及用工单位履行法定义务的情况； （七）设立子公司、分公司等情况。 劳务派遣单位设立的子公司或者分公司，应当向办理许可或者备案手续的人力资源社会保障行政部门提交上一年度劳务派遣经营情况报告。",
+      "topicIds": [
+        "wage-arrears",
+        "contract-performance",
+        "social-insurance",
+        "labor-dispatch",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "c43827ac7ea9f1faef47bd56ed2e94c248d2c27fb27ab6bf00e30aadd4f2524e"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 许可机关应当对劳务派遣单位提交的年度经营情况报告进行核验，依法对劳务派遣单位进行监督，并将核验结果和监督情况载入企业信用记录。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "8b54d576c11df55c57f94b2b7db09789c5453dcf9fddf9c1bb197d10c36245b8"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 有下列情形之一的，许可机关或者其上级行政机关，可以撤销劳务派遣行政许可： （一）许可机关工作人员滥用职权、玩忽职守，给不符合条件的申请人发放《劳务派遣经营许可证》的； （二）超越法定职权发放《劳务派遣经营许可证》的； （三）违反法定程序发放《劳务派遣经营许可证》的； （四）依法可以撤销行政许可的其他情形。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "c60f875a8b1edc8689303ba01e6f64115a64f09334191090b43e3efd294fa54a"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 申请人隐瞒真实情况或者提交虚假材料申请行政许可的，许可机关不予受理、不予行政许可。 劳务派遣单位以欺骗、贿赂等不正当手段和隐瞒真实情况或者提交虚假材料取得行政许可的，许可机关应当予以撤销。被撤销行政许可的劳务派遣单位在1年内不得再次申请劳务派遣行政许可。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "a1bbf90cbe5e7399aa03363a7574e8d497ee8adcd628321f1e274e812f3ff262"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 有下列情形之一的，许可机关应当依法办理劳务派遣行政许可注销手续： （一）《劳务派遣经营许可证》有效期届满，劳务派遣单位未申请延续的，或者延续申请未被批准的； （二）劳务派遣单位依法终止的； （三）劳务派遣行政许可依法被撤销，或者《劳务派遣经营许可证》依法被吊销的； （四）法律、法规规定的应当注销行政许可的其他情形。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "270c241b069ee6188910594c40c9f6307adbd8ea080b61f4c0c46825e94c2464"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 劳务派遣单位向许可机关申请注销劳务派遣行政许可的，应当提交已经依法处理与被派遣劳动者的劳动关系及其社会保险权益等材料，许可机关应当在核实有关情况后办理注销手续。",
+      "topicIds": [
+        "social-insurance",
+        "labor-dispatch",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "0040e65a5313f6cd8045588418fc5fbb57acf42d6c933983d16b3160fe68f5be"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 当事人对许可机关作出的有关劳务派遣行政许可的行政决定不服的，可以依法申请行政复议或者提起行政诉讼。",
+      "topicIds": [
+        "labor-dispatch",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "8dbf2c408cbcd540b66db074b43f8142106a36d1dc8035ff9ec4d2001b8c6f25"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 任何组织和个人有权对实施劳务派遣行政许可中的违法违规行为进行举报，人力资源社会保障行政部门应当及时核实、处理。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "e580f787be9db2b7d6978f330524d7914d2cd895467eb5bfc17cafba98c49d0c"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-30",
+      "locator": "第三十条",
+      "sourceText": "第三十条 人力资源社会保障行政部门有下列情形之一的，由其上级行政机关或者监察机关责令改正，对直接负责的主管人员和其他直接责任人员依法给予处分；构成犯罪的，依法追究刑事责任： （一）向不符合法定条件的申请人发放《劳务派遣经营许可证》，或者超越法定职权发放《劳务派遣经营许可证》的； （二）对符合法定条件的申请人不予行政许可或者不在法定期限内作出准予行政许可决定的； （三）在办理行政许可、实施监督检查工作中，玩忽职守、徇私舞弊，索取或者收受他人财物或者谋取其他利益的； （四）不依法履行监督职责或者监督不力，造成严重后果的。 许可机关违法实施行政许可，给当事人的合法权益造成损害的，应当依照国家赔偿法的规定给予赔偿。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "a5eb3845803b46dbd3539c9752274ff422ebfde4477318f3db61dfbc40dc6acb"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-31",
+      "locator": "第三十一条",
+      "sourceText": "第三十一条 任何单位和个人违反《中华人民共和国劳动合同法》的规定，未经许可，擅自经营劳务派遣业务的，由人力资源社会保障行政部门责令停止违法行为，没收违法所得，并处违法所得1倍以上5倍以下的罚款；没有违法所得的，可以处5万元以下的罚款。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "5163ea53f45b461bc610c619077a3a11b360b5111ca97acef1b4456bab221ec4"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-32",
+      "locator": "第三十二条",
+      "sourceText": "第三十二条 劳务派遣单位违反《中华人民共和国劳动合同法》有关劳务派遣规定的，由人力资源社会保障行政部门责令限期改正；逾期不改正的，以每人5000元以上1万元以下的标准处以罚款，并吊销其《劳务派遣经营许可证》。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "1a97fe336ff30ba20add3280f391d7d4bfe7b1069df385675fb20f092b184bbb"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-33",
+      "locator": "第三十三条",
+      "sourceText": "第三十三条 劳务派遣单位有下列情形之一的，由人力资源社会保障行政部门处1万元以下的罚款；情节严重的，处1万元以上3万元以下的罚款： （一）涂改、倒卖、出租、出借《劳务派遣经营许可证》，或者以其他形式非法转让《劳务派遣经营许可证》的； （二）隐瞒真实情况或者提交虚假材料取得劳务派遣行政许可的； （三）以欺骗、贿赂等不正当手段取得劳务派遣行政许可的。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "80136293f2c56826a6ce73b5ccbc921ff0cc5d993f451dbf578215c0878a3fea"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-34",
+      "locator": "第三十四条",
+      "sourceText": "第三十四条 劳务派遣单位在2012年12月28日至2013年6月30日之间订立的劳动合同和劳务派遣协议，2013年7月1日后应当按照《全国人大常委会关于修改〈中华人民共和国劳动合同法〉的决定》执行。 本办法施行前经营劳务派遣业务的单位，应当按照本办法取得劳务派遣行政许可后，方可经营新的劳务派遣业务；本办法施行后未取得劳务派遣行政许可的，不得经营新的劳务派遣业务。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "89506e5e282336a98415af27b3afd07cd50e9cd8407cb06aff3ae37d5242be02"
+    },
+    {
+      "provisionId": "laowupaiqian-xukezheng-35",
+      "locator": "第三十五条",
+      "sourceText": "第三十五条 本办法自2013年7月1日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "dfe1cd7f35e1bd99dd071f12b6be2ad173c6cc99d3dd640960fa29074b91bbe1"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 国务院公报（2013年第23号）页；页面UTF-8；2013-06-20 人社部令第19号公布，2013-07-01 施行。"
+  ]
+}

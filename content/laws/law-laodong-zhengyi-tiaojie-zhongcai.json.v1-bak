@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "contentType": "law",
+  "sourceId": "law-laodong-zhengyi-tiaojie-zhongcai",
+  "title": "中华人民共和国劳动争议调解仲裁法",
+  "sourceType": "law",
+  "issuingAuthority": "全国人民代表大会常务委员会",
+  "documentNumber": "中华人民共和国主席令第八十号",
+  "promulgationDate": "2007-12-29",
+  "effectiveDate": "2008-05-01",
+  "validityStatus": "effective",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://flk.npc.gov.cn/detail?title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8A%B3%E5%8A%A8%E4%BA%89%E8%AE%AE%E8%B0%83%E8%A7%A3%E4%BB%B2%E8%A3%81%E6%B3%95&id=2c909fdd678bf17901678bf64f28039d",
+  "sourceCheckedAt": "2026-08-27",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "wage-arrears",
+    "overtime-pay",
+    "unlawful-termination-compensation"
+  ],
+  "provisions": [
+    {
+      "provisionId": "tiaojiezhongcai-2",
+      "locator": "第二条",
+      "sourceText": "中华人民共和国境内的用人单位与劳动者发生的下列劳动争议，适用本法：（一）因确认劳动关系发生的争议；（二）因订立、履行、变更、解除和终止劳动合同发生的争议；（三）因除名、辞退和辞职、离职发生的争议；（四）因工作时间、休息休假、社会保险、福利、培训以及劳动保护发生的争议；（五）因劳动报酬、工伤医疗费、经济补偿或者赔偿金等发生的争议；（六）法律、法规规定的其他劳动争议。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "overtime-pay",
+        "wage-arrears",
+        "social-insurance-noncompete"
+      ],
+      "keywords": [
+        "劳动争议",
+        "适用范围"
+      ],
+      "textSha256": "1335cd7f11f1c1892e0d8beb69375d75a373f67229ec6404c753ce7b85dd6ff1"
+    },
+    {
+      "provisionId": "tiaojiezhongcai-6",
+      "locator": "第六条",
+      "sourceText": "发生劳动争议，当事人对自己提出的主张，有责任提供证据。与争议事项有关的证据属于用人单位掌握管理的，用人单位应当提供；用人单位不提供的，应当承担不利后果。",
+      "topicIds": [
+        "overtime-pay",
+        "wage-arrears"
+      ],
+      "keywords": [
+        "举证责任",
+        "证据",
+        "加班费"
+      ],
+      "textSha256": "b0e8b27a1f3ef358008a84586cad7b9983b09eb3bddc07e9715ca2651d98d6e6"
+    },
+    {
+      "provisionId": "tiaojiezhongcai-27",
+      "locator": "第二十七条",
+      "sourceText": "劳动争议申请仲裁的时效期间为一年。仲裁时效期间从当事人知道或者应当知道其权利被侵害之日起计算。前款规定的仲裁时效，因当事人一方向对方当事人主张权利，或者向有关部门请求权利救济，或者对方当事人同意履行义务而中断。从中断时起，仲裁时效期间重新计算。因不可抗力或者有其他正当理由，当事人不能在本条第一款规定的仲裁时效期间申请仲裁的，仲裁时效中止。从中止时效的原因消除之日起，仲裁时效期间继续计算。劳动关系存续期间因拖欠劳动报酬发生争议的，劳动者申请仲裁不受本条第一款规定的仲裁时效期间的限制；但是，劳动关系终止的，应当自劳动关系终止之日起一年内提出。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [
+        "仲裁时效",
+        "拖欠工资"
+      ],
+      "textSha256": "8cd58f810f813648de6d75c952d7c3d4d618f854b834d15a62e1d8065a07b9ae"
+    }
+  ],
+  "validityNotes": []
+}

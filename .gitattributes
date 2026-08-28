@@ -1,0 +1,26 @@
+# 统一文本行尾为 LF（微信小程序源文件同样为 UTF-8 + LF，符合其编码要求）
+* text=auto eol=lf
+
+# CloudBase 云函数启动脚本必须为 LF（无扩展名文件显式声明为文本）
+scf_bootstrap text eol=lf
+
+# 二进制文件不做行尾/编码处理
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bmp binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.tar binary
+*.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp3 binary
+*.mp4 binary
+*.wav binary

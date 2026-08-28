@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-ldrszy-typical-batch4-03",
+  "caseId": "case-ldrszy-typical-batch4-03",
+  "title": "病亡职工的遗属能否以未依法缴纳社会保险费为由要求用人单位补足抚恤金",
+  "publishingAuthority": "最高人民法院、人力资源社会保障部",
+  "caseType": "typical_case",
+  "publicationDate": "2025-04-16",
+  "jurisdiction": "全国性",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.court.gov.cn/zixun/xiangqing/462311.html",
+  "sourceCheckedAt": "2026-08-27",
+  "retrievedAt": "2026-08-27",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "social-insurance",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "病亡职工的遗属能否以未依法缴纳社会保险费为由要求用人单位补足抚恤金"
+  ],
+  "keyFacts": "2016年6月，刘某松入职某出租车公司，双方劳动合同约定刘某松工作岗位为司机，劳动合同期限自2016年6月2日至2022年3月31日。2021年8月20日，刘某松因病死亡。经查询，刘某松基本养老保险累计实际缴费年限为4年2个月，个人缴费金额合计13766.64元。2017年5月至2018年5月期间，某出租车公司未按照《中华人民共和国社会保险法》规定为刘某松缴纳社会保险费。因该期间社会保险断缴导致刘某松遗属张某欣、张某颖、张某萍无法领取的抚恤金差额为36633.36元。张某欣、张某颖、张某萍向仲裁委员会申请仲裁，请求：某出租车公司支付非因工死亡抚恤金差额36633.36元。后张某欣、张某颖、张某萍不服仲裁委员会裁决，向人民法院提起诉讼。\n原告请求 \n张某欣、张某颖、张某萍起诉请求某出租车公司支付非因工死亡抚恤金差额36633.36元。",
+  "holding": "人民法院判决：某出租车公司向张某欣、张某颖、张某萍支付非因工死亡的抚恤金差额36633.36元。",
+  "reasoning": "《中华人民共和国社会保险法》第十七条规定“参加基本养老保险的个人，因病或者非因工死亡的，其遗属可以领取丧葬补助金和抚恤金”。当地规定，根据本人的缴费年限确定抚恤金的发放月数，缴费年限满5年不满10年的，发放月数为6个月；累计缴费年限不满5年的，其遗属待遇标准不得超过其个人缴费之和。本案中，某出租车公司未依法为刘某松缴纳2017年5月至2018年5月期间的社会保险费，致使张某欣、张某颖、张某萍无法按照缴费年限满5年领取6个月的抚恤金，只能领取刘某松个人缴费的13766.64元，因此，某出租车公司应支付抚恤金差额部分。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-shehuibaoxian-2018",
+      "locator": "第十七条"
+    }
+  ],
+  "documentNumber": null
+}

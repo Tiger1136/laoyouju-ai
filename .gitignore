@@ -1,0 +1,90 @@
+# ============================================================
+# 劳有据 AI —— Git 忽略规则
+# 原则：源码、内容库、测试与文档必须入库；一切可重建产物、
+# 本地缓存、日志、会话与认证缓存一律排除（不执行删除，仅忽略）。
+# ============================================================
+
+# ---- 依赖 ----
+node_modules/
+
+# ---- 构建产物 ----
+.next/
+apps/web/out/
+apps/web/.next/
+out/
+dist/
+packages/*/dist/
+functions/*/dist/
+coverage/
+*.tsbuildinfo
+
+# ---- 检索索引（构建产物，可由 content 完全重建，不入库）----
+content/.index/
+
+# ---- CloudBase/部署产物（构建生成，不入库）----
+deploy/
+.cloudbaserc.local.json
+
+# ---- CloudBase 本地缓存与临时产物 ----
+.cloudbase/
+.tcbrc*
+functions/**/.temp/
+**/.tmp/
+
+# ---- 微信开发者工具：私有配置不入库（project.config.json 可入库）----
+project.private.config.json
+
+# ---- 环境变量：所有 .env 及 .env.* 一律忽略；仅放行示例文件 ----
+.env
+.env.*
+!.env.example
+
+# ---- 日志 ----
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# ---- 临时探针与临时脚本/文件 ----
+scripts/_*
+scripts/probe/
+_scratch*/
+scratch*/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.cache
+*.raw.html
+
+# ---- Corepack 本地缓存（本机 corepack enable 受限时，COREPACK_HOME 指向工作区内）----
+.corepack/
+
+# ---- pnpm 本地 store（环境受限时 pnpm 会在项目内创建 .pnpm-store）----
+.pnpm-store/
+
+# ---- Harness/Codex 等 Agent 会话文件 ----
+.codex/
+.harness/
+.dsh/
+.agent-sessions/
+*.session-*
+
+# ---- 浏览器 Cookie / 登录态文件 ----
+cookies*
+*.cookies
+.browser-data/
+localstorage*
+*.sqlite
+*.sqlite3
+
+# ---- 操作系统与编辑器临时文件 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~

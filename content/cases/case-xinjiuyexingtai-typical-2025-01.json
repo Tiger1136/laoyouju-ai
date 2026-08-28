@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-xinjiuyexingtai-typical-2025-01",
+  "caseId": "case-xinjiuyexingtai-typical-2025-01",
+  "title": "企业与网约货车司机之间存在用工事实、构成支配性劳动管理的，应当认定存在劳动关系——某运输公司诉杨某劳动争议案",
+  "publishingAuthority": "最高人民法院",
+  "caseType": "typical_case",
+  "publicationDate": "2025-04-30",
+  "jurisdiction": "全国性",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.court.gov.cn/zixun/xiangqing/463871.html",
+  "sourceCheckedAt": "2026-08-27",
+  "retrievedAt": "2026-08-27",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "no-written-contract",
+    "labor-relationship-recognition",
+    "new-employment-forms"
+  ],
+  "issues": [
+    "企业与网约货车司机之间存在用工事实、构成支配性劳动管理的，应当认定存在劳动关系——某运输公司诉杨某劳动争议案"
+  ],
+  "keyFacts": "杨某在某运输公司从事混凝土运输工作，双方未订立书面劳动合同。杨某入职后先通过微信群接受某运输公司派单，后在某平台注册账号绑定该公司，由该公司审批通过之后，通过平台接受该公司派单。某运输公司根据接单数、运输量、是否超时、有无罚款等按月向杨某支付运费报酬。杨某与某运输公司产生争议，申请劳动仲裁，请求确认劳动关系。劳动仲裁裁决杨某与某运输公司存在劳动关系。某运输公司不服仲裁裁决，诉至法院。",
+  "holding": "一审法院判决确认杨某与某运输公司存在劳动关系。某运输公司不服，提起上诉。二审法院判决驳回上诉，维持原判。\n法院生效裁判认为，本案主要争议焦点为某运输公司与杨某是否存在劳动关系。《中华人民共和国劳动合同法》第七条规定：“用人单位自用工之日起即与劳动者建立劳动关系”，据此，人民法院应当根据用工事实认定企业和劳动者的法律关系。而劳动关系的本质特征是支配性劳动管理。本案中，其一，某运输公司确认杨某在某平台注册的账号须选择该公司绑定，并经公司审批。杨某在工作过程中需要服从某运输公司安排，某运输公司存在对杨某进行扣罚等劳动管理行为。杨某对运输任务、运输价格均不具有自主决定权。其二，某运输公司与杨某按月结算工资，某运输公司确认杨某基本每天都有接单，相关运输收入构成杨某主要经济来源。其三，杨某从事的是混凝土运输工作，属于某运输公司的业务组成。综上，某运输公司与杨某之间存在用工事实，构成支配性劳动管理，应当认定双方存在劳动关系。",
+  "reasoning": "互联网平台及数字技术要素的加入一定程度上改变了传统劳动管理方式，但未改变劳动管理的性质。参照指导性",
+  "citedProvisions": [
+    {
+      "sourceId": "law-laodonghetongfa-2012",
+      "locator": "第七条"
+    }
+  ],
+  "documentNumber": null
+}

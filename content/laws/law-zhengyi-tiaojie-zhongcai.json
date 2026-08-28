@@ -1,0 +1,606 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "law-zhengyi-tiaojie-zhongcai",
+  "title": "中华人民共和国劳动争议调解仲裁法",
+  "sourceType": "law",
+  "issuingAuthority": "全国人民代表大会常务委员会",
+  "documentNumber": "中华人民共和国主席令第八十号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://flk.npc.gov.cn/detail?title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8A%B3%E5%8A%A8%E4%BA%89%E8%AE%AE%E8%B0%83%E8%A7%A3%E4%BB%B2%E8%A3%81%E6%B3%95&id=2c909fdd678bf17901678bf64f28039d",
+  "promulgationDate": "2007-12-29",
+  "effectiveDate": "2008-05-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "a9b5b5fe8215212bfd279a9fd901b65c10a9ef9378f0c9dbf2afdd94e0746dbb",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "arbitration-procedure",
+    "arbitration-limitation",
+    "labor-relationship-recognition",
+    "working-hours-leave",
+    "wage-arrears",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "contract-performance",
+    "social-insurance",
+    "work-injury",
+    "labor-dispatch",
+    "noncompete-confidentiality"
+  ],
+  "provisions": [
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了公正及时解决劳动争议，保护当事人合法权益，促进劳动关系和谐稳定，制定本法。",
+      "topicIds": [
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "809cb81d6e945af41ec2f3df8bb9b1cb53b1d8ecd859c7b7754a84dd2cac1b87"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-2",
+      "locator": "第二条",
+      "sourceText": "第二条 中华人民共和国境内的用人单位与劳动者发生的下列劳动争议，适用本法： （一）因确认劳动关系发生的争议； （二）因订立、履行、变更、解除和终止劳动合同发生的争议； （三）因除名、辞退和辞职、离职发生的争议； （四）因工作时间、休息休假、社会保险、福利、培训以及劳动保护发生的争议； （五）因劳动报酬、工伤医疗费、经济补偿或者赔偿金等发生的争议； （六）法律、法规规定的其他劳动争议。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance",
+        "social-insurance",
+        "work-injury",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "c4635fa29f010c809256822b3dd92afe0eedae586c3385da55049d1c8e76f7c4"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-3",
+      "locator": "第三条",
+      "sourceText": "第三条 解决劳动争议，应当根据事实，遵循合法、公正、及时、着重调解的原则，依法保护当事人的合法权益。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "d633301fb85cf8b8b89e89e993c377ae5477acbb712b487e172712f2670ffa2d"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-4",
+      "locator": "第四条",
+      "sourceText": "第四条 发生劳动争议，劳动者可以与用人单位协商，也可以请工会或者第三方共同与用人单位协商，达成和解协议。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "621c17084e9ecb71cbb32391e790295382c27403c9c5150571b4adf0982c7197"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-5",
+      "locator": "第五条",
+      "sourceText": "第五条 发生劳动争议，当事人不愿协商、协商不成或者达成和解协议后不履行的，可以向调解组织申请调解；不愿调解、调解不成或者达成调解协议后不履行的，可以向劳动争议仲裁委员会申请仲裁；对仲裁裁决不服的，除本法另有规定的外，可以向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "7badbdaca3d1791a70f6dd851b41a32ff9618d4c9c95199607761ab5b0875b2d"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-6",
+      "locator": "第六条",
+      "sourceText": "第六条 发生劳动争议，当事人对自己提出的主张，有责任提供证据。与争议事项有关的证据属于用人单位掌握管理的，用人单位应当提供；用人单位不提供的，应当承担不利后果。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "31663eb0d5c4471be03d811f180a94bb6ada7eac9b04446b59c420ea086a79e8"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-7",
+      "locator": "第七条",
+      "sourceText": "第七条 发生劳动争议的劳动者一方在十人以上，并有共同请求的，可以推举代表参加调解、仲裁或者诉讼活动。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "9ce238ce6bf64847d176f817ce9fbf32b78f6bdac030cd8f435a363e519eb5c9"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-8",
+      "locator": "第八条",
+      "sourceText": "第八条 县级以上人民政府劳动行政部门会同工会和企业方面代表建立协调劳动关系三方机制，共同研究解决劳动争议的重大问题。",
+      "topicIds": [
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "49ead46d097aa87aabe73c05433d688f9f12099c37164b38f8efffa8d6454197"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-9",
+      "locator": "第九条",
+      "sourceText": "第九条 用人单位违反国家规定，拖欠或者未足额支付劳动报酬，或者拖欠工伤医疗费、经济补偿或者赔偿金的，劳动者可以向劳动行政部门投诉，劳动行政部门应当依法处理。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "78c69b5a674b02317b2b9680e8b8ca41fe256df902fa940de19d5225827ef5fe"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-10",
+      "locator": "第十条",
+      "sourceText": "第十条 发生劳动争议，当事人可以到下列调解组织申请调解： （一）企业劳动争议调解委员会； （二）依法设立的基层人民调解组织； （三）在乡镇、街道设立的具有劳动争议调解职能的组织。 企业劳动争议调解委员会由职工代表和企业代表组成。职工代表由工会成员担任或者由全体职工推举产生，企业代表由企业负责人指定。企业劳动争议调解委员会主任由工会成员或者双方推举的人员担任。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "8633a8299a9f78b535172e51f267e950ac5211c32531e9cce661dce43d1572ce"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 劳动争议调解组织的调解员应当由公道正派、联系群众、热心调解工作，并具有一定法律知识、政策水平和文化水平的成年公民担任。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "d2fd2c20a2222fe13d7aed20b660c544ea7f8614311da8237c1d97a245987ea8"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 当事人申请劳动争议调解可以书面申请，也可以口头申请。口头申请的，调解组织应当当场记录申请人基本情况、申请调解的争议事项、理由和时间。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "ceec6537bb98ca14df6110f06aa4b61c0e843f2e4c1e0a83b32b8323d045473f"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 调解劳动争议，应当充分听取双方当事人对事实和理由的陈述，耐心疏导，帮助其达成协议。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "ddb5b97d85069509a106b7a79f98d34610837e097a8b8e86e6e7e89a686f9068"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 经调解达成协议的，应当制作调解协议书。 调解协议书由双方当事人签名或者盖章 ，经调解员签名并加盖调解组织印章 后生效，对双方当事人具有约束力，当事人应当履行。 自劳动争议调解组织收到调解申请之日起十五日内未达成调解协议的，当事人可以依法申请仲裁。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2b19e8a11f09c1e6b611e827bdc022a585ef7c5bdd39de3d37e47916b0abf227"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 达成调解协议后，一方当事人在协议约定期限内不履行调解协议的，另一方当事人可以依法申请仲裁。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "b060877479bc4c9b7c6519113469cabc93448fb8d695eb4ed352e2d382bc8162"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 因支付拖欠劳动报酬、工伤医疗费、经济补偿或者赔偿金事项达成调解协议，用人单位在协议约定期限内不履行的，劳动者可以持调解协议书依法向人民法院申请支付令。人民法院应当依法发出支付令。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "70258fe34a34f84f07eb2ac48a34851bd98126a9de0362747f1650633fcef67e"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 劳动争议仲裁委员会按照统筹规划、合理布局和适应实际需要的原则设立。省、自治区人民政府可以决定在市、县设立；直辖市人民政府可以决定在区、县设立。直辖市、设区的市也可以设立一个或者若干个劳动争议仲裁委员会。劳动争议仲裁委员会不按行政区划层层设立。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "4809cb95a48094afbda6e93c3609f07dbbfd94efb2da957d44904b0a35b697f8"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 国务院劳动行政部门依照本法有关规定制定仲裁规则。省、自治区、直辖市人民政府劳动行政部门对本行政区域的劳动争议仲裁工作进行指导。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c257352306a17d8e9b99e5234e782fccf96d00ce2805728128ee1287d071c7ec"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 劳动争议仲裁委员会由劳动行政部门代表、工会代表和企业方面代表组成。劳动争议仲裁委员会组成人员应当是单数。 劳动争议仲裁委员会依法履行下列职责： （一）聘任、解聘专职或者兼职仲裁员； （二）受理劳动争议案件； （三）讨论重大或者疑难的劳动争议案件； （四）对仲裁活动进行监督。 劳动争议仲裁委员会下设办事机构，负责办理劳动争议仲裁委员会的日常工作。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "7f175dd88d4cec561e86e93a57397ef21ca438ec8ad804abfaf07d84fc07fc46"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 劳动争议仲裁委员会应当设仲裁员名册。 仲裁员应当公道正派并符合下列条件之一： （一）曾任审判员的； （二）从事法律研究、教学工作并具有中级以上职称的； （三）具有法律知识、从事人力资源管理或者工会等专业工作满五年的； （四）律师执业满三年的。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "54efa68e03c671354353583d3dcff57046b70ee6099099486ca43973fcbb8be9"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 劳动争议仲裁委员会负责管辖本区域内发生的劳动争议。 劳动争议由劳动合同履行地或者用人单位所在地的劳动争议仲裁委员会管辖。双方当事人分别向劳动合同履行地和用人单位所在地的劳动争议仲裁委员会申请仲裁的，由劳动合同履行地的劳动争议仲裁委员会管辖。",
+      "topicIds": [
+        "contract-performance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "21c7ea5e892af9aa1e62082f0fce69926ee6de98b8b5f53c107069289d286d98"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 发生劳动争议的劳动者和用人单位为劳动争议仲裁案件的双方当事人。 劳务派遣单位或者用工单位与劳动者发生劳动争议的，劳务派遣单位和用工单位为共同当事人。",
+      "topicIds": [
+        "labor-dispatch",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "aac5234b4464452494b5600f81d8846928b3fed5dcd399c0892a320e0bdd494e"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 与劳动争议案件的处理结果有利害关系的第三人，可以申请参加仲裁活动或者由劳动争议仲裁委员会通知其参加仲裁活动。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "97c8033ba38076c419e4868e027d6d7c7183cb81a4d336cb8712632905537fa2"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 当事人可以委托代理人参加仲裁活动。委托他人参加仲裁活动，应当向劳动争议仲裁委员会提交有委托人签名或者盖章的委托书，委托书应当载明委托事项和权限。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "5658c4ad7417201f9d1a11e003ab2f535e006046387869b6135d7b1f1016230f"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 丧失或者部分丧失民事行为能力的劳动者，由其法定代理人代为参加仲裁活动；无法定代理人的，由劳动争议仲裁委员会为其指定代理人。劳动者死亡的，由其近亲属或者代理人参加仲裁活动。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2623d36f9f09584918c5db89306045c1b5f5fdcbd8845d4380ca835ed4ddf3c8"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 劳动争议仲裁公开进行，但当事人协议不公开进行或者涉及国家秘密、商业秘密和个人隐私的除外。",
+      "topicIds": [
+        "noncompete-confidentiality",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "5239f109fee4fc6fe32425f547aef2aa5599a137e133db01b5f4f99a314644ea"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 劳动争议申请仲裁的时效期间为一年。仲裁时效期间从当事人知道或者应当知道其权利被侵害之日起计算。 前款规定的仲裁时效，因当事人一方向对方当事人主张权利，或者向有关部门请求权利救济，或者对方当事人同意履行义务而中断。从中断时起，仲裁时效期间重新计算。 因不可抗力或者有其他正当理由，当事人不能在本条第一款规定的仲裁时效期间申请仲裁的，仲裁时效中止。从中止时效的原因消除之日起，仲裁时效期间继续计算。 劳动关系存续期间因拖欠劳动报酬发生争议的，劳动者申请仲裁不受本条第一款规定的仲裁时效期间的限制；但是，劳动关系终止的，应当自劳动关系终止之日起一年内提出。",
+      "topicIds": [
+        "wage-arrears",
+        "labor-relationship-recognition",
+        "arbitration-limitation",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "7908256c0d565fff747e2d040f48ac1f62422ad2841e80f071c778f3480053dc"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 申请人申请仲裁应当提交书面仲裁申请，并按照被申请人人数提交副本。 仲裁申请书应当载明下列事项： （一）劳动者的姓名、性别、年龄、职业、工作单位和住所，用人单位的名称、住所和法定代表人或者主要负责人的姓名、职务； （二）仲裁请求和所根据的事实、理由； （三）证据和证据来源、证人姓名和住所。 书写仲裁申请确有困难的，可以口头申请，由劳动争议仲裁委员会记入笔录，并告知对方当事人。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "5348285fa60d4d20d0ec4dad84e362c94c451cfd69eb6900ffec1163172bbabc"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 劳动争议仲裁委员会收到仲裁申请之日起五日内，认为符合受理条件的，应当受理，并通知申请人；认为不符合受理条件的，应当书面通知申请人不予受理，并说明理由。对劳动争议仲裁委员会不予受理或者逾期未作出决定的，申请人可以就该劳动争议事项向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "4f3dbb006d7ba0428bf84ec7ba0d9ab181d820e99a3d42fd0e519a921ae3c1d7"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-30",
+      "locator": "第三十条",
+      "sourceText": "第三十条 劳动争议仲裁委员会受理仲裁申请后，应当在五日内将仲裁申请书副本送达被申请人。 被申请人收到仲裁申请书副本后，应当在十日内向劳动争议仲裁委员会提交答辩书。劳动争议仲裁委员会收到答辩书后，应当在五日内将答辩书副本送达申请人。被申请人未提交答辩书的，不影响仲裁程序的进行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c312fce478ca17e23db8bad93a0e378a6c91efaf3d8936da7ed4230b2c47a9a0"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-31",
+      "locator": "第三十一条",
+      "sourceText": "第三十一条 劳动争议仲裁委员会裁决劳动争议案件实行仲裁庭制。仲裁庭由三名仲裁员组成，设首席仲裁员。简单劳动争议案件可以由一名仲裁员独任仲裁。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "af3774dbfb582bda13283ab4782294ae41037f8768d06abe54207ba16f612723"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-32",
+      "locator": "第三十二条",
+      "sourceText": "第三十二条 劳动争议仲裁委员会应当在受理仲裁申请之日起五日内将仲裁庭的组成情况书面通知当事人。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "0ff2a29068673351e53a037106a8919185eb51626b7a75709ac2cd0a4a83c663"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-33",
+      "locator": "第三十三条",
+      "sourceText": "第三十三条 仲裁员有下列情形之一，应当回避，当事人也有权以口头或者书面方式提出回避申请： （一）是本案当事人或者当事人、代理人的近亲属的； （二）与本案有利害关系的； （三）与本案当事人、代理人有其他关系，可能影响公正裁决的； （四）私自会见当事人、代理人，或者接受当事人、代理人的请客送礼的。 劳动争议仲裁委员会对回避申请应当及时作出决定，并以口头或者书面方式通知当事人。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c4d076be0ffb05f7857f509444b6bc601c5444bde25786d465b62c290c8a092e"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-34",
+      "locator": "第三十四条",
+      "sourceText": "第三十四条 仲裁员有本法第三十三条第四项规定情形，或者有索贿受贿、徇私舞弊、枉法裁决行为的，应当依法承担法律责任。劳动争议仲裁委员会应当将其解聘。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "4a7215e6f9539cbe791a91404521efbab4bbc878384395227d61031d53287905"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-35",
+      "locator": "第三十五条",
+      "sourceText": "第三十五条 仲裁庭应当在开庭五日前，将开庭日期、地点书面通知双方当事人。当事人有正当理由的，可以在开庭三日前请求延期开庭。是否延期，由劳动争议仲裁委员会决定。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "fa797bc4f5a059689d813a660af4268b6d98ed7e372489288461f2ca13392c20"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-36",
+      "locator": "第三十六条",
+      "sourceText": "第三十六条 申请人收到书面通知，无正当理由拒不到庭或者未经仲裁庭同意中途退庭的，可以视为撤回仲裁申请。 被申请人收到书面通知，无正当理由拒不到庭或者未经仲裁庭同意中途退庭的，可以缺席裁决。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "54251e84383e69c75c709a84e2646b20718f322f69f3b271db859fab080ec68f"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-37",
+      "locator": "第三十七条",
+      "sourceText": "第三十七条 仲裁庭对专门性问题认为需要鉴定的，可以交由当事人约定的鉴定机构鉴定；当事人没有约定或者无法达成约定的，由仲裁庭指定的鉴定机构鉴定。 根据当事人的请求或者仲裁庭的要求，鉴定机构应当派鉴定人参加开庭。当事人经仲裁庭许可，可以向鉴定人提问。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "581ea2b62e5a12c8bce99ad773503571970657be40d8473bdf727787a5d47eee"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-38",
+      "locator": "第三十八条",
+      "sourceText": "第三十八条 当事人在仲裁过程中有权进行质证和辩论。质证和辩论终结时，首席仲裁员或者独任仲裁员应当征询当事人的最后意见。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "1a163ba9287bcfcafa26bffdce0275b7052fff2131237a2e78de7eb53fe19ee6"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-39",
+      "locator": "第三十九条",
+      "sourceText": "第三十九条 当事人提供的证据经查证属实的，仲裁庭应当将其作为认定事实的根据。 劳动者无法提供由用人单位掌握管理的与仲裁请求有关的证据，仲裁庭可以要求用人单位在指定期限内提供。用人单位在指定期限内不提供的，应当承担不利后果。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2b03be0372ace8252cdc5292216c8e2dba0bffec7f3cbbd7de2a90eb966fb0c7"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-40",
+      "locator": "第四十条",
+      "sourceText": "第四十条 仲裁庭应当将开庭情况记入笔录。当事人和其他仲裁参加人认为对自己陈述的记录有遗漏或者差错的，有权申请补正。如果不予补正，应当记录该申请。 笔录由仲裁员、记录人员、当事人和其他仲裁参加人签名或者盖章 。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "ebe5a60e56bfad2b78ef917b20579287f55075cc5910fec7ff72de359d5ae820"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-41",
+      "locator": "第四十一条",
+      "sourceText": "第四十一条 当事人申请劳动争议仲裁后，可以自行和解。达成和解协议的，可以撤回仲裁申请。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "d43310dd333fc1e131237cfdd9685cb8e8da5ae2fefec504b3b1722f10d9ce9a"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-42",
+      "locator": "第四十二条",
+      "sourceText": "第四十二条 仲裁庭在作出裁决前，应当先行调解。 调解达成协议的，仲裁庭应当制作调解书。 调解书应当写明仲裁请求和当事人协议的结果。调解书由仲裁员签名，加盖劳动争议仲裁委员会印章，送达双方当事人。调解书经双方当事人签收后，发生法律效力。 调解不成或者调解书送达前，一方当事人反悔的，仲裁庭应当及时作出裁决。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "6332d745d8435f3a0b3cd53f3e0cf7dbb7af9dc66bc4dcf9de5fb40e29c1c9bf"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-43",
+      "locator": "第四十三条",
+      "sourceText": "第四十三条 仲裁庭裁决劳动争议案件，应当自劳动争议仲裁委员会受理仲裁申请之日起四十五日内结束。案情复杂需要延期的，经劳动争议仲裁委员会主任批准，可以延期并书面通知当事人，但是延长期限不得超过十五日。逾期未作出仲裁裁决的，当事人可以就该劳动争议事项向人民法院提起诉讼。 仲裁庭裁决劳动争议案件时，其中一部分事实已经清楚，可以就该部分先行裁决。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "6cfad0b18d1bea3d0c3954adccd0a2db8d82c64c4ecff8f72333f5573c608caa"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-44",
+      "locator": "第四十四条",
+      "sourceText": "第四十四条 仲裁庭对追索劳动报酬、工伤医疗费、经济补偿或者赔偿金的案件，根据当事人的申请，可以裁决先予执行，移送人民法院执行。 仲裁庭裁决先予执行的，应当符合下列条件： （一）当事人之间权利义务关系明确； （二）不先予执行将严重影响申请人的生活。 劳动者申请先予执行的，可以不提供担保。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "a00a715915e5411b32d406ec15e1a01696c7cfb431d014e83c9d7425c5b72db8"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-45",
+      "locator": "第四十五条",
+      "sourceText": "第四十五条 裁决应当按照多数仲裁员的意见作出，少数仲裁员的不同意见应当记入笔录。仲裁庭不能形成多数意见时，裁决应当按照首席仲裁员的意见作出。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "4f22ccd232ff0bbbb6d0270644c787e2ef03ca48b9f628ea1bc815d133467af3"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-46",
+      "locator": "第四十六条",
+      "sourceText": "第四十六条 裁决书应当载明仲裁请求、争议事实、裁决理由、裁决结果和裁决日期。裁决书由仲裁员签名，加盖劳动争议仲裁委员会印章。对裁决持不同意见的仲裁员，可以签名，也可以不签名。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "03d53fcd290e9fcb83a05a17500a5c843d9a82fdf6fa5aa94f0faed6050eae6f"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-47",
+      "locator": "第四十七条",
+      "sourceText": "第四十七条 下列劳动争议，除本法另有规定的外，仲裁裁决为终局裁决，裁决书自作出之日起发生法律效力： （一）追索劳动报酬、工伤医疗费、经济补偿或者赔偿金，不超过当地月最低工资标准十二个月金额的争议； （二）因执行国家的劳动标准在工作时间、休息休假、社会保险等方面发生的争议。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "social-insurance",
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "29dbb5e894c26522fc2eba36bc440a9f290ed927d72fa90b17ed8b077be1ad8b"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-48",
+      "locator": "第四十八条",
+      "sourceText": "第四十八条 劳动者对本法第四十七条规定的仲裁裁决不服的，可以自收到仲裁裁决书之日起十五日内向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "ecd9e65e032bce5e84160d732928bb8956fe0720188d7e6a7532f498f088d370"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-49",
+      "locator": "第四十九条",
+      "sourceText": "第四十九条 用人单位有证据证明本法第四十七条规定的仲裁裁决有下列情形之一，可以自收到仲裁裁决书之日起三十日内向劳动争议仲裁委员会所在地的中级人民法院申请撤销裁决： （一）适用法律、法规确有错误的； （二）劳动争议仲裁委员会无管辖权的； （三）违反法定程序的； （四）裁决所根据的证据是伪造的； （五）对方当事人隐瞒了足以影响公正裁决的证据的； （六）仲裁员在仲裁该案时有索贿受贿、徇私舞弊、枉法裁决行为的。 人民法院经组成合议庭审查核实裁决有前款规定情形之一的，应当裁定撤销。 仲裁裁决被人民法院裁定撤销的，当事人可以自收到裁定书之日起十五日内就该劳动争议事项向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "36c89dd1e8e09f18f9610242c96b3a685f960b17870dad04a85a1337ff2b69d7"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-50",
+      "locator": "第五十条",
+      "sourceText": "第五十条 当事人对本法第四十七条规定以外的其他劳动争议案件的仲裁裁决不服的，可以自收到仲裁裁决书之日起十五日内向人民法院提起诉讼；期满不起诉的，裁决书发生法律效力。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "18b75fa8dff9af4bb618615373a8a9633334726c0876ee0d30d3bcbd62886056"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-51",
+      "locator": "第五十一条",
+      "sourceText": "第五十一条 当事人对发生法律效力的调解书、裁决书，应当依照规定的期限履行。一方当事人逾期不履行的，另一方当事人可以依照民事诉讼法的有关规定向人民法院申请执行。受理申请的人民法院应当依法执行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "daf09068d7cec542bebfd502b9d599952a733049ac1a0870a1e42fcb6c998107"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-52",
+      "locator": "第五十二条",
+      "sourceText": "第五十二条 事业单位实行聘用制的工作人员与本单位发生劳动争议的，依照本法执行；法律、行政法规或者国务院另有规定的，依照其规定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "fa3ac43046695c5ec4b0936d5d2feadc424f39fdeb47978b84034c656983583c"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-53",
+      "locator": "第五十三条",
+      "sourceText": "第五十三条 劳动争议仲裁不收费。劳动争议仲裁委员会的经费由财政予以保障。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "65b7ce8b69dc05ac9e21d1931403ab54bb2bb1f7b7756b72164e35ef1bbabad4"
+    },
+    {
+      "provisionId": "zhengyi-tiaojie-zhongcai-54",
+      "locator": "第五十四条",
+      "sourceText": "第五十四条 本法自2008年5月1日起施行。 编 辑： 责 编： lunan --> 相关文章 关于《中华人民共和国劳动争议调解仲裁法（草案）》的说明 全国人大法律委员会关于《中华人民共和国劳动争议调解仲裁法（草案二次审议稿）》审议结果的报告 中华人民共和国主席令 中华人民共和国主席令（十一届第1号） 中华人民共和国律师法 中华人民共和国民事诉讼法 中华人民共和国城乡规划法 中华人民共和国节约能源法 中华人民共和国主席令（十一届第2号） 中华人民共和国残疾人保障法 中华人民共和国循环经济促进法 中华人民共和国企业国有资产法 中华人民共和国消防法 中华人民共和国农村土地承包经营纠纷调解仲裁法 中华人民共和国驻外外交人员法 中华人民共和国海岛保护法 中华人民共和国侵权责任法 中华人民共和国国防动员法 中华人民共和国国家赔偿法 中华人民共和国行政监察法 中华人民共和国村民委员会组织法 中华人民共和国水土保持法 中华人民共和国车船税法 中华人民共和国非物质文化遗产法 中华人民共和国行政强制法 中华人民共和国和阿尔及利亚民主人民共和国关于民事和商事司法协助的条约 中华人民共和国海关法 中华人民共和国草原法 中华人民共和国证券法 中华人民共和国煤炭法 中华人民共和国进出口商品检验法 中华人民共和国传染病防治法 中华人民共和国种子法 中华人民共和国动物防疫法 中华人民共和国民办教育促进法 中华人民共和国全国人民代表大会公告（第六号） 中华人民共和国全国人民代表大会公告（第五号） 中华人民共和国全国人民代表大会公告（第四号） 中华人民共和国全国人民代表大会公告（第三号） 中华人民共和国全国人民代表大会公告（第二号） 中华人民共和国全国人民代表大会公告（第一号） 中华人民共和国科学技术进步法 中华人民共和国禁毒法 中华人民共和国水污染防治法 中华人民共和国食品安全法 中华人民共和国邮政法（修订） 中华人民共和国统计法 中华人民共和国涉外民事关系法律适用法 中华人民共和国社会保险法 中华人民共和国旅游法 中华人民共和国文物保护法 中华人民共和国主席令（十届第82号） 关于《中华人民共和国科学技术进步法（修订草案）》的说明 全国人民代表大会常务委员会执法检查组关于检查《中华人民共和国义务教育法》实施情况的报告",
+      "topicIds": [
+        "social-insurance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "7269e1f45982b83ba39869f74119f5901d1eda10abb57f0cf26db5491347d604"
+    }
+  ],
+  "validityNotes": [
+    "中国人大网（npc.gov.cn）全文；页面UTF-8。主席令号在页面顶部元数据中未直接显示，采用通行主席令号“第八十号”。"
+  ]
+}

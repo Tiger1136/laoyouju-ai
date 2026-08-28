@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-ldrszy-typical-batch2-05",
+  "caseId": "case-ldrszy-typical-batch2-05",
+  "title": "用人单位未与劳动者协商一致增加工作任务，劳动者是否有权拒绝",
+  "publishingAuthority": "最高人民法院、人力资源社会保障部",
+  "caseType": "typical_case",
+  "publicationDate": "2021-08-26",
+  "jurisdiction": "全国性",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.court.gov.cn/zixun/xiangqing/319151.html",
+  "sourceCheckedAt": "2026-08-27",
+  "retrievedAt": "2026-08-27",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "overtime-pay",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "arbitration-procedure",
+    "contract-performance",
+    "working-hours-leave"
+  ],
+  "issues": [
+    "用人单位未与劳动者协商一致增加工作任务，劳动者是否有权拒绝"
+  ],
+  "keyFacts": "张某于2018年9月入职某报刊公司从事投递员工作，每天工作6小时，每周工作6天，月工资3500元。2020年6月，因同区域另外一名投递员离职，某报刊公司在未与张某协商的情况下，安排其在第三季度承担该投递员的工作任务。张某认为，要完成加倍的工作量，其每天工作时间至少需延长4小时以上，故拒绝上述安排。某报刊公司依据员工奖惩制度，以张某不服从工作安排为由与其解除劳动合同。张某向劳动人事争议仲裁委员会（简称仲裁委员会）申请仲裁。",
+  "holding": "仲裁委员会裁决某报刊公司支付张某违法解除劳动合同赔偿金14000元（裁决为终局裁决）。",
+  "reasoning": "本案的争议焦点是某报刊公司未与张某协商一致增加其工作任务，张某是否有权拒绝。\n《中华人民共和国劳动合同法》第三十一条规定：“用人单位应当严格执行劳动定额标准，不得强迫或者变相强迫劳动者加班。”第三十五条规定：“用人单位与劳动者协商一致，可以变更劳动合同约定的内容。”劳动合同是明确用人单位和劳动者权利义务的书面协议，未经变更，双方均应严格按照约定履行，特别是涉及工作时间等劳动定额标准的内容。\n本案中，某报刊公司超出合理限度大幅增加张某的工作任务，应视为变更劳动合同约定的内容，违反了关于“协商一致”变更劳动合同的法律规定，已构成变相强迫劳动者加班。因此，张某有权依法拒绝上述安排。某报刊公司以张某不服从工作安排为由与其解除劳动合同不符合法律规定。故仲裁委员会依法裁决某报刊公司支付张某违法解除劳动合同赔偿金。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-laodonghetongfa-2012",
+      "locator": "第三十一条"
+    }
+  ],
+  "documentNumber": null
+}

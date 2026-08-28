@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "reg-nvzhigong-tebieguiding",
+  "title": "女职工劳动保护特别规定",
+  "sourceType": "administrative_regulation",
+  "issuingAuthority": "国务院",
+  "documentNumber": "国务院令第619号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2012-05/07/content_2602602.htm",
+  "promulgationDate": "2012-04-28",
+  "effectiveDate": "2012-04-28",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [
+    "reg-nvzhigong-tebieguiding-1988"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "85729387fd97887bcfdf447132f4ecaf005902f38b40260aa471d9a6dc77c155",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "female-worker-protection",
+    "working-hours-leave",
+    "work-injury",
+    "wage-arrears",
+    "social-insurance",
+    "arbitration-procedure"
+  ],
+  "provisions": [
+    {
+      "provisionId": "nvzhigong-tebieguiding-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了减少和解决女职工在劳动中因生理特点造成的特殊困难，保护女职工健康，制定本规定。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "b0b229d2504b24fb2821a34c26259946b2f2a009230ee96c61bf13288782908b"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-2",
+      "locator": "第二条",
+      "sourceText": "第二条 中华人民共和国境内的国家机关、企业、事业单位、社会团体、个体经济组织以及其他社会组织等用人单位及其女职工，适用本规定。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "e6fc67784c8e3f41627c2ad26eabe71db6ec04c95e11ab8590e4f3ef69e57bd8"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-3",
+      "locator": "第三条",
+      "sourceText": "第三条 用人单位应当加强女职工劳动保护，采取措施改善女职工劳动安全卫生条件，对女职工进行劳动安全卫生知识培训。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "0252a57d32d9d945c44dcfb042548a71739a34409e7093bd035687ba0c02d0ba"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-4",
+      "locator": "第四条",
+      "sourceText": "第四条 用人单位应当遵守女职工禁忌从事的劳动范围的规定。用人单位应当将本单位属于女职工禁忌从事的劳动范围的岗位书面告知女职工。 女职工禁忌从事的劳动范围由本规定附录列示。国务院安全生产监督管理部门会同国务院人力资源社会保障行政部门、国务院卫生行政部门根据经济社会发展情况，对女职工禁忌从事的劳动范围进行调整。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "94a939ecc39911be728fe2977129bae53635a18fa78a063436cf479318966420"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-5",
+      "locator": "第五条",
+      "sourceText": "第五条 用人单位不得因女职工怀孕、生育、哺乳降低其工资、予以辞退、与其解除劳动或者聘用合同。",
+      "topicIds": [
+        "wage-arrears",
+        "female-worker-protection"
+      ],
+      "keywords": [
+        "孕期",
+        "产期",
+        "哺乳期",
+        "解除劳动合同"
+      ],
+      "textSha256": "c7e4f0fe917571f7a38482413e859a5380be1dbbf2325f136ebc25685539e865"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-6",
+      "locator": "第六条",
+      "sourceText": "第六条 女职工在孕期不能适应原劳动的，用人单位应当根据医疗机构的证明，予以减轻劳动量或者安排其他能够适应的劳动。 对怀孕7个月以上的女职工，用人单位不得延长劳动时间或者安排夜班劳动，并应当在劳动时间内安排一定的休息时间。 怀孕女职工在劳动时间内进行产前检查，所需时间计入劳动时间。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "d2e5dfbb15e4ae1c19e3a501fcc2ee245a177cbe363a22fd74a21ef38a277180"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-7",
+      "locator": "第七条",
+      "sourceText": "第七条 女职工生育享受98天产假，其中产前可以休假15天；难产的，增加产假15天；生育多胞胎的，每多生育1个婴儿，增加产假15天。 女职工怀孕未满4个月流产的，享受15天产假；怀孕满4个月流产的，享受42天产假。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "a9fa39570bcb24f02d4ec6adce191379781812b92f6411d8b41c6d1c6a4a8edc"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-8",
+      "locator": "第八条",
+      "sourceText": "第八条 女职工产假期间的生育津贴，对已经参加生育保险的，按照用人单位上年度职工月平均工资的标准由生育保险基金支付；对未参加生育保险的，按照女职工产假前工资的标准由用人单位支付。 女职工生育或者流产的医疗费用，按照生育保险规定的项目和标准，对已经参加生育保险的，由生育保险基金支付；对未参加生育保险的，由用人单位支付。",
+      "topicIds": [
+        "wage-arrears",
+        "social-insurance",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "c3fa1aecb2e633c6b5f16f99687e5d626309276141b3c748a3023163ed39ac85"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-9",
+      "locator": "第九条",
+      "sourceText": "第九条 对哺乳未满1周岁婴儿的女职工，用人单位不得延长劳动时间或者安排夜班劳动。 用人单位应当在每天的劳动时间内为哺乳期女职工安排1小时哺乳时间；女职工生育多胞胎的，每多哺乳1个婴儿每天增加1小时哺乳时间。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "f6c4f34999beb2f9e7fde53aa46057d07e037229dcb527c240030bc16cf99605"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-10",
+      "locator": "第十条",
+      "sourceText": "第十条 女职工比较多的用人单位应当根据女职工的需要，建立女职工卫生室、孕妇休息室、哺乳室等设施，妥善解决女职工在生理卫生、哺乳方面的困难。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "c2547678854bdb1c0027d73d3d0bda10656360a7b4dc20899ece02ecd9c9034d"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 在劳动场所，用人单位应当预防和制止对女职工的性骚扰。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "0b8034142e7cb25bde2f01e1812cbe0a3655f358308b4e9d8e403a0f67d08fa2"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 县级以上人民政府人力资源社会保障行政部门、安全生产监督管理部门按照各自职责负责对用人单位遵守本规定的情况进行监督检查。 工会、妇女组织依法对用人单位遵守本规定的情况进行监督。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "5564491023a3c19f3298b64c2eaf2ed963b0fd42216540c877e02ef8402b2a72"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 用人单位违反本规定第六条第二款、第七条、第九条第一款规定的，由县级以上人民政府人力资源社会保障行政部门责令限期改正，按照受侵害女职工每人1000元以上5000元以下的标准计算，处以罚款。 用人单位违反本规定附录第一条、第二条规定的，由县级以上人民政府安全生产监督管理部门责令限期改正，按照受侵害女职工每人1000元以上5000元以下的标准计算，处以罚款。用人单位违反本规定附录第三条、第四条规定的，由县级以上人民政府安全生产监督管理部门责令限期治理，处5万元以上30万元以下的罚款；情节严重的，责令停止有关作业，或者提请有关人民政府按照国务院规定的权限责令关闭。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "6fed37dbe51a8312b2834b33719e3c7ed17442fa6ba878a04f7d3b7243576283"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 用人单位违反本规定，侵害女职工合法权益的，女职工可以依法投诉、举报、申诉，依法向劳动人事争议调解仲裁机构申请调解仲裁，对仲裁裁决不服的，依法向人民法院提起诉讼。",
+      "topicIds": [
+        "female-worker-protection",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "5bdf75502d68824702d1499246ddef6199f6563800bc9b4a1c717db90cfd69fa"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 用人单位违反本规定，侵害女职工合法权益，造成女职工损害的，依法给予赔偿；用人单位及其直接负责的主管人员和其他直接责任人员构成犯罪的，依法追究刑事责任。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "f8ace0bb70ab1994d18a28e8cb304fe49a7995c26c181a9fdce7b7e766125084"
+    },
+    {
+      "provisionId": "nvzhigong-tebieguiding-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 本规定自公布之日起施行。1988年7月21日国务院发布的《女职工劳动保护规定》同时废止。 附录： 女职工禁忌从事的劳动范围 一、女职工禁忌从事的劳动范围： （一）矿山井下作业； （二）体力劳动强度分级标准中规定的第四级体力劳动强度的作业； （三）每小时负重6次以上、每次负重超过20公斤的作业，或者间断负重、每次负重超过25公斤的作业。 二、女职工在经期禁忌从事的劳动范围： （一）冷水作业分级标准中规定的第二级、第三级、第四级冷水作业； （二）低温作业分级标准中规定的第二级、第三级、第四级低温作业； （三）体力劳动强度分级标准中规定的第三级、第四级体力劳动强度的作业； （四）高处作业分级标准中规定的第三级、第四级高处作业。 三、女职工在孕期禁忌从事的劳动范围： （一）作业场所空气中铅及其化合物、汞及其化合物、苯、镉、铍、砷、氰化物、氮氧化物、一氧化碳、二硫化碳、氯、己内酰胺、氯丁二烯、氯乙烯、环氧乙烷、苯胺、甲醛等有毒物质浓度超过国家职业卫生标准的作业； （二）从事抗癌药物、己烯雌酚生产，接触麻醉剂气体等的作业； （三）非密封源放射性物质的操作，核事故与放射事故的应急处置； （四）高处作业分级标准中规定的高处作业； （五）冷水作业分级标准中规定的冷水作业； （六）低温作业分级标准中规定的低温作业； （七）高温作业分级标准中规定的第三级、第四级的作业； （八）噪声作业分级标准中规定的第三级、第四级的作业； （九）体力劳动强度分级标准中规定的第三级、第四级体力劳动强度的作业； （十）在密闭空间、高压室作业或者潜水作业，伴有强烈振动的作业，或者需要频繁弯腰、攀高、下蹲的作业。 四、女职工在哺乳期禁忌从事的劳动范围： （一）孕期禁忌从事的劳动范围的第一项、第三项、第九项； （二）作业场所空气中锰、氟、溴、甲醇、有机磷化合物、有机氯化合物等有毒物质浓度超过国家职业卫生标准的作业。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "36e1b561771e8bc0718c7dcb0392c24e721fd8bde2884009ff411ec01b52a66a"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn 政策库全文；页面UTF-8；2012-04-18 国务院第200次常务会议通过，国务院令第619号签署日期2012-04-28，自公布之日起施行。 被替代/被修订旧版本（档案记录）: [1988-07-21国务院《女职工劳动保护规定》]。"
+  ]
+}

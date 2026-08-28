@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "reg-guowuyuan-gongzuoshijian",
+  "title": "国务院关于职工工作时间的规定（1995修订）",
+  "sourceType": "administrative_regulation",
+  "issuingAuthority": "国务院",
+  "documentNumber": "国务院令第174号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=806",
+  "promulgationDate": "1995-03-25",
+  "effectiveDate": "1995-05-01",
+  "expiryDate": null,
+  "validityStatus": "amended",
+  "supersedes": [
+    "reg-guowuyuan-gongzuoshijian-1994"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "f1c7a30ccb5326e86d4bf370e0a9502c125a8b22a1f21b8fe0dde32a108a8771",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "working-hours-leave",
+    "overtime-pay"
+  ],
+  "provisions": [
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了合理安排职工的工作和休息时间，维护职工的休息权利，调动职工的积极性，促进社会主义现代化建设事业的发展，根据宪法有关规定，制定本规定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "8a06d95c25a82d0ab89c6306f05369da3a6a16fea6b8b794e231253d712db6a9"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-2",
+      "locator": "第二条",
+      "sourceText": "第二条 本规定适用于在中华人民共和国境内的国家机关、社会团体、企业事业单位以及其他组织的职工。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "875527bae484d3efc974379c6cc814494e6a601ba28fdd57177c15b868d59532"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-3",
+      "locator": "第三条",
+      "sourceText": "第三条 职工每日工作8小时、每周工作40小时。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "9c356d4c9e71e7e30c5686bf51e6656df05eb1776f6b58954bcc4401783c072b"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-4",
+      "locator": "第四条",
+      "sourceText": "第四条 在特殊条件下从事劳动和有特殊情况，需要适当缩短工作时间的，按照国家有关规定执行。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "505d27bd3117a1c8d255f8b9b2a9b1a3b31a37b3eca0b44062eb3f40c031772f"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-5",
+      "locator": "第五条",
+      "sourceText": "第五条 因工作性质或者生产特点的限制，不能实行每日工作8小时、每周工作40小时标准工时制度的，按照国家有关规定，可以实行其他工作和休息办法。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "1ae6b364563d050b0509c8f1e7facf671509c7accd6d9c391ac1dda56603b5ee"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-6",
+      "locator": "第六条",
+      "sourceText": "第六条 任何单位和个人不得擅自延长职工工作时间。因特殊情况和紧急任务确需延长工作时间的，按照国家有关规定执行。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "a9af685df45e7d0c7d35de5d870314aaab7336040d7b3ecd1ebf8afcd4134fe4"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-7",
+      "locator": "第七条",
+      "sourceText": "第七条 国家机关、事业单位实行统一的工作时间，星期六和星期日为周休息日。 企业和不能实行前款规定的统一工作时间的事业单位，可以根据实际情况灵活安排周休息日。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "5b181a5e083b932ee48cd99ae05ea7e3ce950811fc39281ed84d1f762713ff2c"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-8",
+      "locator": "第八条",
+      "sourceText": "第八条 本规定由劳动部、人事部负责解释；实施办法由劳动部、人事部制定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "5f0ab530e653ecb4006e09fa74804dc1db020a51b9993a8fc7299963aef00453"
+    },
+    {
+      "provisionId": "guowuyuan-gongzuoshijian-9",
+      "locator": "第九条",
+      "sourceText": "第九条 本规定自1995年5月1日起施行。1995年5月1日施行有困难的企业、事业单位，可以适当延期；但是，事业单位最迟应当自1996年1月1日起施行，企业最迟应当自1997年5月1日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "8cb42d3c16d42b809808ef6323346d0a89d3693389f197de20702c2c140c9e2b"
+    }
+  ],
+  "validityNotes": [
+    "已存在 reg-guowuyuan-gongzuoshijian，原 mohrss.gov.cn 地址（t20201103_394935）现仅返回988字节（JS/跳转页），改用商务部（mofcom）政策法规库“1995修订”全文（id=806）；页面UTF-8。 被替代/被修订旧版本（档案记录）: [1994-02-03国务院令第146号《国务院关于职工工作时间的规定》]。"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-tj-ldzzy-2026-04-07",
+  "caseId": "case-tj-ldzzy-2026-04-07",
+  "title": "用人单位不得安排哺乳期女职工夜班劳动",
+  "publishingAuthority": "天津市高级人民法院、天津市人力资源和社会保障局",
+  "caseType": "local_typical_case",
+  "publicationDate": "2026-04-30",
+  "jurisdiction": "天津市",
+  "authorityLevel": "B",
+  "officialUrl": "https://tjfy.tjcourt.gov.cn/article/detail/2026/04/id/9298867.shtml",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "overtime-pay",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "working-hours-leave",
+    "female-worker-protection",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "用人单位不得安排哺乳期女职工夜班劳动"
+  ],
+  "keyFacts": "吴某为女职工，于2011年6月1日与某销售公司签订劳动合同。2023年6月5日，吴某生育一子并休产假。2023年12月2日吴某返岗工作，某销售公司安排吴某夜班劳动。吴某以处于哺乳期为由提出异议，未按某销售公司要求提供夜班劳动。后某销售公司向吴某送达《解除劳动合同通知书》，以吴某旷工为由解除劳动合同。吴某向劳动人事争议仲裁委员会（以下简称仲裁委员会）申请仲裁，请求裁决某销售公司支付违法解除劳动合同赔偿金。仲裁委员会裁决支持吴某请求后，某销售公司不服，向人民法院提起诉讼。\n原告诉讼请求\n请求判决某销售公司无需支付违法解除劳动合同赔偿金。",
+  "holding": "人民法院判决某销售公司支付吴某违法解除劳动合同赔偿金。",
+  "reasoning": "本案的争议焦点是，某销售公司解除与吴某的劳动合同是否合法。\n《中华人民共和国劳动法》第六十三条规定：“不得安排女职工在哺乳未满一周岁的婴儿期间从事国家规定的第三级体力劳动强度的劳动和哺乳期禁忌从事的其他劳动，不得安排其延长工作时间和夜班劳动”。《女职工劳动保护特别规定》第九条规定：“对哺乳未满一周岁婴儿的女职工，用人单位不得延长劳动时间或者安排夜班劳动”。\n本案中，吴某于产假结束后返岗工作，某销售公司在吴某哺乳期间，仍安排其夜班劳动。某销售公司的上述行为，违反了法律规定，损害了吴某作为女职工在哺乳期内的合法权益。吴某未按某销售公司要求提供夜班劳动，不构成无故旷工。某销售公司以吴某旷工为由解除劳动合同，属于违法解除，应当支付吴某违法解除劳动合同赔偿金。；本案是保护哺乳期女职工合法劳动权益的典型案例。《中华人民共和国劳动法》《女职工劳动保护特别规定》等法律法规规定，女职工在孕期、产期、哺乳期内享受特殊劳动保护，特别是对于哺乳未满一周岁婴儿的女职工，用人单位应当保障其哺乳时间，不得安排延长工作时间及夜班劳动，禁止用人单位无正当理由随意解除劳动合同。仲裁委员会和人民法院认定用人单位解除劳动合同属于违法解除，应当承担相应赔偿责任，依法保护了哺乳期女职工的合法权益。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-laodongfa-2018",
+      "locator": "第六十三条"
+    },
+    {
+      "sourceId": "reg-nvzhigong-tebieguiding",
+      "locator": "第九条"
+    }
+  ],
+  "documentNumber": null
+}

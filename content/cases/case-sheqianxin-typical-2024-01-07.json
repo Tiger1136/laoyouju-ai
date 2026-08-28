@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-sheqianxin-typical-2024-01-07",
+  "caseId": "case-sheqianxin-typical-2024-01-07",
+  "title": "用人单位对农民工工资支付情况 负有举证责任 ——唐某诉某建筑劳务公司追索劳动报酬纠纷案",
+  "publishingAuthority": "最高人民法院、人力资源社会保障部、中华全国总工会",
+  "caseType": "typical_case",
+  "publicationDate": "2024-01-25",
+  "jurisdiction": "全国性",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.court.gov.cn/shenpan/xiangqing/423922.html",
+  "sourceCheckedAt": "2026-08-27",
+  "retrievedAt": "2026-08-27",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "wage-arrears",
+    "no-written-contract",
+    "work-injury",
+    "arbitration-procedure",
+    "working-hours-leave",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "用人单位对农民工工资支付情况 负有举证责任 ——唐某诉某建筑劳务公司追索劳动报酬纠纷案"
+  ],
+  "keyFacts": "唐某与某建筑劳务公司签订书面劳动合同，工作岗位为木工。后唐某在工作中受伤，被认定为工伤并进行了伤残等级评定。因双方对唐某受伤当月工资支付发生争议，唐某向劳动人事争议仲裁委员会申请仲裁，要求某建筑劳务公司支付其受伤当月工资。",
+  "holding": "劳动人事争议仲裁委员会认为，《中华人民共和国劳动争议调解仲裁法》第六条规定“发生劳动争议，当事人对自己提出的主张，有责任提供证据。与争议事项有关的证据属于用人单位掌握管理的，用人单位应当提供；用人单位不提供的，应当承担不利后果”，《保障农民工工资支付条例》第五十条规定“农民工与用人单位就拖欠工资存在争议，用人单位应当提供依法由其保存的劳动合同、职工名册、工资支付台账和清单等材料；不提供的，依法承担不利后果”。某建筑劳务公司虽然主张唐某受伤当月仅工作十余天并已结清其工资，但未提供工资支付台账和清单等相应证据，应当承担举证不能的不利后果，遂认定唐某受伤当月全勤（唐某受伤日为当月最后一天），并根据双方均认可的唐某日工资标准，裁决某建筑劳务公司支付唐某受伤当月工资5000余元。",
+  "reasoning": "我国劳动法律将保护劳动者的合法权益作为立法宗旨之一，在相关规定中充分考虑了劳动者特别是农民工举证能力不足的实际情况。在劳动争议案件中，工资支付台账和清单是认定用人单位是否依法履行工资支付义务的重要依据。《保障农民工工资支付条例》第十五条规定“用人单位应当按照工资支付周期编制书面工资支付台账，并至少保存3年。书面工资支付台账应当包括用人单位名称，支付周期，支付日期，支付对象姓名、身份证号码、联系方式，工作时间，应发工资项目及数额，代扣、代缴、扣除项目和数额，实发工资数额，银行代发工资凭证或者农民工签字等内容。用人单位向农民工支付工资时，应当提供农民工本人的工资清单”。用人单位应当严格落实上述要求，编制、保存好农民工工资支付台账和清单，清晰记录工作时间、工资项目及数额等要素，避免在劳动争议仲裁及诉讼过程中承担举证不能的不利后果。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-zhengyi-tiaojie-zhongcai",
+      "locator": "第六条"
+    },
+    {
+      "sourceId": "reg-nongmingong-gongzi",
+      "locator": "第五十条"
+    },
+    {
+      "sourceId": "reg-nongmingong-gongzi",
+      "locator": "第十五条"
+    }
+  ],
+  "documentNumber": null
+}

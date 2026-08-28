@@ -1,0 +1,329 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-gongshang-rending-banfa",
+  "title": "工伤认定办法",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第8号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711327.htm",
+  "promulgationDate": "2010-12-31",
+  "effectiveDate": "2011-01-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [
+    "rule-gongshang-rending-banfa-2003"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "c6fca60c666c37961c3c2525c135b5d5fce62113049e634112f8ff5a3a69fb89",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "work-injury",
+    "social-insurance",
+    "labor-relationship-recognition",
+    "arbitration-procedure",
+    "noncompete-confidentiality"
+  ],
+  "provisions": [
+    {
+      "provisionId": "gongshang-rending-banfa-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为规范工伤认定程序，依法进行工伤认定，维护当事人的合法权益，根据《工伤保险条例》的有关规定，制定本办法",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "0df034c8ecff12df507ab062b2724c7f2c0c371edb5ca63f701426b3f9a7dc56"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-2",
+      "locator": "第二条",
+      "sourceText": "第二条 社会保险行政部门进行工伤认定按照本办法执行。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "86a54e71b68d86ab0618d509aef9e14d01b47a85a3ae7a823653c92330be5a41"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-3",
+      "locator": "第三条",
+      "sourceText": "第三条 工伤认定应当客观公正、简捷方便，认定程序应当向社会公开。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "8cff63030bf79d5862f6c7c140677fdf31a05e03331a67ea74b2f534a9b35884"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-4",
+      "locator": "第四条",
+      "sourceText": "第四条 职工发生事故伤害或者按照职业病防治法规定被诊断、鉴定为职业病，所在单位应当自事故伤害发生之日或者被诊断、鉴定为职业病之日起30日内，向统筹地区社会保险行政部门提出工伤认定申请。遇有特殊情况，经报社会保险行政部门同意，申请时限可以适当延长。 按照前款规定应当向省级社会保险行政部门提出工伤认定申请的，根据属地原则应当向用人单位所在地设区的市级社会保险行政部门提出。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "b402655ca0b6bf200e2c0d720ea364b5278c3aecb3bebd0dabdee9e3ce552b27"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-5",
+      "locator": "第五条",
+      "sourceText": "第五条 用人单位未在规定的时限内提出工伤认定申请的，受伤害职工或者其近亲属、工会组织在事故伤害发生之日或者被诊断、鉴定为职业病之日起1年内，可以直接按照本办法第四条规定提出工伤认定申请。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "fd3828b772d9ab3a1c320ed1e6c67200e458baa6e178f372c5b41006db7a5927"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-6",
+      "locator": "第六条",
+      "sourceText": "第六条 提出工伤认定申请应当填写《工伤认定申请表》，并提交下列材料： （一）劳动、聘用合同文本复印件或者与用人单位存在劳动关系（包括事实劳动关系）、人事关系的其他证明材料； （二）医疗机构出具的受伤后诊断证明书或者职业病诊断证明书（或者职业病诊断鉴定书）。",
+      "topicIds": [
+        "work-injury",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "80ecaf30e2ba3542c3cb982037bc5f06006124ff68d309a87f02c2192a83a501"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-7",
+      "locator": "第七条",
+      "sourceText": "第七条 工伤认定申请人提交的申请材料符合要求，属于社会保险行政部门管辖范围且在受理时限内的，社会保险行政部门应当受理。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "902fe9edc09ece7e74767bdb756fac7c6c6d2164cdbf9212b638366856d1616d"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-8",
+      "locator": "第八条",
+      "sourceText": "第八条 社会保险行政部门收到工伤认定申请后，应当在15日内对申请人提交的材料进行审核，材料完整的，作出受理或者不予受理的决定；材料不完整的，应当以书面形式一次性告知申请人需要补正的全部材料。社会保险行政部门收到申请人提交的全部补正材料后，应当在15日内作出受理或者不予受理的决定。 社会保险行政部门决定受理的，应当出具《工伤认定申请受理决定书》；决定不予受理的，应当出具《工伤认定申请不予受理决定书》。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "cce5ae3a4cd80099c2863f3b37de6dd8fb93e290a52f719137f5dd882efa4576"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-9",
+      "locator": "第九条",
+      "sourceText": "第九条 社会保险行政部门受理工伤认定申请后，可以根据需要对申请人提供的证据进行调查核实。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "033ff1f6835786ef7ceb8b9b435245ba9821d973544d6fc506efb77af59aaa50"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-10",
+      "locator": "第十条",
+      "sourceText": "第十条 社会保险行政部门进行调查核实，应当由两名以上工作人员共同进行，并出示执行公务的证件。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "150bb8e081e6ef01b8272493dcef6f05d261bd1af0553265ee93580e7f49179a"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 社会保险行政部门工作人员在工伤认定中，可以进行以下调查核实工作： （一）根据工作需要，进入有关单位和事故现场； （二）依法查阅与工伤认定有关的资料，询问有关人员并作出调查笔录； （三）记录、录音、录像和复制与工伤认定有关的资料。调查核实工作的证据收集参照行政诉讼证据收集的有关规定执行。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "336b305feb89620e09e269a69f2824ff7550afca2b433bdc487fcdec0d77beca"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 社会保险行政部门工作人员进行调查核实时，有关单位和个人应当予以协助。用人单位、工会组织、医疗机构以及有关部门应当负责安排相关人员配合工作，据实提供情况和证明材料。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "931b5b6f4887acfff03a64a5a790305c360f66e6f40675e72348374071fab122"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 社会保险行政部门在进行工伤认定时，对申请人提供的符合国家有关规定的职业病诊断证明书或者职业病诊断鉴定书，不再进行调查核实。职业病诊断证明书或者职业病诊断鉴定书不符合国家规定的要求和格式的，社会保险行政部门可以要求出具证据部门重新提供。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "10eaca604b48670204ffb46c4462ec9a149991c8378de0f6f11fd94273cef43e"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 社会保险行政部门受理工伤认定申请后，可以根据工作需要，委托其他统筹地区的社会保险行政部门或者相关部门进行调查核实。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "aecb3f9b12e024dd9e643e126ae1fd5285e2746d7fc354579280a6cd1011f6da"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 社会保险行政部门工作人员进行调查核实时，应当履行下列义务： （一）保守有关单位商业秘密以及个人隐私； （二）为提供情况的有关人员保密。",
+      "topicIds": [
+        "social-insurance",
+        "noncompete-confidentiality"
+      ],
+      "keywords": [],
+      "textSha256": "6f815de85980683132c4bb6b3cf874565233b965b14f9a0482ac55f2f7b9e500"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 社会保险行政部门工作人员与工伤认定申请人有利害关系的，应当回避。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "fda661efc3e0fb6ac8f364c0f2f6dd5c2582919d92f3d491c2158429a93769b1"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 职工或者其近亲属认为是工伤，用人单位不认为是工伤的，由该用人单位承担举证责任。用人单位拒不举证的，社会保险行政部门可以根据受伤害职工提供的证据或者调查取得的证据，依法作出工伤认定决定。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "aea5a8a558273f224249e6ae60cd0f83d63c1b1eb13133bc4763e0fbec2d576b"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 社会保险行政部门应当自受理工伤认定申请之日起60日内作出工伤认定决定，出具《认定工伤决定书》或者《不予认定工伤决定书》。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "3e26612c8fefdc3aef639c6bc32ea4d5701fef2264edcb7600dd9053ce269212"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 《认定工伤决定书》应当载明下列事项： （一）用人单位全称； （二）职工的姓名、性别、年龄、职业、身份证号码； （三）受伤害部位、事故时间和诊断时间或职业病名称、受伤害经过和核实情况、医疗救治的基本情况和诊断结论； （四）认定工伤或者视同工伤的依据； （五）不服认定决定申请行政复议或者提起行政诉讼的部门和时限； （六）作出认定工伤或者视同工伤决定的时间。 《不予认定工伤决定书》应当载明下列事项： （一）用人单位全称； （二）职工的姓名、性别、年龄、职业、身份证号码； （三）不予认定工伤或者不视同工伤的依据； （四）不服认定决定申请行政复议或者提起行政诉讼的部门和时限； （五）作出不予认定工伤或者不视同工伤决定的时间。 《认定工伤决定书》和《不予认定工伤决定书》应当加盖社会保险行政部门工伤认定专用印章。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "0fcca11759ea7fad2ee6d446ccd9fe963aa1e44b75ebb8ec6857975f4324f93f"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 社会保险行政部门受理工伤认定申请后，作出工伤认定决定需要以司法机关或者有关行政主管部门的结论为依据的，在司法机关或者有关行政主管部门尚未作出结论期间，作出工伤认定决定的时限中止，并书面通知申请人。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "63827c9e9aed5fa5d17ad8445262c3e581357d6da3448e8d8c156c159476ed17"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 社会保险行政部门对于事实清楚、权利义务明确的工伤认定申请，应当自受理工伤认定申请之日起15日内作出工伤认定决定。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "098ecd0fdbe1dee977499945afe736a605c37769ec7d6df8648ec7f996924684"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 社会保险行政部门应当自工伤认定决定作出之日起20日内，将《认定工伤决定书》或者《不予认定工伤决定书》送达受伤害职工（或者其近亲属）和用人单位，并抄送社会保险经办机构。 《认定工伤决定书》和《不予认定工伤决定书》的送达参照民事法律有关送达的规定执行。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "7acf577baf60a600aa084430fd05df8f7779c3f88080b2fa61a832e1470ca604"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 职工或者其近亲属、用人单位对不予受理决定不服或者对工伤认定决定不服的，可以依法申请行政复议或者提起行政诉讼。",
+      "topicIds": [
+        "work-injury",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "888d59cf7e73fbbf82fcdd9e062c341c4347f06b07ec90355a453fafefd2cefb"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 工伤认定结束后，社会保险行政部门应当将工伤认定的有关资料保存50年。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "6798d5128a8e01f92960bcd2db7ac37e29b15526a4dc4947b3cf91b703796160"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 用人单位拒不协助社会保险行政部门对事故伤害进行调查核实的，由社会保险行政部门责令改正，处2000元以上2万元以下的罚款。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "c5ff91e4baa8658826914a09c90cb8f9fc9d1c19a292eaaf3e44a8c52043a083"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 本办法中的《工伤认定申请表》、《工伤认定申请受理决定书》、《工伤认定申请不予受理决定书》、《认定工伤决定书》、《不予认定工伤决定书》的样式由国务院社会保险行政部门统一制定。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "1f1b841924c8ab8bf4060bc99a4f5b3a10f480e2df5b053892155f3d6cbf9bfc"
+    },
+    {
+      "provisionId": "gongshang-rending-banfa-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 本办法自2011年1月1日起施行。劳动和社会保障部2003年9月23日颁布的《工伤认定办法》同时废止。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "0afdcf9cb87c744f606e271532a7284d045cc2d318298e72eb93ae74e464ef51"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2010-12-31 人社部令第8号公布，2011-01-01 施行。 被替代/被修订旧版本（档案记录）: [2003-09-23劳动和社会保障部《工伤认定办法》]。"
+  ]
+}

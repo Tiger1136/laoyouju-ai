@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "reg-quanguonianjie-fangjia",
+  "title": "全国年节及纪念日放假办法（2024修订）",
+  "sourceType": "administrative_regulation",
+  "issuingAuthority": "国务院",
+  "documentNumber": "国务院令第795号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/gongbao/2024/issue_11726/202411/content_6989774.html",
+  "promulgationDate": "2024-11-10",
+  "effectiveDate": "2025-01-01",
+  "expiryDate": null,
+  "validityStatus": "amended",
+  "supersedes": [
+    "reg-quanguonianjie-fangjia-2013"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "120cb72963f09b7793f6cd0e3883d4b4dfdc190d03b60ebda991d9fea017cae6",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "working-hours-leave"
+  ],
+  "provisions": [
+    {
+      "provisionId": "quanguonianjie-fangjia-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为统一全国年节及纪念日的假期，制定本办法。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "21ec0ccbe6c7bb90f258cabecdbadcb6ff9c64e5c4f7aa854467f49cd3baa831"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-2",
+      "locator": "第二条",
+      "sourceText": "第二条 全体公民放假的节日： （一）元旦，放假1天（1月1日）； （二）春节，放假4天（农历除夕、正月初一至初三）； （三）清明节，放假1天（农历清明当日）； （四）劳动节，放假2天（5月1日、2日）； （五）端午节，放假1天（农历端午当日）； （六）中秋节，放假1天（农历中秋当日）； （七）国庆节，放假3天（10月1日至3日）。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "dbe83483a18c8ac36790679069e1da88d241039f16bf3ef823e56a8bc338e887"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-3",
+      "locator": "第三条",
+      "sourceText": "第三条 部分公民放假的节日及纪念日： （一）妇女节（3月8日），妇女放假半天； （二）青年节（5月4日），14周岁以上的青年放假半天； （三）儿童节（6月1日），不满14周岁的少年儿童放假1天； （四）中国人民解放军建军纪念日（8月1日），现役军人放假半天。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "ea230b25b25e93727f7cbd0ff814ee7d488e9c1fa101c76375635757ff24786d"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-4",
+      "locator": "第四条",
+      "sourceText": "第四条 少数民族习惯的节日，由各少数民族聚居地区的地方人民政府，按照各该民族习惯，规定放假日期。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "d5709ee348eee818e9bf417b0bd538453af81bd0531bb584f2174336fda3360c"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-5",
+      "locator": "第五条",
+      "sourceText": "第五条 二七纪念日、五卅纪念日、七七抗战纪念日、九三抗战胜利纪念日、九一八纪念日、教师节、护士节、记者节、植树节等其他节日、纪念日，均不放假。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "3baecbc83baba9d76254821925211a9ffff3501450fd65d8cc0a1c13035af89b"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-6",
+      "locator": "第六条",
+      "sourceText": "第六条 全体公民放假的假日，如果适逢周六、周日，应当在工作日补假。部分公民放假的假日，如果适逢周六、周日，则不补假。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "5cff5196fc339f15df26cea1fea455bf7939d0a9f63609275a6fe2a7c09c8814"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-7",
+      "locator": "第七条",
+      "sourceText": "第七条 全体公民放假的假日，可合理安排统一放假调休，结合落实带薪年休假等制度，实际形成较长假期。除个别特殊情形外，法定节假日假期前后连续工作一般不超过6天。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "1c4a79c318026a0dd3749f8647f106b4cf61ad8373812c48c728697f13a95969"
+    },
+    {
+      "provisionId": "quanguonianjie-fangjia-8",
+      "locator": "第八条",
+      "sourceText": "第八条 本办法自公布之日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "c0a2e26574f23cfa7c383734250abe7387a0e7d02eda2eb961c3dd45aa135a34"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 国务院公报（2024年第33号）页（含修改决定+办法全文）；页面UTF-8；2024-11-08 国务院第45次常务会议通过，2024-11-10 公布，2025-01-01 施行。勿用旧版644号。 被替代/被修订旧版本（档案记录）: [2013年修订版（国务院令第644号）]。"
+  ]
+}

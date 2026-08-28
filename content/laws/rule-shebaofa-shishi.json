@@ -1,0 +1,350 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-shebaofa-shishi",
+  "title": "实施《中华人民共和国社会保险法》若干规定",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第13号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711321.htm",
+  "promulgationDate": "2011-06-29",
+  "effectiveDate": "2011-07-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "5006f246747762489c35801270f5585d362bba280bdaaeb2300a831febbd8c2a",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "social-insurance",
+    "work-injury",
+    "arbitration-limitation",
+    "wage-arrears",
+    "unlawful-termination-compensation",
+    "contract-performance",
+    "noncompete-confidentiality",
+    "labor-relationship-recognition",
+    "arbitration-procedure"
+  ],
+  "provisions": [
+    {
+      "provisionId": "shebaofa-shishi-1",
+      "locator": "第一条",
+      "sourceText": "第一条 社会保险法第十五条规定的统筹养老金，按照国务院规定的基础养老金计发办法计发。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "a12f5f2db167c991237e40232f56b52706fd510df01fd377918d76466c4d8b9d"
+    },
+    {
+      "provisionId": "shebaofa-shishi-2",
+      "locator": "第二条",
+      "sourceText": "第二条 参加职工基本养老保险的个人达到法定退休年龄时，累计缴费不足十五年的，可以延长缴费至满十五年。社会保险法实施前参保、延长缴费五年后仍不足十五年的，可以一次性缴费至满十五年。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "5f6819ac9b15d6b4d8e982786e250d0db68acb54c60058022de986fbf124a01f"
+    },
+    {
+      "provisionId": "shebaofa-shishi-3",
+      "locator": "第三条",
+      "sourceText": "第三条 参加职工基本养老保险的个人达到法定退休年龄后，累计缴费不足十五年（含依照第二条规定延长缴费）的，可以申请转入户籍所在地新型农村社会养老保险或者城镇居民社会养老保险，享受相应的养老保险待遇。 参加职工基本养老保险的个人达到法定退休年龄后，累计缴费不足十五年（含依照第二条规定延长缴费），且未转入新型农村社会养老保险或者城镇居民社会养老保险的，个人可以书面申请终止职工基本养老保险关系。社会保险经办机构收到申请后，应当书面告知其转入新型农村社会养老保险或者城镇居民社会养老保险的权利以及终止职工基本养老保险关系的后果，经本人书面确认后，终止其职工基本养老保险关系，并将个人账户储存额一次性支付给本人。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "76fa0d8d569c7feb2363e86b23f9f94501a999b42555a693957a8fe81f23f30d"
+    },
+    {
+      "provisionId": "shebaofa-shishi-4",
+      "locator": "第四条",
+      "sourceText": "第四条 参加职工基本养老保险的个人跨省流动就业，达到法定退休年龄时累计缴费不足十五年的，按照《国务院办公厅关于转发人力资源社会保障部财政部城镇企业职工基本养老保险关系转移接续暂行办法的通知》(国办发〔2009〕66号)有关待遇领取地的规定确定继续缴费地后，按照本规定第二条办理。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "681b9999248f2222ddce123fdef248e13809ace25a26e90b606d47360f973aaf"
+    },
+    {
+      "provisionId": "shebaofa-shishi-5",
+      "locator": "第五条",
+      "sourceText": "第五条 参加职工基本养老保险的个人跨省流动就业，符合按月领取基本养老金条件时，基本养老金分段计算、统一支付的具体办法，按照《国务院办公厅关于转发人力资源社会保障部财政部城镇企业职工基本养老保险关系转移接续暂行办法的通知》(国办发〔2009〕66号)执行。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "f5df3adaf9ef1065e77faa2213ff2f68e8b4b357dc0dbc5a8b596cdae4780216"
+    },
+    {
+      "provisionId": "shebaofa-shishi-6",
+      "locator": "第六条",
+      "sourceText": "第六条 职工基本养老保险个人账户不得提前支取。个人在达到法定的领取基本养老金条件前离境定居的，其个人账户予以保留,达到法定领取条件时，按照国家规定享受相应的养老保险待遇。其中，丧失中华人民共和国国籍的，可以在其离境时或者离境后书面申请终止职工基本养老保险关系。社会保险经办机构收到申请后，应当书面告知其保留个人账户的权利以及终止职工基本养老保险关系的后果，经本人书面确认后，终止其职工基本养老保险关系，并将个人账户储存额一次性支付给本人。 参加职工基本养老保险的个人死亡后，其个人账户中的余额可以全部依法继承。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "1ab010e540e748e9aac52b5c6f2213cd06e6f45f040a15a0114afd9b3bc95699"
+    },
+    {
+      "provisionId": "shebaofa-shishi-7",
+      "locator": "第七条",
+      "sourceText": "第七条 社会保险法第二十七条规定的退休人员享受基本医疗保险待遇的缴费年限按照各地规定执行。 参加职工基本医疗保险的个人，基本医疗保险关系转移接续时，基本医疗保险缴费年限累计计算。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "d3bb04ac51be770087b5e70d22fbe91ebe1a7652225a8aef7f192c71946ec1bc"
+    },
+    {
+      "provisionId": "shebaofa-shishi-8",
+      "locator": "第八条",
+      "sourceText": "第八条 参保人员在协议医疗机构发生的医疗费用，符合基本医疗保险药品目录、诊疗项目、医疗服务设施标准的，按照国家规定从基本医疗保险基金中支付。 参保人员确需急诊、抢救的，可以在非协议医疗机构就医；因抢救必须使用的药品可以适当放宽范围。参保人员急诊、抢救的医疗服务具体管理办法由统筹地区根据当地实际情况制定。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "3f592d26b1170bca3ef47efcdf154fccaa368f8f9d9fd0fef4ce5b204bc041de"
+    },
+    {
+      "provisionId": "shebaofa-shishi-9",
+      "locator": "第九条",
+      "sourceText": "第九条 职工（包括非全日制从业人员）在两个或者两个以上用人单位同时就业的，各用人单位应当分别为职工缴纳工伤保险费。职工发生工伤，由职工受到伤害时工作的单位依法承担工伤保险责任。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "943cf2e1d1c565bbbc92e6b2855c8db1b73d8a24b3b45175c6fe7214fc44cc8a"
+    },
+    {
+      "provisionId": "shebaofa-shishi-10",
+      "locator": "第十条",
+      "sourceText": "第十条 社会保险法第三十七条第二项中的醉酒标准，按照《车辆驾驶人员血液、呼气酒精含量阈值与检验》（GB19522-2004）执行。公安机关交通管理部门、医疗机构等有关单位依法出具的检测结论、诊断证明等材料，可以作为认定醉酒的依据。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "62c12f8f10c3a06a3d1c92ea5e218c1601bfd5034eb8680a569f0b2df4edbdcb"
+    },
+    {
+      "provisionId": "shebaofa-shishi-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 社会保险法第三十八条第八项中的因工死亡补助金是指《工伤保险条例》第三十九条的一次性工亡补助金，标准为工伤发生时上一年度全国城镇居民人均可支配收入的20倍。 上一年度全国城镇居民人均可支配收入以国家统计局公布的数据为准。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "28d20f37d7bee451c7b58ef2bc20fd8053d36dfccddab71b749041e2d161e4b4"
+    },
+    {
+      "provisionId": "shebaofa-shishi-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 社会保险法第三十九条第一项治疗工伤期间的工资福利，按照《工伤保险条例》第三十三条有关职工在停工留薪期内应当享受的工资福利和护理等待遇的规定执行。",
+      "topicIds": [
+        "wage-arrears",
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "fedd7a80c62bd8fa00a4aae9eb9a952ab77710725e376ee6f6d8ec9ee5932b3f"
+    },
+    {
+      "provisionId": "shebaofa-shishi-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 失业人员符合社会保险法第四十五条规定条件的，可以申请领取失业保险金并享受其他失业保险待遇。其中，非因本人意愿中断就业包括下列情形： （一）依照劳动合同法第四十四条第一项、第四项、第五项规定终止劳动合同的； （二）由用人单位依照劳动合同法第三十九条、第四十条、第四十一条规定解除劳动合同的； （三）用人单位依照劳动合同法第三十六条规定向劳动者提出解除劳动合同并与劳动者协商一致解除劳动合同的； （四）由用人单位提出解除聘用合同或者被用人单位辞退、除名、开除的； （五）劳动者本人依照劳动合同法第三十八条规定解除劳动合同的； （六）法律、法规、规章规定的其他情形。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "5377f69a76ce38e328e5065123eb74bbb44d40116f76af786e28bbbfcdb5aecd"
+    },
+    {
+      "provisionId": "shebaofa-shishi-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 失业人员领取失业保险金后重新就业的，再次失业时，缴费时间重新计算。失业人员因当期不符合失业保险金领取条件的，原有缴费时间予以保留，重新就业并参保的，缴费时间累计计算。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "f71f1a4e045d8e39a3fc234e468d7e47c981715f794229d2e68a364cebf93177"
+    },
+    {
+      "provisionId": "shebaofa-shishi-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 失业人员在领取失业保险金期间，应当积极求职，接受职业介绍和职业培训。失业人员接受职业介绍、职业培训的补贴由失业保险基金按照规定支付。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "df3175d7aff3d0402bce318d7fa66f537c712f5fc11533434a744ffd95363102"
+    },
+    {
+      "provisionId": "shebaofa-shishi-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 社会保险基金预算、决算草案的编制、审核和批准，依照《国务院关于试行社会保险基金预算的意见》(国发〔2010〕2号)的规定执行。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "4bfaf1aac8128290849e8cf576f934c4afbc3303aad3127aec0ec50788ea8a42"
+    },
+    {
+      "provisionId": "shebaofa-shishi-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 社会保险经办机构应当每年至少一次将参保人员个人权益记录单通过邮寄方式寄送本人。同时，社会保险经办机构可以通过手机短信或者电子邮件等方式向参保人员发送个人权益记录。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "fea13181bf3adcaa0d06d674e4112154b92a59fd224cb6d20ea29116174696e8"
+    },
+    {
+      "provisionId": "shebaofa-shishi-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 社会保险行政部门、社会保险经办机构及其工作人员应当依法为用人单位和个人的信息保密，不得违法向他人泄露下列信息： （一）涉及用人单位商业秘密或者公开后可能损害用人单位合法利益的信息； （二）涉及个人权益的信息。",
+      "topicIds": [
+        "social-insurance",
+        "noncompete-confidentiality"
+      ],
+      "keywords": [],
+      "textSha256": "7e4e104207a921e77c9b2c2280ea355f3d90cf1e453d2589247ff17d4c371aeb"
+    },
+    {
+      "provisionId": "shebaofa-shishi-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 用人单位在终止或者解除劳动合同时拒不向职工出具终止或者解除劳动关系证明，导致职工无法享受社会保险待遇的，用人单位应当依法承担赔偿责任。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "social-insurance",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "8447273be87c67644ba997e2608a1cec8393ece3d9d25950d5df1e1b5af7c92b"
+    },
+    {
+      "provisionId": "shebaofa-shishi-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 职工应当缴纳的社会保险费由用人单位代扣代缴。用人单位未依法代扣代缴的，由社会保险费征收机构责令用人单位限期代缴，并自欠缴之日起向用人单位按日加收万分之五的滞纳金。用人单位不得要求职工承担滞纳金。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "521ce2139f3338fc288b4fdb188d342fac3855b9d4bf1e8f028993ed9bcdab22"
+    },
+    {
+      "provisionId": "shebaofa-shishi-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 用人单位因不可抗力造成生产经营出现严重困难的，经省级人民政府社会保险行政部门批准后，可以暂缓缴纳一定期限的社会保险费，期限一般不超过一年。暂缓缴费期间，免收滞纳金。到期后，用人单位应当缴纳相应的社会保险费。",
+      "topicIds": [
+        "social-insurance",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "d80fcd66e9e689de3e03762115863d610504f3bc164fa7bc8d441046999e80b4"
+    },
+    {
+      "provisionId": "shebaofa-shishi-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 用人单位按照社会保险法第六十三条的规定，提供担保并与社会保险费征收机构签订缓缴协议的，免收缓缴期间的滞纳金。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "b51bcfa250c945418bdad1c83166f778aef4820a5e5d6b6dd83bdc2d4de8595d"
+    },
+    {
+      "provisionId": "shebaofa-shishi-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 用人单位按照本规定第二十一条、第二十二条缓缴社会保险费期间，不影响其职工依法享受社会保险待遇。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "ef0eafac7a56a1fd0f079fa54520a3a20ebe6ff62bd689c4d5f5d755341846a2"
+    },
+    {
+      "provisionId": "shebaofa-shishi-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 用人单位未按月将缴纳社会保险费的明细情况告知职工本人的，由社会保险行政部门责令改正；逾期不改的，按照《劳动保障监察条例》第三十条的规定处理。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "dc213e5d09104a39bc98fd69a6ee8e23d5f0a7ac15a4c28cfd235b3face61024"
+    },
+    {
+      "provisionId": "shebaofa-shishi-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 医疗机构、药品经营单位等社会保险服务机构以欺诈、伪造证明材料或者其他手段骗取社会保险基金支出的，由社会保险行政部门责令退回骗取的社会保险金，处骗取金额二倍以上五倍以下的罚款。对与社会保险经办机构签订服务协议的医疗机构、药品经营单位，由社会保险经办机构按照协议追究责任，情节严重的，可以解除与其签订的服务协议。对有执业资格的直接负责的主管人员和其他直接责任人员，由社会保险行政部门建议授予其执业资格的有关主管部门依法吊销其执业资格。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "140c1e057afe49ac7d28d1eee116cdf55ca569a894cfd77285ae8a9ff05b1866"
+    },
+    {
+      "provisionId": "shebaofa-shishi-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 社会保险经办机构、社会保险费征收机构、社会保险基金投资运营机构、开设社会保险基金专户的机构和专户管理银行及其工作人员有下列违法情形的，由社会保险行政部门按照社会保险法第九十一条的规定查处： （一）将应征和已征的社会保险基金，采取隐藏、非法放置等手段，未按规定征缴、入账的； （二）违规将社会保险基金转入社会保险基金专户以外的账户的； （三）侵吞社会保险基金的； （四）将各项社会保险基金互相挤占或者其他社会保障基金挤占社会保险基金的； （五）将社会保险基金用于平衡财政预算，兴建、改建办公场所和支付人员经费、运行费用、管理费用的； （六）违反国家规定的投资运营政策的。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "4fd80e8478474b1a06aa7b5276f6ad0bba5d0d88e38b4a4b7ec83d94d36a49d8"
+    },
+    {
+      "provisionId": "shebaofa-shishi-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 职工与所在用人单位发生社会保险争议的，可以依照《中华人民共和国劳动争议调解仲裁法》、《劳动人事争议仲裁办案规则》的规定，申请调解、仲裁，提起诉讼。 职工认为用人单位有未按时足额为其缴纳社会保险费等侵害其社会保险权益行为的，也可以要求社会保险行政部门或者社会保险费征收机构依法处理。社会保险行政部门或者社会保险费征收机构应当按照社会保险法和《劳动保障监察条例》等相关规定处理。在处理过程中，用人单位对双方的劳动关系提出异议的，社会保险行政部门应当依法查明相关事实后继续处理。",
+      "topicIds": [
+        "social-insurance",
+        "labor-relationship-recognition",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c8b8f89ea9bea59d22f234180f0b6198e6a0c170543f23925796c20c988b9394"
+    },
+    {
+      "provisionId": "shebaofa-shishi-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 在社会保险经办机构征收社会保险费的地区，社会保险行政部门应当依法履行社会保险法第六十三条所规定的有关行政部门的职责。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "596a4d054b8bc71fc9a388e061086b3e0713403f6d1a8904c29c02baf567dfb0"
+    },
+    {
+      "provisionId": "shebaofa-shishi-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 2011年7月1日后对用人单位未按时足额缴纳社会保险费的处理，按照社会保险法和本规定执行；对2011年7月1日前发生的用人单位未按时足额缴纳社会保险费的行为，按照国家和地方人民政府的有关规定执行。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "0ad779fd75bec64ac89c1746073edfef94caeaaba7bdc8dfeb4d291aa32c66f5"
+    },
+    {
+      "provisionId": "shebaofa-shishi-30",
+      "locator": "第三十条",
+      "sourceText": "第三十条 本规定自2011年7月1日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "3423fba18538e888385f793d098af693ab2ff305b7cd98529fadff055d65206c"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2011-06-29 人社部令第13号公布，2011-07-01 施行。"
+  ]
+}

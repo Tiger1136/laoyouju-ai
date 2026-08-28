@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-bj-ldzzy-2025-12-05",
+  "caseId": "case-bj-ldzzy-2025-12-05",
+  "title": "劳动者私自找人替岗用人单位可依法解除劳动合同",
+  "publishingAuthority": "北京市人力资源和社会保障局",
+  "caseType": "arbitration_typical_case",
+  "publicationDate": "2025-12-26",
+  "jurisdiction": "北京市",
+  "authorityLevel": "B",
+  "officialUrl": "https://rsj.beijing.gov.cn/bm/ztzl/dxal/202512/t20251226_4366546.html",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "unlawful-termination-compensation",
+    "labor-relationship-recognition",
+    "arbitration-procedure",
+    "contract-performance"
+  ],
+  "issues": [
+    "劳动者私自找人替岗用人单位可依法解除劳动合同"
+  ],
+  "keyFacts": "李某于2020年7月入职某电力公司，被安排至某研究院项目担任高压配电室运行值班人员。2023年6月10日至29日期间，李某因个人原因外出，在未获得公司批准的情况下，私自安排同事顶替其岗位，并自行向该同事支付了替岗期间相应的报酬。2023年8月，该研究院在安全检查时发现高压配电室值班记录中字迹与李某明显不符，在谈话中，李某承认了私自安排替岗的行为，但李某主张公司规章制度中并未明确禁止“替岗”行为，且其已确保岗位上有人履职，未耽误任何工作，故不构成违纪。公司则认为，李某未经审批私自由他人顶岗，已违背基本劳动纪律，故依据《中华人民共和国劳动合同法》第三十九条第（二）项，以严重违反规章制度为由解除劳动合同。李某不服并提出仲裁申请。",
+  "holding": "仲裁委员会裁决驳回李某的",
+  "reasoning": "本案；劳动关系的人身从属性要求双方，特别是劳动者，必须亲自履行合同义务。这不仅关乎劳动任务的完成，更体现了劳动合同履行过程中的人格信赖与诚实信用原则。劳动者未经批准私自安排他人替岗，即使未造成实际的经济损失，但实质上架空了用人单位对履职主体的选择权与过程管理权，动摇了劳动关系存续的信任基础，属于对基本劳动纪律的违反。为预防此类争议，用人单位应逐步完善规章制度，对替岗、换班等情形予以明确界定，并配套相应的审批程序与责任规定，使劳动纪律更具可操作性。在管理实践中，建议加强岗位巡查与人员核验，建立常态化的监督检查机制，对擅自替岗等行为做到及时发现、书面警示与规范处理，避免因管理松懈产生默认或认可的风险。劳动者亦应强化纪律意识与契约精神，确需离岗的，应严格履行请假或报批手续，不得私自顶替或委托他人履职。只有双方共同遵循劳动法律法规，恪守劳动合同约定，才能有效维护劳动关系的稳定与和谐。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-laodonghetongfa-2012",
+      "locator": "第三十九条"
+    }
+  ],
+  "documentNumber": null
+}

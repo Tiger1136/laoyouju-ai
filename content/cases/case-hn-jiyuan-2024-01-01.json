@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-hn-jiyuan-2024-01-01",
+  "caseId": "case-hn-jiyuan-2024-01-01",
+  "title": "苗某某诉某公司劳动争议案——用人单位不能通过订立劳务合同规避劳动关系",
+  "publishingAuthority": "济源中级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2025-11-21",
+  "jurisdiction": "河南省",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.hncourt.gov.cn/public/detail.php?id=202333",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "labor-relationship-recognition"
+  ],
+  "issues": [
+    "苗某某诉某公司劳动争议案——用人单位不能通过订立劳务合同规避劳动关系"
+  ],
+  "keyFacts": "2023年3月，苗某某到某公司的车间从事机修方面工作，双方签订《劳务合同》。同年8月，苗某某在工作中受伤。2024年6月，苗某某向劳动人事争议仲裁委员会申请仲裁，请求确认其与某公司存在劳动关系，劳动人事争议仲裁委员会不予受理。苗某某不服，诉至人民法院。",
+  "holding": "审理法院认为，苗某某具备劳动者主体资格，某公司具备用工主体资格。苗某某在某公司车间从事的工作是公司业务的组成部分，苗某某需遵守公司各项安全制度并且受公司的劳动管理。双方之间符合劳动关系的法律特征。审理法院判决认定苗某某与某公司之间存在劳动关系。",
+  "reasoning": "实践中，部分企业出于降本增效等考虑，通过与劳动者签订劳务合同规避订立劳动合同，转嫁用工风险。人民法院在判断用人单位与劳动者之间是否存在劳动关系时，不仅审查双方签订合同的名称，更要通过合同的内容和实际履行情况实质性审查双方之间的法律关系是否具备劳动关系的从属性特征，纠正用人单位与劳动者订立所谓“劳务合同”的违法用工行为，切实维护劳动者合法权益。",
+  "citedProvisions": [],
+  "documentNumber": null
+}

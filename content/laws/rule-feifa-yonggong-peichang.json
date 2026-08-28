@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-feifa-yonggong-peichang",
+  "title": "非法用工单位伤亡人员一次性赔偿办法",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第9号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711332.htm",
+  "promulgationDate": "2010-12-31",
+  "effectiveDate": "2011-01-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [
+    "rule-feifa-yonggong-peichang-2003"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "6ded32055b88e40b7c0f9251a621aec7d815b645af91353774dc4675a2623854",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "work-injury",
+    "wage-arrears",
+    "labor-relationship-recognition",
+    "social-insurance",
+    "labor-dispatch",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "arbitration-limitation"
+  ],
+  "provisions": [
+    {
+      "provisionId": "feifa-yonggong-peichang-1",
+      "locator": "第一条",
+      "sourceText": "第一条 根据《工伤保险条例》第六十六条第一款的授权，制定本办法。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "e13d00d4943da278675372ea5a125e97e6804e9e3abf494866fb5ac58d7228ac"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-2",
+      "locator": "第二条",
+      "sourceText": "第二条 本办法所称非法用工单位伤亡人员，是指无营业执照或者未经依法登记、备案的单位以及被依法吊销营业执照或者撤销登记、备案的单位受到事故伤害或者患职业病的职工，或者用人单位使用童工造成的伤残、死亡童工。 前款所列单位必须按照本办法的规定向伤残职工或者死亡职工的近亲属、伤残童工或者死亡童工的近亲属给予一次性赔偿。",
+      "topicIds": [
+        "work-injury",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "c599478f6db9c08b572ddfd5b2dfcaf68340c6ea1c4edb7f05dc7eeda2958617"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-3",
+      "locator": "第三条",
+      "sourceText": "第三条 一次性赔偿包括受到事故伤害或者患职业病的职工或童工在治疗期间的费用和一次性赔偿金。一次性赔偿金数额应当在受到事故伤害或者患职业病的职工或童工死亡或者经劳动能力鉴定后确定。 劳动能力鉴定按照属地原则由单位所在地设区的市级劳动能力鉴定委员会办理。劳动能力鉴定费用由伤亡职工或童工所在单位支付。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "e88bb572fdff6b1ac58bf49ce446e45aa72dccf254d7844baea7ca60e1921336"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-4",
+      "locator": "第四条",
+      "sourceText": "第四条 职工或童工受到事故伤害或者患职业病，在劳动能力鉴定之前进行治疗期间的生活费按照统筹地区上年度职工月平均工资标准确定，医疗费、护理费、住院期间的伙食补助费以及所需的交通费等费用按照《工伤保险条例》规定的标准和范围确定，并全部由伤残职工或童工所在单位支付。",
+      "topicIds": [
+        "wage-arrears",
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "234453de72aa2625ed2e36d79aad192e9170928169a1c54c7f6e8c7380f29304"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-5",
+      "locator": "第五条",
+      "sourceText": "第五条 一次性赔偿金按照以下标准支付： 一级伤残的为赔偿基数的16倍，二级伤残的为赔偿基数的14倍，三级伤残的为赔偿基数的12倍，四级伤残的为赔偿基数的10倍，五级伤残的为赔偿基数的8倍，六级伤残的为赔偿基数的6倍，七级伤残的为赔偿基数的4倍，八级伤残的为赔偿基数的3倍，九级伤残的为赔偿基数的2倍，十级伤残的为赔偿基数的1倍。 前款所称赔偿基数，是指单位所在工伤保险统筹地区上年度职工年平均工资。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "social-insurance",
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "0fd412058f3c8e733825741e077dc58dfec486b594bd6e3f1b7236fbc0b5dea1"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-6",
+      "locator": "第六条",
+      "sourceText": "第六条 受到事故伤害或者患职业病造成死亡的，按照上一年度全国城镇居民人均可支配收入的20倍支付一次性赔偿金，并按照上一年度全国城镇居民人均可支配收入的10倍一次性支付丧葬补助等其他赔偿金。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "work-injury",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "d31f479d148e30fdcfbdd9a8f46102483095b1c473bc173c6717088a7d945c52"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-7",
+      "locator": "第七条",
+      "sourceText": "第七条 单位拒不支付一次性赔偿的，伤残职工或者死亡职工的近亲属、伤残童工或者死亡童工的近亲属可以向人力资源和社会保障行政部门举报。经查证属实的，人力资源和社会保障行政部门应当责令该单位限期改正。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "a165df8ec44724bf51c32f262cabaf3fc6bad7845e766fa7a0052d764c34d3f6"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-8",
+      "locator": "第八条",
+      "sourceText": "第八条 伤残职工或者死亡职工的近亲属、伤残童工或者死亡童工的近亲属就赔偿数额与单位发生争议的，按照劳动争议处理的有关规定处理。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "75e323666f09216766ceebec07c7d7af22a94765e0eaa020fd05cb8107848ae6"
+    },
+    {
+      "provisionId": "feifa-yonggong-peichang-9",
+      "locator": "第九条",
+      "sourceText": "第九条 本办法自2011年1月1日起施行。劳动和社会保障部2003年9月23日颁布的《非法用工单位伤亡人员一次性赔偿办法》同时废止。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "99528ac85a86cf7d96c417e7e05816bdb2a56fb7bf7e827e08ca1bc3d34a1714"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2010-12-31 人社部令第9号公布，2011-01-01 施行。 被替代/被修订旧版本（档案记录）: [2003-09-23劳动和社会保障部《非法用工单位伤亡人员一次性赔偿办法》]。"
+  ]
+}

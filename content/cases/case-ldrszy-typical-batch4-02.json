@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-ldrszy-typical-batch4-02",
+  "caseId": "case-ldrszy-typical-batch4-02",
+  "title": "用人单位能否因女职工怀孕调岗降薪",
+  "publishingAuthority": "最高人民法院、人力资源社会保障部",
+  "caseType": "typical_case",
+  "publicationDate": "2025-04-16",
+  "jurisdiction": "全国性",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.court.gov.cn/zixun/xiangqing/462311.html",
+  "sourceCheckedAt": "2026-08-27",
+  "retrievedAt": "2026-08-27",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "contract-performance",
+    "female-worker-protection"
+  ],
+  "issues": [
+    "用人单位能否因女职工怀孕调岗降薪"
+  ],
+  "keyFacts": "赵某于2022年1月入职某科技公司任工程师，双方订立的劳动合同约定：工作期间分为参与具体项目期间与等待项目期间，其中参与具体项目期间赵某的月工资构成为基本工资3000元（高于当地最低工资标准）加项目岗位津贴14000元；等待项目期间赵某仅领取基本工资。2023年2月，赵某告知某科技公司其怀孕事实，某科技公司未与赵某沟通协商便直接向赵某所在的项目组宣布“赵某退出所在项目组”，赵某反对无果后未再上班。此后，某科技公司主张赵某未参与项目并按照3000元/月的标准支付赵某孕期工资。赵某向仲裁委员会申请仲裁。",
+  "holding": "仲裁委员会裁决：某科技公司按照17000元/月的标准补齐赵某孕期工资差额。",
+  "reasoning": "本案的争议焦点是用人单位能否因为女职工怀孕调岗降薪。\n《中华人民共和国妇女权益保障法》第四十八条第一款、《女职工劳动保护特别规定》（中华人民共和国国务院令第619号）第五条明确规定用人单位不得因怀孕降低女职工的工资和福利待遇。《女职工劳动保护特别规定》第六条规定：“女职工在孕期不能适应原劳动的，用人单位应当根据医疗机构的证明，予以减轻劳动量或者安排其他能够适应的劳动”，明确“减轻劳动量或者安排其他能够适应的劳动”的前提是“女职工在孕期不能适应原劳动”。因此，如果孕期女职工能够适应原劳动的，用人单位应当尊重并保护女职工的劳动权利。\n本案中，某科技公司要求赵某退出所在项目的行为，既不符合双方劳动合同约定的等待项目期间的情形，也未征求赵某本人的同意，更未经医疗机构证明赵某存在“不能适应原劳动”的情形，属于违反《女职工劳动保护特别规定》第六条规定，变相调整孕期女职工岗位的情形。该公司以赵某未参与项目为由降低赵某孕期工资标准，违反了《中华人民共和国妇女权益保障法》第四十八条第一款、《女职工劳动保护特别规定》第五条的规定，因此仲裁委员会依法裁决某科技公司按照赵某原工资待遇17000元/月的标准补齐赵某的孕期工资差额。",
+  "citedProvisions": [
+    {
+      "sourceId": "reg-nvzhigong-tebieguiding",
+      "locator": "第五条"
+    },
+    {
+      "sourceId": "reg-nvzhigong-tebieguiding",
+      "locator": "第六条"
+    }
+  ],
+  "documentNumber": null
+}

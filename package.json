@@ -1,0 +1,25 @@
+{
+  "name": "laoyouju",
+  "version": "0.0.0",
+  "private": true,
+  "description": "劳有据 AI —— 劳动问题，回答有依据。",
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "workspaces": [
+    "apps/*",
+    "functions/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "content:validate": "node packages/retrieval/dist/cli.js validate",
+    "retrieval:build": "node packages/retrieval/dist/cli.js build",
+    "retrieval:query": "node packages/retrieval/dist/cli.js query",
+    "lint": "corepack pnpm -r run lint",
+    "typecheck": "corepack pnpm -r run typecheck",
+    "test": "corepack pnpm -r run test",
+    "build": "corepack pnpm run content:validate && corepack pnpm run retrieval:build && corepack pnpm run typecheck && corepack pnpm -r run build",
+    "check": "corepack pnpm run lint && corepack pnpm run typecheck && corepack pnpm run build && corepack pnpm run test"
+  }
+}

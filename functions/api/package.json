@@ -1,0 +1,31 @@
+{
+  "name": "@laoyouju/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "劳有据 AI —— CloudBase HTTP 云函数（Node 原生 http，本地可运行骨架）。",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "main": "./dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc -p tsconfig.build.json",
+    "build:deploy": "node scripts/build-deploy.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/api.test.mjs"
+  },
+  "dependencies": {
+    "@laoyouju/retrieval": "workspace:*",
+    "@laoyouju/shared": "workspace:*",
+    "@laoyouju/search": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "esbuild": "0.28.2",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.68.0"
+  }
+}

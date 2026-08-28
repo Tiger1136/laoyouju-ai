@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-qiyelao-dong-zhengyi-xieshang",
+  "title": "企业劳动争议协商调解规定",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第17号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711334.htm",
+  "promulgationDate": "2011-11-30",
+  "effectiveDate": "2012-01-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "74f4f038a080d288b2932faa48eef906580300164f4734bd505a45df952913d6",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "arbitration-procedure",
+    "working-hours-leave",
+    "labor-relationship-recognition",
+    "contract-performance",
+    "arbitration-limitation"
+  ],
+  "provisions": [
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为规范企业劳动争议协商、调解行为，促进劳动关系和谐稳定，根据《中华人民共和国劳动争议调解仲裁法》，制定本规定。",
+      "topicIds": [
+        "labor-relationship-recognition",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "947b2fdd3c4edbfe2e11d1b75ba90328d6fd2343252fa7aa0d8bb1ea55f638a4"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-2",
+      "locator": "第二条",
+      "sourceText": "第二条 企业劳动争议协商、调解，适用本规定。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "77c8dab05ee7f43e371eeb08cab19264f6e3aae30e42c97b81f2d8f5ad1b390b"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-3",
+      "locator": "第三条",
+      "sourceText": "第三条 企业应当依法执行职工大会、职工代表大会、厂务公开等民主管理制度，建立集体协商、集体合同制度，维护劳动关系和谐稳定。",
+      "topicIds": [
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "d2dd9182423b762baa0d1b9164193f8e665b914d45655a8c435a162dfb368729"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-4",
+      "locator": "第四条",
+      "sourceText": "第四条 企业应当建立劳资双方沟通对话机制，畅通劳动者利益诉求表达渠道。 劳动者认为企业在履行劳动合同、集体合同，执行劳动保障法律、法规和企业劳动规章制度等方面存在问题的，可以向企业劳动争议调解委员会（以下简称调解委员会）提出。调解委员会应当及时核实情况，协调企业进行整改或者向劳动者做出说明。 劳动者也可以通过调解委员会向企业提出其他合理诉求。调解委员会应当及时向企业转达，并向劳动者反馈情况。",
+      "topicIds": [
+        "contract-performance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "04c39c569c628a6885da44da93ac41b719ef554fb258feba6caa28126d77b7a8"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-5",
+      "locator": "第五条",
+      "sourceText": "第五条 企业应当加强对劳动者的人文关怀，关心劳动者的诉求，关注劳动者的心理健康，引导劳动者理性维权，预防劳动争议发生。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "9a9eabba4a54a9d076579950391b6e5b48936d33230119f2ee18bc428047ad15"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-6",
+      "locator": "第六条",
+      "sourceText": "第六条 协商、调解劳动争议，应当根据事实和有关法律法规的规定，遵循平等、自愿、合法、公正、及时的原则。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "3943e21e8890b4c02a3d5d74eac07c64779ed2eccaed3657ecfc0972d02ea3e7"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-7",
+      "locator": "第七条",
+      "sourceText": "第七条 人力资源和社会保障行政部门应当指导企业开展劳动争议预防调解工作，具体履行下列职责： （一）指导企业遵守劳动保障法律、法规和政策； （二）督促企业建立劳动争议预防预警机制； （三）协调工会、企业代表组织建立企业重大集体性劳动争议应急调解协调机制，共同推动企业劳动争议预防调解工作； （四）检查辖区内调解委员会的组织建设、制度建设和队伍建设情况。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c4e5c161293cb1f9867b8aebe42887af3c1b4958f35376a7f76517253958ef66"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-8",
+      "locator": "第八条",
+      "sourceText": "第八条 发生劳动争议，一方当事人可以通过与另一方当事人约见、面谈等方式协商解决。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "c089928fbcc249dffae1a4794abab4e1883bd8f9ab6715406d1a6da646457e64"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-9",
+      "locator": "第九条",
+      "sourceText": "第九条 劳动者可以要求所在企业工会参与或者协助其与企业进行协商。工会也可以主动参与劳动争议的协商处理，维护劳动者合法权益。 劳动者可以委托其他组织或者个人作为其代表进行协商。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "82cec1ff825cd285649a627edd70d49ba4c4bc31409d8c7dab4c08709eeafc1c"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-10",
+      "locator": "第十条",
+      "sourceText": "第十条 一方当事人提出协商要求后，另一方当事人应当积极做出口头或者书面回应。5日内不做出回应的，视为不愿协商。 协商的期限由当事人书面约定，在约定的期限内没有达成一致的，视为协商不成。当事人可以书面约定延长期限。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "77c1f2e096e5ad583eca5a0e3caadc0dcceaa4aa2ff2d00230123a0a18a3a661"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 协商达成一致，应当签订书面和解协议。和解协议对双方当事人具有约束力，当事人应当履行。 经仲裁庭审查，和解协议程序和内容合法有效的，仲裁庭可以将其作为证据使用。但是，当事人为达成和解的目的作出妥协所涉及的对争议事实的认可，不得在其后的仲裁中作为对其不利的证据。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "42616632821a76602f3b90b8b72376ccdcddffa70df7f4a41d52365f5b7eda93"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 发生劳动争议，当事人不愿协商、协商不成或者达成和解协议后，一方当事人在约定的期限内不履行和解协议的，可以依法向调解委员会或者乡镇、街道劳动就业社会保障服务所（中心）等其他依法设立的调解组织申请调解，也可以依法向劳动人事争议仲裁委员会（以下简称仲裁委员会）申请仲裁。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "c8a96e66ce83d3533fedc6fb500bf304ae32a4384d60ec9b5b48267f923e516e"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 大中型企业应当依法设立调解委员会，并配备专职或者兼职工作人员。 有分公司、分店、分厂的企业，可以根据需要在分支机构设立调解委员会。总部调解委员会指导分支机构调解委员会开展劳动争议预防调解工作。 调解委员会可以根据需要在车间、工段、班组设立调解小组。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "573559e5230d57aee00a42a9771c0b925a4880360e310d6bbfc123d2cfe3e521"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 小微型企业可以设立调解委员会，也可以由劳动者和企业共同推举人员，开展调解工作。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2b3c81fb65156e5d03d5689611246256d97ef55d0fb81e92aa8dd8587228bc45"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 调解委员会由劳动者代表和企业代表组成，人数由双方协商确定，双方人数应当对等。劳动者代表由工会委员会成员担任或者由全体劳动者推举产生，企业代表由企业负责人指定。调解委员会主任由工会委员会成员或者双方推举的人员担任。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "7e3bd5f104fa720603ed3d6a9929bf6d1fc05e8e2deb2ab9871f30b6500453ed"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 调解委员会履行下列职责： （一）宣传劳动保障法律、法规和政策； （二）对本企业发生的劳动争议进行调解； （三）监督和解协议、调解协议的履行； （四）聘任、解聘和管理调解员； （五）参与协调履行劳动合同、集体合同、执行企业劳动规章制度等方面出现的问题； （六）参与研究涉及劳动者切身利益的重大方案； （七）协助企业建立劳动争议预防预警机制。",
+      "topicIds": [
+        "contract-performance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "992951bdacc863bcfc8909952d50064c1a291800bc56e0e3b319fb8595285f87"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 调解员履行下列职责： （一）关注本企业劳动关系状况，及时向调解委员会报告； （二）接受调解委员会指派，调解劳动争议案件； （三）监督和解协议、调解协议的履行； （四）完成调解委员会交办的其他工作。",
+      "topicIds": [
+        "labor-relationship-recognition",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "6b870310dcc8fbaeba2c81cd20d251e8f22589ddfc514bb2c5103f6042f9c74b"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 调解员应当公道正派、联系群众、热心调解工作，具有一定劳动保障法律政策知识和沟通协调能力。调解员由调解委员会聘任的本企业工作人员担任，调解委员会成员均为调解员。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "b1235a5c834ca633b548077fb5febd0b01d1784261ca9a29ac7a0c16817fe1b1"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 调解员的聘期至少为1年，可以续聘。调解员不能履行调解职责时，调解委员会应当及时调整。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "82a6179d25c669d6071dc4b2d9a477e2811c5c8afbc9ec776f37dd14c0cbf6cd"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 调解员依法履行调解职责，需要占用生产或者工作时间的，企业应当予以支持，并按照正常出勤对待。",
+      "topicIds": [
+        "working-hours-leave",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "b1baaf8872214f0d95dab47e852beb7ee405979ed27a5fd660544ec66c126881"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 发生劳动争议，当事人可以口头或者书面形式向调解委员会提出调解申请。 申请内容应当包括申请人基本情况、调解请求、事实与理由。 口头申请的，调解委员会应当当场记录。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "f44588048fa3c919d409c3c2e1d6f6b76b2663215c8e4e814057e49169f72e26"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 调解委员会接到调解申请后，对属于劳动争议受理范围且双方当事人同意调解的，应当在3个工作日内受理。对不属于劳动争议受理范围或者一方当事人不同意调解的，应当做好记录，并书面通知申请人。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2df1d1aaa34f1d2d850c3fa859126d44a8fa2fcf46a9a06cbeeb008cae2fe162"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 发生劳动争议，当事人没有提出调解申请，调解委员会可以在征得双方当事人同意后主动调解。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "22c2a3fe3ab3b3d856d6fad922cfb50436e77d3a95830fea55ef856fb9e4f5ed"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 调解委员会调解劳动争议一般不公开进行。但是，双方当事人要求公开调解的除外。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "17a20b1934b80dfe85f2d7afb02e7c37a55b928a3cdca703150161ebd7003043"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 调解委员会根据案件情况指定调解员或者调解小组进行调解，在征得当事人同意后，也可以邀请有关单位和个人协助调解。 调解员应当全面听取双方当事人的陈述，采取灵活多样的方式方法，开展耐心、细致的说服疏导工作，帮助当事人自愿达成调解协议。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "2ca8d8b3edcf3404d82a8c8c02aefa78e2e5a474b410088bc2be99e03a0c1744"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 经调解达成调解协议的，由调解委员会制作调解协议书。调解协议书应当写明双方当事人基本情况、调解请求事项、调解的结果和协议履行期限、履行方式等。 调解协议书由双方当事人签名或者盖章，经调解员签名并加盖调解委员会印章后生效。 调解协议书一式三份，双方当事人和调解委员会各执一份。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "f0485f474668ff27cb6a7ee24fbe99ad9ecd7b4a72d4c24d30d4abf76cee91e6"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 生效的调解协议对双方当事人具有约束力，当事人应当履行。 双方当事人可以自调解协议生效之日起15日内共同向仲裁委员会提出仲裁审查申请。仲裁委员会受理后，应当对调解协议进行审查，并根据《劳动人事争议仲裁办案规则》第五十四条规定，对程序和内容合法有效的调解协议，出具调解书。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "dd9ae4dc320d2ed165ce3a32b847030eefcb5a21f6c4d3437174dc9dcb24ebb7"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 双方当事人未按前条规定提出仲裁审查申请，一方当事人在约定的期限内不履行调解协议的，另一方当事人可以依法申请仲裁。 仲裁委员会受理仲裁申请后，应当对调解协议进行审查，调解协议合法有效且不损害公共利益或者第三人合法利益的，在没有新证据出现的情况下，仲裁委员会可以依据调解协议作出仲裁裁决。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "1c5f936b9d0c3c8acd1edd246dec73c5d17cd1c512ab11159bf65a0e8a5e1c89"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 调解委员会调解劳动争议，应当自受理调解申请之日起15日内结束。但是，双方当事人同意延期的可以延长。 在前款规定期限内未达成调解协议的，视为调解不成。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "9e0352a27732eda2958f0afb2dd4997f2a418c1fbffe8b531da005bbca5e23eb"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-30",
+      "locator": "第三十条",
+      "sourceText": "第三十条 当事人不愿调解、调解不成或者达成调解协议后，一方当事人在约定的期限内不履行调解协议的，调解委员会应当做好记录，由双方当事人签名或者盖章，并书面告知当事人可以向仲裁委员会申请仲裁。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "db5dd4d1e810fd503d8f958bf082eee1714b995029fd64cd7eb1ea984760c9e4"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-31",
+      "locator": "第三十一条",
+      "sourceText": "第三十一条 有下列情形之一的，按照《劳动人事争议仲裁办案规则》第十条的规定属于仲裁时效中断，从中断时起，仲裁时效期间重新计算： （一）一方当事人提出协商要求后，另一方当事人不同意协商或者在5日内不做出回应的； （二）在约定的协商期限内，一方或者双方当事人不同意继续协商的； （三）在约定的协商期限内未达成一致的； （四）达成和解协议后，一方或者双方当事人在约定的期限内不履行和解协议的； （五）一方当事人提出调解申请后，另一方当事人不同意调解的； （六）调解委员会受理调解申请后，在第二十九条规定的期限内一方或者双方当事人不同意调解的； （七）在第二十九条规定的期限内未达成调解协议的； （八）达成调解协议后，一方当事人在约定期限内不履行调解协议的。",
+      "topicIds": [
+        "arbitration-limitation",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "1d68f1c41c02665f962e7adff1bd65dcf4c2abe677abae8465f35b924560aef2"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-32",
+      "locator": "第三十二条",
+      "sourceText": "第三十二条 调解委员会应当建立健全调解登记、调解记录、督促履行、档案管理、业务培训、统计报告、工作考评等制度。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "231dbee4889071f60de6bd565d15416351afe02886c384c878cbb6df9d11fb09"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-33",
+      "locator": "第三十三条",
+      "sourceText": "第三十三条 企业应当支持调解委员会开展调解工作，提供办公场所，保障工作经费。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "98b6a17e96e1092b37df3c865657c2c6e39b359233cac1725f646c9d58b68c69"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-34",
+      "locator": "第三十四条",
+      "sourceText": "第三十四条 企业未按照本规定成立调解委员会，劳动争议或者群体性事件频发，影响劳动关系和谐，造成重大社会影响的，由县级以上人力资源和社会保障行政部门予以通报；违反法律法规规定的，依法予以处理。",
+      "topicIds": [
+        "labor-relationship-recognition",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "0ba93dd7c2617e9ed1ccbadacd8f52268fef043cf0cce8efbdc83bad4012be6b"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-35",
+      "locator": "第三十五条",
+      "sourceText": "第三十五条 调解员在调解过程中存在严重失职或者违法违纪行为，侵害当事人合法权益的，调解委员会应当予以解聘。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "b4db5ca04b46175faff04608e8b2877f43772fc3842ff435f45af50d1909729f"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-36",
+      "locator": "第三十六条",
+      "sourceText": "第三十六条 民办非企业单位、社会团体开展劳动争议协商、调解工作参照本规定执行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "d207587880caecb69d24e2e351d8fce4bec074435547b08b6d8c3ee8f57b5879"
+    },
+    {
+      "provisionId": "qiyelao-dong-zhengyi-xieshang-37",
+      "locator": "第三十七条",
+      "sourceText": "第三十七条 本规定自2012年1月1日起施行",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "e4f7a2928150fd01db44b559da95f439ecb48a83b038d5009d50ee3a92be854c"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2011-11-30 人社部令第17号公布，2012-01-01 施行。"
+  ]
+}

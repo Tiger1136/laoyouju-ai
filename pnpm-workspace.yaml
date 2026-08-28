@@ -1,0 +1,15 @@
+packages:
+  - apps/*
+  - functions/*
+  - packages/*
+# pnpm store 固定在项目内（.pnpm-store 已被 .gitignore 忽略），避免写入工作区外
+storeDir: .pnpm-store
+# 无 TTY 环境（CI/自动化）下允许自动重建 node_modules，不因确认提示中止
+confirmModulesPurge: false
+# pnpm 11 构建脚本白名单（保持最小化；unrs-resolver 自带预编译 binding，无需运行构建脚本）
+allowBuilds:
+  esbuild: true
+  unrs-resolver: false
+# pnpm 11 自动记录的“最低发布年龄豁免”条目（next@16.3.3 发布未满最低发布年龄，由 pnpm 维护）
+minimumReleaseAgeExclude:
+  - next@16.3.3

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-gongzi-zhesuan-2022",
+  "title": "关于职工全年月平均工作时间和工资折算问题的通知",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部发〔2025〕2号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/zhengceku/202501/content_6995777.htm",
+  "promulgationDate": "2025-01-01",
+  "effectiveDate": "2025-01-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [
+    "rule-gongzi-zhesuan-2008"
+  ],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "aefcbced91ef154d9118690c021091efe4849ceb6cc05a376c2343136748d1af",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "wage-arrears",
+    "overtime-pay",
+    "working-hours-leave"
+  ],
+  "provisions": [
+    {
+      "provisionId": "gongzi-zhesuan-2022-0",
+      "locator": "全文",
+      "sourceText": "关于职工全年月平均工作时间和工资折算问题的通知人社部发〔2025〕2号各省、自治区、直辖市及新疆生产建设兵团人力资源社会保障厅（局）：根据《国务院关于修改的决定》（国务院令第795号）的规定，全体公民的节日假期由原来的11天增设为13天。据此，职工全年月平均制度工作时间和工资折算办法分别调整如下：一、制度工作时间的计算年工作日：365天-104天（休息日）-13天（法定节假日）＝248天季工作日：248天÷4季＝62天/季月工作日：248天÷12月＝20.67天/月工作小时数的计算：以月、季、年的工作日乘以每日的8小时。二、日工资、小时工资的折算按照劳动法第五十一条的规定，法定节假日用人单位应当依法支付工资，即折算日工资、小时工资时不剔除国家规定的13天法定节假日。据此，日工资、小时工资的折算为：日工资：月工资收入÷月计薪天数小时工资：月工资收入÷（月计薪天数×8小时）月计薪天数：（365天-104天）÷12月＝21.75天三、废止文件2008年1月3日原劳动和社会保障部发布的《",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "aefcbced91ef154d9118690c021091efe4849ceb6cc05a376c2343136748d1af"
+    }
+  ],
+  "validityNotes": [
+    "任务原定抓取劳社部发〔2008〕3号通知；经核查，该2008通知已被人社部发〔2025〕2号通知（根据国务院令第795号调整，月计薪天数仍21.75天）明确废止（正文：“2008年1月3日原劳动和社会保障部发布的〈…〉（劳社部发〔2008〕3号）同时废止”）。故抓取并记录现行有效的2025年通知。 被替代/被修订旧版本（档案记录）: [劳社部发〔2008〕3号《关于职工全年月平均工作时间和工资折算"
+  ]
+}

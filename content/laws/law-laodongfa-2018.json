@@ -1,0 +1,1092 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "law-laodongfa-2018",
+  "title": "中华人民共和国劳动法（2018修正）",
+  "sourceType": "law",
+  "issuingAuthority": "全国人民代表大会常务委员会",
+  "documentNumber": "中华人民共和国主席令第二十八号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://policy.mofcom.gov.cn/claw/clawContent.shtml?id=66953",
+  "promulgationDate": "1994-07-05",
+  "effectiveDate": "1995-01-01",
+  "expiryDate": null,
+  "validityStatus": "amended",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "a2e1ad14579d0e12be236aa0157516319311a851c082569d86fe0f8a6d5f5386",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "working-hours-leave",
+    "overtime-pay",
+    "wage-arrears",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "probation-disputes",
+    "labor-relationship-recognition",
+    "contract-performance",
+    "arbitration-procedure",
+    "social-insurance",
+    "noncompete-confidentiality",
+    "work-injury",
+    "female-worker-protection",
+    "arbitration-limitation"
+  ],
+  "provisions": [
+    {
+      "provisionId": "laodongfa-2018-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了保护劳动者的合法权益，调整劳动关系，建立和维护适应社会主义市场经济的劳动制度，促进经济发展和社会进步，根据宪法，制定本法。",
+      "topicIds": [
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "fd7b3c431dc0954042355f952bfc9ec5fa28ae4add19ef3544d7df4b42884a39"
+    },
+    {
+      "provisionId": "laodongfa-2018-2",
+      "locator": "第二条",
+      "sourceText": "第二条 在中华人民共和国境内的企业、个体经济组织（以下统称用人单位）和与之形成劳动关系的劳动者，适用本法。 国家机关、事业组织、社会团体和与之建立劳动合同关系的劳动者，依照本法执行。",
+      "topicIds": [
+        "contract-performance",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "989fac9340ebaac01f7d98299a83e4368eebc84a643ff9a36f7b6ad3737bc943"
+    },
+    {
+      "provisionId": "laodongfa-2018-3",
+      "locator": "第三条",
+      "sourceText": "第三条 劳动者享有平等就业和选择职业的权利、取得劳动报酬的权利、休息休假的权利、获得劳动安全卫生保护的权利、接受职业技能培训的权利、享受社会保险和福利的权利、提请劳动争议处理的权利以及法律规定的其他劳动权利。 劳动者应当完成劳动任务，提高职业技能，执行劳动安全卫生规程，遵守劳动纪律和职业道德。",
+      "topicIds": [
+        "wage-arrears",
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "fede97d86911abfb3482ba981f03883b76c4a711ee701f46744237a720a15a96"
+    },
+    {
+      "provisionId": "laodongfa-2018-4",
+      "locator": "第四条",
+      "sourceText": "第四条 用人单位应当依法建立和完善规章制度，保障劳动者享有劳动权利和履行劳动义务。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "d2e89aea61efed9eb3848e649d13d60f5e49cc2bf74bf663e3d6cb8a17679fdb"
+    },
+    {
+      "provisionId": "laodongfa-2018-5",
+      "locator": "第五条",
+      "sourceText": "第五条 国家采取各种措施，促进劳动就业，发展职业教育，制定劳动标准，调节社会收入，完善社会保险，协调劳动关系，逐步提高劳动者的生活水平。",
+      "topicIds": [
+        "social-insurance",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "c1a079bab3fceb4f8cc4e81253adf4967c33d13d2863b775d1c7982a49c780e9"
+    },
+    {
+      "provisionId": "laodongfa-2018-6",
+      "locator": "第六条",
+      "sourceText": "第六条 国家提倡劳动者参加社会义务劳动，开展劳动竞赛和合理化建议活动，鼓励和保护劳动者进行科学研究、技术革新和发明创造，表彰和奖励劳动模范和先进工作者。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "7595d2af147b61e0181cb0aae2e0c7f22469af7766d2e09ae61cff4d8eb101a3"
+    },
+    {
+      "provisionId": "laodongfa-2018-7",
+      "locator": "第七条",
+      "sourceText": "第七条 劳动者有权依法参加和组织工会。 工会代表和维护劳动者的合法权益，依法独立自主地开展活动。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "d912c7d96bce2d3ffc053f8942cc9474065d6a7328d3d47835bec9ec89e7c244"
+    },
+    {
+      "provisionId": "laodongfa-2018-8",
+      "locator": "第八条",
+      "sourceText": "第八条 劳动者依照法律规定，通过职工大会、职工代表大会或者其他形式，参与民主管理或者就保护劳动者合法权益与用人单位进行平等协商。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "98a3f10ddcfd3c2ef3c0d5144b687f2b9f817aeb10b1c5454f9874973c8ab545"
+    },
+    {
+      "provisionId": "laodongfa-2018-9",
+      "locator": "第九条",
+      "sourceText": "第九条 国务院劳动行政部门主管全国劳动工作。 县级以上地方人民政府劳动行政部门主管本行政区域内的劳动工作。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "3156e3fe0848154556335918ae8bb081d02d01c5eccb39d69e3a6a4e2f593056"
+    },
+    {
+      "provisionId": "laodongfa-2018-10",
+      "locator": "第十条",
+      "sourceText": "第十条 国家通过促进经济和社会发展，创造就业条件，扩大就业机会。 国家鼓励企业、事业组织、社会团体在法律、行政法规规定的范围内兴办产业或者拓展经营，增加就业。 国家支持劳动者自愿组织起来就业和从事个体经营实现就业。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "ed7de0f5f961531980e6f4c8e0123c39f1abb785392f2622a31fc1b1f27d6c7e"
+    },
+    {
+      "provisionId": "laodongfa-2018-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 地方各级人民政府应当采取措施，发展多种类型的职业介绍机构，提供就业服务。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "04cd92f1122348e706150714d217429ff327293b9e39839d4b35cb0f4ea3a6aa"
+    },
+    {
+      "provisionId": "laodongfa-2018-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 劳动者就业，不因民族、种族、性别、宗教信仰不同而受歧视。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "1c8998ed35b8dad18ed9b48d23e66b64a08fd352a5b171a8899817c91482ba88"
+    },
+    {
+      "provisionId": "laodongfa-2018-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 妇女享有与男子平等的就业权利。在录用职工时，除国家规定的不适合妇女的工种或者岗位外，不得以性别为由拒绝录用妇女或者提高对妇女的录用标准。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "91bbab262b253609f7356c641649287d03c206d28a360d2611f807b38c9e96b5"
+    },
+    {
+      "provisionId": "laodongfa-2018-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 残疾人、少数民族人员、退出现役的军人的就业，法律、法规有特别规定的，从其规定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "be65c06d0cbea2aab2511a5138db979fa9b057c13c55ba1e1066277164e712de"
+    },
+    {
+      "provisionId": "laodongfa-2018-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 禁止用人单位招用未满十六周岁的未成年人。 文艺、体育和特种工艺单位招用未满十六周岁的未成年人，必须遵守国家有关规定，并保障其接受义务教育的权利。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "1ea2a82923541b0723a52cc9387d3a0725d0e997d0b60bb10c11ce7616b65ed6"
+    },
+    {
+      "provisionId": "laodongfa-2018-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 劳动合同是劳动者与用人单位确立劳动关系、明确双方权利和义务的协议。 建立劳动关系应当订立劳动合同。",
+      "topicIds": [
+        "contract-performance",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "e0d16e0c3d21198af92d19ede1385abed936ff3dc4d8b80fe6595d2a27cfdd5b"
+    },
+    {
+      "provisionId": "laodongfa-2018-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 订立和变更劳动合同，应当遵循平等自愿、协商一致的原则，不得违反法律、行政法规的规定。 劳动合同依法订立即具有法律约束力，当事人必须履行劳动合同规定的义务。",
+      "topicIds": [
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "35e9829754e19b2699b9ca5bdc0a088d910e926c74ecd86b4d283281b9ee61ab"
+    },
+    {
+      "provisionId": "laodongfa-2018-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 下列劳动合同无效： （一）违反法律、行政法规的劳动合同； （二）采取欺诈、威胁等手段订立的劳动合同。 无效的劳动合同，从订立的时候起，就没有法律约束力。确认劳动合同部分无效的，如果不影响其余部分的效力，其余部分仍然有效。 劳动合同的无效，由劳动争议仲裁委员会或者人民法院确认。",
+      "topicIds": [
+        "contract-performance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "e3b31dcb5c2ff277b04a13c08ab131cccb10f830a3f155e5f819f2f23eb8be45"
+    },
+    {
+      "provisionId": "laodongfa-2018-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 劳动合同应当以书面形式订立，并具备以下条款： （一）劳动合同期限； （二）工作内容； （三）劳动保护和劳动条件； （四）劳动报酬； （五）劳动纪律； （六）劳动合同终止的条件； （七）违反劳动合同的责任。 劳动合同除前款规定的必备条款外，当事人可以协商约定其他内容。",
+      "topicIds": [
+        "wage-arrears",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "7535acd72f2d1b014581f368c06d2b7e53297dbf79ce141263f7e83743561f33"
+    },
+    {
+      "provisionId": "laodongfa-2018-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 劳动合同的期限分为有固定期限、无固定期限和以完成一定的工作为期限。 劳动者在同一用人单位连续工作满十年以上，当事人双方同意续延劳动合同的，如果劳动者提出订立无固定期限的劳动合同，应当订立无固定期限的劳动合同。",
+      "topicIds": [
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "fb4ceebdeddfab9e14beb4185697415db79ef3340859dd327b0149c718306d64"
+    },
+    {
+      "provisionId": "laodongfa-2018-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 劳动合同可以约定试用期。试用期最长不得超过六个月。",
+      "topicIds": [
+        "contract-performance",
+        "probation-disputes"
+      ],
+      "keywords": [],
+      "textSha256": "53c4ddb4a20537357165b4bdf50b0746aeb191acb248cbea88006b1576967b75"
+    },
+    {
+      "provisionId": "laodongfa-2018-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 劳动合同当事人可以在劳动合同中约定保守用人单位商业秘密的有关事项。",
+      "topicIds": [
+        "contract-performance",
+        "noncompete-confidentiality"
+      ],
+      "keywords": [],
+      "textSha256": "07d404531cbf0d5069531c2158c4beaf53efb40a28afc448ca2ff096bfeb3a78"
+    },
+    {
+      "provisionId": "laodongfa-2018-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 劳动合同期满或者当事人约定的劳动合同终止条件出现，劳动合同即行终止。",
+      "topicIds": [
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "a9c47cf03edc79eb0f68aa8af3de485821b936afd2b5c65e8ea6479f75206712"
+    },
+    {
+      "provisionId": "laodongfa-2018-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 经劳动合同当事人协商一致，劳动合同可以解除。",
+      "topicIds": [
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "879e3949c36e30ee4b73742b18ec52adda03249d82f0b3cb6126a7c4eef97e66"
+    },
+    {
+      "provisionId": "laodongfa-2018-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 劳动者有下列情形之一的，用人单位可以解除劳动合同： （一）在试用期间被证明不符合录用条件的； （二）严重违反劳动纪律或者用人单位规章制度的； （三）严重失职，营私舞弊，对用人单位利益造成重大损害的； （四）被依法追究刑事责任的。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "probation-disputes"
+      ],
+      "keywords": [],
+      "textSha256": "97d6b7d550a1e845633a5fbd861db3c8b72308898cdd7986cf354855b6facdab"
+    },
+    {
+      "provisionId": "laodongfa-2018-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 有下列情形之一的，用人单位可以解除劳动合同，但是应当提前三十日以书面形式通知劳动者本人： （一）劳动者患病或者非因工负伤，医疗期满后，不能从事原工作也不能从事由用人单位另行安排的工作的； （二）劳动者不能胜任工作，经过培训或者调整工作岗位，仍不能胜任工作的； （三）劳动合同订立时所依据的客观情况发生重大变化，致使原劳动合同无法履行，经当事人协商不能就变更劳动合同达成协议的。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "f931a4c6a33c21984d071437a6f01dfeecfa10a2873e1f0a77952247feff55af"
+    },
+    {
+      "provisionId": "laodongfa-2018-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 用人单位濒临破产进行法定整顿期间或者生产经营状况发生严重困难，确需裁减人员的，应当提前三十日向工会或者全体职工说明情况，听取工会或者职工的意见，经向劳动行政部门报告后，可以裁减人员。 用人单位依据本条规定裁减人员，在六个月内录用人员的，应当优先录用被裁减的人员。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "a9abbacef85d81dc5a82e99a9504b96cf7eed6dd9c125a70ac4598a08dc561f6"
+    },
+    {
+      "provisionId": "laodongfa-2018-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 用人单位依据本法第二十四条、第二十六条、第二十七条的规定解除劳动合同的，应当依照国家有关规定给予经济补偿。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance"
+      ],
+      "keywords": [
+        "经济补偿",
+        "解除劳动合同"
+      ],
+      "textSha256": "7c0c1e0728305078b62f37778c4ad09a920e7c8c1f3008d04d4112bbb24f9bf8"
+    },
+    {
+      "provisionId": "laodongfa-2018-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 劳动者有下列情形之一的，用人单位不得依据本法第二十六条、第二十七条的规定解除劳动合同： （一）患职业病或者因工负伤并被确认丧失或者部分丧失劳动能力的； （二）患病或者负伤，在规定的医疗期内的； （三）女职工在孕期、产期、哺乳期内的； （四）法律、行政法规规定的其他情形。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "work-injury",
+        "female-worker-protection"
+      ],
+      "keywords": [
+        "孕期",
+        "产期",
+        "哺乳期",
+        "不得解除劳动合同"
+      ],
+      "textSha256": "0506123113ad7b1e0f3c0de9fadde7cf3b76a8abc9e4f11d19eda712769991be"
+    },
+    {
+      "provisionId": "laodongfa-2018-30",
+      "locator": "第三十条",
+      "sourceText": "第三十条 用人单位解除劳动合同，工会认为不适当的，有权提出意见。如果用人单位违反法律、法规或者劳动合同，工会有权要求重新处理；劳动者申请仲裁或者提起诉讼的，工会应当依法给予支持和帮助。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "a8d4c830ea636ae5f8e11088aab2f43078563ce0340cc9bc52054cceaecdabce"
+    },
+    {
+      "provisionId": "laodongfa-2018-31",
+      "locator": "第三十一条",
+      "sourceText": "第三十一条 劳动者解除劳动合同，应当提前三十日以书面形式通知用人单位。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "c1a1dceea3ceab33fd48cb938bbc68560b45b80a8b4cce77be4fac25195e0c75"
+    },
+    {
+      "provisionId": "laodongfa-2018-32",
+      "locator": "第三十二条",
+      "sourceText": "第三十二条 有下列情形之一的，劳动者可以随时通知用人单位解除劳动合同： （一）在试用期内的； （二）用人单位以暴力、威胁或者非法限制人身自由的手段强迫劳动的； （三）用人单位未按照劳动合同约定支付劳动报酬或者提供劳动条件的。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "probation-disputes"
+      ],
+      "keywords": [],
+      "textSha256": "80677fa8eae623fedec4256a1f0e89bc2fd4077e731630303186ea491de56a54"
+    },
+    {
+      "provisionId": "laodongfa-2018-33",
+      "locator": "第三十三条",
+      "sourceText": "第三十三条 企业职工一方与企业可以就劳动报酬、工作时间、休息休假、劳动安全卫生、保险福利等事项，签订集体合同。集体合同草案应当提交职工代表大会或者全体职工讨论通过。 集体合同由工会代表职工与企业签订；没有建立工会的企业，由职工推举的代表与企业签订。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "4b18d1219e6b8b31a448672756b9682b43e02c63cc723d89cd2eba2e591e2318"
+    },
+    {
+      "provisionId": "laodongfa-2018-34",
+      "locator": "第三十四条",
+      "sourceText": "第三十四条 集体合同签订后应当报送劳动行政部门；劳动行政部门自收到集体合同文本之日起十五日内未提出异议的，集体合同即行生效。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "11ba4b624f1b6e72480557bdd6ef78005faf99d367915c3f4c9ae982d040426d"
+    },
+    {
+      "provisionId": "laodongfa-2018-35",
+      "locator": "第三十五条",
+      "sourceText": "第三十五条 依法签订的集体合同对企业和企业全体职工具有约束力。职工个人与企业订立的劳动合同中劳动条件和劳动报酬等标准不得低于集体合同的规定。",
+      "topicIds": [
+        "wage-arrears",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "a4726cebb3676e29587f9757c68e5148e65a9b9bf8114647ea7266b030a27a79"
+    },
+    {
+      "provisionId": "laodongfa-2018-36",
+      "locator": "第三十六条",
+      "sourceText": "第三十六条 国家实行劳动者每日工作时间不超过八小时、平均每周工作时间不超过四十四小时的工时制度。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "7530873f834c1761a8c24839462a7e3b8c98e5f41e8f8323fb6ed7e9488e7a7c"
+    },
+    {
+      "provisionId": "laodongfa-2018-37",
+      "locator": "第三十七条",
+      "sourceText": "第三十七条 对实行计件工作的劳动者，用人单位应当根据本法第三十六条规定的工时制度合理确定其劳动定额和计件报酬标准。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "08d351f6fb5b0e0f80fbf9522592d95bb54b01b4c4523eb2e21acf410c26a18f"
+    },
+    {
+      "provisionId": "laodongfa-2018-38",
+      "locator": "第三十八条",
+      "sourceText": "第三十八条 用人单位应当保证劳动者每周至少休息一日。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "9b88767f38b3aeb8f5411ce87962cb83923d7cb4ca891e790a7ea323acf4340f"
+    },
+    {
+      "provisionId": "laodongfa-2018-39",
+      "locator": "第三十九条",
+      "sourceText": "第三十九条 企业因生产特点不能实行本法第三十六条、第三十八条规定的，经劳动行政部门批准，可以实行其他工作和休息办法。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "a0687816e04612e08d226e34e359c1de2ae9668755c150c242e55127f76db33d"
+    },
+    {
+      "provisionId": "laodongfa-2018-40",
+      "locator": "第四十条",
+      "sourceText": "第四十条 用人单位在下列节日期间应当依法安排劳动者休假： （一）元旦； （二）春节； （三）国际劳动节； （四）国庆节； （五）法律、法规规定的其他休假节日。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "f8def62774c226bcba63a5e9ff1cc6904cac5271490fb3afdacdfccf37b4e06c"
+    },
+    {
+      "provisionId": "laodongfa-2018-41",
+      "locator": "第四十一条",
+      "sourceText": "第四十一条 用人单位由于生产经营需要，经与工会和劳动者协商后可以延长工作时间，一般每日不得超过一小时；因特殊原因需要延长工作时间的，在保障劳动者身体健康的条件下延长工作时间每日不得超过三小时，但是每月不得超过三十六小时。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [
+        "延长工作时间",
+        "加班",
+        "协商"
+      ],
+      "textSha256": "daf046364d98835562c5f5a7068f867f8afbe1de2bd546cecd8e78ea1ec046da"
+    },
+    {
+      "provisionId": "laodongfa-2018-42",
+      "locator": "第四十二条",
+      "sourceText": "第四十二条 有下列情形之一的，延长工作时间不受本法第四十一条规定的限制： （一）发生自然灾害、事故或者因其他原因，威胁劳动者生命健康和财产安全，需要紧急处理的； （二）生产设备、交通运输线路、公共设施发生故障，影响生产和公众利益，必须及时抢修的； （三）法律、行政法规规定的其他情形。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "bab0c3979d24d0457878d33babb5ed5b331d8af033df2f1a5b378a00b9a95394"
+    },
+    {
+      "provisionId": "laodongfa-2018-43",
+      "locator": "第四十三条",
+      "sourceText": "第四十三条 用人单位不得违反本法规定延长劳动者的工作时间。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "cce72c2fdf25aa548036b24b5e03dc38c26b7b1616485725efddc7e9942f3b28"
+    },
+    {
+      "provisionId": "laodongfa-2018-44",
+      "locator": "第四十四条",
+      "sourceText": "第四十四条 有下列情形之一的，用人单位应当按照下列标准支付高于劳动者正常工作时间工资的工资报酬： （一）安排劳动者延长工作时间的，支付不低于工资的百分之一百五十的工资报酬； （二）休息日安排劳动者工作又不能安排补休的，支付不低于工资的百分之二百的工资报酬； （三）法定休假日安排劳动者工作的，支付不低于工资的百分之三百的工资报酬。",
+      "topicIds": [
+        "working-hours-leave",
+        "overtime-pay",
+        "wage-arrears"
+      ],
+      "keywords": [
+        "加班费",
+        "加班工资",
+        "延长工作时间",
+        "休息日",
+        "法定休假日"
+      ],
+      "textSha256": "664458acd0961da883743dd9c04e3b3fdc13fad0e30d71fc76e6994e6ca6c0e1"
+    },
+    {
+      "provisionId": "laodongfa-2018-45",
+      "locator": "第四十五条",
+      "sourceText": "第四十五条 国家实行带薪年休假制度。 劳动者连续工作一年以上的，享受带薪年休假。具体办法由国务院规定。",
+      "topicIds": [
+        "working-hours-leave",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "a201c78edd7365117fd43e23962c2755091e6334497be9a741218f98e0dcbb69"
+    },
+    {
+      "provisionId": "laodongfa-2018-46",
+      "locator": "第四十六条",
+      "sourceText": "第四十六条 工资分配应当遵循按劳分配原则，实行同工同酬。 工资水平在经济发展的基础上逐步提高。国家对工资总量实行宏观调控。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "5a5f372d0f37768bc52e392efd6e9edb7bafbbccb391e98f0865ffb3a721b9ec"
+    },
+    {
+      "provisionId": "laodongfa-2018-47",
+      "locator": "第四十七条",
+      "sourceText": "第四十七条 用人单位根据本单位的生产经营特点和经济效益，依法自主确定本单位的工资分配方式和工资水平。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "bff11ca0502bb0d5b4e68b7e058850126f9cb0c2d58f8fb480d7e579eabeaa49"
+    },
+    {
+      "provisionId": "laodongfa-2018-48",
+      "locator": "第四十八条",
+      "sourceText": "第四十八条 国家实行最低工资保障制度。最低工资的具体标准由省、自治区、直辖市人民政府规定，报国务院备案。 用人单位支付劳动者的工资不得低于当地最低工资标准。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "12c0f8e816173b3ffc04fc0a97578eca3b3bed459dfa28bda27cc9646bb541e6"
+    },
+    {
+      "provisionId": "laodongfa-2018-49",
+      "locator": "第四十九条",
+      "sourceText": "第四十九条 确定和调整最低工资标准应当综合参考下列因素： （一）劳动者本人及平均赡养人口的最低生活费用； （二）社会平均工资水平； （三）劳动生产率； （四）就业状况； （五）地区之间经济发展水平的差异。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "a7afc439b8d44b14df393019a01307868a0c0fa9f7fa19d1e168e521492fd34f"
+    },
+    {
+      "provisionId": "laodongfa-2018-50",
+      "locator": "第五十条",
+      "sourceText": "第五十条 工资应当以货币形式按月支付给劳动者本人。不得克扣或者无故拖欠劳动者的工资。",
+      "topicIds": [
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "e2214561a606ff6769ec40fd2f6c63df69dd002c49e0a4257ed82a7c534abcb9"
+    },
+    {
+      "provisionId": "laodongfa-2018-51",
+      "locator": "第五十一条",
+      "sourceText": "第五十一条 劳动者在法定休假日和婚丧假期间以及依法参加社会活动期间，用人单位应当依法支付工资。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "7e22e5c3ad4b6ad0062364a5a9ace72ba9a9335c3a36412ca4491f5b7d26b0ff"
+    },
+    {
+      "provisionId": "laodongfa-2018-52",
+      "locator": "第五十二条",
+      "sourceText": "第五十二条 用人单位必须建立、健全劳动安全卫生制度，严格执行国家劳动安全卫生规程和标准，对劳动者进行劳动安全卫生教育，防止劳动过程中的事故，减少职业危害。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "049f49bc4028538e9e43290efd171ec1192712a239627d4a315045b5917446c2"
+    },
+    {
+      "provisionId": "laodongfa-2018-53",
+      "locator": "第五十三条",
+      "sourceText": "第五十三条 劳动安全卫生设施必须符合国家规定的标准。 新建、改建、扩建工程的劳动安全卫生设施必须与主体工程同时设计、同时施工、同时投入生产和使用。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "569870ded543183466f9b806e330faa53b15aef255c0d85f30ed2ff66a2edd95"
+    },
+    {
+      "provisionId": "laodongfa-2018-54",
+      "locator": "第五十四条",
+      "sourceText": "第五十四条 用人单位必须为劳动者提供符合国家规定的劳动安全卫生条件和必要的劳动防护用品，对从事有职业危害作业的劳动者应当定期进行健康检查。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "60825126005afcb7d17fe92d2bcae5c295c2f7fe5ac9984aea95b3e5c44b9d80"
+    },
+    {
+      "provisionId": "laodongfa-2018-55",
+      "locator": "第五十五条",
+      "sourceText": "第五十五条 从事特种作业的劳动者必须经过专门培训并取得特种作业资格。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "47b48596cea4087fd35051f41afba776b15e37d3c8db8cb2105b6815d0806284"
+    },
+    {
+      "provisionId": "laodongfa-2018-56",
+      "locator": "第五十六条",
+      "sourceText": "第五十六条 劳动者在劳动过程中必须严格遵守安全操作规程。 劳动者对用人单位管理人员违章指挥、强令冒险作业，有权拒绝执行；对危害生命安全和身体健康的行为，有权提出批评、检举和控告。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "db030ee3510a4b13806f35a105fce85609f7a37c8da465b3028299434a429e74"
+    },
+    {
+      "provisionId": "laodongfa-2018-57",
+      "locator": "第五十七条",
+      "sourceText": "第五十七条 国家建立伤亡事故和职业病统计报告和处理制度。县级以上各级人民政府劳动行政部门、有关部门和用人单位应当依法对劳动者在劳动过程中发生的伤亡事故和劳动者的职业病状况，进行统计、报告和处理。",
+      "topicIds": [
+        "work-injury"
+      ],
+      "keywords": [],
+      "textSha256": "2e219b194b761643d3258324e8ab932daf4a088752ecb376d667f75fc211fce4"
+    },
+    {
+      "provisionId": "laodongfa-2018-58",
+      "locator": "第五十八条",
+      "sourceText": "第五十八条 国家对女职工和未成年工实行特殊劳动保护。 未成年工是指年满十六周岁未满十八周岁的劳动者。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "c44a549d9c5a608ba0baa8267ead68b9aea296a3430a0b61ae92758f7687c45e"
+    },
+    {
+      "provisionId": "laodongfa-2018-59",
+      "locator": "第五十九条",
+      "sourceText": "第五十九条 禁止安排女职工从事矿山井下、国家规定的第四级体力劳动强度的劳动和其他禁忌从事的劳动。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "3cd184c5c883d900387d82f943fdf586ab02376b0736e40a89a4642d4323b1d1"
+    },
+    {
+      "provisionId": "laodongfa-2018-60",
+      "locator": "第六十条",
+      "sourceText": "第六十条 不得安排女职工在经期从事高处、低温、冷水作业和国家规定的第三级体力劳动强度的劳动。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "e46a01c37b520e4212f6e72f9805f6b82855c5c1b0b9c7fb33ec72057982574d"
+    },
+    {
+      "provisionId": "laodongfa-2018-61",
+      "locator": "第六十一条",
+      "sourceText": "第六十一条 不得安排女职工在怀孕期间从事国家规定的第三级体力劳动强度的劳动和孕期禁忌从事的劳动。对怀孕七个月以上的女职工，不得安排其延长工作时间和夜班劳动。",
+      "topicIds": [
+        "working-hours-leave",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "81a7d88ce8c9f02cfcdea3975b8d1b0ba0aec66eadd71d285539f36f6ec2ec85"
+    },
+    {
+      "provisionId": "laodongfa-2018-62",
+      "locator": "第六十二条",
+      "sourceText": "第六十二条 女职工生育享受不少于九十天的产假。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "8ac30905244a381a7387b7a85c94cc7e106a1f6ae76e28633c2e8976f047a85b"
+    },
+    {
+      "provisionId": "laodongfa-2018-63",
+      "locator": "第六十三条",
+      "sourceText": "第六十三条 不得安排女职工在哺乳未满一周岁的婴儿期间从事国家规定的第三级体力劳动强度的劳动和哺乳期禁忌从事的其他劳动，不得安排其延长工作时间和夜班劳动。",
+      "topicIds": [
+        "working-hours-leave",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "e06f1facd5089fea97df6f01518f9456c025885c6fb0859b2b967ec2688c6e1b"
+    },
+    {
+      "provisionId": "laodongfa-2018-64",
+      "locator": "第六十四条",
+      "sourceText": "第六十四条 不得安排未成年工从事矿山井下、有毒有害、国家规定的第四级体力劳动强度的劳动和其他禁忌从事的劳动。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "83cb14f679d0635a9850a30b855cd97dda1f8dd666c54e508706c8439b223269"
+    },
+    {
+      "provisionId": "laodongfa-2018-65",
+      "locator": "第六十五条",
+      "sourceText": "第六十五条 用人单位应当对未成年工定期进行健康检查。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "96cd875d6878e1aaf6cd0c60fa53ef06b923714156f15be6e92d2d97a0258e6a"
+    },
+    {
+      "provisionId": "laodongfa-2018-66",
+      "locator": "第六十六条",
+      "sourceText": "第六十六条 国家通过各种途径，采取各种措施，发展职业培训事业，开发劳动者的职业技能，提高劳动者素质，增强劳动者的就业能力和工作能力。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "60d6fe5760b53badc051d620e2581a0b56e74a1bd2190e131356ca1cc2cfeae2"
+    },
+    {
+      "provisionId": "laodongfa-2018-67",
+      "locator": "第六十七条",
+      "sourceText": "第六十七条 各级人民政府应当把发展职业培训纳入社会经济发展的规划，鼓励和支持有条件的企业、事业组织、社会团体和个人进行各种形式的职业培训。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "2b34f8e27485fc3d5c5fa27ace93351df52fa3858d2668cf1e391fd35e0a16ae"
+    },
+    {
+      "provisionId": "laodongfa-2018-68",
+      "locator": "第六十八条",
+      "sourceText": "第六十八条 用人单位应当建立职业培训制度，按照国家规定提取和使用职业培训经费，根据本单位实际，有计划地对劳动者进行职业培训。 从事技术工种的劳动者，上岗前必须经过培训。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "63728ec03fbeff78c000177c31bd1821e3b56a6c0c177989cd79f05f448a551e"
+    },
+    {
+      "provisionId": "laodongfa-2018-69",
+      "locator": "第六十九条",
+      "sourceText": "第六十九条 国家确定职业分类，对规定的职业制定职业技能标准，实行职业资格证书制度，由经备案的考核鉴定机构负责对劳动者实施职业技能考核鉴定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "98fccfbe5569f364705d35131dca6623c23396bddef77e41a72dfa5967dee58e"
+    },
+    {
+      "provisionId": "laodongfa-2018-70",
+      "locator": "第七十条",
+      "sourceText": "第七十条 国家发展社会保险事业，建立社会保险制度，设立社会保险基金，使劳动者在年老、患病、工伤、失业、生育等情况下获得帮助和补偿。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "0e17696bf7c0e18fa4335eb4599cc7d826c745dbba2c39a1f6c922f92c92e53a"
+    },
+    {
+      "provisionId": "laodongfa-2018-71",
+      "locator": "第七十一条",
+      "sourceText": "第七十一条 社会保险水平应当与社会经济发展水平和社会承受能力相适应。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "9820ecbb178dcd840470c1ef3fe749347cbf0cc3b26f96b443718e04e1908a1c"
+    },
+    {
+      "provisionId": "laodongfa-2018-72",
+      "locator": "第七十二条",
+      "sourceText": "第七十二条 社会保险基金按照保险类型确定资金来源，逐步实行社会统筹。用人单位和劳动者必须依法参加社会保险，缴纳社会保险费。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "913a3a4186e75b93da3607fa318876e8aafa5dc4957240ffeca17b3891722d55"
+    },
+    {
+      "provisionId": "laodongfa-2018-73",
+      "locator": "第七十三条",
+      "sourceText": "第七十三条 劳动者在下列情形下，依法享受社会保险待遇： （一）退休； （二）患病、负伤； （三）因工伤残或者患职业病； （四）失业； （五）生育。 劳动者死亡后，其遗属依法享受遗属津贴。 劳动者享受社会保险待遇的条件和标准由法律、法规规定。 劳动者享受的社会保险金必须按时足额支付。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "6dfa6adbbb0491c2bbc18aebd94beb41d893f0f5495499f8cab8d71e9f59be7f"
+    },
+    {
+      "provisionId": "laodongfa-2018-74",
+      "locator": "第七十四条",
+      "sourceText": "第七十四条 社会保险基金经办机构依照法律规定收支、管理和运营社会保险基金，并负有使社会保险基金保值增值的责任。 社会保险基金监督机构依照法律规定，对社会保险基金的收支、管理和运营实施监督。 社会保险基金经办机构和社会保险基金监督机构的设立和职能由法律规定。 任何组织和个人不得挪用社会保险基金。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "9f54158ead7e1c104c81f668e2e236733d608a12bb894183ea3cbb80ecb50c6c"
+    },
+    {
+      "provisionId": "laodongfa-2018-75",
+      "locator": "第七十五条",
+      "sourceText": "第七十五条 国家鼓励用人单位根据本单位实际情况为劳动者建立补充保险。 国家提倡劳动者个人进行储蓄性保险。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "7599c58df962626bd27398e948a2cc489fbeeb1fc62adee17b51457205ce7b82"
+    },
+    {
+      "provisionId": "laodongfa-2018-76",
+      "locator": "第七十六条",
+      "sourceText": "第七十六条 国家发展社会福利事业，兴建公共福利设施，为劳动者休息、休养和疗养提供条件。 用人单位应当创造条件，改善集体福利，提高劳动者的福利待遇。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "21a05915c0d96d78cd176d27456ed80046ff5535f26e3dae438d4ee5e2132279"
+    },
+    {
+      "provisionId": "laodongfa-2018-77",
+      "locator": "第七十七条",
+      "sourceText": "第七十七条 用人单位与劳动者发生劳动争议，当事人可以依法申请调解、仲裁、提起诉讼，也可以协商解决。 调解原则适用于仲裁和诉讼程序。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "44d979292ec9ceff8b8750a6acccaf4585833ae4ac3525f0d1553712668b4894"
+    },
+    {
+      "provisionId": "laodongfa-2018-78",
+      "locator": "第七十八条",
+      "sourceText": "第七十八条 解决劳动争议，应当根据合法、公正、及时处理的原则，依法维护劳动争议当事人的合法权益。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "05f89fd811834584f8baac409885660ce4d8a7a12e13607fe918aedb72f0f504"
+    },
+    {
+      "provisionId": "laodongfa-2018-79",
+      "locator": "第七十九条",
+      "sourceText": "第七十九条 劳动争议发生后，当事人可以向本单位劳动争议调解委员会申请调解；调解不成，当事人一方要求仲裁的，可以向劳动争议仲裁委员会申请仲裁。当事人一方也可以直接向劳动争议仲裁委员会申请仲裁。对仲裁裁决不服的，可以向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "13093024ddfde2a3977d2c5ad02094ccad35ca140af320da30ea50894347dcec"
+    },
+    {
+      "provisionId": "laodongfa-2018-80",
+      "locator": "第八十条",
+      "sourceText": "第八十条 在用人单位内，可以设立劳动争议调解委员会。劳动争议调解委员会由职工代表、用人单位代表和工会代表组成。劳动争议调解委员会主任由工会代表担任。 劳动争议经调解达成协议的，当事人应当履行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "113714f0774b084ced95bfe1930b6239318b161b114a5b7d7f7c6f73116fdbf1"
+    },
+    {
+      "provisionId": "laodongfa-2018-81",
+      "locator": "第八十一条",
+      "sourceText": "第八十一条 劳动争议仲裁委员会由劳动行政部门代表、同级工会代表、用人单位方面的代表组成。劳动争议仲裁委员会主任由劳动行政部门代表担任。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "f17f96477d0d93e6584ad0cf55730caf69e1ff52a7944d613c797752074c1c50"
+    },
+    {
+      "provisionId": "laodongfa-2018-82",
+      "locator": "第八十二条",
+      "sourceText": "第八十二条 提出仲裁要求的一方应当自劳动争议发生之日起六十日内向劳动争议仲裁委员会提出书面申请。仲裁裁决一般应在收到仲裁申请的六十日内作出。对仲裁裁决无异议的，当事人必须履行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "22023ddb6e345bb5c7b17166f96c9b8e0d8ff81db1f7ccdadad4fdc03d2d9df3"
+    },
+    {
+      "provisionId": "laodongfa-2018-83",
+      "locator": "第八十三条",
+      "sourceText": "第八十三条 劳动争议当事人对仲裁裁决不服的，可以自收到仲裁裁决书之日起十五日内向人民法院提起诉讼。一方当事人在法定期限内不起诉又不履行仲裁裁决的，另一方当事人可以申请人民法院强制执行。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "01a1d41bfb8d45fce640de532819fee12246bc9299de6b9f00e9a2eeb2cc36d3"
+    },
+    {
+      "provisionId": "laodongfa-2018-84",
+      "locator": "第八十四条",
+      "sourceText": "第八十四条 因签订集体合同发生争议，当事人协商解决不成的，当地人民政府劳动行政部门可以组织有关各方协调处理。 因履行集体合同发生争议，当事人协商解决不成的，可以向劳动争议仲裁委员会申请仲裁；对仲裁裁决不服的，可以自收到仲裁裁决书之日起十五日内向人民法院提起诉讼。",
+      "topicIds": [
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "0afb29095d204830f22b79fa835f26fe7cd32937f467b0286c649e91b6a88127"
+    },
+    {
+      "provisionId": "laodongfa-2018-85",
+      "locator": "第八十五条",
+      "sourceText": "第八十五条 县级以上各级人民政府劳动行政部门依法对用人单位遵守劳动法律、法规的情况进行监督检查，对违反劳动法律、法规的行为有权制止，并责令改正。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "2a8e6cdc47cc2d9f361b883bdf6b6bf24e64ad64a8cc932b224ac2f3bb2ca956"
+    },
+    {
+      "provisionId": "laodongfa-2018-86",
+      "locator": "第八十六条",
+      "sourceText": "第八十六条 县级以上各级人民政府劳动行政部门监督检查人员执行公务，有权进入用人单位了解执行劳动法律、法规的情况，查阅必要的资料，并对劳动场所进行检查。 县级以上各级人民政府劳动行政部门监督检查人员执行公务，必须出示证件，秉公执法并遵守有关规定。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "d4d245c37c6a98fe15fdaa945242b70143903041758a498616b92bbdc68affe1"
+    },
+    {
+      "provisionId": "laodongfa-2018-87",
+      "locator": "第八十七条",
+      "sourceText": "第八十七条 县级以上各级人民政府有关部门在各自职责范围内，对用人单位遵守劳动法律、法规的情况进行监督。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "4dbd6ac23d138bd7787dd26e1d92e82700aaccbf533fad738a7c387e6f332a2a"
+    },
+    {
+      "provisionId": "laodongfa-2018-88",
+      "locator": "第八十八条",
+      "sourceText": "第八十八条 各级工会依法维护劳动者的合法权益，对用人单位遵守劳动法律、法规的情况进行监督。 任何组织和个人对于违反劳动法律、法规的行为有权检举和控告。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "59908a941545bf13626d1e80367978a5f50af5dd7d38ad0a64cea6e0b72ad149"
+    },
+    {
+      "provisionId": "laodongfa-2018-89",
+      "locator": "第八十九条",
+      "sourceText": "第八十九条 用人单位制定的劳动规章制度违反法律、法规规定的，由劳动行政部门给予警告，责令改正；对劳动者造成损害的，应当承担赔偿责任。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "d76344302aad41731478478620b4dff8e75f0942b157c08fcaa429afa69b4e0c"
+    },
+    {
+      "provisionId": "laodongfa-2018-90",
+      "locator": "第九十条",
+      "sourceText": "第九十条 用人单位违反本法规定，延长劳动者工作时间的，由劳动行政部门给予警告，责令改正，并可以处以罚款。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "456f09f771b70cb1390cfe93ae19e14987ad97b3072c01ff688a77ef3a32d466"
+    },
+    {
+      "provisionId": "laodongfa-2018-91",
+      "locator": "第九十一条",
+      "sourceText": "第九十一条 用人单位有下列侵害劳动者合法权益情形之一的，由劳动行政部门责令支付劳动者的工资报酬、经济补偿，并可以责令支付赔偿金： （一）克扣或者无故拖欠劳动者工资的； （二）拒不支付劳动者延长工作时间工资报酬的； （三）低于当地最低工资标准支付劳动者工资的； （四）解除劳动合同后，未依照本法规定给予劳动者经济补偿的。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance"
+      ],
+      "keywords": [
+        "赔偿金",
+        "经济补偿",
+        "工资报酬"
+      ],
+      "textSha256": "be765917fe24c1df24ebd334da9c697c7aab559ad93d82bf1852ce41a0a8e078"
+    },
+    {
+      "provisionId": "laodongfa-2018-92",
+      "locator": "第九十二条",
+      "sourceText": "第九十二条 用人单位的劳动安全设施和劳动卫生条件不符合国家规定或者未向劳动者提供必要的劳动防护用品和劳动保护设施的，由劳动行政部门或者有关部门责令改正，可以处以罚款；情节严重的，提请县级以上人民政府决定责令停产整顿；对事故隐患不采取措施，致使发生重大事故，造成劳动者生命和财产损失的，对责任人员依照刑法有关规定追究刑事责任。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "7ae0d3d9fc58ed6121d22bee340e766277307c583f633516eb4817c23ceca625"
+    },
+    {
+      "provisionId": "laodongfa-2018-93",
+      "locator": "第九十三条",
+      "sourceText": "第九十三条 用人单位强令劳动者违章冒险作业，发生重大伤亡事故，造成严重后果的，对责任人员依法追究刑事责任。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "f0f91d03ade47845db5d64bbdac748607afb3a211d12eac978d04e9611c64037"
+    },
+    {
+      "provisionId": "laodongfa-2018-94",
+      "locator": "第九十四条",
+      "sourceText": "第九十四条 用人单位非法招用未满十六周岁的未成年人的，由劳动行政部门责令改正，处以罚款；情节严重的，由市场监督管理部门吊销营业执照。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "ac1914a160a43d83f2e0a6ff3d46a3673fec09cc192a57b8fe7babf3692d44d9"
+    },
+    {
+      "provisionId": "laodongfa-2018-95",
+      "locator": "第九十五条",
+      "sourceText": "第九十五条 用人单位违反本法对女职工和未成年工的保护规定，侵害其合法权益的，由劳动行政部门责令改正，处以罚款；对女职工或者未成年工造成损害的，应当承担赔偿责任。",
+      "topicIds": [
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "5726d8c6501642f3a0a4a97714284d713e4cef3ba4c5424c28e694d3761aaf72"
+    },
+    {
+      "provisionId": "laodongfa-2018-96",
+      "locator": "第九十六条",
+      "sourceText": "第九十六条 用人单位有下列行为之一，由公安机关对责任人员处以十五日以下拘留、罚款或者警告；构成犯罪的，对责任人员依法追究刑事责任： （一）以暴力、威胁或者非法限制人身自由的手段强迫劳动的； （二）侮辱、体罚、殴打、非法搜查和拘禁劳动者的。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "6cf3cfdc83c37734ac88102afe5eed18674caa296cb0a43882ce6a3cce6cb21d"
+    },
+    {
+      "provisionId": "laodongfa-2018-97",
+      "locator": "第九十七条",
+      "sourceText": "第九十七条 由于用人单位的原因订立的无效合同，对劳动者造成损害的，应当承担赔偿责任。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "0051dc33e3fdfb19134d9ef23df9cc8d0410101755d5345d40a4e927f78de84b"
+    },
+    {
+      "provisionId": "laodongfa-2018-98",
+      "locator": "第九十八条",
+      "sourceText": "第九十八条 用人单位违反本法规定的条件解除劳动合同或者故意拖延不订立劳动合同的，由劳动行政部门责令改正；对劳动者造成损害的，应当承担赔偿责任。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "8e5c07b87889cf66d54c1da4a63ecee2a8e00b604e5e48d3d3cb43d5adc3cec4"
+    },
+    {
+      "provisionId": "laodongfa-2018-99",
+      "locator": "第九十九条",
+      "sourceText": "第九十九条 用人单位招用尚未解除劳动合同的劳动者，对原用人单位造成经济损失的，该用人单位应当依法承担连带赔偿责任。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "08562392c3c39384434c51bec25b908d9726090751693504dd99d850ad7b5b1e"
+    },
+    {
+      "provisionId": "laodongfa-2018-100",
+      "locator": "第一百条",
+      "sourceText": "第一百条 用人单位无故不缴纳社会保险费的，由劳动行政部门责令其限期缴纳；逾期不缴的，可以加收滞纳金。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "ed427488bd34ecb3b144943200082ef658f0928f337e01ddaf50e336a6213ad6"
+    },
+    {
+      "provisionId": "laodongfa-2018-101",
+      "locator": "第一百零一条",
+      "sourceText": "第一百零一条 用人单位无理阻挠劳动行政部门、有关部门及其工作人员行使监督检查权，打击报复举报人员的，由劳动行政部门或者有关部门处以罚款；构成犯罪的，对责任人员依法追究刑事责任。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "980c8881e54c83651760bf48253b1d7095b11a8167f41c28af1c3f9ca44af535"
+    },
+    {
+      "provisionId": "laodongfa-2018-102",
+      "locator": "第一百零二条",
+      "sourceText": "第一百零二条 劳动者违反本法规定的条件解除劳动合同或者违反劳动合同中约定的保密事项，对用人单位造成经济损失的，应当依法承担赔偿责任。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "noncompete-confidentiality"
+      ],
+      "keywords": [],
+      "textSha256": "b708aab2e7b118538e1b85d94abf0179f376a39677fa4156d6ff4f9c11d52c86"
+    },
+    {
+      "provisionId": "laodongfa-2018-103",
+      "locator": "第一百零三条",
+      "sourceText": "第一百零三条 劳动行政部门或者有关部门的工作人员滥用职权、玩忽职守、徇私舞弊，构成犯罪的，依法追究刑事责任；不构成犯罪的，给予行政处分。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "9e145fc792f7efd03353abe1dcef3561e9b16a9910c5702853694551d3119f11"
+    },
+    {
+      "provisionId": "laodongfa-2018-104",
+      "locator": "第一百零四条",
+      "sourceText": "第一百零四条 国家工作人员和社会保险基金经办机构的工作人员挪用社会保险基金，构成犯罪的，依法追究刑事责任。",
+      "topicIds": [
+        "social-insurance"
+      ],
+      "keywords": [],
+      "textSha256": "583a3201eade9d543e897f8b91ff0f0c45ec24a5647bb724a7c064045ee3914a"
+    },
+    {
+      "provisionId": "laodongfa-2018-105",
+      "locator": "第一百零五条",
+      "sourceText": "第一百零五条 违反本法规定侵害劳动者合法权益，其他法律、行政法规已规定处罚的，依照该法律、行政法规的规定处罚。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "f4468853989775464b2d3a3cb2846140e6efdf1ac07c87f0ed4f89294776d99f"
+    },
+    {
+      "provisionId": "laodongfa-2018-106",
+      "locator": "第一百零六条",
+      "sourceText": "第一百零六条 省、自治区、直辖市人民政府根据本法和本地区的实际情况，规定劳动合同制度的实施步骤，报国务院备案。",
+      "topicIds": [
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "bce24772e14a43376d42137debd58cc6561975c8e736b0c134d4b2995d7bee71"
+    },
+    {
+      "provisionId": "laodongfa-2018-107",
+      "locator": "第一百零七条",
+      "sourceText": "第一百零七条 本法自1995年1月1日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "cc46c911f884112e790e231f2229c217671528266641d69aee47a267c91210df"
+    }
+  ],
+  "validityNotes": [
+    "mofcom（商务部）政策法规库“2018修正”全文；页面为UTF-8，正文含2009/2018两次修正注记。npc.gov.cn/gov.cn 未检索到该2018修正完整文本。"
+  ]
+}

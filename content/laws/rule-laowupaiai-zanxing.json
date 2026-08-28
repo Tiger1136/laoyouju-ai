@@ -1,0 +1,370 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-laowupaiai-zanxing",
+  "title": "劳务派遣暂行规定",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第22号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711309.htm",
+  "promulgationDate": "2014-01-24",
+  "effectiveDate": "2014-03-01",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "9449cc5419363a0fcfdf8268f724943490ed67c834163e9f50b0950c9734f101",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "labor-dispatch",
+    "contract-performance",
+    "social-insurance",
+    "labor-relationship-recognition",
+    "no-written-contract",
+    "probation-disputes",
+    "working-hours-leave",
+    "wage-arrears",
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "work-injury",
+    "female-worker-protection"
+  ],
+  "provisions": [
+    {
+      "provisionId": "laowupaiai-zanxing-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为规范劳务派遣，维护劳动者的合法权益，促进劳动关系和谐稳定，依据《中华人民共和国劳动合同法》（以下简称劳动合同法）和《中华人民共和国劳动合同法实施条例》（以下简称劳动合同法实施条例）等法律、行政法规，制定本规定。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "dda103ac3c878dd3cf0b13c35eb93bbc523ea9bc5b4df6b7cc59805064fbe9e8"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-2",
+      "locator": "第二条",
+      "sourceText": "第二条 劳务派遣单位经营劳务派遣业务，企业（以下称用工单位）使用被派遣劳动者，适用本规定。 依法成立的会计师事务所、律师事务所等合伙组织和基金会以及民办非企业单位等组织使用被派遣劳动者，依照本规定执行。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "9f6e45352c52bdbf2e21406403f8a12e633748d638042296d2cf9035a1df493a"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-3",
+      "locator": "第三条",
+      "sourceText": "第三条 用工单位只能在临时性、辅助性或者替代性的工作岗位上使用被派遣劳动者。 前款规定的临时性工作岗位是指存续时间不超过6个月的岗位；辅助性工作岗位是指为主营业务岗位提供服务的非主营业务岗位；替代性工作岗位是指用工单位的劳动者因脱产学习、休假等原因无法工作的一定期间内，可以由其他劳动者替代工作的岗位。 用工单位决定使用被派遣劳动者的辅助性岗位，应当经职工代表大会或者全体职工讨论，提出方案和意见，与工会或者职工代表平等协商确定，并在用工单位内公示。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "3c875f29a127362798a5a78c88fb64aaca653756294092e6cbf6592b3e54b7e2"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-4",
+      "locator": "第四条",
+      "sourceText": "第四条 用工单位应当严格控制劳务派遣用工数量，使用的被派遣劳动者数量不得超过其用工总量的10%。 前款所称用工总量是指用工单位订立劳动合同人数与使用的被派遣劳动者人数之和。 计算劳务派遣用工比例的用工单位是指依照劳动合同法和劳动合同法实施条例可以与劳动者订立劳动合同的用人单位。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "5fee48cfa08dd8721e48f244fafa54ca1e07b086e1b093523f06e099beabf594"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-5",
+      "locator": "第五条",
+      "sourceText": "第五条 劳务派遣单位应当依法与被派遣劳动者订立2年以上的固定期限书面劳动合同。",
+      "topicIds": [
+        "no-written-contract",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "f57c029a45bec6546e9038dad3d20ebe4c178ffc3bd9dcd7dd9b4b112a405fa0"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-6",
+      "locator": "第六条",
+      "sourceText": "第六条 劳务派遣单位可以依法与被派遣劳动者约定试用期。劳务派遣单位与同一被派遣劳动者只能约定一次试用期。",
+      "topicIds": [
+        "probation-disputes",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "472245b21a1d9ea21d694fdba61eb4300348f6872b5c38fb30a5ad4e7f80cfb4"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-7",
+      "locator": "第七条",
+      "sourceText": "第七条 劳务派遣协议应当载明下列内容： （一）派遣的工作岗位名称和岗位性质； （二）工作地点； （三）派遣人员数量和派遣期限； （四）按照同工同酬原则确定的劳动报酬数额和支付方式； （五）社会保险费的数额和支付方式； （六）工作时间和休息休假事项； （七）被派遣劳动者工伤、生育或者患病期间的相关待遇； （八）劳动安全卫生以及培训事项； （九）经济补偿等费用； （十）劳务派遣协议期限； （十一）劳务派遣服务费的支付方式和标准； （十二）违反劳务派遣协议的责任； （十三）法律、法规、规章规定应当纳入劳务派遣协议的其他事项。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "social-insurance",
+        "work-injury",
+        "female-worker-protection",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "cc996ea1144da19f6f40747a574a35a2a9fd4b35b01d12180c5e24b497c5be30"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-8",
+      "locator": "第八条",
+      "sourceText": "第八条 劳务派遣单位应当对被派遣劳动者履行下列义务： （一）如实告知被派遣劳动者劳动合同法第八条规定的事项、应遵守的规章制度以及劳务派遣协议的内容； （二）建立培训制度，对被派遣劳动者进行上岗知识、安全教育培训； （三）按照国家规定和劳务派遣协议约定，依法支付被派遣劳动者的劳动报酬和相关待遇； （四）按照国家规定和劳务派遣协议约定，依法为被派遣劳动者缴纳社会保险费，并办理社会保险相关手续； （五）督促用工单位依法为被派遣劳动者提供劳动保护和劳动安全卫生条件； （六）依法出具解除或者终止劳动合同的证明； （七）协助处理被派遣劳动者与用工单位的纠纷； （八）法律、法规和规章规定的其他事项。",
+      "topicIds": [
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "social-insurance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "e0929a62addc65afe41d41ed75af76424c222ae9446039aa04428c8e2eddc1f1"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-9",
+      "locator": "第九条",
+      "sourceText": "第九条 用工单位应当按照劳动合同法第六十二条规定，向被派遣劳动者提供与工作岗位相关的福利待遇，不得歧视被派遣劳动者。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "df3f2bb35e66b11d8999ef3bec70a0f912d7919f003d9c345fbf6369fa88f059"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-10",
+      "locator": "第十条",
+      "sourceText": "第十条 被派遣劳动者在用工单位因工作遭受事故伤害的，劳务派遣单位应当依法申请工伤认定，用工单位应当协助工伤认定的调查核实工作。劳务派遣单位承担工伤保险责任，但可以与用工单位约定补偿办法。 被派遣劳动者在申请进行职业病诊断、鉴定时，用工单位应当负责处理职业病诊断、鉴定事宜，并如实提供职业病诊断、鉴定所需的劳动者职业史和职业危害接触史、工作场所职业病危害因素检测结果等资料，劳务派遣单位应当提供被派遣劳动者职业病诊断、鉴定所需的其他材料。",
+      "topicIds": [
+        "social-insurance",
+        "work-injury",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "a1c03922a36bafe3ba0d061ff5bb47b4e75b29e09a74fbd5d1498aaa61ddc686"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 劳务派遣单位行政许可有效期未延续或者《劳务派遣经营许可证》被撤销、吊销的，已经与被派遣劳动者依法订立的劳动合同应当履行至期限届满。双方经协商一致，可以解除劳动合同。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "03caaffb80e562c133df1033255d9d33723fc7bf95b87082bfe69982e99e0771"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 有下列情形之一的，用工单位可以将被派遣劳动者退回劳务派遣单位： （一）用工单位有劳动合同法第四十条第三项、第四十一条规定情形的； （二）用工单位被依法宣告破产、吊销营业执照、责令关闭、撤销、决定提前解散或者经营期限届满不再继续经营的； （三）劳务派遣协议期满终止的。 被派遣劳动者退回后在无工作期间，劳务派遣单位应当按照不低于所在地人民政府规定的最低工资标准，向其按月支付报酬。",
+      "topicIds": [
+        "wage-arrears",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "bae537effc46d9bdf2e59f364505c1257f98d601852d79f424c9998034b59e2f"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 被派遣劳动者有劳动合同法第四十二条规定情形的，在派遣期限届满前，用工单位不得依据本规定第十二条第一款第一项规定将被派遣劳动者退回劳务派遣单位；派遣期限届满的，应当延续至相应情形消失时方可退回。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "3c94c844b9adeab4fb76bc2544c036074933aa4d815984df0389538c65e40c0a"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 被派遣劳动者提前30日以书面形式通知劳务派遣单位，可以解除劳动合同。被派遣劳动者在试用期内提前3日通知劳务派遣单位，可以解除劳动合同。劳务派遣单位应当将被派遣劳动者通知解除劳动合同的情况及时告知用工单位。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "probation-disputes",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "e3adb7d191902fb6f569218dbab2658d5803b64d4ba9f718edbb1c6e21f280bf"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 被派遣劳动者因本规定第十二条规定被用工单位退回，劳务派遣单位重新派遣时维持或者提高劳动合同约定条件，被派遣劳动者不同意的，劳务派遣单位可以解除劳动合同。 被派遣劳动者因本规定第十二条规定被用工单位退回，劳务派遣单位重新派遣时降低劳动合同约定条件，被派遣劳动者不同意的，劳务派遣单位不得解除劳动合同。但被派遣劳动者提出解除劳动合同的除外。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "55e3895adf848da0cf39501607e7e85c2efcb7c43785ac4257e078e4d8da2d46"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 劳务派遣单位被依法宣告破产、吊销营业执照、责令关闭、撤销、决定提前解散或者经营期限届满不再继续经营的，劳动合同终止。用工单位应当与劳务派遣单位协商妥善安置被派遣劳动者。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "e616e49a2e61d796aee7e2cd1fc98d370835be42f1706075ba96bb7c2ded045f"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 劳务派遣单位因劳动合同法第四十六条或者本规定第十五条、第十六条规定的情形，与被派遣劳动者解除或者终止劳动合同的，应当依法向被派遣劳动者支付经济补偿。",
+      "topicIds": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "c97b7783bf725426d11b300c86f8a0b487d7263bd3d86ede8a882fcffa8382d9"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 劳务派遣单位跨地区派遣劳动者的，应当在用工单位所在地为被派遣劳动者参加社会保险，按照用工单位所在地的规定缴纳社会保险费，被派遣劳动者按照国家规定享受社会保险待遇。",
+      "topicIds": [
+        "social-insurance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "61b6feb1d690da6ac79a73bc0482b399031f3ee3638bb1233315dcf7fa7577b2"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 劳务派遣单位在用工单位所在地设立分支机构的，由分支机构为被派遣劳动者办理参保手续，缴纳社会保险费。 劳务派遣单位未在用工单位所在地设立分支机构的，由用工单位代劳务派遣单位为被派遣劳动者办理参保手续，缴纳社会保险费。",
+      "topicIds": [
+        "social-insurance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "504c1a6abe41481e98fe692ac4e8370a27b6dc36e2ab303204c8dcf3120ad416"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-20",
+      "locator": "第二十条",
+      "sourceText": "第二十条 劳务派遣单位、用工单位违反劳动合同法和劳动合同法实施条例有关劳务派遣规定的，按照劳动合同法第九十二条规定执行。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "bcfe777278e517537eef0964ce9f2c517fff06fb7a5192b1ed734ab94bbebbcd"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-21",
+      "locator": "第二十一条",
+      "sourceText": "第二十一条 劳务派遣单位违反本规定解除或者终止被派遣劳动者劳动合同的，按照劳动合同法第四十八条、第八十七条规定执行。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "26341bc5ba94dfedb3f2f7863dd574c9d23d6dfc4642310ac6111ed9845e79db"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-22",
+      "locator": "第二十二条",
+      "sourceText": "第二十二条 用工单位违反本规定第三条第三款规定的，由人力资源社会保障行政部门责令改正，给予警告；给被派遣劳动者造成损害的，依法承担赔偿责任。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "ca077ea6098d2326c7b37e515b5582ff6ee78972549a62411756f0dab296fca7"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-23",
+      "locator": "第二十三条",
+      "sourceText": "第二十三条 劳务派遣单位违反本规定第六条规定的，按照劳动合同法第八十三条规定执行。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "2d5626877d77649b438f326b5bccc2144f3faee3744bd0b447221a80aaffd39f"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-24",
+      "locator": "第二十四条",
+      "sourceText": "第二十四条 用工单位违反本规定退回被派遣劳动者的，按照劳动合同法第九十二条第二款规定执行。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "9fc4052f50bb5d2f59aebc1bdc1a8d2aa9a82c1d1446a16453976d7b29752307"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-25",
+      "locator": "第二十五条",
+      "sourceText": "第二十五条 外国企业常驻代表机构和外国金融机构驻华代表机构等使用被派遣劳动者的，以及船员用人单位以劳务派遣形式使用国际远洋海员的，不受临时性、辅助性、替代性岗位和劳务派遣用工比例的限制。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "137d7baa38ad0eca2273801ddbb422fa9b035e7c2876bb686b456d6e96952417"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-26",
+      "locator": "第二十六条",
+      "sourceText": "第二十六条 用人单位将本单位劳动者派往境外工作或者派往家庭、自然人处提供劳动的，不属于本规定所称劳务派遣。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "9123092cc5345442f324446497cc3ce599f0ac42340868785f6bbdadbb6eef91"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-27",
+      "locator": "第二十七条",
+      "sourceText": "第二十七条 用人单位以承揽、外包等名义，按劳务派遣用工形式使用劳动者的，按照本规定处理。",
+      "topicIds": [
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "16a060e723391f1ca94395d3d655d4e9bb72a329e6c02574a057a3329384f09f"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-28",
+      "locator": "第二十八条",
+      "sourceText": "第二十八条 用工单位在本规定施行前使用被派遣劳动者数量超过其用工总量10%的，应当制定调整用工方案，于本规定施行之日起2年内降至规定比例。但是，《全国人民代表大会常务委员会关于修改〈中华人民共和国劳动合同法〉的决定》公布前已依法订立的劳动合同和劳务派遣协议期限届满日期在本规定施行之日起2年后的，可以依法继续履行至期限届满。 用工单位应当将制定的调整用工方案报当地人力资源社会保障行政部门备案。 用工单位未将本规定施行前使用的被派遣劳动者数量降至符合规定比例之前，不得新用被派遣劳动者。",
+      "topicIds": [
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "85a9b86d9565ba5b33e1be7f67bfe9a17e61d6f92704768342602dcdb94d2fef"
+    },
+    {
+      "provisionId": "laowupaiai-zanxing-29",
+      "locator": "第二十九条",
+      "sourceText": "第二十九条 本规定自2014年3月1日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "b0fb46f399f076b6be6205f04f9d7f4af7e88dec7d3b73335e89196136cb8c83"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2014-01-24 人社部令第22号公布，2014-03-01 施行。"
+  ]
+}

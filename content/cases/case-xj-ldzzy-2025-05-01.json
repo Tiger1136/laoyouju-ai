@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-xj-ldzzy-2025-05-01",
+  "caseId": "case-xj-ldzzy-2025-05-01",
+  "title": "胡某与乌鲁木齐市某家具有限公司劳动争议案——确认劳动关系之诉适用一年仲裁时效期间的规定",
+  "publishingAuthority": "新疆维吾尔自治区人力资源和社会保障厅（以案释法专栏）",
+  "caseType": "local_typical_case",
+  "publicationDate": "2025-05-06",
+  "jurisdiction": "新疆维吾尔自治区",
+  "authorityLevel": "B",
+  "officialUrl": "https://rst.xinjiang.gov.cn/xjrst/c113095/202505/3e81b3ad53074cbfa4cbab480bb35f97.shtml",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "unlawful-termination-compensation",
+    "compensation-and-damages",
+    "labor-relationship-recognition",
+    "arbitration-procedure",
+    "arbitration-limitation"
+  ],
+  "issues": [
+    "胡某与乌鲁木齐市某家具有限公司劳动争议案——确认劳动关系之诉适用一年仲裁时效期间的规定"
+  ],
+  "keyFacts": "2018年10月胡某向劳动人事争议仲裁委员会申请仲裁，请求解除其与乌鲁木齐市某家具有限公司（以下简称某家具公司）的劳动关系并要求给付经济补偿。该仲裁委裁决双方劳动关系解除，驳回胡某其他仲裁请求。胡某不服该裁决向人民法院起诉请求给付经济补偿，该案两审判决均确认双方劳动关系解除但均驳回其关于经济补偿的请求。2023年8月胡某再次向劳动人事争议仲裁委员会申请仲裁，请求确认其与某家具公司于2003年8月至2017年12月期间存在劳动关系，该仲裁委裁决驳回胡某仲裁请求。胡某不服该裁决向一审法院起诉请求确认其与某家具公司在上述期间存在劳动关系。一审法院认为胡某2023年8月申请劳动仲裁确认劳动关系超过一年的仲裁时效期间，遂判决驳回胡某的诉讼请求。胡某不服一审判决提起上诉，二审法院驳回上诉，维持原判。",
+  "holding": "（官方页面未单独公布处理结果）",
+  "reasoning": "《中华人民共和国劳动争议调解仲裁法》第二条明确规定因确认劳动关系发生的争议属于劳动争议的范围，该法第二十七条规定的仲裁时效除在该条第四款中明确排除劳动报酬请求权不适用外，并未明确规定确认劳动关系之诉不适用仲裁时效。劳动关系确认纠纷适用一年仲裁时效的规定有利于督促劳动者尽快收集证据、行使权利。如果经过时间较长，可能会因取证困难、证据灭失等因素增加劳动者的维权难度，也会因为超过仲裁时效期间而不受法律的保护。；《中华人民共和国劳动争议调解仲裁法》第二十七条规定：劳动争议申请仲裁的时效期间为一年。仲裁时效期间从当事人知道或者应当知道其权利被侵害之日起计算。胡某自称在某家具公司工作至2018年1月，且其于2018年提出解除劳动关系的仲裁申请，双方劳动关系解除的事实已被生效法律文书确认。胡某2023年8月向仲裁委申请劳动仲裁确认劳动关系超过上述法律规定的一年仲裁时效期间，胡某也未提交证据证明存在不可抗力或有其他正当理由导致仲裁时效中止、中断。故对胡某要求确认其与某家具公司自2003年8月至2017年12月存在劳动关系的请求不予支持。",
+  "citedProvisions": [
+    {
+      "sourceId": "law-zhengyi-tiaojie-zhongcai",
+      "locator": "第二条"
+    },
+    {
+      "sourceId": "law-zhengyi-tiaojie-zhongcai",
+      "locator": "第二十七条"
+    }
+  ],
+  "documentNumber": null
+}

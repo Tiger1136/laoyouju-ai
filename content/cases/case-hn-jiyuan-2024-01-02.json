@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-hn-jiyuan-2024-01-02",
+  "caseId": "case-hn-jiyuan-2024-01-02",
+  "title": "郝某与某工程公司劳动争议案——转承包建设工程的个人招用的劳动者被认定为工伤后，承包人负有支付工伤保险待遇的责任",
+  "publishingAuthority": "济源中级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2025-11-21",
+  "jurisdiction": "河南省",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.hncourt.gov.cn/public/detail.php?id=202333",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "social-insurance",
+    "work-injury",
+    "labor-dispatch",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "郝某与某工程公司劳动争议案——转承包建设工程的个人招用的劳动者被认定为工伤后，承包人负有支付工伤保险待遇的责任"
+  ],
+  "keyFacts": "某工程公司将所承包工程转包给卢某。卢某招用郝某到工地从事焊工工作，郝某在作业时从高处坠落受伤。2022年3月，人社部门作出《认定工伤决定书》，认定郝某受到的事故伤害为工伤，某工程公司对郝某受到的事故伤害承担工伤保险责任。经劳动能力鉴定委员会鉴定，确定郝某劳动功能障碍等级为一级，属于“完全生活不能自理”。郝某向劳动人事争议仲裁委员会申请仲裁，请求某工程公司支付一级伤残应享有的工伤保险待遇。劳动人事争议仲裁委员会部分予以支持。仲裁裁决后，郝某、某工程公司均向人民法院提起诉讼。",
+  "holding": "（官方页面未单独公布处理结果）",
+  "reasoning": "工伤保险作为社会保障体系的重要组成部分，对于保障工伤职工权益、促进社会公平具有重要意义。实践中，建设工程领域违法转分包现象多发，根据《最高人民法院关于审理工伤保险行政案件若干问题的规定》，用工单位违法将承包业务转包给不具备用工主体资格的组织或自然人，该组织或自然人聘用的职工因工伤亡的，用工单位为承担工伤保险责任的单位。因此，认定工伤后，劳动者可以直接要求承包人承担支付工伤保险待遇的责任。该类纠纷确定承包人承担支付工伤保险待遇的责任，有利于规范建筑企业落实项目参保工伤保险的政策，及时充分保护劳动者的工伤救济权利。",
+  "citedProvisions": [],
+  "documentNumber": null
+}

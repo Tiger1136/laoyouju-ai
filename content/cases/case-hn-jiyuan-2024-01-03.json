@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-hn-jiyuan-2024-01-03",
+  "caseId": "case-hn-jiyuan-2024-01-03",
+  "title": "张某某诉某公司劳动争议案——用人单位与职工有关不缴纳社会保险的约定无效",
+  "publishingAuthority": "济源中级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2025-11-21",
+  "jurisdiction": "河南省",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.hncourt.gov.cn/public/detail.php?id=202333",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "social-insurance",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "张某某诉某公司劳动争议案——用人单位与职工有关不缴纳社会保险的约定无效"
+  ],
+  "keyFacts": "1995年1月，张某某通过劳动人事代理参加养老保险。2010年12月，张某某入职某公司并签订《承诺书》，双方约定某公司不为张某某缴纳社会保险，而是将相关费用以工资补贴形式直接发放给张某某。此后，某公司未为张某某缴纳社会保险，2014年至2023年10月，张某某自行缴纳了社会保险个人及单位应承担部分。张某某向劳动人事争议仲裁委员会申请仲裁，请求某公司承担其工作期间单位应承担部分的养老保险、医疗保险。劳动人事争议仲裁委员会以张某某超过法定退休年龄不予受理。张某某不服，诉至人民法院。",
+  "holding": "审理法院认为，缴纳社会保险费是用人单位和劳动者的法定义务，除法律规定的事由外，不因双方约定而免除，某公司与张某某双方有关不缴纳社会保险费的约定无效。张某某已缴纳其工作期间的社会保险费用，有权要求某公司承担单位应承担部分。审理法院判决某公司支付张某某2014年4月至2023年10月期间的养老保险、医疗保险单位应承担部分。",
+  "reasoning": "社会保险具有强制性，依法参加社会保险是用人单位和劳动者的法定义务。若劳动者与用人单位签订自愿申请不参加社保的《承诺书》，该《承诺书》因违反法律强制性规定无效，用人单位仍应承担缴纳社会保险费用的责任。此规则有助于督促用人单位为劳动者依法缴纳社会保险、引导劳动者关注自身长远利益，以充分实现社会保险制度保障和改善民生的作用。",
+  "citedProvisions": [],
+  "documentNumber": null
+}

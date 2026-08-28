@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "law",
+  "sourceId": "rule-nianxiujia-shishibanfa",
+  "title": "企业职工带薪年休假实施办法",
+  "sourceType": "departmental_rule",
+  "issuingAuthority": "人力资源和社会保障部",
+  "documentNumber": "人社部令第1号",
+  "authorityLevel": "A",
+  "jurisdiction": "全国性",
+  "officialUrl": "https://www.gov.cn/zhengce/2022-08/31/content_5711300.htm",
+  "promulgationDate": "2008-09-18",
+  "effectiveDate": "2008-09-18",
+  "expiryDate": null,
+  "validityStatus": "effective",
+  "supersedes": [],
+  "supersededBy": [],
+  "retrievedAt": "2026-08-27",
+  "contentHash": "0a83590866e1b76c1e3c518741109d198733732b73d6454e346cc0ee1b907084",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "working-hours-leave",
+    "wage-arrears",
+    "labor-relationship-recognition",
+    "work-injury",
+    "female-worker-protection",
+    "arbitration-limitation",
+    "overtime-pay",
+    "unlawful-termination-compensation",
+    "contract-performance",
+    "labor-dispatch",
+    "compensation-and-damages",
+    "arbitration-procedure"
+  ],
+  "provisions": [
+    {
+      "provisionId": "nianxiujia-shishibanfa-1",
+      "locator": "第一条",
+      "sourceText": "第一条 为了实施《职工带薪年休假条例》（以下简称条例），制定本实施办法。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "9761243d04d7eb76cdeb08a46f2a6fbd431d98b979c4122eda762c30d6b2cbbf"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-2",
+      "locator": "第二条",
+      "sourceText": "第二条 中华人民共和国境内的企业、民办非企业单位、有雇工的个体工商户等单位（以下称用人单位）和与其建立劳动关系的职工，适用本办法。",
+      "topicIds": [
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "f83f99a6a1cb6cdf267544e5cbe5c56bd1a92f5255f407d235b05cda2000eaa2"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-3",
+      "locator": "第三条",
+      "sourceText": "第三条 职工连续工作满12个月以上的，享受带薪年休假（以下简称年休假）。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "ce482f6af28db17b151741d7b01ece90e5d93870deab433c96e910c2b90bc86e"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-4",
+      "locator": "第四条",
+      "sourceText": "第四条 年休假天数根据职工累计工作时间确定。职工在同一或者不同用人单位工作期间，以及依照法律、行政法规或者国务院规定视同工作期间，应当计为累计工作时间。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "989e363dcece3788987a6c10258bcb77d4ed0ae448da1e12c01b107e1a7eb0be"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-5",
+      "locator": "第五条",
+      "sourceText": "第五条 职工新进用人单位且符合本办法第三条规定的，当年度年休假天数，按照在本单位剩余日历天数折算确定，折算后不足1整天的部分不享受年休假。 前款规定的折算方法为：（当年度在本单位剩余日历天数÷365天）×职工本人全年应当享受的年休假天数。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "cc37164faa6a2937c31ffab5584be49aefd4eb57fa56df33f82262a89913d438"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-6",
+      "locator": "第六条",
+      "sourceText": "第六条 职工依法享受的探亲假、婚丧假、产假等国家规定的假期以及因工伤停工留薪期间不计入年休假假期。",
+      "topicIds": [
+        "working-hours-leave",
+        "work-injury",
+        "female-worker-protection"
+      ],
+      "keywords": [],
+      "textSha256": "c6bab895de679c57a3e75108f078bb561b3537253d037f5c6ab84011c944e562"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-7",
+      "locator": "第七条",
+      "sourceText": "第七条 职工享受寒暑假天数多于其年休假天数的，不享受当年的年休假。确因工作需要,职工享受的寒暑假天数少于其年休假天数的，用人单位应当安排补足年休假天数。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "36cb14e6aae79938b3fd5330ffa7ee47bc42080395011c7697cebea042caba99"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-8",
+      "locator": "第八条",
+      "sourceText": "第八条 职工已享受当年的年休假，年度内又出现条例第四条第 （二）、（三）、（四）、（五）项规定情形之一的，不享受下一年度的年休假。",
+      "topicIds": [
+        "working-hours-leave",
+        "arbitration-limitation"
+      ],
+      "keywords": [],
+      "textSha256": "67e42dcf5d8cf9db36ae19fbac152b09ee97911760fbe5530729a27ce3fbe1e2"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-9",
+      "locator": "第九条",
+      "sourceText": "第九条 用人单位根据生产、工作的具体情况，并考虑职工本人意愿，统筹安排年休假。用人单位确因工作需要不能安排职工年休假或者跨1个年度安排年休假的，应征得职工本人同意。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "1d5e606cf5ee5aac50c2244823ca00eb4b21b0f6351233aa348e0121e6ec3584"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-10",
+      "locator": "第十条",
+      "sourceText": "第十条 用人单位经职工同意不安排年休假或者安排职工年休假天数少于应休年休假天数，应当在本年度内对职工应休未休年休假天数，按照其日工资收入的300%支付未休年休假工资报酬，其中包含用人单位支付职工正常工作期间的工资收入。 用人单位安排职工休年休假，但是职工因本人原因且书面提出不休年休假的，用人单位可以只支付其正常工作期间的工资收入。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "66bb462c46bca607fa5af8c2d1e248cbf3ace656d4572107239d2fd882fdbf28"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-11",
+      "locator": "第十一条",
+      "sourceText": "第十一条 计算未休年休假工资报酬的日工资收入按照职工本人的月工资除以月计薪天数 （21.75天）进行折算。 前款所称月工资是指职工在用人单位支付其未休年休假工资报酬前12个月剔除加班工资后的月平均工资。在本用人单位工作时间不满12个月的，按实际月份计算月平均工资。 职工在年休假期间享受与正常工作期间相同的工资收入。实行计件工资、提成工资或者其他绩效工资制的职工，日工资收入的计发办法按照本条第一款、第二款的规定执行。",
+      "topicIds": [
+        "working-hours-leave",
+        "overtime-pay",
+        "wage-arrears"
+      ],
+      "keywords": [],
+      "textSha256": "4704ee60af4492b678399025504205c3a85ddd7e0e32e086eaa01ce178ee1f3d"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-12",
+      "locator": "第十二条",
+      "sourceText": "第十二条 用人单位与职工解除或者终止劳动合同时，当年度未安排职工休满应休年休假天数的，应当按照职工当年已工作时间折算应休未休年休假天数并支付未休年休假工资报酬，但折算后不足1整天的部分不支付未休年休假工资报酬。 前款规定的折算方法为：（当年度在本单位已过日历天数÷365天）×职工本人全年应当享受的年休假天数-当年度已安排年休假天数。 用人单位当年已安排职工年休假的，多于折算应休年休假的天数不再扣回。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "67efa9cfba3cc386a0d71edc88355ab4529dafc1c7391fb2913099ca54b55f3a"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-13",
+      "locator": "第十三条",
+      "sourceText": "第十三条 劳动合同、集体合同约定的或者用人单位规章制度规定的年休假天数、未休年休假工资报酬高于法定标准的，用人单位应当按照有关约定或者规定执行。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "contract-performance"
+      ],
+      "keywords": [],
+      "textSha256": "4e87ce232d7c8ea69363777e2aa2d49ab02f42a6e39383a7ba078e53a995f7ba"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-14",
+      "locator": "第十四条",
+      "sourceText": "第十四条 劳务派遣单位的职工符合本办法第三条规定条件的，享受年休假。 被派遣职工在劳动合同期限内无工作期间由劳务派遣单位依法支付劳动报酬的天数多于其全年应当享受的年休假天数的，不享受当年的年休假；少于其全年应当享受的年休假天数的，劳务派遣单位、用工单位应当协商安排补足被派遣职工年休假天数。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "contract-performance",
+        "labor-dispatch"
+      ],
+      "keywords": [],
+      "textSha256": "6b51baef759ce5397ca0a40d184d513dea9f25e0f53c2411cc569ea1e981a626"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-15",
+      "locator": "第十五条",
+      "sourceText": "第十五条 县级以上地方人民政府劳动行政部门应当依法监督检查用人单位执行条例及本办法的情况。 用人单位不安排职工休年休假又不依照条例及本办法规定支付未休年休假工资报酬的，由县级以上地方人民政府劳动行政部门依据职权责令限期改正；对逾期不改正的，除责令该用人单位支付未休年休假工资报酬外，用人单位还应当按照未休年休假工资报酬的数额向职工加付赔偿金；对拒不执行支付未休年休假工资报酬、赔偿金行政处理决定的，由劳动行政部门申请人民法院强制执行。",
+      "topicIds": [
+        "working-hours-leave",
+        "wage-arrears",
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "arbitration-procedure"
+      ],
+      "keywords": [],
+      "textSha256": "db7805eb45f3f7f0849c54d422abc7c93224199ca17d6551b707504482e47924"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-16",
+      "locator": "第十六条",
+      "sourceText": "第十六条 职工与用人单位因年休假发生劳动争议的，依照劳动争议处理的规定处理。",
+      "topicIds": [
+        "working-hours-leave"
+      ],
+      "keywords": [],
+      "textSha256": "68f9b80f4e3f976798c1b6d9dfb60b7a3788d68cb4a056d2ac9f078f9a0cf706"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-17",
+      "locator": "第十七条",
+      "sourceText": "第十七条 除法律、行政法规或者国务院另有规定外，机关、事业单位、社会团体和与其建立劳动关系的职工，依照本办法执行。 船员的年休假按《中华人民共和国船员条例》执行。",
+      "topicIds": [
+        "working-hours-leave",
+        "labor-relationship-recognition"
+      ],
+      "keywords": [],
+      "textSha256": "67077ca5685fcae77b12de5323a5a9a2928ced22650398279d4f2a7dd64f9db3"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-18",
+      "locator": "第十八条",
+      "sourceText": "第十八条 本办法中的 “年度”是指公历年度。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "63d02150b81433a9260b622df0e05fc396e47793921c506d41b2fc0b1fd749b2"
+    },
+    {
+      "provisionId": "nianxiujia-shishibanfa-19",
+      "locator": "第十九条",
+      "sourceText": "第十九条 本办法自发布之日起施行。",
+      "topicIds": [],
+      "keywords": [],
+      "textSha256": "c59ebf24976c7f98d823a8dfbcab88b17484634fc7ab29341e3f5a05e8404151"
+    }
+  ],
+  "validityNotes": [
+    "中国政府网 gov.cn（人力资源社会保障部规章）全文；页面UTF-8；2008-09-18 人社部令第1号公布，自公布之日起施行。"
+  ]
+}

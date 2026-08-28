@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-jx-2026-01-04",
+  "caseId": "case-jx-2026-01-04",
+  "title": "关联企业混同用工的，劳动者可以主张依据用工管理行为确认劳动关系——郜某与甲公司、乙公司劳动争议案",
+  "publishingAuthority": "江西省高级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2026-04-30",
+  "jurisdiction": "江西省",
+  "authorityLevel": "B",
+  "officialUrl": "https://jxgy.jxfy.gov.cn/article/detail/2026/04/id/9298232.shtml",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "unlawful-termination-compensation",
+    "no-written-contract",
+    "social-insurance",
+    "labor-relationship-recognition",
+    "working-hours-leave",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "关联企业混同用工的，劳动者可以主张依据用工管理行为确认劳动关系——郜某与甲公司、乙公司劳动争议案"
+  ],
+  "keyFacts": "2019年8月，郜某入职甲公司，先后签订两份书面劳动合同，合同期限至2027年8月18日。2019年8月至2023年3月，甲公司向郜某支付工资并为其缴纳社会保险费。2023年3月至2025年2月，乙公司向郜某支付工资并为其缴纳社会保险费。2025年1月15日，甲公司向郜某发出解除劳动合同通知。郜某不服，申请劳动仲裁，要求确认与乙公司自2025年1月16日起继续履行劳动合同。被仲裁裁决驳回后，郜某诉至法院。",
+  "holding": "人民法院经审理认为，虽然郜某系与甲公司签订书面劳动合同，但甲公司、乙公司经营范围相同，股东、法定代表人及管理人员存在关联，且两公司存在混同用工情形，郜某的工作地点、岗位、内容均无变化，结合2023年3月之后系乙公司实际用工并发放工资、缴纳社会保险费的事实可知，乙公司与郜某关系更为密切，现郜某主张与乙公司存在劳动关系、要求继续履行劳动合同，应予支持。",
+  "reasoning": "《最高人民法院关于审理劳动争议案件适用法律问题的解释（二）》第三条规定：“劳动者被多个存在关联关系的单位交替或者同时用工，其请求确认劳动关系的，人民法院按照下列情形分别处理：（一）已订立书面劳动合同，劳动者请求按照劳动合同确认劳动关系的，人民法院依法予以支持；（二）未订立书面劳动合同的，根据用工管理行为，综合考虑工作时间、工作内容、劳动报酬支付、社会保险费缴纳等因素确认劳动关系。”劳动者为关联企业提供劳动，有权选择与关系更为密切的用人单位确认存在劳动关系，并不受所签订书面劳动合同的限制。人民法院审理此类案件时，可根据劳动者主张，在查明用工相关事实的基础上认定劳动关系主体，避免经营主体利用关联关系规避法定用工义务。（典型意义并入）",
+  "citedProvisions": [
+    {
+      "sourceId": "jie-laodong-zhengyi-2",
+      "locator": "第三条"
+    }
+  ],
+  "documentNumber": null
+}

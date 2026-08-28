@@ -1,0 +1,37 @@
+{
+  "name": "@laoyouju/retrieval",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "劳有据 AI —— 内容 schema、内容加载、校验与中文 n-gram/BM25 检索（本地、确定性、可重复构建）。",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/retrieval.test.mjs && node tests/case-corpus.test.mjs"
+  },
+  "dependencies": {
+    "@laoyouju/shared": "workspace:*",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.68.0"
+  }
+}

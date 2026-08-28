@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "laoyouju-demo-d0g2c7d8sb319ddf3",
+  "functionRoot": "./deploy",
+  "functions": [
+    {
+      "name": "api",
+      "runtime": "Nodejs20.19",
+      "timeout": 60,
+      "memorySize": 256,
+      "installDependency": false,
+      "ignore": [
+        "node_modules",
+        "node_modules/**/*",
+        ".git",
+        "tests",
+        "scripts",
+        "*.map",
+        "DEPLOY_PACKAGE.md"
+      ],
+      "type": "HTTP",
+      "gatewayPath": "/api"
+    }
+  ]
+}

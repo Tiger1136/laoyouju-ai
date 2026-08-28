@@ -1,0 +1,7 @@
+#!/bin/sh
+# CloudBase 云函数启动脚本（CloudBase HTTP 访问服务在 Phase 6 配置使用；本阶段仅本地验证）。
+# 要求：LF 行尾、/bin/sh、fail-fast；不包含任何密钥；不写死 Windows 路径。
+# 端口：CloudBase 平台通过 PORT 环境变量注入；本地默认 9000（见 src/server.ts）。
+set -eu
+
+exec node dist/server.js

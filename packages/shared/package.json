@@ -1,0 +1,36 @@
+{
+  "name": "@laoyouju/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "劳有据 AI —— 两端与服务端共享的 API 契约与运行时校验。",
+  "engines": {
+    "node": ">=20 <25"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/contracts.test.mjs"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "eslint": "9.39.5",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.68.0"
+  }
+}
