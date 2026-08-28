@@ -304,3 +304,16 @@
 - **备注**：同步耗时约 15.9–16.0s（模型超时 15s、链路上限约 20s），处于预算边缘但成功；已记录待跟进。
 - **费用**：真实 DeepSeek 2 次调用（以腾讯云账单为准）；无付费资源创建/升级；未启用 WSA。
 - **文件变更**：docs/DEPLOYMENT.md（当前部署状态表更新为本轮）、docs/PROGRESS.md（本记录）；无源码/内容/cloudbaserc.json 变更；未创建 commit/remote。
+
+## PHASE_7C_SHANDONG_OFFICIAL_CORPUS（山东官方案例与裁审口径专项，2026-08-28）
+
+> 阶段定义：山东官方案例 +30~50（目标 231~251 总量）+ 山东裁审口径收录；**结果：PARTIAL（新增 18 例）**——真实全文官方可用批次受限（山东法院网多站点 500/连接中断、多批次发布会页无案例全文、官方全文页未能全部定位），未达 30 例最低线；宁缺毋滥，未拆改凑数。分支 feat/shandong-official-corpus，未合并 main、未部署。
+
+- **案例新增（18 例，全部官方全文）**：山东省高院 2021-04-29 劳动人事争议典型案例（8，ytlzfy/sdcourt 官方页）；山东省高院+省人社厅 2023-12-28 新就业形态劳动争议典型案例（6，聊城市人社局官网全文转载）；山东法院劳动者权益司法保护十大典型案件成员（1，齐某与某人力公司案，庆云法院网）；山东省 2024 年度劳动人事争议十大典型案例成员（1，安丘法院服务期违约金案，含诉讼请求）；《山东民事审判参考》典型案例栏目 2 例（济南期票案、肥城群体性纠纷案）——青岛黄某纺织公司案为入选最高法解释（二）典型案例，与库内 case-laodongzhengyi-typical-2025-05 重复，已跳过。
+- **地方裁审口径（2 份，C 级）**：山东高院+省人社厅 2019-06-10《关于审理劳动人事争议案件若干问题会议纪要》（25 项）；山东高院 2021-11-01《劳动争议热点难点问题诉讼指引》（7 大部分）。
+- **schema 最小扩展（含测试）**：law sourceType 新增 local_guidance（authorityLevel 允许 A/C、jurisdiction 允许省级；validator 双向强制：地方指引必须 C 级+省级，全国性规范必须 A 级+全国性+全国性机关）；CaseSourceSchema 新增可选 claims。
+- **规模**：laws=34→36、cases=201→219、provisions=1276→1308、registry=251→271；19 主题每主题 ≥5 案例保持；省级地区覆盖 13（新增山东省）；去重：标题/URL/案情指纹无重复（含与既有 201 例交叉查重，case-corpus 14/14 通过）。
+- **门禁/测试**：content:validate PASS（36/219/1308/271）；retrieval:build OK（docs=1527，两次构建字节一致）；retrieval.test **31/31**（原 28 + 新增 3 项：6 条山东黄金查询通用能力断言、山东案例数据层回归、地方指引 C 级/省级双约束校验）；case-corpus **14/14**；`pnpm run check` exit 0；git diff --check 通过；支付宝提现手续费/怎么做红烧肉等仍无劳动法证据（领域门控全绿）。
+- **未收录（明确记录）**：菏泽“菏”法护薪品牌事例（工作事例非个案）；淄博高新区/省人社厅 2024 年度十大新闻（无全文，官方全文页未定位）；青岛中院 2022-04-28 白皮书十大案例（发布会页无全文）；山东法院“人民法院案例库裁判要旨汇总”（仅要旨无案情/结果）。
+- **安全**：未读取/修改 DEEPSEEK_API_KEY；未调用真实 DeepSeek/WSA；未操作 CloudBase/未部署；无付费资源；未改 GitHub 可见性；未删除 phase-7b-live-201 标签；无 force push。
+- **文件变更**：content/laws +2、content/cases +18、content/raw（phase7c 案例原文 + 2 份指引原文）、content/sources（probe 清单、registry 重建）、scripts/import-cases.mjs（phase7c/点评/claims 支持）、scripts/import-registry.mjs（authorityLevel 按文档）、scripts/import-sd-guidance.mjs（新增）、packages/retrieval schemas/validate/catalog、retrieval.test.mjs（+3 项）、docs/CONTENT_REVIEW.md、docs/CASE_COVERAGE_AUDIT.md（重建）、docs/DECISIONS.md（ADR-030）、本文件。

@@ -7,50 +7,50 @@
 
 ## 规模
 
-- 案例总数：**201**（唯一案例；sourceId 全局唯一）
-- 来源批次数：27
-- 覆盖省级地区数：12（非"全国性"地区数；联合地区按拆分计数：北京市、四川省、重庆市、福建省、贵州省、河北省、河南省、江西省、陕西省、天津市、新疆维吾尔自治区、云南省）
+- 案例总数：**219**（唯一案例；sourceId 全局唯一）
+- 来源批次数：32
+- 覆盖省级地区数：13（非"全国性"地区数；联合地区按拆分计数：北京市、四川省、重庆市、福建省、贵州省、河北省、河南省、江西省、山东省、陕西省、天津市、新疆维吾尔自治区、云南省）
 - 官方 URL 全部通过 host 白名单：是 ✅
 - 元数据完整（URL/机关/日期/地区/审核状态）：是 ✅
 - 疑似重复（标题或标题+案情前 200 字相同）：无 ✅
 - 占位/待补充内容：无 ✅
-- 官方未公布案号（documentNumber=null）：190 / 201
+- 官方未公布案号（documentNumber=null）：208 / 219
 
 ## 19 主题案例覆盖
 
 | TopicId | 标签 | 案例数 | 7B 目标 |
 |---|---|---|---|
-| unlawful-termination-compensation | 违法解除与经济补偿 | 91 | ≥20（与补偿赔偿合计口径） |
-| wage-arrears | 拖欠工资 | 42 | ≥15 |
+| unlawful-termination-compensation | 违法解除与经济补偿 | 95 | ≥20（与补偿赔偿合计口径） |
+| wage-arrears | 拖欠工资 | 47 | ≥15 |
 | overtime-pay | 加班费 | 17 | ≥15（与工时休假合计口径） |
-| no-written-contract | 未签书面劳动合同 | 32 | ≥12（与二倍工资合计口径） |
+| no-written-contract | 未签书面劳动合同 | 35 | ≥12（与二倍工资合计口径） |
 | probation-disputes | 试用期争议 | 7 | ≥5 |
-| social-insurance-noncompete | 社会保险与竞业限制 | 90 | ≥5 |
-| labor-relationship-recognition | 劳动关系认定 | 45 | ≥20（与新就业形态合计口径） |
-| contract-performance | 劳动合同订立履行变更解除终止 | 39 | ≥5 |
-| double-wage-notice | 未签合同二倍工资 | 11 | ≥12（与未签合同合计口径） |
-| compensation-and-damages | 经济补偿与违法解除赔偿金 | 84 | ≥20（与违法解除合计口径） |
-| working-hours-leave | 工作时间休息休假 | 52 | ≥15（与加班费合计口径） |
-| social-insurance | 社会保险 | 60 | ≥10 |
-| work-injury | 工伤 | 31 | ≥15 |
-| female-worker-protection | 女职工与三期保护 | 19 | ≥5 |
-| noncompete-confidentiality | 竞业限制与保密 | 24 | ≥10 |
-| labor-dispatch | 劳务派遣 | 10 | ≥5 |
-| new-employment-forms | 新就业形态 | 38 | ≥20（与劳动关系认定合计口径） |
+| social-insurance-noncompete | 社会保险与竞业限制 | 103 | ≥5 |
+| labor-relationship-recognition | 劳动关系认定 | 52 | ≥20（与新就业形态合计口径） |
+| contract-performance | 劳动合同订立履行变更解除终止 | 43 | ≥5 |
+| double-wage-notice | 未签合同二倍工资 | 12 | ≥12（与未签合同合计口径） |
+| compensation-and-damages | 经济补偿与违法解除赔偿金 | 89 | ≥20（与违法解除合计口径） |
+| working-hours-leave | 工作时间休息休假 | 56 | ≥15（与加班费合计口径） |
+| social-insurance | 社会保险 | 70 | ≥10 |
+| work-injury | 工伤 | 34 | ≥15 |
+| female-worker-protection | 女职工与三期保护 | 22 | ≥5 |
+| noncompete-confidentiality | 竞业限制与保密 | 27 | ≥10 |
+| labor-dispatch | 劳务派遣 | 11 | ≥5 |
+| new-employment-forms | 新就业形态 | 45 | ≥20（与劳动关系认定合计口径） |
 | arbitration-limitation | 仲裁时效 | 5 | ≥15（与裁诉衔接合计口径） |
-| arbitration-procedure | 仲裁管辖庭审证据与裁诉衔接 | 60 | ≥15（与仲裁时效合计口径） |
+| arbitration-procedure | 仲裁管辖庭审证据与裁诉衔接 | 66 | ≥15（与仲裁时效合计口径） |
 
 ## 高频主题目标达成
 
-- 违法解除/经济补偿与赔偿金（unlawful-termination-compensation + compensation-and-damages）：91 + 84（目标 ≥20）
-- 工资/欠薪/提成奖金（wage-arrears）：42（目标 ≥15）
-- 加班费与工时休假（overtime-pay + working-hours-leave）：17 + 52（目标 ≥15）
-- 劳动关系认定及新就业形态（labor-relationship-recognition + new-employment-forms）：45 + 38（目标 ≥20）
-- 未签合同与二倍工资（no-written-contract + double-wage-notice）：32 + 11（目标 ≥12）
-- 工伤（work-injury）：31（目标 ≥15）
-- 社会保险（social-insurance）：60（目标 ≥10）
-- 竞业限制与保密（noncompete-confidentiality）：24（目标 ≥10）
-- 仲裁时效/证据/管辖/裁诉衔接（arbitration-limitation + arbitration-procedure）：5 + 60（目标 ≥15）
+- 违法解除/经济补偿与赔偿金（unlawful-termination-compensation + compensation-and-damages）：95 + 89（目标 ≥20）
+- 工资/欠薪/提成奖金（wage-arrears）：47（目标 ≥15）
+- 加班费与工时休假（overtime-pay + working-hours-leave）：17 + 56（目标 ≥15）
+- 劳动关系认定及新就业形态（labor-relationship-recognition + new-employment-forms）：52 + 45（目标 ≥20）
+- 未签合同与二倍工资（no-written-contract + double-wage-notice）：35 + 12（目标 ≥12）
+- 工伤（work-injury）：34（目标 ≥15）
+- 社会保险（social-insurance）：70（目标 ≥10）
+- 竞业限制与保密（noncompete-confidentiality）：27（目标 ≥10）
+- 仲裁时效/证据/管辖/裁诉衔接（arbitration-limitation + arbitration-procedure）：5 + 66（目标 ≥15）
 
 ## 来源批次（按批次计数）
 
@@ -67,6 +67,11 @@
 - ldrszy-typical-batch2｜10 案｜最高人民法院、人力资源社会保障部｜2021-08-26｜?｜核验 2026-08-27｜https://www.court.gov.cn/zixun/xiangqing/319151.html
 - ldrszy-typical-batch3｜6 案｜最高人民法院、人力资源社会保障部｜2023-05-26｜?｜核验 2026-08-27｜https://www.court.gov.cn/zixun/xiangqing/401172.html
 - ldrszy-typical-batch4｜5 案｜最高人民法院、人力资源社会保障部｜2025-04-16｜?｜核验 2026-08-27｜https://www.court.gov.cn/zixun/xiangqing/462311.html
+- sd-ldzzy-2021-04｜8 案｜?｜?｜?｜核验 ?｜?
+- sd-mscankao-typcases-2026｜2 案｜?｜?｜?｜核验 ?｜?
+- sd-sdgy-laborer-rights-2024-04｜1 案｜?｜?｜?｜核验 ?｜?
+- sd-wf-anqiu-2024nd-02｜1 案｜?｜?｜?｜核验 ?｜?
+- sd-xinjiuyexingtai-2023-12｜6 案｜?｜?｜?｜核验 ?｜?
 - sheqianxin-typical-2024-01｜13 案｜最高人民法院、人力资源社会保障部、中华全国总工会｜2024-01-25｜?｜核验 2026-08-27｜https://www.court.gov.cn/shenpan/xiangqing/423922.html
 - sheqianxin-typical-2024-12｜9 案｜最高人民法院｜2024-12-23｜?｜核验 2026-08-27｜https://www.court.gov.cn/zixun/xiangqing/450661.html
 - sx-ldzzy-2023-02｜9 案｜陕西省人力资源和社会保障厅、陕西省高级人民法院｜2023-12-20｜陕西省｜核验 2026-08-28｜https://rst.shaanxi.gov.cn/sy/tzgg/202312/t20231220_2528183.html
@@ -86,6 +91,7 @@
 
 - 全国性：81
 - 北京市：20
+- 山东省：18
 - 天津市：15
 - 陕西省：14
 - 四川省、重庆市：12

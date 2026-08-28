@@ -61,13 +61,52 @@
 
 > 其余 53 例（Phase 7A 批次）清单沿用首次核对记录（2026-08-27），本阶段仅重算其 topicIds（确定性规则），未改动事实/结果/引用。
 
+## Phase 7C 山东专项（2026-08-28）
+
+> 山东官方劳动争议案例与地方裁审口径专项扩充（分支 feat/shandong-official-corpus；仅数据/schema 层，未部署）。
+> 权威分类：**A=全国性权威规范；B=官方指导/典型案例；C=官方地方裁审指引（Phase 7C 新增，效力低于全国法律）；D=仅线索**。
+> 地方会议纪要/诉讼指引**不得**表述为全国统一规则；回答中引用其内容时必须标明发布机关、适用地域与效力边界（API/Web 展示区分列为下一阶段）。
+
+### 山东案例批次（新增 18 例，全部 official_source_verified）
+
+| 批次 slug | 案例数 | 官方 URL | 发布机关 | 发布日期 | 地区 | 待复核事项 |
+|---|---|---|---|---|---|---|
+| sd-ldzzy-2021-04 | 8 | https://www.sdcourt.gov.cn/ytlzfy/390100/390078/7125670/index.html | 山东省高级人民法院 | 2021-04-29 | 山东省 | 裁判结果/点评为官方发布摘要；案号未公布（null） |
+| sd-xinjiuyexingtai-2023-12 | 6 | https://rsj.liaocheng.gov.cn/channel_t_190_13631/doc_658e920b9334e3baedc013a4.html | 山东省高级人民法院、山东省人力资源和社会保障厅 | 2023-12-28 | 山东省 | 聊城市人社局官网转载省高院+省人社厅发布会全文；案号未公布（null） |
+| sd-sdgy-laborer-rights-2024-04 | 1 | https://www.sdcourt.gov.cn/dzqyfy/393461/393508/20146226/index.html | 山东省高级人民法院 | 2024-04-29 | 山东省 | 齐某与某人力公司案（入选山东法院劳动者权益司法保护十大典型案件；庆云法院网全文） |
+| sd-wf-anqiu-2024nd-02 | 1 | https://www.sdcourt.gov.cn/wfzy/442541/442542/39062025/index.html | 山东省高级人民法院、山东省人力资源和社会保障厅 | 2025-04-28 | 山东省 | 安丘法院案（2024年度十大）；含【原告诉讼请求】，已入 claims 字段 |
+| sd-mscankao-typcases-2026 | 2 | https://jntlfy.sdcourt.gov.cn/ytlsqfy/resource/cms/article/390465/44578792/2026050609033341125.pdf | 山东省高级人民法院（山东民事审判参考编辑部） | 2026-05-06 | 山东省 | 济南期票案（入选全国总工会、最高法、最高检 2025 年劳动法律监督一函两书典型案例）、肥城群体性纠纷案（入选 2025 年度山东法院鲁法品牌十大典型案例）；肥城案官方原文未披露个案裁决结果，holding 以化解全文表述摘录 |
+
+> 案例均含 title/sourceId/caseId/publishingAuthority/publicationDate/jurisdiction/canonicalUrl/sourceLevel(B)/topicIds/keyFacts/claims（官方原文存在时）/holding/reasoning/documentNumber=null（官方均未公布案号）。
+
+### 地方裁审指引（C 级；效力低于全国法律；仅适用于山东省）
+
+| sourceId | 标题 | 机关 | 发布日期 | 官方 URL | 收录内容 |
+|---|---|---|---|---|---|
+| sd-ldrs-shenli-jiyao-2019 | 山东省高级人民法院、山东省人力资源和社会保障厅关于审理劳动人事争议案件若干问题会议纪要（2019） | 山东省高级人民法院、山东省人力资源和社会保障厅 | 2019-06-10 | https://www.sdcourt.gov.cn/lypyfy/404120/404053/8497525/index.html | 25 项（2018-10/12、2019-04 三次座谈会研讨后印发；含转包工伤责任、混同用工、竞业限制、二倍工资时效、终局裁决等） |
+| sd-ldrs-susong-zhiyin-2021 | 山东省高级人民法院劳动争议热点难点问题诉讼指引（2021） | 山东省高级人民法院 | 2021-11-01 | https://www.sdcourt.gov.cn/tadyqfy/383375/383353/7888039/index.html | 7 大部分（主管范围/确认劳动关系/合同效力订立变更/解除终止与补偿赔偿/工资加班年假/工伤社保/程序） |
+
+> schema 扩展（最小化并已添加测试）：LawSourceTypeSchema 增加 local_guidance；law 文档 authorityLevel 允许 A/C、jurisdiction 允许省级字符串；
+> validator 强制 local_guidance=C 级+具体省份、其余类型=A 级+全国性+全国性机关；registry/catalog 同步；CaseSourceSchema 增加可选 claims 字段。
+
+### 去重与跳过清单（明确记录）
+
+| 来源 | 判定 | 理由 |
+|---|---|---|
+| 济南槐荫法院网页（seed02）案例「驾驶自有车辆提供货运服务的司机与团购平台服务商之间能否认定为劳动关系？」 | 重复，跳过 | 与 sd-xinjiuyexingtai-2023-12 案例3 同一案例（省高院+省人社厅批次成员），保留批次全文页作为 canonical |
+| 青岛中院「黄某与某纺织公司竞业限制纠纷案」（入选最高法解释（二）典型案例） | 重复，跳过 | 已作为 case-laodongzhengyi-typical-2025-05 收录（最高法 2025-08-01 批次） |
+| 最高法第三批劳动人事争议典型案例（东阿法院网转载页） | 重复，跳过 | 与库内 ldrszy-typical-batch3（6 例）同批 |
+| 菏泽法院「菏」法护薪品牌事例 | 未收录 | 为工作事例（主要做法/取得成效），非个案，缺少基本案情/裁判结果，不符合案例字段要求 |
+| 淄博高新区「入选2024年度十大」新闻、山东省人社厅 2024 年度十大新闻 | 未收录 | 仅有新闻稿，官方案例全文页未能在本阶段定位（列入 Next） |
+| 青岛中院 2022-04-28 劳动争议白皮书十大典型案例 | 未收录 | 发布会页无案例全文（列入 Next） |
+
 ## 自动校验结果
 
-- 内容库全局校验（`content:validate`）：通过（laws=34、cases=201、provisions=1276、registry=251）。全量 201 例清单/主题覆盖以 `docs/CASE_COVERAGE_AUDIT.md`（2026-08-28 生成）为准，本文件案例表为早期批次记录。
+- 内容库全局校验（`content:validate`）：通过（laws=36、cases=219、provisions=1308、registry=271；Phase 7C 新增 18 例山东案例与 2 份山东地方裁审指引）。全量 219 例清单/主题覆盖以 `docs/CASE_COVERAGE_AUDIT.md`（2026-08-28 生成）为准，本文件案例表为早期批次记录。
 - 唯一性：sourceId 全局唯一、provisionId 全局唯一、无重复 provision；案例标题/标题+案情前 200 字无近似重复（脚本审计）。
 - 官方 host：白名单含 国家法律法规数据库、中国人大网、中国政府网、最高人民法院、人社部、以及经逐域核验的省级法院官网（广东/上海/江苏/河南/江西/辽宁/天津/河北/广西）；未发现相似域名绕过（`isAllowedOfficialHost` 校验）。
-- 案号：官方页面给出（指导案例编号等）才记录，格式校验（含指导性案例/指导案例编号），未公布一律 null（201 例中 190 例未公布，如实，见 CASE_COVERAGE_AUDIT.md）。
-- 全国规范：签发机关均为全国性机关；未导入地方性法规、地方工资标准或地方仲裁口径（**案例**允许地方官方案例，仅限官方来源）。
+- 案号：官方页面给出（指导案例编号等）才记录，格式校验（含指导性案例/指导案例编号），未公布一律 null（219 例中 208 例未公布，如实，见 CASE_COVERAGE_AUDIT.md）。
+- 全国规范：签发机关均为全国性机关；未导入地方性法规、地方工资标准或地方仲裁口径（**案例**允许地方官方案例，仅限官方来源）。Phase 7C 另收录 2 份山东省级裁审指引（sourceType=local_guidance，authorityLevel=C，jurisdiction=山东省），validator 强制其不得为 A 级/全国性，且不得与其他法律混同。
 - law/行政法规/司法解释不得为 repealed/unknown 进入索引：通过。
 - `textSha256` 与规范化 `sourceText` 一致：通过。
 - `source_verified` 与 `legal_reviewed` 未混淆：本阶段所有内容均为 `source_verified`，无任何 `legal_reviewed`。
