@@ -54,6 +54,9 @@ export const LawSourceTypeSchema = z.enum([
   "judicial_interpretation",
   "arbitration_procedure",
   "policy",
+  // 地方裁审指引（Phase 7C: 山东省级法院/人社部门会议纪要、诉讼指引等）：
+  // 官方发布但效力低于全国性法律，不得标为 A 级。validator 强制 C 级 + 省级 jurisdiction。
+  "local_guidance",
 ]);
 export type LawSourceType = z.infer<typeof LawSourceTypeSchema>;
 
@@ -131,8 +134,9 @@ export const LawSourceSchema = z.strictObject({
   sourceType: LawSourceTypeSchema,
   issuingAuthority: z.string().min(1).max(150),
   documentNumber: z.string().min(1).max(120).nullable(),
-  authorityLevel: z.literal("A"),
-  jurisdiction: z.literal(JURISDICTION_NATIONAL),
+  // A = 全国性权威规范；C = 官方地方裁审指引（Phase 7C；validator 按 sourceType 强制）。
+  authorityLevel: z.enum(["A", "C"]),
+  jurisdiction: z.string().min(1).max(60),
   officialUrl: z.string().url().refine((v) => v.startsWith("https://"), {
     message: "officialUrl 必须使用 HTTPS",
   }),
@@ -189,6 +193,8 @@ export const CaseSourceSchema = z.strictObject({
   issues: z.array(z.string().min(1).max(300)).min(1).max(10),
   keyFacts: z.string().min(1).max(2000),
   holding: z.string().min(1).max(1500),
+  /** 官方原文给出的诉讼/仲裁请求（如【原告诉讼请求】【申请人请求】；官方无此段时省略）。 */
+  claims: z.string().min(1).max(1500).optional(),
   reasoning: z.string().min(1).max(2000),
   citedProvisions: z.array(CitedProvisionSchema).default([]),
   documentNumber: z.string().min(1).max(120).nullable().default(null), // 页面出现案号/入库编号时填写

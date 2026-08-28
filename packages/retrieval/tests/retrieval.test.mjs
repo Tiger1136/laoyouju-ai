@@ -345,3 +345,69 @@ test("computeTextSha256 与 canonicalize 确定性", () => {
   assert.equal(a, computeTextSha256(text));
   assert.match(a, /^[0-9a-f]{64}$/);
 });
+
+// ============================================================
+// Phase 7C：山东官方劳动争议案例与地方裁审指引
+// ============================================================
+
+// 山东黄金查询回归（只断言通用检索能力：top3 有 A 级法条、top5 有官方案例、
+// 命中来源均为 HTTPS 官方白名单；不得硬编码 sourceId/caseId 或排名）。
+const SHANDONG_GOLD = [
+  "山东公司拖欠提成奖金怎么办",
+  "济南公司违法辞退怎么赔",
+  "青岛外卖骑手能否确认劳动关系",
+  "山东建筑工地违法转包发生工伤谁负责",
+  "山东竞业限制没有补偿是否有效",
+  "山东劳动仲裁超过一年还能申请吗",
+];
+
+test("7C：山东黄金查询 top3 含 A 级法条且 top5 含官方案例（通用能力断言）", () => {
+  const index = build();
+  for (const q of SHANDONG_GOLD) {
+    const hits = queryIndex(index, q, 5);
+    assert.ok(hits.length > 0, `山东黄金查询无结果: ${q}`);
+    const top3 = hits.slice(0, 3);
+    assert.ok(
+      top3.some((h) => h.kind === "provision" && h.sourceLevel === "A"),
+      `${q} top3 无 A 级法条: ${JSON.stringify(top3.map((h) => h.kind + "|" + h.docId + "|" + h.locator))}`,
+    );
+    assert.ok(hits.some((h) => h.kind === "case"), `${q} top5 无官方案例`);
+    for (const h of hits) {
+      assert.ok(h.officialUrl.startsWith("https://"), `${q} 非 HTTPS: ${h.docId}`);
+      assert.ok(isAllowedOfficialHost(new URL(h.officialUrl).hostname), `${q} host 不在白名单: ${h.docId}`);
+    }
+  }
+});
+
+test("7C：山东案例数据层回归（jurisdiction=山东省、B 级、官方 URL、claims 可选字段）", () => {
+  const sd = LOADED.cases.filter((c) => c.jurisdiction === "山东省");
+  assert.ok(sd.length >= 10, `山东案例数 ${sd.length} 应 >= 10`);
+  assert.ok(sd.every((c) => c.authorityLevel === "B"));
+  assert.ok(sd.every((c) => isAllowedOfficialHost(new URL(c.officialUrl).hostname)));
+  assert.ok(sd.some((c) => c.claims !== undefined), "应有案例携带官方诉讼请求字段 claims");
+});
+
+test("7C：地方裁审指引必须为 C 级且仅限山东省（schema/validate 双约束）", () => {
+  const guidance = LOADED.laws.filter((l) => l.sourceType === "local_guidance");
+  assert.ok(guidance.length >= 1, "应存在地方裁审指引文档");
+  for (const g of guidance) {
+    assert.equal(g.authorityLevel, "C");
+    assert.equal(g.jurisdiction, "山东省");
+    assert.ok(g.officialUrl.startsWith("https://"));
+    assert.ok(g.provisions.length >= 1);
+    assert.ok(g.topicIds.length >= 1);
+  }
+  // 指引标为 A 级必须被拒绝（不得冒充全国法律）
+  const badLevel = { ...guidance[0], sourceId: "mock-sd-guidance-A", authorityLevel: "A" };
+  const v1 = validateContent({ ...LOADED, laws: [...LOADED.laws, badLevel], documents: [...LOADED.documents, badLevel] });
+  assert.ok(v1.issues.some((i) => i.code === "LOCAL_GUIDANCE_WRONG_LEVEL"), JSON.stringify(v1.issues.slice(0, 5)));
+  // 指引标为全国性必须被拒绝
+  const badJuris = { ...guidance[0], sourceId: "mock-sd-guidance-J", jurisdiction: "全国性" };
+  const v2 = validateContent({ ...LOADED, laws: [...LOADED.laws, badJuris], documents: [...LOADED.documents, badJuris] });
+  assert.ok(v2.issues.some((i) => i.code === "LOCAL_GUIDANCE_REQUIRES_PROVINCE"), JSON.stringify(v2.issues.slice(0, 5)));
+  // 全国性规范降为 C 级必须被拒绝（反向保护）
+  const natLaw = LOADED.laws.filter((l) => l.sourceType !== "local_guidance")[0];
+  const badNational = { ...natLaw, sourceId: "mock-national-C", authorityLevel: "C" };
+  const v3 = validateContent({ ...LOADED, laws: [...LOADED.laws, badNational], documents: [...LOADED.documents, badNational] });
+  assert.ok(v3.issues.some((i) => i.code === "NATIONAL_SOURCE_MUST_BE_A"), JSON.stringify(v3.issues.slice(0, 5)));
+});

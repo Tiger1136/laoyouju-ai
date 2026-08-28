@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO = join(__dirname, "..");
 const OUT_DIR = join(REPO, "content", "sources");
-const GENERATED_AT = "2026-08-27";
+const GENERATED_AT = "2026-08-28";
 
 /** 被替代的旧司法解释（档案记录；不得作为现行依据）。依据：法释〔2020〕26号 废止目录。 */
 const SUPERSEDED_ARCHIVE = [
@@ -62,7 +62,7 @@ function main() {
       title: law.title,
       contentType: "law",
       sourceType: law.sourceType,
-      authorityLevel: "A",
+      authorityLevel: law.authorityLevel,
       issuingAuthority: law.issuingAuthority,
       documentNumber: law.documentNumber,
       jurisdiction: law.jurisdiction,

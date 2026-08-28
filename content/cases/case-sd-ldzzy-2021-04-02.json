@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-sd-ldzzy-2021-04-02",
+  "caseId": "case-sd-ldzzy-2021-04-02",
+  "title": "用人单位未支付竞业限制经济补偿劳动者可不受竞业限制的约束",
+  "publishingAuthority": "山东省高级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2021-04-29",
+  "jurisdiction": "山东省",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.sdcourt.gov.cn/ytlzfy/390100/390078/7125670/index.html",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "compensation-and-damages",
+    "noncompete-confidentiality",
+    "arbitration-procedure",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "用人单位未支付竞业限制经济补偿劳动者可不受竞业限制的约束"
+  ],
+  "keyFacts": "王某是某美术培训学校的教师，2019年5月王某从培训学校离职，双方签订离职协议，约定王某离职后2年内不得从事同行业，如违反约定，应支付违约金10万元。王某自2019年9月16日即与他人成立美术培训公司，培训学校认为王某严重违反有关竞业禁止约定，遂将王某诉诸法院，请求其履行保密及竞业限制协议，支付违约金10万元并赔偿各项损失10万元。",
+  "holding": "一审认为，培训学校应按照激励方案的要求，履行按月向王某支付竞业限制经济补偿的义务，但并未按照约定履行义务，王某即不再受竞业限制的约束。故，培训学校要求王某支付违约金10万元及继续履行竞业限制协议不符合法律规定，主张损失10万元亦未提供证据证实，法院不予支持。遂判决：驳回培训学校的诉讼请求。",
+  "reasoning": "当事人在劳动合同或者保密协议中约定了竞业限制和经济补偿，劳动合同解除或者终止后，因用人单位的原因导致三个月未支付经济补偿，劳动者即便未请求解除竞业限制协议，三个月后开展同类业务，不受竞业限制的约束。 （潍坊市寒亭区人民法院民一庭 承办法官牟爱平 法官助理张凯安）",
+  "citedProvisions": [],
+  "documentNumber": null
+}

@@ -17,9 +17,10 @@ const PROBE_DIR = join(REPO, "content", "sources", "probe");
 const OUT_DIR = join(REPO, "content", "cases");
 const RETRIEVED_AT = "2026-08-28";
 
-// ---- 批次清单：cases.json + cases-phase7b-*.json（Phase 7B 扩展字段：jurisdiction/caseType/checkedAt）----
+// ---- 批次清单：cases.json + cases-phase7b-*.json + cases-phase7c-*.json
+// （Phase 7B 扩展字段：jurisdiction/caseType/checkedAt；Phase 7C：山东官方案例批次）----
 function loadBatches() {
-  const files = readdirSync(PROBE_DIR).filter((f) => /^cases(-phase7b-.*)?\.json$/.test(f)).sort();
+  const files = readdirSync(PROBE_DIR).filter((f) => /^cases(-phase7[bc]-.*)?\.json$/.test(f)).sort();
   const batches = [];
   for (const f of files) {
     let raw = readFileSync(join(PROBE_DIR, f), "utf8");
@@ -168,7 +169,8 @@ function buildCaseDocument(batch, section, slug) {
       blocks["裁判结果及理由"] ?? "").trim();
   const reasoning =
     (blocks["案例分析"] ?? blocks["裁判要旨"] ?? blocks["典型意义"] ?? blocks["裁判理由"] ??
-      blocks["裁判结果及理由"] ?? blocks["分析"] ?? "").trim();
+      blocks["裁判结果及理由"] ?? blocks["分析"] ?? blocks["点评"] ?? blocks["评析"] ?? "").trim();
+  const claimsRaw = (blocks["诉讼请求"] ?? blocks["申请人请求"] ?? blocks["原告请求"] ?? blocks["仲裁请求"] ?? "").trim();
   const issuesRaw = (blocks["争议焦点"] ?? "").trim();
   const docNoRaw = (blocks["案号"] ?? "").trim();
   const documentNumber = docNoRaw === "" || docNoRaw === "未公布" || docNoRaw.includes("未公布案号")
@@ -207,6 +209,7 @@ function buildCaseDocument(batch, section, slug) {
     issues: issuesRaw.length > 0 ? [issuesRaw.slice(0, 300)] : [title.slice(0, 120)],
     keyFacts: keyFacts.length > 0 ? keyFacts : "（官方页面未提供基本案情摘要，详见案例分析部分）",
     holding: holding.length > 0 ? holding : "（官方页面未提供裁判/处理结果摘要，详见案例分析部分）",
+    ...(claimsRaw.length > 0 ? { claims: claimsRaw.slice(0, 1500) } : {}),
     reasoning: reasoning.length > 0 ? reasoning : "（官方页面未提供分析内容）",
     citedProvisions: cited,
     documentNumber,
@@ -246,6 +249,7 @@ function main() {
     const candidates = [
       join(RAW_DIR, batch.batchSlug + ".txt"),
       join(RAW_DIR, "phase7b", batch.batchSlug + ".txt"),
+      join(RAW_DIR, "phase7c", batch.batchSlug + ".txt"),
     ];
     const rawPath = candidates.find((p) => existsSync(p));
     if (rawPath === undefined) {

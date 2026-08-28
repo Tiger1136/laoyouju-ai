@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2.0.0",
+  "contentType": "case",
+  "sourceId": "case-sd-ldzzy-2021-04-03",
+  "caseId": "case-sd-ldzzy-2021-04-03",
+  "title": "存在转包、违法分包的情形时，用工单位承担职工的工伤保险责任不以是否存在劳动关系为前提",
+  "publishingAuthority": "山东省高级人民法院",
+  "caseType": "local_typical_case",
+  "publicationDate": "2021-04-29",
+  "jurisdiction": "山东省",
+  "authorityLevel": "B",
+  "officialUrl": "https://www.sdcourt.gov.cn/ytlzfy/390100/390078/7125670/index.html",
+  "sourceCheckedAt": "2026-08-28",
+  "retrievedAt": "2026-08-28",
+  "verificationStatus": "official_source_verified",
+  "reviewStatus": "source_verified",
+  "topicIds": [
+    "social-insurance",
+    "work-injury",
+    "labor-relationship-recognition",
+    "labor-dispatch",
+    "social-insurance-noncompete"
+  ],
+  "issues": [
+    "存在转包、违法分包的情形时，用工单位承担职工的工伤保险责任不以是否存在劳动关系为前提"
+  ],
+  "keyFacts": "原告某建设公司将某居民小区住宅楼及附属车库分包给某劳务公司，并签订《建筑工程劳务分包合同》，牛某作为代表在合同上签字。后宋某从牛某处分包了该居民小区的钢筋工程，被告王某经人介绍从事上述工程的钢筋工工作，某建设公司与王某未签订劳动合同，亦未为王某缴纳工伤保险。2019年10月27日上午，王某在工地进行钢筋拉直时，工友韩某因工作与其发生口角，后致王某受伤，王某受伤后由宋某送回家，之后未再出勤上班。王某申请认定工伤，因某建设公司否认与王某存在劳动关系，当地人社局出具了工伤认定中止通知书。",
+  "holding": "依照《最高人民法院关于审理工伤保险行政案件若干问题的规定》第三条第一款“社会保险行政部门认定下列单位为承担工伤保险责任单位的，人民法院应予支持：……（四）用工单位违反法律、法规规定将承包业务转包给不具备用工主体资格的组织或者自然人，该组织或者自然人聘用的职工从事承包业务时因工伤亡的，用工单位为承担工伤保险责任的单位；……”规定，当存在转包、违法分包的情形时，用工单位承担职工的工伤保险责任不以是否存在劳动关系为前提，职工发生工伤事故，转包、违法分包的用工单位依法应当承担相应的工伤保险责任。",
+  "reasoning": "通常情况下，认定职工工伤应以职工与用人单位之间存在劳动关系为前提。但是在用工单位违反法律、法规规定，将承包业务转包给不具备用工主体资格的组织或者自然人的情况下，从保护职工合法权益的角度出发，认定用工单位承担工伤保险责任并不必须以存在劳动关系为前提，有利于保障农民工不因非法用工而丧失相应的工伤保险待遇。 （泰安市中级人民法院民四庭 承办法官邢友峰、法官助理李付慧）",
+  "citedProvisions": [
+    {
+      "sourceId": "jie-gongshangbaoxian-xingzheng",
+      "locator": "第三条"
+    }
+  ],
+  "documentNumber": null
+}

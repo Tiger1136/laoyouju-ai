@@ -23,6 +23,7 @@ export const SOURCE_TYPE_LABEL: Record<string, string> = {
   judicial_interpretation: "司法解释",
   arbitration_procedure: "仲裁程序规范",
   policy: "政策文件",
+  local_guidance: "地方裁审指引（省级法院/人社部门）",
   case: "官方案例",
 };
 
@@ -186,7 +187,7 @@ export function buildCatalog(content?: LoadedContent): Catalog {
       id,
       provisionCount,
       caseCount,
-      boundaryNote: "当前已收录全国性规则与官方发布案例；地方性法规、地方工资标准与地方仲裁口径未作为本地知识库收录，涉及地方规则时将通过联网检索线索提示并引导核验地方官方来源。",
+      boundaryNote: "当前已收录全国性规则、官方发布案例，以及山东省级裁审会议纪要/诉讼指引（地方裁审指引，C 级，仅适用于山东省）；地方性法规、省内其他裁审口径未作为本地知识库收录，涉及地方规则时将通过联网检索线索提示并引导核验地方官方来源。",
     };
   });
 

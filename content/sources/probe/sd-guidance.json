@@ -1,0 +1,164 @@
+[
+  {
+    "sourceId": "sd-ldrs-shenli-jiyao-2019",
+    "rawFile": "sd-ldrs-shenli-jiyao-2019.txt",
+    "title": "山东省高级人民法院、山东省人力资源和社会保障厅关于审理劳动人事争议案件若干问题会议纪要（2019）",
+    "issuingAuthority": "山东省高级人民法院、山东省人力资源和社会保障厅",
+    "officialUrl": "https://www.sdcourt.gov.cn/lypyfy/404120/404053/8497525/index.html",
+    "promulgationDate": "2019-06-10",
+    "effectiveDate": "2019-06-10",
+    "itemRegex": "^[\\u3000 \\t]*([一二三四五六七八九十]+)、",
+    "validityNotes": [
+      "地方裁审指引（C 级）：省法院、省人社厅 2018-10/12、2019-04 三次座谈会研讨 25 个法律适用问题后以会议纪要形式印发（落款 2019-06-10），指导全省劳动人事争议案件审理；非全国性法律法规，不得作为全国统一规则引用。"
+    ],
+    "topicsByItem": {
+      "1": [
+        "work-injury",
+        "labor-relationship-recognition"
+      ],
+      "2": [
+        "social-insurance",
+        "work-injury",
+        "compensation-and-damages",
+        "double-wage-notice",
+        "no-written-contract"
+      ],
+      "3": [
+        "labor-relationship-recognition"
+      ],
+      "4": [
+        "labor-relationship-recognition"
+      ],
+      "5": [
+        "noncompete-confidentiality"
+      ],
+      "6": [
+        "noncompete-confidentiality"
+      ],
+      "7": [
+        "noncompete-confidentiality"
+      ],
+      "8": [
+        "noncompete-confidentiality"
+      ],
+      "9": [
+        "noncompete-confidentiality",
+        "wage-arrears"
+      ],
+      "10": [
+        "noncompete-confidentiality"
+      ],
+      "11": [
+        "contract-performance"
+      ],
+      "12": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance"
+      ],
+      "13": [
+        "labor-dispatch"
+      ],
+      "14": [
+        "social-insurance",
+        "compensation-and-damages"
+      ],
+      "15": [
+        "wage-arrears",
+        "social-insurance",
+        "compensation-and-damages"
+      ],
+      "16": [
+        "work-injury",
+        "overtime-pay",
+        "compensation-and-damages",
+        "working-hours-leave"
+      ],
+      "17": [
+        "working-hours-leave"
+      ],
+      "18": [
+        "social-insurance"
+      ],
+      "19": [
+        "wage-arrears",
+        "arbitration-limitation"
+      ],
+      "20": [
+        "social-insurance",
+        "female-worker-protection",
+        "arbitration-limitation"
+      ],
+      "21": [
+        "double-wage-notice",
+        "no-written-contract",
+        "arbitration-limitation"
+      ],
+      "22": [
+        "unlawful-termination-compensation",
+        "arbitration-procedure"
+      ],
+      "23": [
+        "double-wage-notice",
+        "no-written-contract"
+      ],
+      "24": [
+        "double-wage-notice",
+        "no-written-contract"
+      ],
+      "25": [
+        "arbitration-procedure",
+        "work-injury",
+        "social-insurance"
+      ]
+    }
+  },
+  {
+    "sourceId": "sd-ldrs-susong-zhiyin-2021",
+    "rawFile": "sd-ldrs-susong-zhiyin-2021.txt",
+    "title": "山东省高级人民法院劳动争议热点难点问题诉讼指引（2021）",
+    "issuingAuthority": "山东省高级人民法院",
+    "officialUrl": "https://www.sdcourt.gov.cn/tadyqfy/383375/383353/7888039/index.html",
+    "promulgationDate": "2021-11-01",
+    "effectiveDate": "2021-11-01",
+    "itemRegex": "^[\\u3000 \\t]*([一二三四五六七八九十]+)、",
+    "validityNotes": [
+      "地方裁审指引（C 级）：山东高院依据现行法律/司法解释并结合全省审判实际发布的劳动争议热点难点问题诉讼指引（泰安岱岳区法院网转载，2021-11-01）；非全国性法律法规，不得作为全国统一规则引用。"
+    ],
+    "topicsByItem": {
+      "1": [
+        "arbitration-procedure",
+        "labor-relationship-recognition",
+        "wage-arrears",
+        "compensation-and-damages"
+      ],
+      "2": [
+        "labor-relationship-recognition"
+      ],
+      "3": [
+        "no-written-contract",
+        "double-wage-notice",
+        "contract-performance"
+      ],
+      "4": [
+        "unlawful-termination-compensation",
+        "compensation-and-damages",
+        "contract-performance"
+      ],
+      "5": [
+        "wage-arrears",
+        "overtime-pay",
+        "working-hours-leave",
+        "compensation-and-damages"
+      ],
+      "6": [
+        "work-injury",
+        "social-insurance"
+      ],
+      "7": [
+        "arbitration-procedure",
+        "arbitration-limitation"
+      ]
+    }
+  }
+]

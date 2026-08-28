@@ -1,6 +1,6 @@
 import { loadContent, type LoadedContent } from "./load.js";
 import { computeTextSha256 } from "./normalize.js";
-import { isAllowedOfficialHost, type ContentDocument, type RegistryEntry } from "./schemas.js";
+import { isAllowedOfficialHost, JURISDICTION_NATIONAL, type ContentDocument, type RegistryEntry } from "./schemas.js";
 
 /** Phase 7A 验收底线：不少于 30 部现行全国性规范、50 个官方案例。 */
 export const MIN_LAW_SOURCES = 30;
@@ -111,11 +111,40 @@ export function validateContent(content?: LoadedContent): ValidationResult {
     }
 
     if (doc.contentType === "law") {
-      if (!isNationalAuthority(doc.issuingAuthority)) {
-        issues.push({
-          code: "NOT_NATIONAL_AUTHORITY",
-          message: `${doc.sourceId} 的签发机关不是全国性机关: ${doc.issuingAuthority}`,
-        });
+      // Phase 7C：地方裁审指引（local_guidance）应为 C 级 + 省级 jurisdiction；
+      // 其余类型必须 A 级 + 全国性 + 全国性机关（不得把地方口径冒充全国法律）。
+      if (doc.sourceType === "local_guidance") {
+        if (doc.authorityLevel !== "C") {
+          issues.push({
+            code: "LOCAL_GUIDANCE_WRONG_LEVEL",
+            message: `${doc.sourceId} 地方裁审指引必须为 C 级（不得标为 A 级）: ${doc.authorityLevel}`,
+          });
+        }
+        if (doc.jurisdiction === JURISDICTION_NATIONAL || doc.jurisdiction === "") {
+          issues.push({
+            code: "LOCAL_GUIDANCE_REQUIRES_PROVINCE",
+            message: `${doc.sourceId} 地方裁审指引的 jurisdiction 必须为具体省份: ${doc.jurisdiction}`,
+          });
+        }
+      } else {
+        if (doc.authorityLevel !== "A") {
+          issues.push({
+            code: "NATIONAL_SOURCE_MUST_BE_A",
+            message: `${doc.sourceId} 全国性规范来源必须为 A 级: ${doc.authorityLevel}`,
+          });
+        }
+        if (doc.jurisdiction !== JURISDICTION_NATIONAL) {
+          issues.push({
+            code: "NATIONAL_SOURCE_REQUIRES_NATIONAL_JURISDICTION",
+            message: `${doc.sourceId} 全国性规范来源的 jurisdiction 必须为全国性: ${doc.jurisdiction}`,
+          });
+        }
+        if (!isNationalAuthority(doc.issuingAuthority)) {
+          issues.push({
+            code: "NOT_NATIONAL_AUTHORITY",
+            message: `${doc.sourceId} 的签发机关不是全国性机关: ${doc.issuingAuthority}`,
+          });
+        }
       }
       if (doc.validityStatus === "repealed" || doc.validityStatus === "unknown") {
         issues.push({
