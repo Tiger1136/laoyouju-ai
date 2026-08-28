@@ -74,8 +74,28 @@ function mockAnswerPayload(first, second) {
 }
 
 /**
- * 构造 mock DeepSeek fetch：从用户消息中读取证据编号，返回固定 JSON（仅 answer 结构——
- * 验证“answered 只生成 answer、不再要求完整 clarification”）。
+ * 从证据文本中按分级标签提取引用编号（A/B/C；证据行格式：[S#] 《title》（locator）｜A级·…｜…）。
+ * 用于 mock 模拟“合规模型”：applicableLaw 只引用 A 级、similarCases 只引用 B 级。
+ */
+function evidenceRefsByLevel(userContent) {
+  const byLevel = { A: [], B: [], C: [] };
+  const re = /`\[S(\d+)\]\s*《[^\n]*?｜(A级[^｜\n]*|B级[^｜\n]*|C级[^｜\n]*|D级[^｜\n]*)｜`/g;
+  for (const m of userContent.matchAll(re)) {
+    const label = m[2];
+    const level = label.startsWith("A级") ? "A" : label.startsWith("B级") ? "B" : label.startsWith("C级") ? "C" : "D";
+    if (byLevel[level] !== undefined) {
+      byLevel[level].push(m[1]);
+    }
+  }
+  for (const k of Object.keys(byLevel)) {
+    byLevel[k].sort((a, b) => Number(a) - Number(b));
+  }
+  return byLevel;
+}
+
+/**
+ * 构造 mock DeepSeek fetch：从用户消息中读取证据编号按分级引用（A 级→applicableLaw、B 级→similarCases），
+ * 返回固定 JSON（仅 answer 结构——验证“answered 只生成 answer、不再要求完整 clarification”）。
  * capture 传入数组时记录每次请求体（供请求载荷断言）。
  */
 function mockDeepSeekFetch({ malformed = false, capture } = {}) {
@@ -86,10 +106,9 @@ function mockDeepSeekFetch({ malformed = false, capture } = {}) {
       capture.push(body);
     }
     const userMsg = body.messages.find((m) => m.role === "user");
-    const evidenceRefs = [...new Set([...(userMsg?.content ?? "").matchAll(/\[S(\d+)\]/g)].map((m) => m[1]))].sort((a, b) => Number(a) - Number(b));
-    const s = evidenceRefs.slice(0, 3);
-    const first = s[0] ?? "";
-    const second = s[1] ?? "";
+    const byLevel = evidenceRefsByLevel(userMsg?.content ?? "");
+    const first = byLevel.A[0] ?? "";
+    const second = byLevel.B[0] ?? "";
     let content = JSON.stringify(mockAnswerPayload(first, second));
     if (malformed) {
       content = "这不是JSON";
@@ -100,7 +119,6 @@ function mockDeepSeekFetch({ malformed = false, capture } = {}) {
     });
   };
 }
-
 /** 构造带 mock DeepSeek 的问答上下文（复用默认内容资源加载；maxTokens 走生产默认 1300、timeout 走测试小值）。 */
 function mockQuestionContext() {
   const base = createDefaultAskContext();
@@ -871,4 +889,161 @@ test("延迟修复：模型超时会 Abort 并映射为 502 UPSTREAM_ERROR（不
   const text = JSON.stringify(body);
   assert.equal(text.includes("DEEPSEEK_API_KEY"), false);
   assert.equal(text.includes("api.deepseek.com"), false, "不得泄露上游地址");
+});
+// ============================================================
+// Phase 7C-1：权威层级区分（applicableLaw=A 级 / localGuidance=C 级山东指引 / similarCases=B 级案例）
+// ============================================================
+
+const SD_NONCOMPETE_QUESTION = "山东公司没有约定竞业补偿，竞业协议有效吗？";
+const BJ_NONCOMPETE_QUESTION = "北京公司没有约定竞业补偿，竞业协议有效吗？";
+const UNKNOWN_LOCATION_NONCOMPETE_QUESTION = "公司没有约定竞业补偿，竞业协议有效吗？";
+
+/** 分级不变量：applicableLaw 只引 A 级；localGuidance 只引 C 级地方指引（省级）；similarCases 只引 B 级案例；全部引用可解析。 */
+function assertLevelSeparation(body) {
+  const refToSource = new Map(body.sources.map((s) => [s.citationRef, s]));
+  const refs = (items) => items.flatMap((x) => [...x.matchAll(/\[S(\d+)\]/g)].map((m) => "S" + m[1]));
+  if (body.outcome === "answered" && body.answer !== null) {
+    for (const item of body.answer.applicableLaw) {
+      for (const ref of refs([item])) {
+        assert.equal(refToSource.get(ref)?.sourceLevel, "A", "applicableLaw 只能引用 A 级全国性规范: " + item);
+      }
+    }
+    for (const item of body.answer.localGuidance) {
+      for (const ref of refs([item])) {
+        const s = refToSource.get(ref);
+        assert.equal(s?.sourceLevel, "C", "localGuidance 只能引用 C 级: " + item);
+        assert.equal(s?.sourceType, "local_guidance", "localGuidance 必须引用地方裁审指引: " + item);
+        assert.ok(s?.jurisdiction === "山东省" || (s?.jurisdiction ?? "").includes("山东"), "localGuidance 必须带省级 jurisdiction: " + item);
+      }
+      assert.ok(item.includes("山东"), "localGuidance 条目必须明确山东适用: " + item);
+    }
+    for (const item of body.answer.similarCases) {
+      for (const ref of refs([item])) {
+        const s = refToSource.get(ref);
+        assert.equal(s?.sourceLevel, "B", "similarCases 只能引用 B 级案例: " + item);
+        assert.equal(s?.sourceType, "case", "similarCases 只能引用官方案例: " + item);
+      }
+    }
+  }
+  // 所有被引用的编号都能在 sources 中解析。
+  const allCited = refs([
+    ...(body.answer?.applicableLaw ?? []),
+    ...(body.answer?.localGuidance ?? []),
+    ...(body.answer?.similarCases ?? []),
+    ...(body.clarification?.legalFramework ?? []),
+    ...(body.clarification?.possibleConclusions ?? []),
+  ]);
+  for (const ref of allCited) {
+    assert.ok(refToSource.has(ref), "引用编号不能在 sources 中解析: " + ref);
+  }
+}
+
+test("7C-1：山东问题同时区分 A 级法律 / C 级山东指引 / B 级案例（mock 模型）", async () => {
+  const server2 = createMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: SD_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "answered", "山东竞业问题应走 answered 分支");
+  assert.ok(body.answer.applicableLaw.length >= 1, "必须包含 A 级适用法律");
+  assert.ok(body.answer.localGuidance.length >= 1, "山东问题应包含 C 级山东地方裁审参考");
+  assert.ok(body.answer.similarCases.length >= 1, "应包含 B 级官方案例参考");
+  assertLevelSeparation(body);
+  const text = JSON.stringify(body);
+  assert.equal(text.includes("不属于全国统一") || text.includes("不是全国统一"), true, "必须声明山东口径不是全国统一规则");
+  const parsed = parseAskSuccessResponse(body);
+  assert.equal(parsed.success, true, "契约层级校验通过: " + JSON.stringify(parsed.error?.issues ?? null).slice(0, 300));
+});
+
+test("7C-1：北京问题不得出现山东指引（localGuidance 为空，不把山东口径当作北京/全国规则）", async () => {
+  const server2 = createMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: BJ_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "answered");
+  assert.deepEqual(body.answer.localGuidance, [], "非山东问题不得出现山东指引");
+  const text = JSON.stringify(body.answer);
+  assert.equal(text.includes("山东地区裁审参考"), false, "不得把山东口径描述为北京适用规则");
+  assert.ok(!/如争议发生在山东/.test(text), "地点明确为北京时不需要条件化表述");
+  assertLevelSeparation(body);
+});
+
+test("7C-1：地域未知时必须条件化表述（如争议发生在山东……其他地区裁审口径可能不同）", async () => {
+  const server2 = createMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: UNKNOWN_LOCATION_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "answered");
+  if (body.answer.localGuidance.length > 0) {
+    for (const item of body.answer.localGuidance) {
+      assert.ok(item.includes("如争议发生在山东，可参考"), "未知地点必须使用条件化表述: " + item);
+      assert.ok(item.includes("其他地区裁审口径可能不同"), "未知地点必须声明地区差异: " + item);
+    }
+    assert.ok(JSON.stringify(body.answer.boundaries).includes("其他地区裁审口径可能不同"), "boundaries 应声明地区差异");
+  }
+  assertLevelSeparation(body);
+});
+
+test("7C-1：生活类问题（怎么做红烧肉）仍为 out_of_scope 且不出现任何法律来源", async () => {
+  const { status, body } = await requestAt(mockBaseUrl, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: "怎么做红烧肉" }),
+  });
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "out_of_scope");
+  assert.equal(body.outOfScope.message, OUT_OF_SCOPE_MESSAGE);
+  assert.equal(body.sources.length, 0, "out_of_scope 不得附带任何法律来源");
+});
+
+test("7C-1：全部劳动/改写矩阵问题满足分级不变量（applicableLaw=A、localGuidance=C 山东、similarCases=B、引用可解析）", async () => {
+  for (const item of QUESTION_MATRIX) {
+    if (item.kind !== "labor" && item.kind !== "variant") {
+      continue;
+    }
+    const { status, body } = await requestAt(mockBaseUrl, "/api/v1/ask", {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ question: item.q }),
+    });
+    assert.equal(status, 200, "问题应返回 200: " + item.q);
+    assertLevelSeparation(body);
+    const parsed = parseAskSuccessResponse(body);
+    assert.equal(parsed.success, true, "矩阵问题契约校验失败: " + item.q + " " + String(JSON.stringify(parsed.error?.issues ?? null)).slice(0, 300));
+  }
+});
+
+test("7C-1：山东指引用例不进入 sources 的 A 级豁免（C 级来源不被提升）", async () => {
+  // 所有返回的 A 级来源必须为全国性 jurisdiction；C 级来源不得出现在 A 级集合。
+  const { status, body } = await requestAt(mockBaseUrl, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: SD_NONCOMPETE_QUESTION }),
+  });
+  assert.equal(status, 200);
+  for (const s of body.sources) {
+    if (s.sourceLevel === "A") {
+      assert.equal(s.jurisdiction, "全国性", "A 级来源必须为全国性: " + s.sourceId);
+    }
+    if (s.sourceLevel === "C" && s.sourceType === "local_guidance") {
+      assert.equal(s.jurisdiction, "山东省", "地方指引 jurisdiction 必须为山东省: " + s.sourceId);
+    }
+  }
 });

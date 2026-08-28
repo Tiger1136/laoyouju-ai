@@ -291,29 +291,19 @@
 > 未新增案例、未修改已核验 201 例内容、未部署（按项目经理最终指令“不要部署，等待验收”）、未调用真实模型、未操作 CloudBase/密钥。
 
 - **基线确认**：content:validate PASS（laws=34 / cases=201 / provisions=1276 / registry=251）；retrieval:build OK（docs=1477 = 1276 条文 + 201 案例；两次构建 SHA-256 一致 44F68E4E…77F68）；19/19 主题每主题 ≥5 例（probation=7）；12 个省级地区；201 例已核验去重/占位/案号/引用。
-## PHASE_7B_LIVE_DEPLOYMENT_AND_ACCEPTANCE（201 例版部署与线上验收，2026-08-28）
 
-> 项目经理验收通过后授权执行。仅部署与线上验证；未修改检索算法/内容，未启用 WSA/域名/ICP/小程序/GitHub，未创建/升级付费资源，cloudbaserc.json 无 envVariables（未触碰控制台环境变量，未读/未回显 DEEPSEEK_API_KEY）。
+## PHASE_7C_1_SHANDONG_SOURCE_LEVEL_INTEGRATION（来源分级产品级整合，2026-08-28）
 
-- **门禁复核**：pnpm run check exit 0（retrieval 28/28、case-corpus 14/14、shared 30/30、search 16/16、api 42/42、web 29/29）。
-- **部署 API**：build:deploy 生成 deploy/api（server.js 约 712KB；content/laws 34、content/cases 201、registry.json）；本地干净目录验证（health 200/支付宝 out_of_scope/红烧肉 out_of_scope/纯标点 400/工伤 needs_clarification/OPTIONS 204/evil 403）通过；tcb fn deploy api --yes 成功；未传 envVariables。
-- **部署 Web**：以真实 API 地址（NEXT_PUBLIC_API_BASE_URL=…service.tcloudbase.com、NEXT_PUBLIC_SITE_URL=真实测试域）next build（15 路由）后 tcb hosting deploy apps/web/out（65 个文件）。
-- **线上协议级验证（全部通过）**：health 200；/ /laws /cases /topics /ask 均 200；线上 /cases 402 个案例标记（=201 例×2，证明 201 例版）；OPTIONS /api/v1/ask 204 + 单值精确 ACAO + methods POST；允许 Origin 的 health/成功 POST ACAO 均单值精确=网站 Origin；evil Origin POST 403 且响应无 ACAO（不反射）；支付宝提现手续费是多少 → 200 out_of_scope（fixed 文案、sources=0）；怎么做红烧肉 → 200 out_of_scope 转题引导；/ask noindex；sitemap 9 条不含 /ask；robots Disallow /ask（+ /ask/）。
-- **真实 DeepSeek Smoke Test**（唯一问题：竞业协议签了不想干了，公司要我赔钱怎么办？；累计真实调用 2 次——第 1 次 200/约 15.8s 但响应体未被本地脚本捕获（保存代码有误），第 2 次为同问题重放以完成内容验收，requestId 67ce95dc-9366-45a7-840e-40917c5bd010，200/约 16.0s）：outcome=answered；applicableLaw 9 条（全部 A 级：劳动合同法 §23/§24、解释一 §36–§40、解释二 §13/§14，均带 [S#]）；similarCases 2 条 B 级官方案例（[S10] case-cy-ldzzy-2024-01-10 川渝典型案例、[S11] case-zgf-zdxal-2022-32pi-06 最高法 32 批指导案例（马筱楠诉搜狐））；sources=11 全部来自本次证据集；issueIdentification/preliminaryConclusion/nextSteps/evidenceChecklist/factsToConfirm/boundaries/aiNotice（固定 AI 标识）齐全；无虚构法条/案号/法院/金额/网址；响应无密钥/堆栈/环境变量。
-- **201 例版本证明**：① 部署包 content/cases=201 文件；② 线上 /cases 402 标记=201 例；③ Smoke Test 引用的 case-cy-ldzzy-2024-01-10 不在旧 53 例部署包批次内（Phase 7B 新增），证明 API 运行 201 例知识库。
-- **备注**：同步耗时约 15.9–16.0s（模型超时 15s、链路上限约 20s），处于预算边缘但成功；已记录待跟进。
-- **费用**：真实 DeepSeek 2 次调用（以腾讯云账单为准）；无付费资源创建/升级；未启用 WSA。
-- **文件变更**：docs/DEPLOYMENT.md（当前部署状态表更新为本轮）、docs/PROGRESS.md（本记录）；无源码/内容/cloudbaserc.json 变更；未创建 commit/remote。
+> 阶段定义：完成国家法律、山东地方指引、山东案例的产品级区分（API 类型与响应、问答结构、Web 页面与来源卡片、测试与文档），**不做任何案例新增/抓取/拆分**；模型调用一律 mock。分支 feat/shandong-official-corpus；未合并 main、未部署、无云端操作。
 
-## PHASE_7C_SHANDONG_OFFICIAL_CORPUS（山东官方案例与裁审口径专项，2026-08-28）
-
-> 阶段定义：山东官方案例 +30~50（目标 231~251 总量）+ 山东裁审口径收录；**结果：PARTIAL（新增 18 例）**——真实全文官方可用批次受限（山东法院网多站点 500/连接中断、多批次发布会页无案例全文、官方全文页未能全部定位），未达 30 例最低线；宁缺毋滥，未拆改凑数。分支 feat/shandong-official-corpus，未合并 main、未部署。
-
-- **案例新增（18 例，全部官方全文）**：山东省高院 2021-04-29 劳动人事争议典型案例（8，ytlzfy/sdcourt 官方页）；山东省高院+省人社厅 2023-12-28 新就业形态劳动争议典型案例（6，聊城市人社局官网全文转载）；山东法院劳动者权益司法保护十大典型案件成员（1，齐某与某人力公司案，庆云法院网）；山东省 2024 年度劳动人事争议十大典型案例成员（1，安丘法院服务期违约金案，含诉讼请求）；《山东民事审判参考》典型案例栏目 2 例（济南期票案、肥城群体性纠纷案）——青岛黄某纺织公司案为入选最高法解释（二）典型案例，与库内 case-laodongzhengyi-typical-2025-05 重复，已跳过。
-- **地方裁审口径（2 份，C 级）**：山东高院+省人社厅 2019-06-10《关于审理劳动人事争议案件若干问题会议纪要》（25 项）；山东高院 2021-11-01《劳动争议热点难点问题诉讼指引》（7 大部分）。
-- **schema 最小扩展（含测试）**：law sourceType 新增 local_guidance（authorityLevel 允许 A/C、jurisdiction 允许省级；validator 双向强制：地方指引必须 C 级+省级，全国性规范必须 A 级+全国性+全国性机关）；CaseSourceSchema 新增可选 claims。
-- **规模**：laws=34→36、cases=201→219、provisions=1276→1308、registry=251→271；19 主题每主题 ≥5 案例保持；省级地区覆盖 13（新增山东省）；去重：标题/URL/案情指纹无重复（含与既有 201 例交叉查重，case-corpus 14/14 通过）。
-- **门禁/测试**：content:validate PASS（36/219/1308/271）；retrieval:build OK（docs=1527，两次构建字节一致）；retrieval.test **31/31**（原 28 + 新增 3 项：6 条山东黄金查询通用能力断言、山东案例数据层回归、地方指引 C 级/省级双约束校验）；case-corpus **14/14**；`pnpm run check` exit 0；git diff --check 通过；支付宝提现手续费/怎么做红烧肉等仍无劳动法证据（领域门控全绿）。
-- **未收录（明确记录）**：菏泽“菏”法护薪品牌事例（工作事例非个案）；淄博高新区/省人社厅 2024 年度十大新闻（无全文，官方全文页未定位）；青岛中院 2022-04-28 白皮书十大案例（发布会页无全文）；山东法院“人民法院案例库裁判要旨汇总”（仅要旨无案情/结果）。
-- **安全**：未读取/修改 DEEPSEEK_API_KEY；未调用真实 DeepSeek/WSA；未操作 CloudBase/未部署；无付费资源；未改 GitHub 可见性；未删除 phase-7b-live-201 标签；无 force push。
-- **文件变更**：content/laws +2、content/cases +18、content/raw（phase7c 案例原文 + 2 份指引原文）、content/sources（probe 清单、registry 重建）、scripts/import-cases.mjs（phase7c/点评/claims 支持）、scripts/import-registry.mjs（authorityLevel 按文档）、scripts/import-sd-guidance.mjs（新增）、packages/retrieval schemas/validate/catalog、retrieval.test.mjs（+3 项）、docs/CONTENT_REVIEW.md、docs/CASE_COVERAGE_AUDIT.md（重建）、docs/DECISIONS.md（ADR-030）、本文件。
+- **验收口径调整（项目经理）**：18 例山东官方案例 + 2 份山东地方裁审指引验收合格；29/50 目标不再作为本阶段硬门槛；剩余山东官方批次列入后续持续扩充 backlog（本轮严禁继续抓取/拆分/补写案例）。
+- **共享契约（最小向后兼容扩展）**：SourceTypeSchema +“local_guidance”；SOURCE_GROUPS +“local”；SourceCitation 新增 sourceTypeLabel/sourceLevelLabel/topicIds（默认值兼容旧载荷）；Answer 新增可选 localGuidance（默认空数组）；superRefine 强制 A/B/C 分级：applicableLaw 只引 A 级、similarCases 只引 B 级案例、localGuidance 只引 C 级 local_guidance + 省级 jurisdiction，且全部引用可解析。
+- **回答生成**：SYSTEM_PROMPT_V2 增加 A/B/C 引用范围与“山东口径非全国统一规则/条件化表述/类案参考”约束；引擎层（ask.ts）：applicableLaw 等模型文本只保留 A 级引用（C 级引用剥离）、similarCases 只接受纯 B 级案例引用（否则整条丢弃）、localGuidance 由程序按证据确定性组装（collectLocalGuidance：检索池 + 话题补充检索，绝不硬编码 sourceId；地点明确非山东 → 排除；地点未知 → “如争议发生在山东，可参考：……；其他地区裁审口径可能不同。”；地点山东 → “山东地区裁审参考：……（仅适用于山东省，不属于全国统一法律规则）”）；boundaries 追加确定性地区差异说明；needs_clarification 的 legalFramework 同样带标注的山东参考与来源。
+- **证据标签**：buildEvidenceText 使用分级文字标签（A级·全国性法律规范 / B级·官方案例参考 / C级·地方裁审参考（仅限山东，非全国统一规则）/ C级·补充线索），分组 groupOf：local_guidance → local（地方裁审参考）。
+- **Web**：/laws 分区（国家法律法规与司法解释 A 级 / 地方裁审参考 C 级·仅山东省；C 级卡片标签“山东省 · C级 · 地方裁审参考 · 不属于全国统一法律依据”）；/cases 分区（全国性/其他地区与山东省官方案例，均带“B级 · 官方案例参考（类案参考）”标签，山东卡片“山东省官方案例”）；/ask 回答按 适用法律（A 级）/ 山东地区裁审参考（C 级）/ 相似官方案例（B 级）三段标题，来源卡片带分级与类型文字标签；空 localGuidance 不渲染；移动端无溢出（overflow-wrap 兜底）；/ask 仍 noindex、sitemap/robots 不变。
+- **测试（mock，全程不调用真实 DeepSeek/WSA/联网）**：shared 37/37（+7：local_guidance/标签字段、localGuidance 默认值、A/B/C 混置拒绝）；retrieval 33/33（+2：C 级不获 A 级权威加值与 A 级加值保留、山东竞业问题检索到合格 C 级山东指引）；case-corpus 14/14；api 48/48（+6：山东/北京/未知地点/红烧肉/矩阵分级不变量/A 级豁免检查；矩阵测试增加分级不变量与引用可解析断言）；web 32/32（+4：localGuidance 独立栏目与标题、来源卡片分级/类型标签、契约解析）；search 16/16。
+- **门禁**：content:validate PASS（36/219/1308/271）；retrieval:build OK（docs=1527）；retrieval.test 33/33；case-corpus 14/14；pnpm run check exit 0（lint/typecheck/build/test 全部通过）；git diff --check exit 0；密钥扫描通过（diff 中无任何密钥模式）；构建产物/临时文件扫描通过（无新增未跟踪产物；dist/.next/out/.index 均为 gitignore 构建产物）。
+- **规模（不变）**：laws=36、cases=219、provisions=1308、registry=271；19 主题每主题 ≥5 案例保持。
+- **安全**：未调用真实 DeepSeek（全部 mock）；未调用 WSA；未部署 CloudBase；未操作域名/ICP/WSA/小程序/付费资源；未修改 GitHub 可见性；未合并 main；未移动/删除 phase-7b-live-201 标签；无 force push；模型生成的 C 级引用不会进入 A 级来源（契约层拒绝）。
+- **文件变更**：packages/shared（constants/schemas/types 契约 + contracts.test.mjs +7）、packages/retrieval（catalog.ts 标签同源 + retrieval.test.mjs +2）、functions/api（evidence.ts 分组/标签/citation 字段、ask.ts 本地指引组装与 A/B/C 分区、prompt.ts 生成规则、api.test.mjs mock 升级 +6）、apps/web（present.ts、AskForm.tsx、laws/page.tsx、cases/page.tsx、globals.css、ask-normalize.test.mjs +4）、README.md、docs/ARCHITECTURE.md、docs/DECISIONS.md（ADR-031）、docs/CONTENT_REVIEW.md、docs/PROGRESS.md。无 content/ 变更、无 scripts/ 变更。
+- **提交**：feat: distinguish Shandong local guidance and case authority（1 个 commit，已推送 origin/feat/shandong-official-corpus）。

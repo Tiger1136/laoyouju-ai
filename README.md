@@ -14,7 +14,7 @@
 - `packages/retrieval`：内容 schema、加载、全局校验、n-gram/BM25 检索（确定性关键词/意图/话题加权），`MIN_RELEVANCE_SCORE` 用于决定是否发起联网搜索与话题兜底（不再用于“资料不足拒答”）；内容根定位带「与部署包 `dist/` 相邻的 `../content`」兜底；
 - `functions/api`：CloudBase HTTP 云函数（Node 原生 http + 原生 fetch），`POST /api/v1/ask` 执行「领域判定 → 检索（本地知识库 + 可选联网检索线索）→ 证据组织 → DeepSeek 生成 → 引用校验 → 结构化响应」，回答状态为三态 `answered`（八段结构与可核验来源）/ `needs_clarification`（法律框架+可能结论+需补事实+证据清单）/ `out_of_scope`（固定领域引导，不调用模型）；
 - `apps/web`：`/ask` 真实问答页（三态结果展示、限流/配置缺失/服务异常等稳定错误态、可核验官方来源分组展示与如实核验状态），`/ask` noindex 且不进入 sitemap；
-- 内容库：`content/laws/*.json`（34 部全国性规范）、`content/cases/*.json`（201 个官方案例，1276 条条文），`source_verified`。
+- 内容库：`content/laws/*.json`（36 部：34 部全国性规范 A 级 + 2 部山东地方裁审指引 C 级）、`content/cases/*.json`（219 个官方案例，1308 条条文），`source_verified`。
 
 **公网测试版（已部署，使用默认 CloudBase 测试域）**：
 - 网站：`https://laoyouju-demo-d0g2c7d8sb319ddf3-1476043251.tcloudbaseapp.com`
@@ -25,7 +25,14 @@
 
 **2026-08-28 更新**：Phase 7A 新版已部署公网测试版（34 部规范 / 53 个官方案例 / 1276 条条文 / 19 主题；三态回答 answered / needs_clarification / out_of_scope；联网搜索（WSA）仍未启用）。**真实 DeepSeek Smoke Test 已通过**：修复同步延迟根因（显式关闭思考模式 `thinking:{type:"disabled"}`、模型超时 45s→15s、输出上限 1300 tokens、调用前确定 needs_clarification 分支不再让模型双份输出）后，真实调用返回 **200 / 8.4s / answered / 5 项 A 级官方来源**（此前一次 502 约 20s 即思考模式+双份输出导致的真实延迟问题）。
 
-**仍未完成**：小程序端（Phase 1D 延后）、独立域名/备案/正式搜索收录（Phase 7）、内容专业复核；**Phase 7B 官方案例库 201/200 达成，19/19 主题与 12 个省级地区均已达标，检索/语料质量门禁已全绿**（retrieval 28/28、case-corpus 14/14、shared 30/30、search 16/16、api 42/42、web 29/29；`pnpm run check` exit 0，详见 docs/PROGRESS.md）——**部署按项目经理最终指令暂停，等待验收后执行**（线上现仍为 96 例版本，未验证 201 例版线上行为）。
+**2026-08-28 Phase 7C-1 来源分级整合（当前分支 feat/shandong-official-corpus，未合并、未部署）**：
+- **18 例山东官方案例与 2 份山东地方裁审指引已验收**；原 30～50 例目标不再作为本阶段硬门槛，剩余山东官方批次列入持续扩充 backlog（不再继续抓取/拆分/补写案例）；
+- **权威层级区分（A/B/C）已产品化**：A=全国性法律规范（法律/行政法规/司法解释等，法律结论的唯一依据）；B=官方案例（类案参考，无普遍约束力）；C=地方裁审指引（山东省高院/省人社厅会议纪要、诉讼指引，仅适用山东省，非全国统一规则）；
+- **API**：来源卡片新增 `sourceTypeLabel`/`sourceLevelLabel`/`topicIds`，回答新增可选 `localGuidance`（只放 C 级山东指引）；`applicableLaw` 只放 A 级，`similarCases` 只放 B 级案例（契约层+引擎层双重强制）；地点明确非山东时本地指引不出现，地点未知时使用条件化表述“如争议发生在山东，可参考……，其他地区裁审口径可能不同。”；
+- **Web**：/laws 分区展示“国家法律法规与司法解释（A 级）”与“地方裁审参考（C 级，仅山东省）”；/cases 区分山东省官方案例并标注发布机关/适用地域；/ask 国家法律、山东地方指引、官方案例使用不同标题与文字标签；/ask 保持 noindex，sitemap/robots 不变；
+- **门禁全绿**：content:validate（36/219/1308/271）、retrieval 33/33、case-corpus 14/14、shared 37/37、api 48/48、web 32/32、search 16/16，`pnpm run check` exit 0，`git diff --check` exit 0。
+
+**仍未完成**：小程序端（Phase 1D 延后）、独立域名/备案/正式搜索收录（Phase 7）、内容专业复核；当前分支未合并 main、未部署（线上仍为早期版本）。
 
 **下一阶段**：Phase 7 —— 小程序开发与搜索收录（独立域名/ICP 待办）。
 

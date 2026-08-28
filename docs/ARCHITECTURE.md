@@ -17,6 +17,23 @@
 - **functions/api**：CloudBase 云函数（Node.js/TypeScript）。唯一调用 DeepSeek 的入口，持有 DeepSeek Key（服务端环境变量）。
 
 
+## Phase 7C-1：来源分级与权威层级表达（A/B/C）
+
+- **来源分级语义**（全链路一致）：**A = 全国性法律规范**（法律/行政法规/部门规章/司法解释/仲裁程序规范，唯一法律依据）；**B = 官方指导/典型案例**（类案参考，无普遍约束力）；**C = 地方裁审指引/补充线索**（本阶段：山东省高院、省人社厅会议纪要/诉讼指引，仅适用于山东省，非全国统一规则；D = 仅线索）。内容库 validator 双向强制：local_guidance 必为 C 级 + 省级 jurisdiction；全国性规范必为 A 级 + 全国性 + 全国性机关。
+- **API/共享契约**（最小向后兼容扩展）：
+  - `SourceTypeSchema` 增加 `local_guidance`；来源分组 `SOURCE_GROUPS` 增加 `local`（地方裁审参考），分组顺序 law/judicial/local/case/supplement；
+  - `SourceCitation` 增加 `sourceTypeLabel`、`sourceLevelLabel`（文字标签，不只靠颜色）、`topicIds`（适用时）；新字段带默认值，旧载荷兼容；
+  - `Answer` 增加可选 `localGuidance`（只放 C 级山东地方裁审指引，空数组不显示栏目）；
+  - 契约层（`AskSuccessResponseSchema` superRefine）强制：`applicableLaw` 内所有 [S#] 引用必须解析为 A 级来源；`similarCases` 必须为 B 级案例；`localGuidance` 必须为 C 级 local_guidance 且 jurisdiction 为省级；引用编号必须能在 sources 解析。
+- **回答生成规则**（SYSTEM_PROMPT_V2）：优先依据 A 级全国法律；C 级山东指引不得写入 applicableLaw/similarCases（由系统确定性组装 localGuidance）；B 级案例仅作类案参考；禁止把山东口径描述为全国统一规则；问题地点为山东可用“山东地区裁审参考”；地点未知必须条件化“如争议发生在山东，可参考……，其他地区裁审口径可能不同。”；不得编造效力等级、适用地域、机关或网址。
+- **引擎层（functions/api）**：
+  - `buildEvidenceText` 证据行带分级文字标签（A级·全国性法律规范 / B级·官方案例参考 / C级·地方裁审参考或补充线索）与适用地域说明；
+  - 证据选取后确定性收集山东地方裁审指引（collectLocalGuidance：检索池 + 话题补充检索，绝不硬编码 sourceId；仅当地点未知或为山东时保留；地点明确非山东 → 排除）；
+  - `localGuidance` 由程序按证据确定性组装（每条含《标题》（条号）[S#] 与适用地域声明）；模型文本中的 C 级引用一律剥离（不得冒充国家法律依据）；`similarCases` 只接受纯 B 级案例引用，其余整条丢弃；
+  - needs_clarification 的 legalFramework 同样附带（带标注的）山东地方裁审参考与对应来源卡片；
+  - 返回 `coverage` 语义不变（全国性规则）；C 级来源绝不进入 A 级豁免/加值（BM25 `AUTHORITY_BOOST` 仅作用于 A 级 provision，测试锁定）。
+- **Web**：/laws 分区（国家法律法规与司法解释 A 级 / 地方裁审参考 C 级，山东卡片带“山东省 · C级 · 地方裁审参考 · 不属于全国统一法律依据”标签）；/cases 分区（山东省官方案例与全国性/其他地区案例，均带 B 级类案参考标签与发布机关/适用地域）；/ask 回答按 适用法律（A 级）/ 山东地区裁审参考（C 级）/ 相似官方案例（B 级）三段标题展示，来源卡片带分级/类型文字标签；空 localGuidance 不渲染栏目；移动端/桌面端均无溢出（overflow-wrap 全局兜底）；/ask 仍 noindex、不入 sitemap。
+
 ## Phase 7A：回答引擎 v2（LocalKnowledge + Search + 三态）
 
 - 回答状态（outcome）：`answered`（事实足够，八段结构）/ `needs_clarification`（事实不足，仍输出法律框架+可能结论+关键事实+证据清单）/ `out_of_scope`（非劳动争议，固定领域引导文案，不调用模型）。面向用户的"资料不足"泛化状态已废除。
@@ -26,9 +43,9 @@
 - 裸劳动词（工伤/年假/社保/加班/辞退怎么办 等，短查询 + 有劳动主题 + 非个案描述）：不调用模型，按话题从索引确定性检索真实 A 级规范并返回证据驱动的 needs_clarification（法律框架/可能结论/需补充事实/证据清单）。
 - 检索：先查本地权威知识库（话题过滤 + 全局混合，BM25）；`MIN_RELEVANCE_SCORE` 仅用于判断"是否需要联网搜索"，不再用于"资料不足拒答"；本地无 A 级命中时按话题兜底补充真实 A 级规范（保证 answered/needs_clarification 至少一项 A 类来源）。
 - 联网检索：SearchProvider 抽象（`packages/search`）；`TencentWSASearchProvider` 按腾讯云官方文档（https://cloud.tencent.com/document/product/1806/130615）实现：`POST https://api.wsa.cloud.tencent.com/SearchPro`，Header `Authorization: Bearer ${WSA_API_KEY}` + `Content-Type: application/json; charset=UTF-8`，Body `{ Query, Cnt }`（Cnt 仅取官方允许值 10/20/30/40/50）；响应取自 `Response.Pages`（元素为 JSON 字符串，逐项安全解析；映射 title/url/passage|content/date/site → title/url/snippet/publishedAt/siteName）。类型化错误（missing_config/timeout/rate_limited/upstream_status/malformed/network），每问题最多 2 次；结果经 URL/域名/时间/一致性校验后仅作 C 级补充线索，绝不当作完整法条；未配置 `WSA_API_KEY` 时 provider=undefined，本地知识库独立工作。
-- 证据组织：按来源分级（A>B>C）、效力（effective>amended>case）、相关性、时效性、地域适用性排序；保证至少一条 A 级规范；相似官方案例最多 3 条。
+- 证据组织：按来源分级（A>B>C）、效力（effective>amended>case）、相关性、时效性、地域适用性排序；保证至少一条 A 级规范；相似官方案例最多 3 条；山东地方裁审参考（C 级）单独收集并只在“地点未知/山东”时进入回答（见 Phase 7C-1）。
 - 生成：DeepSeek 只依据本次 `[S#]` 证据；服务端逐项校验 citation（**出现任意未在本证据集内的 [S#] → 引用异常，返回证据驱动的 needs_clarification**，不再"删号保留未经支持的断言"；带"第X条"但无有效引用的结论段同样拒绝）；核心法律结论必须至少一项 A 类来源。
-- 响应：`topicsId` 数组 + 分组来源（法律法规/司法解释与仲裁程序/官方案例/补充参考=law/judicial/case/supplement）。
+- 响应：`topicIds` 数组 + 分组来源（国家法律法规/司法解释与仲裁程序/地方裁审参考/官方案例/补充参考=law/judicial/local/case/supplement，Phase 7C-1 起）。
 
 ## 内容与来源登记（Phase 7A）
 
@@ -78,7 +95,7 @@ functions/api：DeepSeek 生成（仅基于证据；要求输出结构化 JSON�
 - 环境变量：`DEEPSEEK_API_KEY`（仅服务端）、`DEEPSEEK_BASE_URL`（默认 https://api.deepseek.com）、`DEEPSEEK_MODEL`（默认 deepseek-v4-flash）；`ALLOWED_ORIGINS` / `WEB_ALLOWED_ORIGIN`（CORS 白名单）。
 - 使用 DeepSeek OpenAI-compatible `/chat/completions`，原生 `fetch`，不引入 SDK；请求 `response_format: json_object`、`max_tokens` 上限、超时；单次调用、不自动重试（避免重复扣费）。
 - 缺 API Key → 503 `SERVICE_NOT_READY`；上游 429 → 503 `RATE_LIMITED`；超时/5xx → 502 `UPSTREAM_ERROR`（均为稳定、安全的错误响应，不泄露内部细节）。
-- 引用校验：模型引用的每个 `[S#]` 必须属于本次检索证据；未知引用丢弃；无有效引用或输出畸形 → 安全降级为 `insufficient`。
+- 引用校验：模型引用的每个 `[S#]` 必须属于本次检索证据；未知引用丢弃；无有效引用或输出畸形 → 安全降级为证据驱动 `needs_clarification`（Phase 7A 起无 `insufficient`）；Phase 7C-1 起按 A/B/C 分级分区校验（见上）。
 
 ## DeepSeek Key 的安全边界
 

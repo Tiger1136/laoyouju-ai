@@ -149,7 +149,7 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
       <h3>覆盖范围说明</h3>
       <p className="answer-coverage">{COVERAGE_NOTE}</p>
       <p className="answer-coverage-source">
-        来源分级：{data.sources.some((s) => s.sourceLevel === "A") ? "含 A 级（全国性规范）来源" : "详见来源列表"} · 案例为 B 级参考
+        来源分级：A 级·全国性法律依据 / B 级·官方案例参考（类案参考，无普遍约束力） / C 级·地方裁审参考（仅山东省，非全国统一规则）；每张来源卡片均带分级文字标签。
       </p>
 
       {data.sources.length > 0 && (
@@ -272,7 +272,7 @@ function CitationItem({ source }: { source: SourceCitation }) {
       </a>
       {v.locator ? <span className="source-locator">（{v.locator}）</span> : null}
       <span className="source-meta">
-        {v.authority} · {v.jurisdiction} · {v.validityStatusLabel} · {v.reviewLabel}
+        {v.sourceLevelLabel} · {v.sourceTypeLabel} · {v.authority} · {v.jurisdiction} · {v.validityStatusLabel} · {v.reviewLabel}
       </span>
       {v.excerpt ? <p className="source-excerpt">{v.excerpt}</p> : null}
       <p className="source-link">

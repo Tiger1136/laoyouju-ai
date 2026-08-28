@@ -63,6 +63,60 @@ function answeredFixture() {
   };
 }
 
+const SOURCE_C_SD = {
+  citationRef: "S2",
+  sourceId: "sd-ldrs-shenli-jiyao-2019",
+  title: "山东省高级人民法院、山东省人力资源和社会保障厅关于审理劳动人事争议案件若干问题会议纪要（2019）",
+  sourceType: "local_guidance",
+  sourceTypeLabel: "地方裁审指引（省级法院/人社部门）",
+  sourceLevel: "C",
+  sourceLevelLabel: "C级 · 地方裁审参考",
+  group: "local",
+  issuingAuthority: "山东省高级人民法院、山东省人力资源和社会保障厅",
+  jurisdiction: "山东省",
+  locator: "五、关于未约定经济补偿的竞业限制协议的效力问题",
+  officialUrl: "https://www.sdcourt.gov.cn/lypyfy/404120/404053/8497525/index.html",
+  validityStatus: "effective",
+  publishedDate: null,
+  retrievedAt: "2026-08-28",
+  excerpt: "（测试）山东省关于未约定经济补偿的竞业限制协议效力的裁审口径摘录。",
+  reviewStatus: "source_verified",
+  verificationStatus: "official_source_verified",
+  topicIds: ["noncompete-confidentiality"],
+};
+
+/** answered fixture 支持注入 localGuidance 与额外来源（用于分级展示测试）。 */
+function answeredWithLocalGuidanceFixture() {
+  const f = answeredFixture();
+  f.answer.localGuidance = [
+    "如争议发生在山东，可参考：《山东省高级人民法院、山东省人力资源和社会保障厅关于审理劳动人事争议案件若干问题会议纪要（2019）》（五、关于未约定经济补偿的竞业限制协议的效力问题）[S2]：山东裁审口径摘录；其他地区裁审口径可能不同。",
+  ];
+  f.answer.similarCases = ["（测试）参考案例 [S3]"];
+  f.sources = [
+    SOURCE_A,
+    SOURCE_C_SD,
+    {
+      citationRef: "S3",
+      sourceId: "struct-test-case-b2",
+      title: "（测试）山东省高级人民法院典型案例",
+      sourceType: "case",
+      sourceLevel: "B",
+      group: "case",
+      issuingAuthority: "山东省高级人民法院",
+      jurisdiction: "山东省",
+      locator: "案例要旨",
+      officialUrl: "https://www.sdcourt.gov.cn/struct-test/case",
+      validityStatus: "not_applicable",
+      publishedDate: "2024-04-29",
+      retrievedAt: "2026-08-28",
+      excerpt: "（测试）案例要旨摘录",
+      reviewStatus: "source_verified",
+      verificationStatus: "official_source_verified",
+    },
+  ];
+  return f;
+}
+
 function clarificationFixture() {
   return {
     ok: true,
@@ -107,7 +161,8 @@ test("answered：合规响应归一化为 answered，八段字段映射正确", 
   assert.equal(state.data?.outcome, "answered");
   const sections = answerSections(state.data);
   const keys = sections.map((s) => s.key);
-  assert.deepEqual(keys, ["issueIdentification", "preliminaryConclusion", "applicableLaw", "similarCases", "nextSteps", "evidenceChecklist", "factsToConfirm", "boundaries"]);
+  assert.deepEqual(keys, ["issueIdentification", "preliminaryConclusion", "applicableLaw", "localGuidance", "similarCases", "nextSteps", "evidenceChecklist", "factsToConfirm", "boundaries"]);
+  assert.equal(sections[3].items, null, "无 localGuidance 时不显示空栏目（items 为 null）");
   assert.equal(sections[0].items[0], "（测试）问题识别：违法解除劳动合同。");
   assert.equal(sections[1].items[0], "（测试）初步结论：可能符合二倍赔偿金规则。");
   assert.deepEqual(sections[2].items, ["《中华人民共和国劳动合同法》第八十七条 [S1]"]);
@@ -190,16 +245,23 @@ test("source_verified 显示“已核对官方来源，尚待专业复核”，�
   assert.notEqual(v.reviewLabel, "已通过专业复核");
 });
 
-test("来源按 法律法规/司法解释与仲裁程序/官方案例/补充检索线索 分组", () => {
+test("来源按 国家法律/司法解释/地方裁审参考/官方案例/补充线索 分组（C 级地方指引单独分组）", () => {
   const groups = groupSources([
     SOURCE_A,
     { ...SOURCE_A, citationRef: "S2", sourceType: "judicial_interpretation", sourceLevel: "A", group: "judicial" },
-    { ...SOURCE_A, citationRef: "S3", sourceType: "case", sourceLevel: "B", group: "case" },
-    { ...SOURCE_A, citationRef: "S4", sourceType: "policy", sourceLevel: "C", group: "supplement", reviewStatus: "draft" },
+    SOURCE_C_SD,
+    { ...SOURCE_A, citationRef: "S4", sourceType: "case", sourceLevel: "B", group: "case" },
+    { ...SOURCE_A, citationRef: "S5", sourceType: "policy", sourceLevel: "C", group: "supplement", reviewStatus: "draft" },
   ]);
-  assert.deepEqual(groups.map((g) => g.label), ["法律法规", "司法解释与仲裁程序", "官方案例", "补充检索线索"]);
-  assert.equal(groups[0].items.length, 1);
-  assert.equal(groups[3].items[0].citationRef, "S4");
+  assert.deepEqual(groups.map((g) => g.label), [
+    "国家法律法规与司法解释（A 级）",
+    "司法解释与仲裁程序（A 级）",
+    "地方裁审参考（C 级，仅山东省）",
+    "官方案例（B 级，类案参考）",
+    "补充检索线索（C 级，待核验）",
+  ]);
+  assert.equal(groups[2].items[0].citationRef, "S2");
+  assert.equal(groups[2].items[0].sourceLevel, "C");
 });
 
 test("合规成功响应在契约层面通过（AskSuccessResponseSchema 派生字段可枚举）", async () => {
@@ -208,4 +270,49 @@ test("合规成功响应在契约层面通过（AskSuccessResponseSchema 派生�
   assert.equal(AskSuccessResponseSchema.safeParse(answeredFixture()).success, true);
   assert.equal(AskSuccessResponseSchema.safeParse(clarificationFixture()).success, true);
   assert.equal(AskSuccessResponseSchema.safeParse(outOfScopeFixture()).success, true);
+});
+// ---------- Phase 7C-1：来源层级展示（A/B/C 文字标签、localGuidance 独立栏目） ----------
+
+test("localGuidance 作为独立栏目出现在 适用法律 与 相似官方案例 之间（含 C 级层级标题）", () => {
+  const data = normalizeAskResponse(200, answeredWithLocalGuidanceFixture()).data;
+  const sections = answerSections(data);
+  const keys = sections.map((s) => s.key);
+  assert.deepEqual(keys, ["issueIdentification", "preliminaryConclusion", "applicableLaw", "localGuidance", "similarCases", "nextSteps", "evidenceChecklist", "factsToConfirm", "boundaries"]);
+  const local = sections.find((s) => s.key === "localGuidance");
+  assert.ok(local.heading.includes("山东地区裁审参考"), "必须是山东地区裁审参考栏目");
+  assert.ok(local.heading.includes("C 级"), "必须标注 C 级");
+  assert.ok(local.heading.includes("仅适用于山东省"), "必须明确仅适用山东省");
+  assert.ok(local.items[0].includes("如争议发生在山东"), "未知地点必须条件化表述");
+  assert.ok(local.items[0].includes("其他地区裁审口径可能不同"), "必须声明地区差异");
+  // 无 localGuidance 时不渲染空栏目
+  const empty = answerSections(normalizeAskResponse(200, answeredFixture()).data);
+  assert.equal(empty.find((s) => s.key === "localGuidance").items, null);
+});
+
+test("来源卡片带分级/类型文字标签（sourceLevelLabel/sourceTypeLabel）", () => {
+  const v = citationView(SOURCE_C_SD);
+  assert.equal(v.sourceLevelLabel, "C级 · 地方裁审参考");
+  assert.equal(v.sourceTypeLabel, "地方裁审指引（省级法院/人社部门）");
+  assert.equal(v.jurisdiction, "山东省");
+  // 旧载荷没有标签字段时按共享标签映射回退（不得空白）
+  const v2 = citationView(SOURCE_A);
+  assert.equal(v2.sourceLevelLabel, "A级 · 全国性法律规范");
+  assert.equal(v2.sourceTypeLabel, "法律");
+});
+
+test("localGuidance 引用可在 sources 中解析且来源为 C 级地方指引（契约级）", async () => {
+  const { AskSuccessResponseSchema } = await import("@laoyouju/shared");
+  const parsed = AskSuccessResponseSchema.safeParse(answeredWithLocalGuidanceFixture());
+  assert.equal(parsed.success, true, JSON.stringify(parsed.error?.issues ?? null));
+  const data = parsed.data;
+  const refToSource = new Map(data.sources.map((s) => [s.citationRef, s]));
+  for (const item of data.answer.localGuidance) {
+    for (const m of item.matchAll(/\[S(\d+)\]/g)) {
+      const s = refToSource.get("S" + m[1]);
+      assert.ok(s, "引用必须可解析");
+      assert.equal(s.sourceLevel, "C");
+      assert.equal(s.sourceType, "local_guidance");
+      assert.equal(s.jurisdiction, "山东省");
+    }
+  }
 });

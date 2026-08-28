@@ -1,8 +1,11 @@
 import {
   AI_NOTICE,
   API_VERSION,
+  isProvincialJurisdiction,
   OUT_OF_SCOPE_MESSAGE,
   parseAskSuccessResponse,
+  SOURCE_LEVEL_LABELS,
+  SOURCE_TYPE_LABELS,
   type Answer,
   type AskSuccessResponse,
   type Clarification,
@@ -51,6 +54,25 @@ export const MAX_OUTPUT_TOKENS = 1300;
 export const DEFAULT_TIMEOUT_MS = 15_000;
 /** 每个问题最多调用两次联网搜索（产品约束）。 */
 export const MAX_SEARCHES_PER_QUESTION = 2;
+
+/** 回答中最多携带的山东地方裁审参考条数（C 级，仅作为地区口径补充）。 */
+export const MAX_LOCAL_GUIDANCE = 2;
+
+/** 山东省（含省内主要城市）判定：用于地方裁审指引的适用性门控。 */
+const SHANDONG_LOCATION_TERMS: readonly string[] = [
+  "山东", "济南", "青岛", "烟台", "潍坊", "淄博", "威海", "济宁", "泰安",
+  "临沂", "德州", "聊城", "滨州", "菏泽", "东营", "日照", "枣庄", "莱芜",
+];
+
+/** 判断提取到的工作地点是否属于山东省（未提取地点返回 false）。 */
+export function isShandongLocation(location: string | undefined): boolean {
+  if (location === undefined || location === "") {
+    return false;
+  }
+  return SHANDONG_LOCATION_TERMS.some(
+    (t) => location === t || location.includes(t) || t.includes(location),
+  );
+}
 
 const CITATION_RE = /\[S([1-9][0-9]{0,2})\]/g;
 
@@ -292,9 +314,17 @@ function fallbackClarification(
     }
   }
   const aItems = items.filter((e) => e.chunk.sourceLevel === "A").slice(0, 6);
+  // Phase 7C-1：澄清路径同样携带山东地方裁审参考（C 级，仅作地区口径补充；地点明确非山东时排除）。
+  const clarLocation = extractFacts(question).location;
+  const clarGuidance = buildClarificationGuidance(ctx, inferred, items, clarLocation);
   const legalFramework = aItems.length > 0
-    ? aItems.map((e) => `《${e.chunk.title}》${e.chunk.locator ? `（${e.chunk.locator}）` : ""} [${e.ref}]：${clip(e.chunk.text, 160)}`)
-    : ["该问题属于劳动争议范畴；请补充问题背景（涉及劳动合同、工资、社保、工伤或劳动仲裁等具体事项）后重新提问。"];
+    ? [
+        ...aItems.map((e) => `《${e.chunk.title}》${e.chunk.locator ? `（${e.chunk.locator}）` : ""} [${e.ref}]：${clip(e.chunk.text, 160)}`),
+        ...clarGuidance.items,
+      ]
+    : clarGuidance.items.length > 0
+      ? clarGuidance.items
+      : ["该问题属于劳动争议范畴；请补充问题背景（涉及劳动合同、工资、社保、工伤或劳动仲裁等具体事项）后重新提问。"];
   const possibleConclusions = possibleConclusionsFor(inferred);
   const requirements = missing.length > 0 ? missing : missingRequiredFacts(inferred, emptyFacts());
   const keyFactsNeeded = requirements.length > 0
@@ -320,7 +350,7 @@ function fallbackClarification(
     answer: null,
     clarification,
     outOfScope: null,
-    sources: aItems.map((e) => buildCitation(e, meta.get(e.chunk.docId))),
+    sources: [...aItems.map((e) => buildCitation(e, meta.get(e.chunk.docId))), ...clarGuidance.sources],
   };
   const parsed = parseAskSuccessResponse(response);
   return parsed.success ? parsed.data : response;
@@ -388,6 +418,154 @@ export function retrieveByTopic(index: BuiltIndex, topics: readonly unknown[], p
   return out.slice(0, MAX_EVIDENCE);
 }
 
+/**
+ * 判断证据块是否为“内容库地方裁审指引”（C 级 + 省级 jurisdiction + sourceType=local_guidance）。
+ * 注意：联网检索线索也是 C 级（补充线索），但不是地方裁审指引，不进入 localGuidance。
+ */
+export function isLocalGuidanceChunk(c: QueryResult, sourceMeta: Map<string, SourceMeta>): boolean {
+  return (
+    c.sourceLevel === "C" &&
+    isProvincialJurisdiction(c.jurisdiction) &&
+    sourceMeta.get(c.docId)?.sourceType === "local_guidance"
+  );
+}
+
+/**
+ * 收集本次证据中的山东地方裁审参考（确定性，最多 MAX_LOCAL_GUIDANCE 条）：
+ * 1) 优先取检索池（hits）中合格 C 级地方指引（score ≥ MIN_RELEVANCE_SCORE，防止弱相关进入）；
+ * 2) 检索池没有时，按话题补充检索（TOPIC_QUERY_MAP + 山东裁审词，绝不硬编码 sourceId）。
+ * 仅供程序组装 localGuidance / 澄清框架使用；不进入 applicableLaw。
+ */
+export function collectLocalGuidance(
+  index: BuiltIndex,
+  topics: readonly TopicId[],
+  pool: readonly QueryResult[],
+  sourceMeta: Map<string, SourceMeta>,
+): QueryResult[] {
+  const seen = new Map<string, QueryResult>();
+  for (const h of pool) {
+    if (isLocalGuidanceChunk(h, sourceMeta) && h.score >= MIN_RELEVANCE_SCORE) {
+      seen.set(h.docId + "\u0000" + h.chunkId, h);
+    }
+  }
+  if (seen.size === 0 && topics.length > 0) {
+    for (const t of topics.slice(0, 4)) {
+      const query = TOPIC_QUERY_MAP[t];
+      if (query === undefined) {
+        continue;
+      }
+      for (const rr of queryIndex(index, query + " 山东省 地方裁审", 6, t)) {
+        if (isLocalGuidanceChunk(rr, sourceMeta) && rr.score >= MIN_RELEVANCE_SCORE) {
+          seen.set(rr.docId + "\u0000" + rr.chunkId, rr);
+        }
+      }
+    }
+  }
+  return [...seen.values()]
+    .sort((a, b) => b.score - a.score || a.chunkId.localeCompare(b.chunkId) || a.docId.localeCompare(b.docId))
+    .slice(0, MAX_LOCAL_GUIDANCE);
+}
+
+/** 单独一条 localGuidance 条目的确定性文案（含适用地域说明；地点未知使用条件化表述）。 */
+export function guidanceItem(c: QueryResult, ref: string, location: string | undefined): string {
+  const isSd = isShandongLocation(location);
+  const prefix = isSd ? "山东地区裁审参考：" : "如争议发生在山东，可参考：";
+  const suffix = isSd ? "（仅适用于山东省，不属于全国统一法律规则）。" : "；其他地区裁审口径可能不同。";
+  const locator = c.locator ? "（" + c.locator + "）" : "";
+  return prefix + "《" + c.title + "》" + locator + "[" + ref + "]：" + clip(c.text, 200) + suffix;
+}
+
+/** 组装 answered 的 localGuidance 字段（地点明确为非山东时为空数组）。 */
+export function buildLocalGuidanceItems(
+  chunks: readonly QueryResult[],
+  evidence: readonly EvidenceItem[],
+  location: string | undefined,
+): string[] {
+  if (location !== undefined && !isShandongLocation(location)) {
+    return [];
+  }
+  const refByKey = new Map(
+    evidence.map((e) => [e.chunk.docId + "\u0000" + e.chunk.chunkId, e.ref]),
+  );
+  const items: string[] = [];
+  for (const g of chunks) {
+    const ref = refByKey.get(g.docId + "\u0000" + g.chunkId);
+    if (ref !== undefined) {
+      items.push(guidanceItem(g, ref, location));
+    }
+    if (items.length >= MAX_LOCAL_GUIDANCE) {
+      break;
+    }
+  }
+  return items;
+}
+
+/** 澄清（needs_clarification）路径附加的山东地方裁审参考（仅当地点未知或为山东时）。 */
+function buildClarificationGuidance(
+  ctx: AskContext,
+  topics: readonly TopicId[],
+  items: readonly EvidenceItem[],
+  location: string | undefined,
+): { items: string[]; sources: SourceCitation[] } {
+  if (location !== undefined && !isShandongLocation(location)) {
+    return { items: [], sources: [] };
+  }
+  const refByKey = new Map(
+    items.map((e) => [e.chunk.docId + "\u0000" + e.chunk.chunkId, e.ref]),
+  );
+  const guides = collectLocalGuidance(
+    ctx.index,
+    topics,
+    items.map((e) => e.chunk),
+    ctx.sourceMeta,
+  );
+  const itemsOut: string[] = [];
+  const sources: SourceCitation[] = [];
+  let next = items.length + 1;
+  for (const g of guides) {
+    const key = g.docId + "\u0000" + g.chunkId;
+    const ref = refByKey.get(key) ?? "S" + next++;
+    itemsOut.push(guidanceItem(g, ref, location));
+    sources.push(buildCitation({ chunk: g, ref }, ctx.sourceMeta.get(g.docId)));
+  }
+  return { items: itemsOut, sources };
+}
+
+/** similarCases 分区：只接受“纯 B 级案例引用”的条目；引用非案例/非 B 级来源的条目整条丢弃。 */
+function cleanSimilarCases(
+  items: string[],
+  valid: ReadonlySet<string>,
+  levelByRef: ReadonlyMap<string, string>,
+  isCaseByRef: ReadonlyMap<string, boolean>,
+): string[] {
+  const out: string[] = [];
+  for (const raw of items) {
+    const t = sanitizeRefs(raw, valid).trim();
+    if (t.length === 0) {
+      continue;
+    }
+    const refs = extractCitationRefs([t]);
+    if (refs.length === 0) {
+      out.push(t); // 占位文案（如“未找到高度相似官方案例”）
+      continue;
+    }
+    if (refs.every((ref) => levelByRef.get(ref) === "B" && isCaseByRef.get(ref) === true)) {
+      out.push(t);
+    }
+    if (out.length >= 10) {
+      break;
+    }
+  }
+  return out;
+}
+
+/** 携带山东地方裁审参考时追加到 boundaries 的确定性说明。 */
+function localGuidanceNotice(location: string | undefined): string {
+  return isShandongLocation(location)
+    ? "山东地区裁审参考仅适用于山东省的裁审实践，不属于全国统一法律规则；其他地区裁审口径可能不同。"
+    : "如争议发生在山东，可参考山东地区裁审口径；其他地区裁审口径可能不同。";
+}
+
 interface EvidenceItem {
   chunk: QueryResult;
   ref: string;
@@ -413,7 +591,9 @@ function buildCitation(item: EvidenceItem, m: SourceMeta | undefined): SourceCit
     sourceId: item.chunk.docId,
     title: item.chunk.title,
     sourceType: meta.sourceType,
+    sourceTypeLabel: SOURCE_TYPE_LABELS[meta.sourceType] ?? meta.sourceType,
     sourceLevel: meta.sourceLevel,
+    sourceLevelLabel: SOURCE_LEVEL_LABELS[meta.sourceLevel] ?? meta.sourceLevel,
     group: meta.sourceGroup,
     issuingAuthority: meta.issuingAuthority || item.chunk.title,
     jurisdiction: meta.jurisdiction,
@@ -425,6 +605,7 @@ function buildCitation(item: EvidenceItem, m: SourceMeta | undefined): SourceCit
     excerpt: clip(item.chunk.text, 300),
     reviewStatus: meta.reviewStatus,
     verificationStatus: meta.verificationStatus,
+    topicIds: (item.chunk.topicIds ?? []).slice(0, 10) as TopicId[],
   };
 }
 
@@ -654,6 +835,24 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   }
   evidence = evidence.slice(0, MAX_EVIDENCE);
 
+  // 6.2 Phase 7C-1：山东地方裁审参考（C 级）——仅当提问地点为山东（或地点未知）时收集；
+  //     地点明确为其他省份时不得出现（避免把山东口径描述为当地/全国规则）。
+  const askLocation = facts.location;
+  const localGuidanceChunks =
+    askLocation === undefined || isShandongLocation(askLocation)
+      ? collectLocalGuidance(ctx.index, deco.topicIds, hits, ctx.sourceMeta)
+      : [];
+  if (localGuidanceChunks.length > 0) {
+    const existing = new Set(evidence.map((e) => e.chunk.docId + "\u0000" + e.chunk.chunkId));
+    for (const g of localGuidanceChunks) {
+      const key = g.docId + "\u0000" + g.chunkId;
+      if (!existing.has(key)) {
+        evidence.push({ chunk: g, ref: "S" + (evidence.length + 1) });
+        existing.add(key);
+      }
+    }
+  }
+
   // 6.5 调用前确定分支：事实不足（具体个案 + 缺关键事实）→ 不调用 DeepSeek，
   //     直接使用证据驱动 clarification 生成路径（法律框架来自真实 A 级证据、可能结论来自话题框架、
   //     关键事实与证据清单来自确定性事实提取；绝不生成无意义的双份模型输出）。
@@ -682,6 +881,11 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
     "- 缺失关键事实：" + missingLine,
     "- 联网检索：" + searchLine,
     "- 证据数量：" + evidence.length + "（A级 " + aCount + "；官方案例 " + caseCount + "）",
+    "- 山东地方裁审指引（C级）：" + (localGuidanceChunks.length > 0
+      ? "证据包含山东地方裁审参考（仅作为山东地区裁审口径参考，不属于全国统一规则）"
+      : askLocation !== undefined && !isShandongLocation(askLocation)
+        ? "提问地点为" + askLocation + "，山东地方裁审指引不作为依据"
+        : "未检索到山东地方裁审参考"),
   ];
 
   // 7. 调用模型（单次，不自动重试；成功返回 JSON 结构）。
@@ -732,15 +936,28 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
     return { status: 200, errorCode: null, payload: fallbackClarification(requestId, question, deco.topicIds, evidence, missing, ctx.sourceMeta, ctx) };
   }
 
+  // 11. Phase 7C-1 A/B/C 分区与声明清洗：
+  //     - applicableLaw 等模型文本只保留 A 级引用（C 级引用一律剥离，不得冒充国家法律依据）；
+  //     - similarCases 只接受 B 级案例引用（引用非 B 级案例的条目整条丢弃）；
+  //     - localGuidance 由系统按证据确定性组装（见 6.2，不依赖模型输出）。
+  const levelByRef = new Map<string, string>();
+  const isCaseByRef = new Map<string, boolean>();
+  for (const e of evidence) {
+    levelByRef.set(e.ref, e.chunk.sourceLevel);
+    isCaseByRef.set(e.ref, e.chunk.kind === "case");
+  }
+  const keepOnlyA = (t: string): string =>
+    t.replace(CITATION_RE, (m, n: string) => (levelByRef.get(`S${n}`) === "A" ? m : ""));
+
   const answer = {
-    issueIdentification: sanitizeRefs(parsed.issueIdentification, validRefs).trim() || (evidence[0]?.chunk.title ?? ""),
-    preliminaryConclusion: sanitizeRefs(parsed.preliminaryConclusion, validRefs).trim(),
-    applicableLaw: cleanList(parsed.applicableLaw, validRefs),
-    similarCases: cleanList(parsed.similarCases, validRefs),
-    nextSteps: cleanList(parsed.nextSteps, validRefs),
-    evidenceChecklist: cleanList(parsed.evidenceChecklist, validRefs),
-    factsToConfirm: cleanList(parsed.factsToConfirm, validRefs),
-    boundaries: cleanList(parsed.boundaries, validRefs),
+    issueIdentification: keepOnlyA(sanitizeRefs(parsed.issueIdentification, validRefs)).trim() || (evidence[0]?.chunk.title ?? ""),
+    preliminaryConclusion: keepOnlyA(sanitizeRefs(parsed.preliminaryConclusion, validRefs)).trim(),
+    applicableLaw: cleanList(parsed.applicableLaw, validRefs).map(keepOnlyA),
+    similarCases: cleanSimilarCases(parsed.similarCases, validRefs, levelByRef, isCaseByRef),
+    nextSteps: cleanList(parsed.nextSteps, validRefs).map(keepOnlyA),
+    evidenceChecklist: cleanList(parsed.evidenceChecklist, validRefs).map(keepOnlyA),
+    factsToConfirm: cleanList(parsed.factsToConfirm, validRefs).map(keepOnlyA),
+    boundaries: cleanList(parsed.boundaries, validRefs).map(keepOnlyA),
   };
 
   const guardedApplicableLaw = answer.applicableLaw.filter(
@@ -754,8 +971,10 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   }
 
   // 10. 引用集合 → citations（含元数据），并保证至少一项 A 级来源（核心法律结论要求）。
+  //     Phase 7C-1：localGuidance 的引用也纳入来源卡片（C 级地方指引单独展示）。
+  const localGuidanceItems = buildLocalGuidanceItems(localGuidanceChunks, evidence, askLocation);
   const citedRefs = new Set([
-    ...extractCitationRefs([...guardedApplicableLaw, ...answer.similarCases]),
+    ...extractCitationRefs([...guardedApplicableLaw, ...answer.similarCases, ...localGuidanceItems]),
   ]);
   const citations: SourceCitation[] = [];
   for (const e of evidence) {
@@ -777,17 +996,23 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   //     到达此处必然为 answered。
   const topicIds = ([...new Set([...deco.topicIds, ...evidence.flatMap((e) => e.chunk.topicIds)])] as TopicId[]).slice(0, 10);
 
+  const baseBoundaries = answer.boundaries.length > 0
+    ? answer.boundaries
+    : ["本回答基于已收录的公开资料生成，不是律师意见；不预测胜诉率；不保证个案结果；地方政策与完整案情可能影响结论；请以官方发布的法律文本为准并核验来源。"];
+  const boundariesOut = [...baseBoundaries];
+  if (localGuidanceItems.length > 0 && !boundariesOut.some((b) => b.includes("山东地区裁审") || b.includes("如争议发生在山东"))) {
+    boundariesOut.push(localGuidanceNotice(askLocation));
+  }
   const finalAnswer: Answer = {
     issueIdentification: answer.issueIdentification || "劳动争议问题",
     preliminaryConclusion: answer.preliminaryConclusion || "初步结论：请见相关依据。",
     applicableLaw: guardedApplicableLaw,
+    localGuidance: localGuidanceItems,
     similarCases: answer.similarCases.length > 0 ? answer.similarCases : ["未找到可核验的高度相似官方案例。"],
     nextSteps: answer.nextSteps.length > 0 ? answer.nextSteps : ["建议先收集并整理证据材料（工资流水、考勤、解除通知等）。"],
     evidenceChecklist: answer.evidenceChecklist.length > 0 ? answer.evidenceChecklist : ["劳动合同、工资流水、考勤记录、解除/辞退证明"],
     factsToConfirm: dedupe([...missing.map((m) => m.description), ...answer.factsToConfirm]).slice(0, 8),
-    boundaries: answer.boundaries.length > 0
-      ? answer.boundaries
-      : ["本回答基于已收录的公开资料生成，不是律师意见；不预测胜诉率；不保证个案结果；地方政策与完整案情可能影响结论；请以官方发布的法律文本为准并核验来源。"],
+    boundaries: boundariesOut,
     aiNotice: AI_NOTICE,
   };
   const response: AskSuccessResponse = {

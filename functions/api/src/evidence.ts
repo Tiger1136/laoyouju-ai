@@ -24,10 +24,19 @@ export interface SourceMeta {
   title: string;
 }
 
-/** Web 展示分组：法律法规 / 司法解释与仲裁程序 / 官方案例 / 补充参考。 */
+/**
+ * Web 展示分组：法律法规 / 司法解释与仲裁程序 / 地方裁审参考（C 级地方指引） / 官方案例 / 补充参考。
+ * Phase 7C-1：地方裁审指引（local_guidance）单独归入 "local" 组，绝不与全国性法律法规混同。
+ */
 export function groupOf(sourceType: string, level: SourceLevel): SourceGroup {
-  if (level === "C" || level === "D") {
+  if (sourceType === "local_guidance") {
+    return "local";
+  }
+  if (level === "D") {
     return "supplement";
+  }
+  if (level === "C") {
+    return "supplement"; // C 级补充线索（联网检索线索等；地方指引已被 local_guidance 分支捕获）
   }
   if (sourceType === "case") {
     return "case";
@@ -45,7 +54,7 @@ export function buildSourceMeta(content: LoadedContent): Map<string, SourceMeta>
     map.set(law.sourceId, {
       sourceType: law.sourceType as SourceType,
       sourceLevel: law.authorityLevel as SourceLevel,
-      sourceGroup: groupOf(law.sourceType as SourceType, law.authorityLevel as SourceLevel),
+      sourceGroup: groupOf(law.sourceType, law.authorityLevel),
       issuingAuthority: law.issuingAuthority,
       jurisdiction: law.jurisdiction,
       validityStatus: law.validityStatus as ValidityStatus,
@@ -129,18 +138,39 @@ export function clip(text: string, max = MAX_EVIDENCE_CHARS): string {
   return t.length > max ? t.slice(0, max) + "…" : t;
 }
 
-/** 生成发送给模型的证据文本（编号 [S1]…[Sn]，含分级/效力/地区元数据）。 */
+/** 生成发送给模型的证据文本（编号 [S1]…[Sn]，含分级/效力/地区元数据；分级标签为文字标签，不含歧义）。 */
 export function buildEvidenceText(hits: QueryResult[], sourceMeta: Map<string, SourceMeta>): string {
   return hits
     .map((c, i) => {
       const meta = sourceMeta.get(c.docId);
-      const levelLabel = c.sourceLevel === "A" ? "A级·规范" : c.sourceLevel === "B" ? "B级·官方案例" : "C级·补充线索";
-      const validityLabel = c.validityStatus === "effective" ? "现行有效" : c.validityStatus === "amended" ? "现行有效（有修正）" : c.kind === "case" ? "案例参考" : c.validityStatus;
+      const levelLabel = evidenceLevelLabel(c, meta);
+      const scopeNote =
+        c.sourceLevel === "C" && meta?.sourceType === "local_guidance"
+          ? "（地方裁审口径，仅适用于山东省，不是全国统一规则）"
+          : c.sourceLevel === "B"
+            ? "（案例仅供类案参考，不具有普遍约束力）"
+            : "";
+      const validityLabel =
+        c.validityStatus === "effective" ? "现行有效" : c.validityStatus === "amended" ? "现行有效（有修正）" : c.kind === "case" ? "案例参考" : c.validityStatus;
       const authority = meta?.issuingAuthority ?? "";
       const jurisdiction = c.jurisdiction || "全国性";
-      return `[S${i + 1}] 《${c.title}》${c.locator ? `（${c.locator}）` : ""}｜${levelLabel}｜${validityLabel}｜发布机关：${authority}｜适用地区：${jurisdiction}｜${c.kind === "case" ? "案例要旨：" : "条文："}${clip(c.text)}`;
+      return `[S${i + 1}] 《${c.title}》${c.locator ? `（${c.locator}）` : ""}｜${levelLabel}${scopeNote}｜${validityLabel}｜发布机关：${authority}｜适用地区：${jurisdiction}｜${c.kind === "case" ? "案例要旨：" : "条文："}${clip(c.text)}`;
     })
     .join("\n\n");
+}
+
+/** 证据分级文字标签（A 全国性规范 / B 官方案例 / C 地方指引或补充线索 / D 补充线索）。 */
+export function evidenceLevelLabel(c: Pick<QueryResult, "sourceLevel" | "kind">, meta?: SourceMeta): string {
+  if (c.sourceLevel === "A") {
+    return "A级·全国性法律规范";
+  }
+  if (c.sourceLevel === "B") {
+    return "B级·官方案例参考";
+  }
+  if (c.sourceLevel === "C") {
+    return meta?.sourceType === "local_guidance" ? "C级·地方裁审参考" : "C级·补充线索";
+  }
+  return "D级·补充线索";
 }
 
 /** 检索是否足够（不用于“资料不足拒答”，仅用于决定是否需要发起联网搜索）。 */

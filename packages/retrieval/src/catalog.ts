@@ -1,4 +1,4 @@
-import { TOPIC_IDS, type TopicId } from "@laoyouju/shared";
+import { SOURCE_LEVEL_LABELS, SOURCE_TYPE_LABELS, TOPIC_IDS, type TopicId } from "@laoyouju/shared";
 import { loadContent, type LoadedContent } from "./load.js";
 
 /** reviewStatus 中文说明（公开页面使用，避免把 source_verified 当成 legal_reviewed）。 */
@@ -16,16 +16,11 @@ export const VALIDITY_STATUS_LABEL: Record<string, string> = {
   not_applicable: "不适用",
 };
 
-export const SOURCE_TYPE_LABEL: Record<string, string> = {
-  law: "法律",
-  administrative_regulation: "行政法规",
-  departmental_rule: "部门规章",
-  judicial_interpretation: "司法解释",
-  arbitration_procedure: "仲裁程序规范",
-  policy: "政策文件",
-  local_guidance: "地方裁审指引（省级法院/人社部门）",
-  case: "官方案例",
-};
+/**
+ * 来源类型中文标签（兼容导出名；实际单一来源为 @laoyouju/shared SOURCE_TYPE_LABELS）。
+ * Phase 7C-1：内容库 catalog 与 API 来源卡片同源，避免两套标签漂移。
+ */
+export const SOURCE_TYPE_LABEL: Record<string, string> = SOURCE_TYPE_LABELS;
 
 export const VERIFICATION_STATUS_LABEL: Record<string, string> = {
   official_source_verified: "已与官方来源核验",
@@ -53,6 +48,7 @@ export interface CatalogLawView {
   sourceType: string;
   sourceTypeLabel: string;
   authorityLevel: string;
+  authorityLevelLabel: string;
   issuingAuthority: string;
   documentNumber: string | null;
   jurisdiction: string;
@@ -82,6 +78,7 @@ export interface CatalogCaseView {
   caseType: string;
   caseTypeLabel: string;
   authorityLevel: string;
+  authorityLevelLabel: string;
   publicationDate: string;
   jurisdiction: string;
   officialUrl: string;
@@ -126,6 +123,7 @@ export function buildCatalog(content?: LoadedContent): Catalog {
     sourceType: law.sourceType,
     sourceTypeLabel: SOURCE_TYPE_LABEL[law.sourceType] ?? law.sourceType,
     authorityLevel: law.authorityLevel,
+    authorityLevelLabel: SOURCE_LEVEL_LABELS[law.authorityLevel] ?? law.authorityLevel,
     issuingAuthority: law.issuingAuthority,
     documentNumber: law.documentNumber,
     jurisdiction: law.jurisdiction,
@@ -159,6 +157,7 @@ export function buildCatalog(content?: LoadedContent): Catalog {
     caseType: c.caseType,
     caseTypeLabel: CASE_TYPE_LABEL[c.caseType] ?? c.caseType,
     authorityLevel: c.authorityLevel,
+    authorityLevelLabel: SOURCE_LEVEL_LABELS[c.authorityLevel] ?? c.authorityLevel,
     publicationDate: c.publicationDate,
     jurisdiction: c.jurisdiction,
     officialUrl: c.officialUrl,

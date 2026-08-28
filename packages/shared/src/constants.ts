@@ -89,9 +89,51 @@ export const OUT_OF_SCOPE_MESSAGE =
 export const SOURCE_LEVELS = ["A", "B", "C", "D"] as const;
 export type SourceLevel = (typeof SOURCE_LEVELS)[number];
 
-/** 来源分组（Web 展示分组）：法律法规 / 司法解释与仲裁程序 / 官方案例 / 补充参考。 */
-export const SOURCE_GROUPS = ["law", "judicial", "case", "supplement"] as const;
+/**
+ * 来源分组（Web 展示分组）：法律法规 / 司法解释与仲裁程序 / 地方裁审参考 / 官方案例 / 补充参考。
+ * Phase 7C-1 新增 "local"：地方裁审指引（C 级）单独分组，避免与全国性法律法规混同。
+ */
+export const SOURCE_GROUPS = ["law", "judicial", "local", "case", "supplement"] as const;
 export type SourceGroup = (typeof SOURCE_GROUPS)[number];
+
+/**
+ * 来源类型中文标签（单一事实来源：内容库 catalog、API 来源卡片与 Web 展示共用）。
+ * 键与 API SourceTypeSchema / 内容库 LawSourceTypeSchema + case 对齐。
+ */
+export const SOURCE_TYPE_LABELS: Readonly<Record<string, string>> = {
+  law: "法律",
+  administrative_regulation: "行政法规",
+  departmental_rule: "部门规章",
+  judicial_interpretation: "司法解释",
+  arbitration_procedure: "仲裁程序规范",
+  policy: "政策文件",
+  local_guidance: "地方裁审指引（省级法院/人社部门）",
+  case: "官方案例",
+};
+
+/**
+ * 来源分级中文标签（A/B/C/D）。同时包含文字标签（不只靠颜色），
+ * 用于 Web 来源卡片与 API 来源卡片展示：
+ * - A：全国性法律规范（法律/行政法规/司法解释等）；
+ * - B：官方案例（类案参考，无普遍约束力）；
+ * - C：地方裁审指引/补充线索（Phase 7C-1 起地方裁审指引仅可放 localGuidance）；
+ * - D：补充线索（仅线索）。
+ */
+export const SOURCE_LEVEL_LABELS: Readonly<Record<SourceLevel, string>> = {
+  A: "A级 · 全国性法律规范",
+  B: "B级 · 官方案例参考",
+  C: "C级 · 地方裁审参考",
+  D: "D级 · 补充线索",
+};
+
+/**
+ * 是否为具体省级 jurisdiction（区别于 全国性 / 待核验 / 未知）。
+ * 用于 localGuidance 分级校验：地方裁审指引必须带具体省份 jurisdiction。
+ */
+export function isProvincialJurisdiction(jurisdiction: string): boolean {
+  const j = jurisdiction.trim();
+  return j !== "" && j !== "全国性" && j !== "待核验" && j !== "未知";
+}
 
 /**
  * 固定 AI 内容提示文案。

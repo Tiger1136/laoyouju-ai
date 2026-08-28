@@ -1,3 +1,4 @@
+import { SOURCE_LEVEL_LABELS, SOURCE_TYPE_LABELS } from "@laoyouju/shared";
 import type { AskSuccessResponse, Clarification, SourceCitation } from "@laoyouju/shared";
 
 /**
@@ -6,10 +7,11 @@ import type { AskSuccessResponse, Clarification, SourceCitation } from "@laoyouj
  */
 
 export const GROUP_LABELS: Readonly<Record<string, string>> = {
-  law: "法律法规",
-  judicial: "司法解释与仲裁程序",
-  case: "官方案例",
-  supplement: "补充检索线索",
+  law: "国家法律法规与司法解释（A 级）",
+  judicial: "司法解释与仲裁程序（A 级）",
+  local: "地方裁审参考（C 级，仅山东省）",
+  case: "官方案例（B 级，类案参考）",
+  supplement: "补充检索线索（C 级，待核验）",
 };
 
 export const REVIEW_STATUS_COPY: Readonly<Record<string, string>> = {
@@ -27,7 +29,7 @@ export const VALIDITY_STATUS_COPY: Readonly<Record<string, string>> = {
 };
 
 export const COVERAGE_NOTE =
-  "本回答基于全国性规则（法律、行政法规、部门规章、司法解释、仲裁程序文件）与官方发布案例；地方性法规、地方工资标准与地方口径未作本地收录，涉及时会提示并引导核验地方官方来源。";
+  "本回答优先依据 A 级全国性规则（法律、行政法规、部门规章、司法解释、仲裁程序文件）；B 级官方发布案例仅作类案参考，不具有普遍约束力。山东地方裁审指引（C 级）仅在问题涉及山东时以“山东地区裁审参考”单独列出，不属于全国统一法律依据；其他地区地方规则未作本地收录，涉及时会提示并引导核验地方官方来源。";
 
 export const CLARIFICATION_FOLLOWUP_HINT =
   "请补充上述信息后重新提交，我会基于补充的事实与已核验的全国性规则继续分析。";
@@ -63,8 +65,9 @@ export function answerSections(data: AskSuccessResponse): AnswerSection[] {
   return [
     { key: "issueIdentification", heading: "问题识别与争议焦点", items: [a.issueIdentification] },
     { key: "preliminaryConclusion", heading: "初步结论", items: [a.preliminaryConclusion] },
-    { key: "applicableLaw", heading: "适用法律及具体条文", items: a.applicableLaw.length > 0 ? a.applicableLaw : null },
-    { key: "similarCases", heading: "相似官方案例", items: a.similarCases.length > 0 ? a.similarCases : null },
+    { key: "applicableLaw", heading: "适用法律及具体条文（A 级 · 全国性法律依据）", items: a.applicableLaw.length > 0 ? a.applicableLaw : null },
+    { key: "localGuidance", heading: "山东地区裁审参考（C 级 · 仅适用于山东省，非全国统一规则）", items: a.localGuidance.length > 0 ? a.localGuidance : null },
+    { key: "similarCases", heading: "相似官方案例（B 级 · 类案参考）", items: a.similarCases.length > 0 ? a.similarCases : null },
     { key: "nextSteps", heading: "下一步行动", items: a.nextSteps.length > 0 ? a.nextSteps : null },
     { key: "evidenceChecklist", heading: "证据材料清单", items: a.evidenceChecklist.length > 0 ? a.evidenceChecklist : null },
     { key: "factsToConfirm", heading: "尚需确认的事实", items: a.factsToConfirm.length > 0 ? a.factsToConfirm : null },
@@ -107,6 +110,8 @@ export interface CitationView {
   publishedDate: string | null;
   reviewLabel: string;
   sourceLevel: string;
+  sourceLevelLabel: string;
+  sourceTypeLabel: string;
 }
 
 export function citationView(s: SourceCitation): CitationView {
@@ -122,6 +127,8 @@ export function citationView(s: SourceCitation): CitationView {
     publishedDate: s.publishedDate,
     reviewLabel: reviewLabel(s.reviewStatus),
     sourceLevel: s.sourceLevel,
+    sourceLevelLabel: s.sourceLevelLabel || SOURCE_LEVEL_LABELS[s.sourceLevel] || s.sourceLevel,
+    sourceTypeLabel: s.sourceTypeLabel || SOURCE_TYPE_LABELS[s.sourceType] || s.sourceType,
   };
 }
 

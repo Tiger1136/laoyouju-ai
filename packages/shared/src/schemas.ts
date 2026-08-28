@@ -3,6 +3,7 @@ import {
   AI_NOTICE,
   ANSWER_OUTCOMES,
   API_VERSION,
+  isProvincialJurisdiction,
   OUT_OF_SCOPE_MESSAGE,
   QUESTION_MAX_LENGTH,
   QUESTION_MIN_LENGTH,
@@ -46,6 +47,9 @@ export const SourceTypeSchema = z.enum([
   "arbitration_procedure",
   "case",
   "policy",
+  // Phase 7C-1：地方裁审指引（省级法院/人社部门会议纪要、诉讼指引等）。
+  // 仅 C 级 + 省级 jurisdiction；不得显示为全国性法律依据。
+  "local_guidance",
 ]);
 
 export const ValidityStatusSchema = z.enum([
@@ -89,8 +93,14 @@ export const SourceCitationSchema = z.strictObject({
     .min(1, { error: "title 不能为空" })
     .max(300, { error: "title 过长" }),
   sourceType: SourceTypeSchema,
+  /** 来源类型中文标签（如“法律”“地方裁审指引（省级法院/人社部门）”）。 */
+  sourceTypeLabel: z.string().trim().max(60).default(""),
   sourceLevel: SourceLevelSchema,
+  /** 来源分级中文标签（如“A级 · 全国性法律规范”“C级 · 地方裁审参考”），含文字、不只靠颜色。 */
+  sourceLevelLabel: z.string().trim().max(60).default(""),
   group: SourceGroupSchema,
+  /** topicIds（适用时；法律与案例来源携带）。 */
+  topicIds: z.array(z.enum(TOPIC_IDS)).max(10).default([]),
   issuingAuthority: z
     .string({ error: "issuingAuthority 必须是字符串" })
     .trim()
@@ -149,11 +159,19 @@ export const AnswerSchema = z.strictObject({
     .trim()
     .min(1, { error: "preliminaryConclusion 不能为空" })
     .max(1200, { error: "preliminaryConclusion 过长" }),
-  /** 适用法律及具体条文（每条可带 [S#] 引用） */
+  /** 适用法律及具体条文（每条可带 [S#] 引用；只允许 A 级全国性法律依据） */
   applicableLaw: z
     .array(SectionItemSchema, { error: "applicableLaw 必须是数组" })
     .max(20, { error: "applicableLaw 条目过多" }),
-  /** 相似官方案例（每条可带 [S#] 引用；无高度相似案例时明确说明"未找到"） */
+  /**
+   * 山东地区裁审参考（Phase 7C-1 新增可选字段；只允许 C 级地方裁审指引 + 省级 jurisdiction；
+   * 仅作为山东地区裁审口径参考，不属于全国统一法律规则；无相关内容时为空数组）。
+   */
+  localGuidance: z
+    .array(SectionItemSchema, { error: "localGuidance 必须是数组" })
+    .max(10, { error: "localGuidance 条目过多" })
+    .default([]),
+  /** 相似官方案例（每条可带 [S#] 引用；只允许 B 级案例；无高度相似案例时明确说明"未找到"） */
   similarCases: z
     .array(SectionItemSchema, { error: "similarCases 必须是数组" })
     .max(10, { error: "similarCases 条目过多" }),
@@ -273,6 +291,7 @@ export const AskSuccessResponseSchema = z
       data.answer !== null
         ? [
             data.answer.applicableLaw,
+            data.answer.localGuidance,
             data.answer.similarCases,
             data.answer.nextSteps,
             data.answer.evidenceChecklist,
@@ -358,8 +377,39 @@ export const AskSuccessResponseSchema = z
         }
       }
     }
-  });
 
+    // Phase 7C-1 来源分级约束（A/B/C 不得混置）：
+    // - applicableLaw 只允许引用 A 级全国性规范（法律/行政法规/司法解释等）；
+    // - similarCases 只允许引用 B 级官方案例；
+    // - localGuidance 只允许引用 C 级地方裁审指引（sourceType=local_guidance 且带省级 jurisdiction）。
+    //   保证前端与回答文本不会把 C 级内容显示为“国家法律依据”。
+    if (data.answer !== null) {
+      const sourceByRef = new Map(data.sources.map((s) => [s.citationRef, s]));
+      const checkLevels = (
+        field: "applicableLaw" | "localGuidance" | "similarCases",
+        list: readonly string[],
+        ok: (s: { sourceLevel: string; sourceType: string; jurisdiction: string }) => boolean,
+        expect: string,
+      ): void => {
+        list.forEach((item, itemIndex) => {
+          for (const m of item.matchAll(CITATION_REF_IN_TEXT_RE)) {
+            const ref = `S${m[1]}`;
+            const src = sourceByRef.get(ref);
+            if (src !== undefined && !ok(src)) {
+              ctx.addIssue({
+                code: "custom",
+                message: `answer.${field}[${itemIndex}] 引用了非${expect}来源 ${ref}（sourceLevel=${src.sourceLevel}, sourceType=${src.sourceType}, jurisdiction=${src.jurisdiction}）`,
+                path: ["answer", field, itemIndex],
+              });
+            }
+          }
+        });
+      };
+      checkLevels("applicableLaw", data.answer.applicableLaw, (s) => s.sourceLevel === "A", "A 级全国性规范");
+      checkLevels("localGuidance", data.answer.localGuidance, (s) => s.sourceLevel === "C" && s.sourceType === "local_guidance" && isProvincialJurisdiction(s.jurisdiction), "C 级地方裁审指引（省级 jurisdiction）");
+      checkLevels("similarCases", data.answer.similarCases, (s) => s.sourceLevel === "B" && s.sourceType === "case", "B 级官方案例");
+    }
+  });
 // ---------------------------------------------------------------------------
 // ApiErrorResponse：统一错误响应
 // ---------------------------------------------------------------------------

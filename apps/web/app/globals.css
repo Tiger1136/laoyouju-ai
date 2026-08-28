@@ -631,3 +631,48 @@ a:hover {
 .ask-submit:disabled {
   cursor: not-allowed;
 }
+
+/* ---- Phase 7C-1：权威层级标签（文字标签为主，颜色为辅） ---- */
+.level-tag {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+.level-tag-a {
+  background: #e3eefb;
+  color: #17365d;
+  border: 1px solid #b9cfe8;
+}
+.level-tag-b {
+  background: #eef7f4;
+  color: #24574f;
+  border: 1px solid #b9dbd3;
+}
+.level-tag-c {
+  background: #fdf3e3;
+  color: #7a5b1e;
+  border: 1px solid #e4d3b0;
+}
+.level-warning {
+  margin: 8px 0 18px;
+  padding: 12px 14px;
+  border: 1px solid #e4d3b0;
+  border-radius: var(--radius);
+  background: #fdf8ee;
+  font-size: 14px;
+  color: #7a5b1e;
+}
+.law-list h2, .case-list h2 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.law-list li, .case-list li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

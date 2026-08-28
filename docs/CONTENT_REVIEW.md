@@ -89,6 +89,18 @@
 > schema 扩展（最小化并已添加测试）：LawSourceTypeSchema 增加 local_guidance；law 文档 authorityLevel 允许 A/C、jurisdiction 允许省级字符串；
 > validator 强制 local_guidance=C 级+具体省份、其余类型=A 级+全国性+全国性机关；registry/catalog 同步；CaseSourceSchema 增加可选 claims 字段。
 
+### Phase 7C-1 来源分级整合（2026-08-28，项目经理调整验收口径后）
+
+> 验收口径（项目经理）：**18 例山东官方案例与 2 份山东地方裁审指引质量合格、予以验收**；原“新增 30～50 例”不再作为本阶段硬门槛；**不得再为追求数量抓取/拆分/补写案例**；剩余山东官方批次列入后续持续扩充 backlog。本轮仅完成国家法律、山东地方指引、山东案例的产品级区分（API/Web/测试/文档），未见新增内容文件。
+
+- **权威层级语义（产品级）**：A=全国性法律规范（唯一法律依据）；B=官方指导/典型案例（类案参考，无普遍约束力）；C=地方裁审指引（2 份山东指引，仅适用于山东省，非全国统一规则）；D=仅线索。
+- **API/共享契约（向后兼容扩展）**：`SourceTypeSchema` 增加 `local_guidance`；`SOURCES_GROUPS` 新增 `local`；`SourceCitation` 新增 `sourceTypeLabel`/`sourceLevelLabel`/`topicIds`（带默认值）；`Answer` 新增可选 `localGuidance`；分级契约强制（applicableLaw=A、similarCases=B、localGuidance=C+省级）。
+- **回答规则**：优先 A 级；C 级山东指引只作补充（localGuidance）；不得仅凭 C 级得出法律结论；不得把山东口径描述为全国统一规则；地点为山东可加“山东地区裁审参考”；地点未知必须条件化“如争议发生在山东，可参考……，其他地区裁审口径可能不同。”；B 级案例称“官方典型案例/类案参考”；citation 一律来自本次 evidence set。
+- **Web 展示**：/laws 分区（国家法律法规与司法解释 A 级 / 地方裁审参考 C 级·仅山东省）；/cases 区分山东省官方案例（标注发布机关与适用地域）与全国性/其他地区案例（均 B 级类案参考）；/ask 三段标题（适用法律 A 级 / 山东地区裁审参考 C 级 / 相似官方案例 B 级）+ 来源卡片分级/类型文字标签；无 localGuidance 不显示空栏目；/ask 保持 noindex，sitemap/robots 不变。
+- **保证性测试（mock，不调用真实 DeepSeek）**：山东问题（A+C+B 三区分）、北京问题（山东指引不出现在回答）、地域未知（条件化表述）、生活问题（out_of_scope 零来源）、全部劳动/改写矩阵的分级不变量与引用可解析；shared 契约层负向用例（applicableLaw 引 C、similarCases 引 A、localGuidance 引 A/非省级全部拒绝）。
+- **门禁**：content:validate（36/219/1308/271）、retrieval:build OK、retrieval 33/33、case-corpus 14/14、shared 37/37、api 48/48、web 32/32、search 16/16、`pnpm run check` exit 0、`git diff --check` exit 0；密钥扫描/构建产物扫描通过。
+
+
 ### 去重与跳过清单（明确记录）
 
 | 来源 | 判定 | 理由 |

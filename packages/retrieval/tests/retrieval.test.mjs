@@ -11,6 +11,7 @@ import {
   buildIndex,
   computeTextSha256,
   detectLaborDomain,
+  explainQuery,
   isAllowedOfficialHost,
   loadContent,
   MIN_RELEVANCE_SCORE,
@@ -410,4 +411,34 @@ test("7C：地方裁审指引必须为 C 级且仅限山东省（schema/validate
   const badNational = { ...natLaw, sourceId: "mock-national-C", authorityLevel: "C" };
   const v3 = validateContent({ ...LOADED, laws: [...LOADED.laws, badNational], documents: [...LOADED.documents, badNational] });
   assert.ok(v3.issues.some((i) => i.code === "NATIONAL_SOURCE_MUST_BE_A"), JSON.stringify(v3.issues.slice(0, 5)));
+});
+// ============================================================
+// Phase 7C-1：来源分级保证（C 级地方指引不得获得 A 级权威加值）
+// ============================================================
+
+test("7C-1：C 级山东地方指引不获得 A 级权威加值，A 级加值保留", () => {
+  const exp = explainQuery(build(), "山东公司没有约定竞业补偿，竞业协议有效吗？", 20);
+  let cSeen = 0;
+  for (const c of exp.ranked) {
+    if (c.result.sourceLevel === "C" && c.result.jurisdiction === "山东省") {
+      cSeen++;
+      assert.equal(c.authorityBoostApplied, false, "C 级来源不得应用 A 级权威加值: " + c.result.docId);
+    }
+  }
+  assert.ok(cSeen >= 1, "应有山东地方指引命中（供 API localGuidance 使用）");
+  const aBoosted = exp.ranked.some(
+    (c) => c.result.sourceLevel === "A" && c.result.kind === "provision" && c.authorityBoostApplied,
+  );
+  assert.ok(aBoosted, "A 级法条的权威加值必须保留（不得因 C 级保护被削弱）");
+});
+
+test("7C-1：山东竞业问题检索到合格的 C 级山东地方指引（分数达到可靠性阈值）", () => {
+  const hits = queryIndex(build(), "山东公司没有约定竞业补偿，竞业协议有效吗？", 12);
+  const cSd = hits.filter(
+    (h) => h.sourceLevel === "C" && h.jurisdiction === "山东省" && h.score >= MIN_RELEVANCE_SCORE,
+  );
+  assert.ok(
+    cSd.length >= 1,
+    `应检索到合格（≥${MIN_RELEVANCE_SCORE} 分、山东省、C 级）的山东地方指引: ${JSON.stringify(hits.map((h) => h.sourceLevel + ":" + h.jurisdiction + ":" + h.docId + ":" + h.score.toFixed(1)))}`,
+  );
 });

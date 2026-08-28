@@ -328,3 +328,82 @@ test("citationRef 越界（S0 / S1000）与非法 sourceId 空白拒绝", () => 
   fixture.answer.applicableLaw = ["越界引用 [S101]"];
   assert.equal(AskSuccessResponseSchema.safeParse(fixture).success, false);
 });
+// ---------- Phase 7C-1：来源分级契约（A/B/C 不得混置：applicableLaw=A、similarCases=B、localGuidance=C 省级指引） ----------
+
+const CITATION_C_LG = {
+  citationRef: "S3",
+  sourceId: "sd-ldrs-shenli-jiyao-2019",
+  title: "（结构测试）山东省劳动人事争议会议纪要",
+  sourceType: "local_guidance",
+  sourceTypeLabel: "地方裁审指引（省级法院/人社部门）",
+  sourceLevel: "C",
+  sourceLevelLabel: "C级 · 地方裁审参考",
+  group: "local",
+  issuingAuthority: "（结构测试）山东省高级人民法院",
+  jurisdiction: "山东省",
+  locator: "（结构测试）第X条",
+  officialUrl: "https://www.sdcourt.gov.cn/struct-test/guidance",
+  validityStatus: "effective",
+  publishedDate: null,
+  retrievedAt: "2026-08-28",
+  excerpt: "（结构测试）山东地方裁审口径摘录",
+  reviewStatus: "source_verified",
+  verificationStatus: "official_source_verified",
+  topicIds: ["noncompete-confidentiality"],
+};
+
+test("7C-1：来源卡片支持 local_guidance 类型与分级/类型标签字段", () => {
+  const parsed = SourceCitationSchema.safeParse(CITATION_C_LG);
+  assert.equal(parsed.success, true);
+  if (parsed.success) {
+    assert.equal(parsed.data.sourceLevelLabel, "C级 · 地方裁审参考");
+    assert.equal(parsed.data.sourceTypeLabel, "地方裁审指引（省级法院/人社部门）");
+    assert.deepEqual(parsed.data.topicIds, ["noncompete-confidentiality"]);
+  }
+  // 旧载荷不带新标签字段仍可解析（默认值兼容）。
+  assert.equal(SourceCitationSchema.safeParse(CITATION_A).success, true);
+  assert.equal(SourceCitationSchema.safeParse(CITATION_B).success, true);
+});
+
+test("7C-1：无 localGuidance 的回答仍合法（默认空数组，不显示空栏目）", () => {
+  assert.equal(AnswerSchema.safeParse(validAnswerFixture()).success, true);
+});
+
+test("7C-1：合法 localGuidance（C 级地方指引 + 省级 jurisdiction）通过", () => {
+  const answer = validAnswerFixture();
+  answer.localGuidance = ["（结构测试）山东地区裁审参考 [S3]"];
+  const fixture = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, CITATION_C_LG] });
+  assert.equal(AskSuccessResponseSchema.safeParse(fixture).success, true);
+});
+
+test("7C-1：applicableLaw 引用 C 级地方指引被拒绝（不得把 C 级当国家法律）", () => {
+  const answer = validAnswerFixture();
+  answer.applicableLaw = ["（结构测试）错误把地方指引当法律 [S3]"];
+  const fixture = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, CITATION_C_LG] });
+  assert.equal(AskSuccessResponseSchema.safeParse(fixture).success, false);
+});
+
+test("7C-1：similarCases 引用 A 级法条被拒绝（案例栏只放 B 级案例）", () => {
+  const answer = validAnswerFixture();
+  answer.similarCases = ["（结构测试）把法条当案例 [S1]"];
+  const fixture = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, CITATION_C_LG] });
+  assert.equal(AskSuccessResponseSchema.safeParse(fixture).success, false);
+});
+
+test("7C-1：localGuidance 引用 A 级来源被拒绝", () => {
+  const answer = validAnswerFixture();
+  answer.localGuidance = ["（结构测试）错误把国家法律当地方指引 [S1]"];
+  const fixture = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, CITATION_C_LG] });
+  assert.equal(AskSuccessResponseSchema.safeParse(fixture).success, false);
+});
+
+test("7C-1：localGuidance 的 C 级来源必须为省级 jurisdiction（全国性/待核验拒绝）", () => {
+  const answer = validAnswerFixture();
+  answer.localGuidance = ["（结构测试）山东参考 [S3]"];
+  const badNational = { ...CITATION_C_LG, jurisdiction: "全国性" };
+  const f1 = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, badNational] });
+  assert.equal(AskSuccessResponseSchema.safeParse(f1).success, false);
+  const hint = { ...CITATION_C_LG, sourceType: "policy", sourceTypeLabel: "政策文件", jurisdiction: "待核验" };
+  const f2 = validSuccessFixture({ answer, sources: [CITATION_A, CITATION_B, hint] });
+  assert.equal(AskSuccessResponseSchema.safeParse(f2).success, false);
+});
