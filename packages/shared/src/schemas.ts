@@ -444,6 +444,8 @@ export const ApiErrorResponseSchema = z.strictObject({
       .min(1, { error: "error.message 不能为空" })
       .max(200, { error: "error.message 过长" }),
     retryable: z.boolean({ error: "error.retryable 必须是布尔值" }),
+    // Phase 8：限流响应建议重试等待秒数（可选；前端可据此显示“稍后再试”）。
+    retryAfterSeconds: z.number().min(0).max(86400).optional(),
   }),
 });
 

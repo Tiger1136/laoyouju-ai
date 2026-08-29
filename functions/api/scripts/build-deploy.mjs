@@ -46,6 +46,15 @@ writeFileSync(
   ) + "\n",
 );
 
+// Phase 8：构建期 kill switch（管理员紧急开关，默认关闭=服务可用）。
+// 操作：KILL_SWITCH_BUILD=on node scripts/build-deploy.mjs 后重新 tcb fn deploy 即暂停真实模型调用；
+// 恢复：不带该变量重新构建部署。不触碰任何环境变量/密钥。
+const killSwitchBuild = (process.env.KILL_SWITCH_BUILD ?? "").trim().toLowerCase() === "on";
+writeFileSync(
+  join(deployDir, "runtime-config.json"),
+  JSON.stringify({ killSwitch: killSwitchBuild }, null, 2) + "\n",
+);
+
 // 复制一份本地验证用的说明（非必需，仅为交接记录）。
 writeFileSync(
   join(deployDir, "DEPLOY_PACKAGE.md"),

@@ -51,6 +51,9 @@ export function normalizeAskResponse(statusCode: number, body: unknown): AskUiSt
     message = "问答服务尚未配置密钥，当前无法生成回答。";
   } else if (statusCode === 503 && err?.code === "RATE_LIMITED") {
     message = "请求过于频繁，请稍后再试。";
+  } else if (statusCode === 429) {
+    // Phase 8：限流 / 全局额度 / kill switch —— 直接使用服务端稳定中文文案。
+    message = err?.message ?? "请求过于频繁，请稍后再试。";
   } else if (statusCode === 502 && err?.code === "UPSTREAM_ERROR") {
     message = "生成服务暂时不可用，请稍后再试。";
   } else if (statusCode === 400) {
@@ -78,6 +81,10 @@ export async function submitQuestion(question: string): Promise<AskUiState> {
   try {
     body = await res.json();
   } catch {
+    // 网关层 429（非 JSON）同样给出友好提示。
+    if (res.status === 429) {
+      return { status: "error", statusCode: 429, errorMessage: "请求过于频繁，请稍后再试。" };
+    }
     return { status: "error", statusCode: res.status, errorMessage: "服务返回了无法解析的响应。" };
   }
 

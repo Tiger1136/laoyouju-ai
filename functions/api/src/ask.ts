@@ -53,6 +53,7 @@ import {
   evaluateCopresenceContract,
   rankCaseCandidates,
 } from "./cases.js";
+import { RequestGuard, limitMessage, resolveLimitConfig, type LimitDecision } from "./limit.js";
 import { buildMessages } from "./prompt.js";
 
 /** answered 输出上限：1200～1400 tokens（八段结构仍完整；同步链路约束下不再让模型生成双份输出）。 */
@@ -164,12 +165,16 @@ export interface AskContext {
   now?: string | undefined;
   timeoutMs?: number | undefined;
   maxTokens?: number | undefined;
+  /** Phase 8 上线保护：模型调用槽位（全局日额度/并发/kill switch）；未注入时不限制。 */
+  guard?: RequestGuard | undefined;
 }
 
 export interface AskOutcome {
   status: number;
   errorCode: string | null;
   payload: unknown;
+  /** Phase 8：429 建议等待秒数（供 Retry-After 头）。 */
+  retryAfter?: number | undefined;
 }
 
 let cachedResources: { index: BuiltIndex; sourceMeta: Map<string, SourceMeta> } | undefined;
@@ -196,6 +201,8 @@ export function createDefaultAskContext(): AskContext {
     now: new Date().toISOString().slice(0, 10),
     timeoutMs: DEFAULT_TIMEOUT_MS,
     maxTokens: MAX_OUTPUT_TOKENS,
+    // Phase 8：上线保护（客户端限频/全局日额度/并发/kill switch；默认阈值可经 LIMIT_* 环境变量覆盖）。
+    guard: new RequestGuard({ config: resolveLimitConfig() }),
   };
 }
 
@@ -896,7 +903,16 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   ];
 
   // 7. 调用模型（单次，不自动重试；成功返回 JSON 结构）。
+  //     Phase 8：占用模型槽位（kill switch / 全局日额度 / 并发上限）；未获槽位不得调用 DeepSeek。
   let content: string;
+  let heldModelSlot = false;
+  if (ctx.guard !== undefined) {
+    const slot = ctx.guard.tryModelSlot();
+    if (!slot.allowed) {
+      return limitPayload(requestId, slot);
+    }
+    heldModelSlot = true;
+  }
   try {
     const result = await chatCompletion(ctx.config, buildMessages(question, analysisLines, evidenceText), {
       fetchFn: ctx.fetchFn,
@@ -915,6 +931,10 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
       return { status: 502, errorCode: "UPSTREAM_ERROR", payload: errorBody(requestId, "UPSTREAM_ERROR", "上游模型服务暂时不可用，请稍后再试", true) };
     }
     return { status: 502, errorCode: "UPSTREAM_ERROR", payload: errorBody(requestId, "UPSTREAM_ERROR", "上游模型服务暂时不可用，请稍后再试", true) };
+  } finally {
+    if (heldModelSlot) {
+      ctx.guard?.releaseModelSlot();
+    }
   }
 
   // 8. 解析模型 JSON；畸形 → 证据驱动 fallback（不虚构任何内容）。
@@ -1116,5 +1136,25 @@ function errorBody(
     apiVersion: API_VERSION,
     requestId,
     error: { code, message, retryable },
+  };
+}
+
+/** Phase 8：限流/kill switch 响应（HTTP 429；友好文案 + 建议等待秒数；不含内部细节）。 */
+function limitPayload(requestId: string, decision: LimitDecision): { status: 429; errorCode: "RATE_LIMITED"; payload: unknown; retryAfter: number } {
+  return {
+    status: 429,
+    errorCode: "RATE_LIMITED",
+    retryAfter: decision.retryAfterSeconds,
+    payload: {
+      ok: false,
+      apiVersion: API_VERSION,
+      requestId,
+      error: {
+        code: "RATE_LIMITED",
+        message: limitMessage(decision.code),
+        retryable: true,
+        retryAfterSeconds: decision.retryAfterSeconds,
+      },
+    },
   };
 }

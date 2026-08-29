@@ -316,3 +316,27 @@ test("localGuidance 引用可在 sources 中解析且来源为 C 级地方指引
     }
   }
 });
+
+test("Phase 8：429 前端显示稳定的中文提示（限流/全局额度/kill switch；不透出内部细节）", () => {
+  const bodies = [
+    { code: "RATE_LIMITED", message: "请求过于频繁，请稍后再试（约 1 分钟）。", retryable: true, retryAfterSeconds: 42 },
+    { code: "RATE_LIMITED", message: "今日咨询人数较多，服务暂时不可用，请明天再来。", retryable: true, retryAfterSeconds: 3600 },
+    { code: "RATE_LIMITED", message: "服务暂时繁忙，请稍后再试。", retryable: true, retryAfterSeconds: 600 },
+  ];
+  for (const b of bodies) {
+    const state = normalizeAskResponse(429, {
+      ok: false,
+      apiVersion: "v1",
+      requestId: "r",
+      error: b,
+    });
+    assert.equal(state.status, "error");
+    assert.equal(state.statusCode, 429);
+    assert.equal(state.errorMessage, b.message, "应直接展示服务端稳定中文文案");
+    assert.ok(!state.errorMessage.includes("node_modules") && !state.errorMessage.includes("DEEPSEEK"), "不得透出内部信息");
+  }
+  // 网关层非 JSON 429：友好兜底文案
+  const gw = normalizeAskResponse(429, "限流");
+  assert.equal(gw.statusCode, 429);
+  assert.equal(gw.errorMessage, "请求过于频繁，请稍后再试。");
+});

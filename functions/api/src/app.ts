@@ -17,6 +17,7 @@ import {
   varyOriginHeader,
 } from "./http.js";
 import { createDefaultAskContext, runAsk, type AskContext } from "./ask.js";
+import { limitMessage, type LimitCode } from "./limit.js";
 
 export interface ApiServerOptions {
   /** 精确 Origin 白名单（逗号分隔；空数组 = 未配置，fail-closed）。 */
@@ -64,6 +65,8 @@ interface AskDecision {
   statusCode: number;
   errorCode: string | null;
   payload: unknown;
+  /** Phase 8：429 时建议客户端等待秒数（写 Retry-After 头）。 */
+  retryAfter?: number | undefined;
 }
 
 /**
@@ -219,7 +222,11 @@ export function createApiServer(options: ApiServerOptions = {}): ReturnType<type
     // handleAsk 只返回结构化结果；唯一响应 writer（respond）在此提交一次。
     void handleAsk(req, requestId, askContext)
       .then((decision) => {
-        respond(decision.statusCode, decision.payload, actualHeaders);
+        const headers =
+          decision.retryAfter !== undefined
+            ? { ...actualHeaders, "Retry-After": String(decision.retryAfter) }
+            : actualHeaders;
+        respond(decision.statusCode, decision.payload, headers);
         finish(decision.statusCode, decision.errorCode ?? undefined);
       })
       .catch(() => {
@@ -305,11 +312,57 @@ async function handleAsk(req: IncomingMessage, requestId: string, askContext: As
     return errorDecision(requestId, 400, "INVALID_REQUEST", "问题无效：请用文字描述你的问题");
   }
 
+  // 5c. Phase 8：入口客户端限频（每客户端分钟/日；无 Origin 的脚本请求同样受限）。
+  //     失败返回 HTTP 429 + Retry-After；客户端标识取网关 X-Forwarded-For 首地址（不可逆哈希存储）。
+  if (askContext.guard !== undefined) {
+    const clientIp = clientIpOf(req);
+    const decision = askContext.guard.checkClient(clientIp);
+    if (!decision.allowed) {
+      return limitDecision(requestId, decision);
+    }
+  }
+
   // 6. 检索 + 模型生成（服务端唯一可信边界）。
   const outcome = await runAsk(question, requestId, askContext);
   return {
     statusCode: outcome.status,
     errorCode: outcome.errorCode,
     payload: outcome.payload,
+    retryAfter: outcome.retryAfter,
+  };
+}
+
+/** 客户端 IP（尽力而为）：X-Forwarded-For 首地址（网关标准），否则 socket 地址。 */
+function clientIpOf(req: IncomingMessage): string | undefined {
+  const fwd = req.headers["x-forwarded-for"];
+  if (typeof fwd === "string" && fwd.trim() !== "") {
+    const first = fwd.split(",")[0]?.trim();
+    if (first !== undefined && first !== "") {
+      return first;
+    }
+  }
+  return req.socket.remoteAddress;
+}
+
+/** Phase 8：429 决策（AskDecision 携带 retryAfterSeconds 供外层写 Retry-After 头）。 */
+function limitDecision(
+  requestId: string,
+  decision: { allowed: boolean; code: string; retryAfterSeconds: number },
+): AskDecision {
+  return {
+    statusCode: 429,
+    errorCode: "RATE_LIMITED",
+    payload: {
+      ok: false,
+      apiVersion: API_VERSION,
+      requestId,
+      error: {
+        code: "RATE_LIMITED",
+        message: limitMessage(decision.code as LimitCode),
+        retryable: true,
+        retryAfterSeconds: decision.retryAfterSeconds,
+      },
+    },
+    retryAfter: decision.retryAfterSeconds,
   };
 }

@@ -14,7 +14,7 @@
     "build:deploy": "node scripts/build-deploy.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node tests/api.test.mjs && node tests/cases.test.mjs"
+    "test": "node tests/api.test.mjs && node tests/cases.test.mjs && node tests/limit.test.mjs"
   },
   "dependencies": {
     "@laoyouju/retrieval": "workspace:*",

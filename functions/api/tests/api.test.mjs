@@ -20,6 +20,7 @@ import { MockSearchProvider } from "@laoyouju/search";
 import { loadContent } from "@laoyouju/retrieval";
 import { classifyScope, extractFacts, decomposeIssues, missingRequiredFacts, isSituationQuestion } from "../dist/analyze.js";
 import { extractCitationRefs, decideSearchUse, MAX_OUTPUT_TOKENS, DEFAULT_TIMEOUT_MS } from "../dist/ask.js";
+import { RequestGuard, limitMessage } from "../dist/limit.js";
 import { QUESTION_MATRIX, MATRIX_COUNTS } from "./question-matrix.mjs";
 
 const LOADED_LAWS = loadContent().laws;
@@ -129,6 +130,15 @@ function mockQuestionContext() {
     sourceMeta: base.sourceMeta,
     now: "2026-08-27",
     timeoutMs: 5000,
+    guard: new RequestGuard({
+      config: {
+        clientPerMinute: 100000,
+        clientPerDay: 100000,
+        globalModelPerDay: 100000,
+        maxConcurrentModels: 100000,
+        killSwitch: false,
+      },
+    }),
   };
 }
 
@@ -1372,4 +1382,100 @@ test("7C-2：结果确定性——同一问题两次回答的 similarCases 完�
   assert.deepEqual(one.answer.similarCases, two.answer.similarCases, "similarCases 必须确定");
   assert.deepEqual(one.answer.localGuidance, two.answer.localGuidance);
   assert.deepEqual(one.answer.applicableLaw.map((s) => s.replace(/\[S\d+\]/g, "[S#]")), two.answer.applicableLaw.map((s) => s.replace(/\[S\d+\]/g, "[S#]")));
+});
+
+// ============================================================
+// Phase 8：最低上线保护（限流/全局额度/kill switch/429 结构）
+// ============================================================
+
+/** 严格 guard 服务器（默认生产阈值 6/min、30/day、100/day 模型、3 并发）。 */
+function createStrictLimitServer(overrides = {}) {
+  return createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      guard: new RequestGuard({
+        config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+      }),
+      ...overrides,
+    },
+  });
+}
+
+test("Phase 8：无 Origin 请求仍受服务端额度保护（第 7 次 429 + Retry-After + 友好文案）", async () => {
+  const server2 = createStrictLimitServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  let last = null;
+  for (let i = 0; i < 6; i++) {
+    last = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+    });
+    assert.equal(last.status, 200, "前 6 次 out_of_scope 应 200（第 " + (i + 1) + " 次）");
+  }
+  // 第 7 次：分钟窗口（6/min）已满 → 429（同 IP 由 store 计数；无 Origin 的脚本同样受限）。
+  const blocked = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  await closeServer(server2);
+  assert.equal(blocked.status, 429, "第 7 次必须 429");
+  assert.equal(blocked.body.error.code, "RATE_LIMITED");
+  assert.ok(blocked.body.error.message.includes("频繁") || blocked.body.error.message.includes("稍后"), blocked.body.error.message);
+  assert.ok(Number(blocked.body.error.retryAfterSeconds) >= 1);
+  assert.ok(Number(blocked.headers.get("retry-after")) >= 1, "应返回 Retry-After 头");
+  assert.equal(String(blocked.body).includes("node_modules"), false);
+});
+
+test("Phase 8：kill switch 开启时模型调用次数为 0（HTTP 429 + 无堆栈）", async () => {
+  const counter = [];
+  const server2 = createStrictLimitServer({
+    fetchFn: mockDeepSeekFetchNoCases({ capture: counter }),
+    guard: new RequestGuard({ config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: true } }),
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body, headers } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: COMPLETE_CASE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 429);
+  assert.equal(body.error.code, "RATE_LIMITED");
+  assert.ok(body.error.message.includes("服务暂时繁忙"), body.error.message);
+  assert.equal(counter.length, 0, "kill switch 开启时模型调用次数必须为 0");
+  assert.ok(headers.get("retry-after"));
+  const text = JSON.stringify(body);
+  assert.equal(text.includes("node_modules"), false);
+  assert.equal(text.includes("stack"), false);
+});
+
+test("Phase 8：全局日额度耗尽后不调用模型（HTTP 429；并发释放后恢复）", async () => {
+  const counter = [];
+  const server2 = createStrictLimitServer({
+    fetchFn: mockDeepSeekFetchNoCases({ capture: counter }),
+    guard: new RequestGuard({ config: { clientPerMinute: 100, clientPerDay: 100, globalModelPerDay: 1, maxConcurrentModels: 3, killSwitch: false } }),
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const first = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: COMPLETE_CASE_QUESTION }),
+  });
+  assert.equal(first.status, 200, "首个请求应成功（额度未耗）");
+  assert.ok(counter.length >= 1);
+  const second = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: COMPLETE_CASE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(second.status, 429);
+  assert.equal(second.body.error.message.includes("明天再来") || second.body.error.message.includes("不可用"), true, second.body.error.message);
+  assert.equal(counter.length, 1, "额度耗尽后不得再调用模型");
 });
