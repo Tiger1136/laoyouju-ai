@@ -1047,3 +1047,329 @@ test("7C-1：山东指引用例不进入 sources 的 A 级豁免（C 级来源�
     }
   }
 });
+
+// ============================================================
+// Phase 7C-2：官方案例证据共现（similarCases 确定性组装）
+// ============================================================
+
+/** 模拟“真实模型行为缺失”：只引用 A 级法条，similarCases 写占位“未找到…”（线上复现形态）。 */
+function mockDeepSeekFetchNoCases({ capture } = {}) {
+  return async (url, init) => {
+    const raw = String(init.body ?? "");
+    const body = JSON.parse(raw);
+    if (capture !== undefined) {
+      capture.push(body);
+    }
+    const userMsg = body.messages.find((m) => m.role === "user");
+    // 模拟线上真实模型的“缺失形态”：只给 A 级法条陈述（无案例引用），similarCases 写占位。
+    void userMsg;
+    const content = JSON.stringify({
+      answer: {
+        issueIdentification: "（测试）问题识别与争议焦点。",
+        preliminaryConclusion: "（测试）初步结论：依据 A 级证据判断；具体结论需结合事实。",
+        applicableLaw: ["《中华人民共和国劳动合同法》相关规定（测试模拟）：依据 A 级全国性规范处理。"],
+        similarCases: ["未找到可核验的高度相似官方案例。"],
+        nextSteps: ["（测试）下一步行动。"],
+        evidenceChecklist: ["（测试）证据材料清单。"],
+        factsToConfirm: ["（测试）待确认事实。"],
+        boundaries: ["（测试）不是律师意见；不预测胜诉率；不保证个案结果；请核验官方来源。"],
+      },
+    });
+    return new Response(JSON.stringify({ choices: [{ message: { content } }] }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  };
+}
+
+function createNoCaseMockServer(overrides = {}) {
+  return createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      fetchFn: mockDeepSeekFetchNoCases(),
+      ...overrides,
+    },
+  });
+}
+
+const LIVE_SD_NONCOMPETE_QUESTION = "我在山东工作，公司要求我遵守竞业限制，但协议没有约定竞业补偿，这份协议有效吗？";
+const ARREARS_COMMISSION_QUESTION = "公司克扣我3000元提成，我入职2年，月薪8000元，可以要求补发吗？";
+const OVERTIME_QUESTION = "我每天加班2小时，月薪8000元，入职1年，公司不给加班费，怎么算加班费？";
+const INJURY_QUESTION = "我在工作中受伤骨折，2025年3月入职，月薪8000元，单位没有给我缴工伤保险，怎么申请工伤认定和赔偿？";
+const DOUBLE_WAGE_QUESTION = "我2024年1月入职，公司一直没签劳动合同，月薪6000元，可以要二倍工资吗？";
+const DISPATCH_QUESTION = "我通过劳务派遣公司到甲公司上班，月薪7000元，被拖欠工资，派遣单位和用工单位谁承担责任？";
+
+/** 断言“A+B 共现”：answered 且有推断主题时，similarCases 至少 1 条 B 级官方案例，且与主题相关、边界说明完整。 */
+function assertCopresence(body, inferredTopicSubstrings) {
+  assert.equal(body.outcome, "answered", "应走 answered 分支");
+  assert.ok(body.answer.applicableLaw.length >= 1, "必须包含 A 级适用法律");
+  assert.ok(body.answer.similarCases.length >= 1, "必须包含至少 1 条 B 级官方案例（引擎确定性补充）");
+  assert.ok(body.answer.similarCases.length <= 2, "最多返回 2 条高相关案例");
+  const refToSource = new Map(body.sources.map((s) => [s.citationRef, s]));
+  for (const item of body.answer.similarCases) {
+    const refs = [...item.matchAll(/\[S(\d+)\]/g)].map((m) => "S" + m[1]);
+    assert.ok(refs.length >= 1, "similarCases 条目必须带引用: " + item);
+    for (const ref of refs) {
+      const s = refToSource.get(ref);
+      assert.ok(s !== undefined, "similarCases 引用可解析: " + ref);
+      assert.equal(s.sourceLevel, "B", "similarCases 只能引用 B 级: " + ref);
+      assert.equal(s.sourceType, "case", "similarCases 只能引用官方案例: " + ref);
+      assert.ok(
+        (s.topicIds ?? []).some((t) => inferredTopicSubstrings.some((k) => t.includes(k))),
+        "案例 topicIds 必须与推断主题相关: " + ref + " topics=" + (s.topicIds ?? []).join(","),
+      );
+    }
+    // 边界说明：同地域/全国性/外地 三类都必须有类案参考边界（不得把外地案例描述为本地规则）。
+    assert.ok(
+      item.includes("不具有普遍约束力") || item.includes("外地类案仅供参考"),
+      "similarCases 条目必须带类案参考边界: " + item.slice(0, 80),
+    );
+    assert.ok(item.includes("类案"), "similarCases 条目必须声明类案参考性质: " + item.slice(0, 80));
+    const jur = refToSource.get(refs[0])?.jurisdiction ?? "";
+    if (jur !== "全国性") {
+      assert.ok(item.includes("适用地域") || item.includes(jur.slice(0, 2)), "外地/地方案例必须显示实际适用地域: " + item.slice(0, 80));
+    }
+  }
+  assertLevelSeparation(body);
+  const parsed = parseAskSuccessResponse(body);
+  assert.equal(parsed.success, true, "契约层级校验通过: " + JSON.stringify(parsed.error?.issues ?? null).slice(0, 300));
+}
+
+test("7C-2：山东竞业限制未约定补偿（线上真实问题形态，模型写占位）→ A+C+B 共现，同地域案例优先", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: LIVE_SD_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "answered", "完整事实的竞业限制问题应 answered");
+  assert.ok(body.answer.applicableLaw.length >= 1);
+  for (const item of body.answer.applicableLaw) {
+    for (const ref of [...item.matchAll(/\[S(\d+)\]/g)].map((m) => "S" + m[1])) {
+      const s = new Map(body.sources.map((x) => [x.citationRef, x])).get(ref);
+      assert.equal(s?.sourceLevel, "A", "applicableLaw 全部为 A 级");
+    }
+  }
+  assert.ok(body.answer.localGuidance.length >= 1, "山东问题必须给出 C 级山东指引");
+  for (const item of body.answer.localGuidance) {
+    assert.ok(item.includes("仅适用于山东省"), "山东指引必须声明地域边界");
+  }
+  assertCopresence(body, ["noncompete", "social-insurance"]);
+  // 同地域优先：存在山东省官方案例时，首个 similarCases 条目必须引用山东省案例。
+  const refToSource = new Map(body.sources.map((s) => [s.citationRef, s]));
+  const firstRef = (body.answer.similarCases[0].match(/\[S(\d+)\]/) ?? [])[1];
+  const firstSource = refToSource.get("S" + firstRef);
+  assert.ok((firstSource?.jurisdiction ?? "").includes("山东"), "同地域（山东）案例应排在首位: " + (firstSource?.jurisdiction ?? "") + " 来自 " + (firstSource?.sourceId ?? ""));
+});
+
+test("7C-2：未说明地域的竞业限制问题 → A+B 共现；山东指引为空或条件化表述", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: UNKNOWN_LOCATION_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["noncompete", "social-insurance"]);
+  if (body.answer.localGuidance.length > 0) {
+    for (const item of body.answer.localGuidance) {
+      assert.ok(item.includes("如争议发生在山东，可参考"), "未知地点必须条件化表述: " + item);
+      assert.ok(item.includes("其他地区裁审口径可能不同"), "未知地点必须声明地区差异: " + item);
+    }
+  }
+});
+
+test("7C-2：北京竞业限制问题 → 不出现山东C级指引；有全国/相关B级案例", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: BJ_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(body.outcome, "answered");
+  assert.deepEqual(body.answer.localGuidance, [], "非山东问题不得出现山东指引");
+  assertCopresence(body, ["noncompete", "social-insurance"]);
+  const refToSource = new Map(body.sources.map((s) => [s.citationRef, s]));
+  const firstRef = (body.answer.similarCases[0].match(/\[S(\d+)\]/) ?? [])[1];
+  const firstSource = refToSource.get("S" + firstRef);
+  assert.ok(!(firstSource?.jurisdiction ?? "").includes("山东"), "北京问题不得把山东案例作为首要案例");
+});
+
+test("7C-2：违法解除 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: COMPLETE_CASE_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["termination", "compensation", "contract"]);
+});
+
+test("7C-2：克扣工资/提成 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: ARREARS_COMMISSION_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["wage", "arrears", "报酬", "工资"]);
+});
+
+test("7C-2：加班 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: OVERTIME_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["overtime", "working"]);
+});
+
+test("7C-2：工伤 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: INJURY_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["injury", "work-injury"]);
+});
+
+test("7C-2：未签劳动合同二倍工资 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: DOUBLE_WAGE_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["double-wage", "no-written", "contract"]);
+});
+
+test("7C-2：劳务派遣 → A+B 共现", async () => {
+  const server2 = createNoCaseMockServer();
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: DISPATCH_QUESTION }),
+  });
+  await closeServer(server2);
+  assertCopresence(body, ["dispatch", "派遣", "wage"]);
+});
+
+test("7C-2：支付宝提现手续费 → out_of_scope，三区为空且不调用模型", async () => {
+  const calls = [];
+  const server2 = createNoCaseMockServer({ fetchFn: mockDeepSeekFetchNoCases({ capture: calls }) });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 200);
+  assert.equal(body.outcome, "out_of_scope");
+  assert.equal(calls.length, 0, "out_of_scope 不得调用模型");
+  assert.deepEqual(body.answer?.applicableLaw ?? [], [], "out_of_scope 不得有 applicableLaw");
+  assert.deepEqual(body.answer?.localGuidance ?? [], []);
+  assert.deepEqual(body.answer?.similarCases ?? [], []);
+  assert.deepEqual(body.sources, [], "out_of_scope 不得有任何来源");
+});
+
+test("7C-2：模型已引用 B 级案例时保持引用并补齐至 2 条（验证优先保留模型引用）", async () => {
+  // 合规 mock：引用第一条 B 级案例（模型文本由引擎确定性文案替换，但引用保留且排在最前）。
+  const cited = [];
+  const server2 = createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      fetchFn: async (url, init) => {
+        const body = JSON.parse(String(init.body ?? "{}"));
+        const userMsg = body.messages.find((m) => m.role === "user");
+        const evidenceText = userMsg?.content ?? "";
+        // 从证据文本行中解析第一条 B 级（官方案例）引用（证据行格式：[S#] 《…》｜B级·…｜…）。
+        const bLine = evidenceText.split("\n").find((ln) => ln.includes("｜B级·官方案例参考"));
+        const b = (bLine?.match(/\[S(\d+)\]/) ?? [])[1] ?? "";
+        cited.push(b);
+        const a = (evidenceText.split("\n").find((ln) => ln.includes("｜A级·全国性法律规范"))?.match(/\[S(\d+)\]/) ?? [])[1] ?? "";
+        const content = JSON.stringify({
+          answer: {
+            issueIdentification: "（测试）问题识别与争议焦点。",
+            preliminaryConclusion: "（测试）初步结论：依据 A 级证据判断。",
+            applicableLaw: a !== "" ? ["《中华人民共和国劳动合同法》相关规定 [S" + a + "]：（测试条目）"] : [],
+            similarCases: b !== "" ? ["《（测试）模型引用案例》案例要旨 [S" + b + "]：……"] : ["未找到可核验的高度相似官方案例。"],
+            nextSteps: ["（测试）下一步。"],
+            evidenceChecklist: ["（测试）证据。"],
+            factsToConfirm: ["（测试）事实。"],
+            boundaries: ["（测试）不是律师意见；不预测胜诉率；请核验官方来源。"],
+          },
+        });
+        return new Response(JSON.stringify({ choices: [{ message: { content } }] }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      },
+    },
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  const { body } = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: JSON_HEADERS,
+    body: JSON.stringify({ question: LIVE_SD_NONCOMPETE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(body.outcome, "answered");
+  assert.ok(body.answer.similarCases.length >= 1 && body.answer.similarCases.length <= 2);
+  // 模型引用的案例必须保留且排在首位（文本为引擎确定性文案）。
+  assert.ok(cited[0] !== "", "证据中应存在 B 级案例引用");
+  assert.ok(body.answer.similarCases[0].includes("[S" + cited[0] + "]"), "模型引用应被保留且排在首位");
+  assertCopresence(body, ["noncompete", "social-insurance"]);
+});
+
+test("7C-2：结果确定性——同一问题两次回答的 similarCases 完全一致", async () => {
+  const run = async () => {
+    const server2 = createNoCaseMockServer();
+    const port = await listenRandom(server2);
+    const base = "http://127.0.0.1:" + port;
+    const { body } = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ question: LIVE_SD_NONCOMPETE_QUESTION }),
+    });
+    await closeServer(server2);
+    return body;
+  };
+  const one = await run();
+  const two = await run();
+  assert.deepEqual(one.answer.similarCases, two.answer.similarCases, "similarCases 必须确定");
+  assert.deepEqual(one.answer.localGuidance, two.answer.localGuidance);
+  assert.deepEqual(one.answer.applicableLaw.map((s) => s.replace(/\[S\d+\]/g, "[S#]")), two.answer.applicableLaw.map((s) => s.replace(/\[S\d+\]/g, "[S#]")));
+});

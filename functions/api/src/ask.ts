@@ -46,6 +46,13 @@ import {
   selectEvidence,
   type SourceMeta,
 } from "./evidence.js";
+import {
+  buildSimilarCaseItem,
+  chooseSimilarCases,
+  collectSimilarCaseCandidates,
+  evaluateCopresenceContract,
+  rankCaseCandidates,
+} from "./cases.js";
 import { buildMessages } from "./prompt.js";
 
 /** answered 输出上限：1200～1400 tokens（八段结构仍完整；同步链路约束下不再让模型生成双份输出）。 */
@@ -939,7 +946,8 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   // 11. Phase 7C-1 A/B/C 分区与声明清洗：
   //     - applicableLaw 等模型文本只保留 A 级引用（C 级引用一律剥离，不得冒充国家法律依据）；
   //     - similarCases 只接受 B 级案例引用（引用非 B 级案例的条目整条丢弃）；
-  //     - localGuidance 由系统按证据确定性组装（见 6.2，不依赖模型输出）。
+  //     - localGuidance 由系统按证据确定性组装（见 6.2，不依赖模型输出）；
+  //     - 最终的 similarCases 集合由系统确定性组装（见 9.5），模型输出仅作为候选引用。
   const levelByRef = new Map<string, string>();
   const isCaseByRef = new Map<string, boolean>();
   for (const e of evidence) {
@@ -970,11 +978,62 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
     return { status: 200, errorCode: null, payload: fallbackClarification(requestId, question, deco.topicIds, evidence, missing, ctx.sourceMeta, ctx) };
   }
 
+  // 9.5 Phase 7C-2：官方案例证据共现（确定性组装，不依赖模型是否主动引用案例）。
+  //     - 模型 similarCases 条目已在步骤 11 按 B 级/case 验证；此处再按“与推断主题交集”复核；
+  //     - 不足 MAX_SIMILAR_CASE_ITEMS 条时，按引擎排序确定性补充（优先主检索池，再按 topicIds 补充检索）；
+  //     - 补充案例若不在证据集中则追加（引用编号延续），保证 citations 可解析；
+  //     - 地域只是排序偏好：同地域 > 全国性 > 其他省份；外地案例一律带实际适用地域与“外地类案参考”边界说明；
+  //     - 输出为引擎生成的确定性文案（要旨摘录来自索引文本，不虚构案号/法院/金额）。
+  const queryForTopic = (t: string): string | undefined => TOPIC_QUERY_MAP[t] ?? undefined;
+  const chosenCase = chooseSimilarCases({
+    modelItems: answer.similarCases,
+    evidence,
+    index: ctx.index,
+    topics: deco.topicIds,
+    pool: hits,
+    location: askLocation,
+    queryForTopic,
+  });
+  const caseRefByKey = new Map(evidence.map((e) => [e.chunk.docId + "\u0000" + e.chunk.chunkId, e.ref]));
+  const similarCaseItems: string[] = [];
+  for (const chunk of chosenCase.chunks) {
+    const key = chunk.docId + "\u0000" + chunk.chunkId;
+    let ref = caseRefByKey.get(key);
+    if (ref === undefined) {
+      ref = "S" + (evidence.length + 1);
+      evidence.push({ chunk, ref });
+      caseRefByKey.set(key, ref);
+    }
+    similarCaseItems.push(buildSimilarCaseItem(chunk, ref, askLocation));
+  }
+  // 共现契约自检（answered + 已推断主题 + 存在合格 B 级候选 → 必须有案例；防御性保证不变量）。
+  const qualifiedCases = collectSimilarCaseCandidates(ctx.index, deco.topicIds, hits, queryForTopic);
+  const cpContract = evaluateCopresenceContract({
+    outcome: "answered",
+    topics: deco.topicIds,
+    qualifiedCandidates: qualifiedCases,
+  });
+  if (cpContract.applied && similarCaseItems.length === 0) {
+    const top = rankCaseCandidates(qualifiedCases, deco.topicIds, askLocation)[0];
+    if (top !== undefined) {
+      const key = top.chunk.docId + "\u0000" + top.chunk.chunkId;
+      let ref = caseRefByKey.get(key);
+      if (ref === undefined) {
+        ref = "S" + (evidence.length + 1);
+        evidence.push({ chunk: top.chunk, ref });
+        caseRefByKey.set(key, ref);
+      }
+      similarCaseItems.push(buildSimilarCaseItem(top.chunk, ref, askLocation));
+    }
+  }
+
   // 10. 引用集合 → citations（含元数据），并保证至少一项 A 级来源（核心法律结论要求）。
   //     Phase 7C-1：localGuidance 的引用也纳入来源卡片（C 级地方指引单独展示）。
   const localGuidanceItems = buildLocalGuidanceItems(localGuidanceChunks, evidence, askLocation);
   const citedRefs = new Set([
-    ...extractCitationRefs([...guardedApplicableLaw, ...answer.similarCases, ...localGuidanceItems]),
+    // 引用集合以最终确定的内容为准：similarCases 由系统确定性组装（9.5），
+    // 其引用（含补充案例）必须在 sources 中可解析。
+    ...extractCitationRefs([...guardedApplicableLaw, ...similarCaseItems, ...localGuidanceItems]),
   ]);
   const citations: SourceCitation[] = [];
   for (const e of evidence) {
@@ -1008,7 +1067,7 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
     preliminaryConclusion: answer.preliminaryConclusion || "初步结论：请见相关依据。",
     applicableLaw: guardedApplicableLaw,
     localGuidance: localGuidanceItems,
-    similarCases: answer.similarCases.length > 0 ? answer.similarCases : ["未找到可核验的高度相似官方案例。"],
+    similarCases: similarCaseItems.length > 0 ? similarCaseItems : ["未找到可核验的高度相似官方案例。"],
     nextSteps: answer.nextSteps.length > 0 ? answer.nextSteps : ["建议先收集并整理证据材料（工资流水、考勤、解除通知等）。"],
     evidenceChecklist: answer.evidenceChecklist.length > 0 ? answer.evidenceChecklist : ["劳动合同、工资流水、考勤记录、解除/辞退证明"],
     factsToConfirm: dedupe([...missing.map((m) => m.description), ...answer.factsToConfirm]).slice(0, 8),
