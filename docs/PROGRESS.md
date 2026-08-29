@@ -328,3 +328,21 @@
 - **标签**：phase-7c2-case-copresence（annotated）已创建并推送（说明：Phase 7C.2 live: applicable law and verified official case evidence coexist for in-scope labor dispute answers.）；main HEAD=30d066c。
 - **文档**：README.md、docs/DEPLOYMENT.md、docs/PROGRESS.md（本记录）、docs/DECISIONS.md（新增 ADR-032）。
 - **安全/边界**：未读取/回显/覆盖 DEEPSEEK_API_KEY；未启用 WSA；未操作域名/ICP/小程序/GitHub 可见性；未删除云资源；未改 CORS；无 force push；未修改 219 例内容、未新增案例、未重新抓取网页。
+
+## PHASE_8_MINIMUM_GO_LIVE_PROTECTION（最低上线保护：限流/费用保护/kill switch，2026-08-29）
+
+> 阶段定义：线上 API 最低限度防滥用与费用保护（客户端限频、全局日模型额度、并发上限、kill switch、友好 429），全门禁后部署并 1 次真实 Smoke Test，通过后打 phase-8-minimum-go-live-protection 标签。结果：**PASS**。
+
+- **实现**：新增 functions/api/src/limit.ts（RequestGuard + FixedWindowCounterStore + 阈值配置 LIMIT_* + 北京时间日窗口 + 客户端 IP SHA-256 哈希键）；app.ts 入口预检（6/min、30/day、429+Retry-After+retryAfterSeconds）；ask.ts 引擎层模型槽位（100/day 全局真实调用 + 3 并发 + kill switch，未获槽位不调用 DeepSeek；try/finally 释放）；kill switch 双通道（构建期 KILL_SWITCH_BUILD=on → runtime-config.json / 运行时 LIMIT_KILL_SWITCH）；共享契约 error 扩展可选 retryAfterSeconds；apps/web 429 稳定中文提示（服务端文案直显；网关非 JSON 429 兜底文案）。
+- **默认阈值**：客户端 6/min、30/day；全局 DeepSeek 100/day；并发 3；kill switch 默认关。全部可由服务端环境变量调整（不触碰 DEEPSEEK_API_KEY，不整体覆盖 envVariables）。
+- **安全降级**：计数存储异常 → 客户端限制放行（可用性优先）、模型调用拒绝（费用保护优先）。
+- **测试（全部 mock，未调用 DeepSeek）**：api 60→63（无 Origin 也受限 429+Retry-After+友好文案、kill switch 0 次调用、全局日额度耗尽后 0 次调用）；新增 limit.test.mjs 11 项（阈值内通过、分钟超限、日超限、全局日额度、并发上限、共享存储计数不超发、kill switch、跨日重置、存储异常降级、文案契约、哈希键）；web 12→13（429 中文提示，不透出内部细节）；cases 14 项保持。
+- **全门禁（真实退出码）**：content:validate 0（36/219/1308/271）；retrieval:build 0；retrieval 33/33、case-corpus 14/14；shared 全绿（error schema 扩展 retryAfterSeconds）；search 16/16；web 13/13；api 63/63 + cases 14/14 + limit 11/11；pnpm run check **exit 0**；git diff --check 0。
+- **部署**：构建期 kill-ON 包 → 线上验证 kill switch（真实问题 → 429「服务暂时繁忙」+ Retry-After 600，0 次模型调用；out_of_scope 正常 200）→ 恢复包（kill OFF）部署 → 突发 8 连发实测 200×6+429×2（Retry-After 38s/37s）→ _verify-live **36/36** → Web 重建并 hosting deploy（68 文件；/ask noindex/sitemap/robots 不变）→ 最终 _verify-live 36/36。
+- **真实 Smoke Test（唯一 1 次）**：200 / answered / 15.712s / requestId fc99414e-5ba8-45f5-8a2e-6bc44860e1f3；applicableLaw 6 条 A（全国性）+ localGuidance 1 条 C 山东 + similarCases 2 条 B（四川/重庆 + 山东同地域），引用全部可解析；无密钥/堆栈。
+- **云端变更**：仅更新 laoyouju-api 函数（2 次：kill-ON 验证 + 恢复）与静态托管（68 文件）；未创建/升级资源、未创建数据库集合、未启用网关限频（CLI 限制，见下）、未操作其他环境、未触碰环境变量与 CORS。
+- **网关客户端限频（跨实例原生能力）尝试**：CloudBase 网关路由支持 qpsPolicy（qpsPerClient ClientIP）——原生、免费、跨实例；但 CLI 3.8.1 的 tcb routes edit --data 对一切合法 JSON 都报「JSON 数据格式错误 position 1」，经 4 种载荷变体 + 直接 node 调用 + 文件传参验证为 CLI 解析缺陷，未能启用。已在 SECURITY.md 记录：控制台「环境配置 → 安全控制 → 限频设置」可配置（PM 操作项）。
+- **跨实例确定性（如实）**：客户端/日额度、全局日额度与并发当前按【函数实例】计数（进程级存储）；严格跨实例精确共享需要 CloudBase 数据库服务端 API Key（CLOUDBASE_APIKEY —— 需控制台创建 API Key 并新增函数环境变量；受「不读取 DEEPSEEK_API_KEY 进行合并、不使用 CLI 整体覆盖 envVariables」约束本轮无法自动完成）——PM 决策项；应用层限制已上线并实测（6 次后 429），作为现阶段费用保护主体。
+- **费用**：真实 DeepSeek 调用 1 次（以腾讯云账单为准）；无付费资源创建/升级。
+- **Git**：main/59e7935 → fix/minimum-go-live-protection（0c8b54e）→ FF 合并 main → 推送 → annotated tag phase-8-minimum-go-live-protection（指向部署提交）；旧标签未移动、无 force push。
+- **安全红线**：未读取/回显/覆盖/要求重提供 DEEPSEEK_API_KEY；未使用 CLI 整体设置 envVariables；未创建或升级付费资源；未操作其他环境；未 force push；未 reset/checkout/clean 删除用户资料；未修改已有标签；真实 DeepSeek 调用恰 1 次。

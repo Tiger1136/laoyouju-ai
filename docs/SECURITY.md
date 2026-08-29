@@ -58,12 +58,14 @@
 - `Access-Control-Allow-Methods` 按路由设置：health 为 `GET, OPTIONS`，ask 为 `POST, OPTIONS`；
 - 不得原样反射未校验的 Origin。
 
-## 服务端限流（正式开放真实模型调用前的上线门槛）
+## 服务端限流与费用保护（Phase 8 已实现，2026-08-29）
 
-- 本阶段（Phase 4+5）接入的是 DeepSeek **调用实现**，但所有测试使用 mock fetch，未使用真实 Key、未调用真实模型、未产生费用；
-- 因此**尚未实现生产级限流**。在 Phase 6 配置云函数环境变量并开放真实模型调用前，必须实现可验证的服务端限流，否则不得开放真实模型调用；
-- 当前 API 已实现：输入长度限制、超时与输出 token 上限、非重试策略。生产级防滥用（频率/配额）仍在 Phase 6 落地；
-- 不得对外声称已具备生产防滥用能力。
+- **入口客户端限频**（functions/api/src/limit.ts + app.ts 入口预检）：默认每客户端每分钟 6 次、每天 30 次；客户端标识取 X-Forwarded-For 首址（网关标准）→ SHA-256 不可逆哈希（不存明文 IP）；无 Origin 的脚本/小程序请求同样受限；超限返回 **HTTP 429** + Retry-After + RATE_LIMITED 稳定错误（含 retryAfterSeconds）。
+- **全局 DeepSeek 调用保护**（引擎层 tryModelSlot）：默认全局每天最多 100 次真实模型调用、最多 3 个并发模型调用；额度用尽/并发占满 → 429（不调用 DeepSeek）；单次请求仍为单次模型调用、无重试。
+- **Kill switch（管理员紧急开关）**：默认关闭（服务可用）。两种触发方式：①构建期 KILL_SWITCH_BUILD=on 生成 runtime-config.json（functions/api/scripts/build-deploy.mjs），重新 tcb fn deploy 即生效；②运行时环境变量 LIMIT_KILL_SWITCH=on|true|1（控制台配置）。开启后不调用 DeepSeek，返回「服务暂时繁忙，请稍后再试。」；不影响 out_of_scope / needs_clarification 本地路径。**不读取/回显/覆盖 DEEPSEEK_API_KEY；不使用 CLI 整体覆盖 envVariables。**
+- **阈值可调**：LIMIT_CLIENT_PER_MINUTE / LIMIT_CLIENT_PER_DAY / LIMIT_GLOBAL_MODEL_PER_DAY / LIMIT_MAX_CONCURRENT_MODELS（服务端环境变量，控制台维护；缺省使用安全默认值）。
+- **存储与降级**：计数为进程级固定窗口存储（自动清扫、不永久积累）；存储异常时客户端限制降级放行（可用性优先），模型调用失败关闭（费用保护优先，返回 429）。
+- **已知局限（如实）**：①跨实例的客户端/日额度与全局日额度/并发目前按【函数实例】计数——跨实例精确共享需要 CloudBase 数据库服务端 API Key（CLOUDBASE_APIKEY，控制台配置），属 PM 决策项；②CloudBase 网关「客户端维度限频」（qpsPerClient，ClientIP）为原生跨实例能力，但 CLI 3.8.1 tcb routes edit 的 --data JSON 解析异常（连合法 JSON 也报错），未能在本轮启用，可在控制台「环境配置 → 安全控制 → 限频设置」配置；③同一公网出口 IP（NAT）的用户共享客户端额度，阈值可按需上调。
 
 ## CloudBase 部署安全（Phase 6）
 

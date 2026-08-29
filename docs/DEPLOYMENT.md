@@ -49,7 +49,20 @@ corepack pnpm -C functions/api run build:deploy
 
 ## 四、当前部署状态（截至记录）
 
-**当前（PHASE_7C.2 案例证据共现修复版，2026-08-29 本轮）**：
+**当前（PHASE_8 最低上线保护版，2026-08-29 本轮）**：
+
+| 项 | 状态 |
+|---|---|
+| 云函数 | ✅ 已部署（更新 laoyouju-api；tcb fn deploy api --region ap-shanghai，cloudbaserc.json 无 envVariables，控制台环境变量未触碰；未读取/回显/覆盖 DEEPSEEK_API_KEY） |
+| 保护内容 | 客户端入 6/min、30/day（X-Forwarded-For 首址 SHA-256 哈希键，无 Origin 同样受限）；全局模型 100/day、3 并发（引擎槽位，额度用尽/并发占满 → 429 不调用模型）；kill switch（默认关：构建期 KILL_SWITCH_BUILD=on 或运行时 LIMIT_KILL_SWITCH）；全部阈值 LIMIT_* 可调；429 返回 Retry-After + retryAfterSeconds + 稳定中文文案 |
+| Web | ✅ 已部署（以真实 API 地址重建：NEXT_PUBLIC_API_BASE_URL=…service.tcloudbase.com；NEXT_PUBLIC_SITE_URL=真实测试域；68 文件；429 触发稳定中文提示；/ask noindex、sitemap/robots 不变） |
+| CORS/SEO | ✅ 未变：预检 204 + 单值精确 ACAO；evil 403；/ask noindex；sitemap 无 /ask；robots Disallow /ask |
+| 线上验证 | ✅ _verify-live 36/36（含 219 caseId / 36 规范 / 18 山东案例 / 2 山东指引 / A/B/C 分区 / CORS / out_of_scope / noindex-sitemap-robots）；突发 8 连发 → 200×6 + 429×2（Retry-After 38s/37s，稳定中文文案）；kill switch 部署版：真实问题 → 429「服务暂时繁忙」且 0 次模型调用；恢复版部署后真实 DeepSeek Smoke Test 1 次：200 / answered / 15.712s / A+B+C 共现 / 引用全部可解析 |
+| 费用 | 真实 DeepSeek 调用 1 次（以腾讯云账单为准）；无付费资源创建/升级 |
+| 标签 | phase-8-minimum-go-live-protection（annotated）已创建并推送；旧标签未动 |
+| 已知局限 | 跨实例精确额度需 CloudBase 数据库服务端 API Key（CLOUDBASE_APIKEY，PM 决策）；网关 qpsPerClient 因 CLI 3.8.1 routes edit JSON 解析异常未启用（可在控制台配置）；NAT 共享 IP 用户共享客户端额度 |
+
+**上一轮（PHASE_7C.2 案例证据共现修复版，2026-08-29）**：
 
 | 项 | 状态 |
 |---|---|
