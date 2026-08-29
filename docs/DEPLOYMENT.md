@@ -49,7 +49,20 @@ corepack pnpm -C functions/api run build:deploy
 
 ## 四、当前部署状态（截至记录）
 
-**当前（PHASE_7C 219 例版，2026-08-29 本轮）**：
+**当前（PHASE_7C.2 案例证据共现修复版，2026-08-29 本轮）**：
+
+| 项 | 状态 |
+|---|---|
+| 云函数 | ✅ 已部署（更新 laoyouju-api；tcb fn deploy api --region ap-shanghai，cloudbaserc.json 无 envVariables，控制台环境变量未触碰；未读取/回显/覆盖 DEEPSEEK_API_KEY） |
+| 部署包 | esbuild 单文件 bundle（约 738.8KB，含 api+shared+retrieval+search+zod）+ content/laws(36) + content/cases(**219**) + content/sources/registry.json(271) + scf_bootstrap + 最小 package.json；bundle 扫描无 sk- 模式（DEEPSEEK_API_KEY 仅环境变量名引用） |
+| 本次变更 | functions/api/src/cases.ts（新增，确定性官方案例组装：模型引用验证 + 主检索池/按 topicIds 补充检索候选 + 同地域>全国性>其他省份排序 + 边界说明 + 共现契约）+ ask.ts 第 9.5 步集成 + prompt.ts 提示微调；**未改内容库、未新增案例、未抓取网页；Web 无代码变更未重新部署** |
+| similarCases 行为 | 仅当全部 219 例确无合格 B 级候选时才显示「未找到可核验的高度相似官方案例」；answered + 已推断主题 + 合格候选时至少 1 条 B；最多 2 条；外地案例带「（案例适用地域：X；外地类案仅供参考，各地裁审口径可能不同）」，同地域/全国性案例带实际地域与类案参考说明 |
+| 真实 DeepSeek Smoke Test | ✅ answered（requestId **02521d07-52da-4753-9d56-44065dbdfb74**）：同一竞业限制问题 → HTTP 200 / **14.593s** / applicableLaw 6 条全 A 级（全国性）+ localGuidance 1 条 C 级山东指引 + **similarCases 2 条 B 级官方案例**（四川/重庆案例：模型引用，标注实际适用地域与「外地类案仅供参考」；山东同地域案例：引擎补充检索确定性加入，标注「山东省官方案例，供类案参考；案例不具有普遍约束力」）；引用全部来自本次 sources 且可解析；八段完整；无虚构/无密钥/无堆栈。**全程仅 1 次真实 DeepSeek 调用**（mock/fixture 先验证捕获脚本；失败不重试） |
+| CORS/SEO | ✅ 未变：预检 204 + 单值精确 ACAO；evil 403；/ask noindex；sitemap 无 /ask；robots Disallow /ask |
+| 费用 | 真实 DeepSeek 调用 1 次（以腾讯云账单为准；本环境无法读取计费金额）；无付费资源创建/升级 |
+| 标签 | ✅ phase-7c2-case-copresence（annotated）已创建并推送；既有 phase-7b-live-201 / phase-7c-shandong-219 未动 |
+
+**上一轮（PHASE_7C 219 例版，2026-08-29；已被 7C.2 取代）**：
 
 | 项 | 状态 |
 |---|---|

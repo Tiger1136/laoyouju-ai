@@ -37,6 +37,16 @@
 - 真实 DeepSeek Smoke Test 通过（唯一 1 次调用）：HTTP 200 / answered / 13.7s，applicableLaw 6 条全 A 级 + localGuidance C 级山东指引（明确仅适用山东、非全国统一规则）+ 八段结构完整、引用全部可解析；
 - 线上 /cases 唯一 caseId=219（山东 18）、/laws 唯一规范=36；CORS/SEO/out_of_scope/400/413 安全规则全部通过；
 - 标签 phase-7c-shandong-219 已创建；山东剩余官方批次为持续扩充 backlog。
+
+**2026-08-29 Phase 7C.2 更新：官方案例证据共现已修复并上线（main 30d066c，标签 phase-7c2-case-copresence）**：
+- **根因**：similarCases 只依赖模型主动引用案例；线上竞业限制 Smoke Test 时模型写「未找到可核验的高度相似官方案例」占位，而证据中其实已有 3 条 B 级官方案例（S8～S10）；同地域山东竞业案例（case-sd-ldzzy-2021-04-02）还在主检索 top10 池之外，引擎缺少确定性补充。
+- **修复**：新增 functions/api/src/cases.ts 确定性组装模块，并在 ask.ts 第 9.5 步集成、微调 prompt 提示；similarCases 由引擎统一组装——先验证模型引用（B 级 + case + topicIds 交集），再从主检索池与按推断 topicIds 的确定性补充检索（topK=20）收集合格候选，按「话题交集 > 同地域 > 全国性 > 其他省份 > 分数」确定性排序，最多 2 条；地域只作排序偏好、绝不硬过滤。
+- **边界说明（引擎生成，不依赖模型）**：全国性案例=「全国性参考案例，供类案参考；案例不具有普遍约束力」；同地域案例=「（X省官方案例，供类案参考；案例不具有普遍约束力）」；外地案例=「（案例适用地域：X；外地类案仅供参考，各地裁审口径可能不同）」。
+- **共现契约**（answered + 已推断主题 + 合格 B 级候选 → similarCases ≥ 1 条 B）：evaluateCopresenceContract 为共享断言（引擎 + 测试双端使用）；只有全部 219 例确无合格候选时才允许诚实占位。
+- **测试**：api 48→60（新增 12 项：山东/未知地域/北京竞业限制、违法解除、克扣提成、加班、工伤、二倍工资、劳务派遣 A+B 共现，支付宝提现 out_of_scope 零调用零来源，模型引用验证+确定性排序，双次运行结果一致）；新增 cases.test.mjs 14 项（地域归一化/排序/边界文案/候选收集/契约/确定性/负向，合成内容库不绑定 sourceId）。
+- **门禁全绿**：content:validate（36/219/1308/271）、retrieval 33/33、case-corpus 14/14、shared 37/37、api 60/60 + 14/14、web 32/32、search 16/16，`pnpm run check` exit 0，`git diff --check` exit 0。
+- **线上验收**：_verify-live 36/36 通过；真实 DeepSeek Smoke Test 仅 1 次调用：HTTP 200 / answered / 14.593s，applicableLaw 6 条全 A（全国性）+ localGuidance 1 条 C 级山东指引 + similarCases 2 条 B 级（山东同地域案例【引擎补充】＋四川/重庆案例【模型引用，注明适用地域与「外地类案仅供参考」】），引用全部可解析、无虚构、无密钥、无堆栈。
+
 **仍未完成**：小程序端（Phase 1D 延后）、独立域名/备案/正式搜索收录（Phase 7）、内容专业复核；当前为默认测试域名与体验环境；独立域名/ICP 未完成。
 
 **下一阶段**：Phase 7 —— 小程序开发与搜索收录（独立域名/ICP 待办）。

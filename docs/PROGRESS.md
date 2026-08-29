@@ -309,3 +309,22 @@
 - **标签**：phase-7c-shandong-219（annotated）已创建并推送；main HEAD=b7f6f1d；feature 分支保留。
 - **文档**：README.md、docs/DEPLOYMENT.md、docs/PROGRESS.md、docs/CONTENT_REVIEW.md（本记录）。
 - **安全/边界**：未读取/回显/覆盖 DEEPSEEK_API_KEY；未启用 WSA；未操作域名/ICP/小程序/GitHub 可见性；未删除云资源；未改 CORS；无 force push。
+
+## PHASE_7C_2_CASE_EVIDENCE_COPRESENCE_FIX（证据共现修复与验收，2026-08-29）
+
+> 阶段定义：修复「有效劳动争议问题有相关 B 级官方案例，但回答仍显示未找到案例」。先诊断（禁止调参），再实现通用、确定性、可测试的官方案例组装逻辑，附加共现契约与回归矩阵，全门禁后 FF 合并、部署，线上 1 次真实 DeepSeek Smoke Test 通过后创建 phase-7c2-case-copresence 标签。结果：**PASS**（无子代理）。
+
+- **诊断（根因，两层）**：①similarCases 只由模型输出驱动——线上竞业限制 Smoke Test 证据已含 3 条 B 级案例（S8 川渝 / S9 主体不适格 / S10 新疆），模型仍写「未找到可核验的高度相似官方案例」占位，引擎无确定性补充；②同地域山东案例（case-sd-ldzzy-2021-04-02「用人单位未支付竞业限制经济补偿劳动者可不受竞业限制的约束」）不在主检索 top10 池内（BM25 排名约 15+），不补充检索则永远选不到。结论：不是检索阈值/地域硬过滤/C 级挤占的问题（C 级指引 S7 在证据窗口内但未挤掉案例槽位；案例槽位上限 3 保留）；是「模型不选 → 引擎不补」的组装缺口。
+- **修复**：新增 functions/api/src/cases.ts（确定性组装模块）+ ask.ts 第 9.5 步集成 + prompt.ts 提示微调（提示模型引用最相关类案即可，系统会确定性核验补充）。similarCases 由引擎统一组装：模型引用先验证（B 级 + case + 与推断 topicIds 有交集），与主检索池、按推断 topicIds 的确定性补充检索（TOPIC_QUERY_MAP 查询 + topic 过滤 + topK=20 + MIN_RELEVANCE_SCORE=8 门槛）合并候选，按「话题交集数（降序）→ 同地域 > 全国性 > 其他省份 → score（降序）→ chunkId（稳定）」排序，最多 2 条。
+- **地域策略**：只作排序偏好、绝不硬过滤（无「山东=山东案例」过滤代码）；优先级：①同主题同地域 ②同主题全国性/最高法 ③同主题其他省份；外地案例统一由引擎生成边界说明「（案例适用地域：X；外地类案仅供参考，各地裁审口径可能不同）」，同地域/全国性分别为「（X省官方案例，供类案参考；案例不具有普遍约束力）」「（全国性参考案例，供类案参考；案例不具有普遍约束力）」。
+- **共现契约**（evaluateCopresenceContract / collectSimilarCaseCandidates）：answered + ≥1 个已推断主题 + 存在合格 B 级候选 → similarCases 至少 1 条 B；needs_clarification / out_of_scope / 无合格候选不强制；只有全部 219 例确无合格候选才允许诚实占位；不降低 out_of_scope 门槛、不把 C 级写入 similarCases、不把 B 级写入 applicableLaw、不编造案号/机关/金额。
+- **测试**：api.test.mjs 48→60（12 项新增：线上形态山东竞业限制【模型写占位→引擎补案例、同地域优先】、未知地域（A+B，山东指引条件化表述）、北京（无山东指引、可用全国/相关案例）、违法解除/克扣提成/加班/工伤/二倍工资/劳务派遣 A+B 共现、支付宝提现 out_of_scope 零模型调用零来源、模型引用验证+确定性排序、双次运行结果一致）；新增 cases.test.mjs 14 项（地域归一化含城市映射、地域分组、排序、候选收集含补充检索、边界文案、chooseSimilarCases、占位识别、共现契约、确定性、低于门槛负向；合成内容库，不绑定真实 sourceId）。全部断言 sourceLevel/sourceType/topicIds 交集/citation 可解析/地域边界说明/确定性，不绑定具体 sourceId。
+- **门禁（全部 exit 0）**：content:validate（36/219/1308/271）；retrieval:build（docs=1527）；retrieval.test 33/33；case-corpus.test 14/14；lint/typecheck/build 全 Done；shared 37/37、search 16/16、web 32/32、api 60/60 + cases 14/14；pnpm run check exit 0；git diff --check 0；密钥扫描（diff 无 sk-./DEEPSEEK_API_KEY= 值；.env.example 占位为既有）干净；临时探针已清理（诊断脚本在 _scratch，未在仓库根目录遗留）。
+- **合并**：从 main（55341d0）创建 fix/case-evidence-copresence → 提交 30d066c（fix: ensure official case evidence coexists with applicable law；6 文件 +985/-5）→ 推送 → FF 合并至 main（55341d0..30d066c）→ 推送 main；fix 分支保留；既有 phase-7b-live-201 / phase-7c-shandong-219 标签未动。
+- **部署**：build:deploy（738.8kb bundle；无 sk- 模式；DEEPSEEK_API_KEY 仅 1 处环境变量名引用）；tcb fn deploy api --region ap-shanghai（cloudbaserc.json 无 envVariables；未读取/回显/覆盖密钥；未创建/升级付费资源；仅操作 laoyouju-demo-d0g2c7d8sb319ddf3）。Web 无代码变更，无需重新部署。
+- **线上验收**：_verify-live 36/36（health 200；219 唯一 caseId；36 规范；18 山东案例；2 山东 C 级指引；A/B/C 分区与标签；CORS 精确单值/evil 403/无 *；out_of_scope 零来源；/ask noindex；sitemap 无 /ask；robots Disallow /ask；空白/标点/超长/超大输入错误码）。
+- **真实 Smoke Test（唯一 1 次调用）**：mock/fixture 先行验证捕获脚本（0 issues；mock 不访问线上）→ live 单次：200 / answered / 14.593s / requestId 02521d07-52da-4753-9d56-44065dbdfb74；applicableLaw 6 条全 A（劳动合同法 §23/§24、解释（一）§36/§37/§38/§39）；localGuidance 1 条 C 级山东指引（仅适用于山东省、不属于全国统一法律规则）；**similarCases 2 条 B 级**——四川/重庆案例【模型引用，标注「（案例适用地域：四川省、重庆市；外地类案仅供参考，各地裁审口径可能不同）」】＋山东同地域案例【引擎按 topicIds 补充检索确定性加入，标注「（山东省官方案例，供类案参考；案例不具有普遍约束力）」】；引用全部可解析；八段完整；无虚构法条/案例/案号/机关/金额/网址；无密钥/堆栈/环境变量；失败不重试（未触发）。
+- **费用**：真实 DeepSeek 调用共 1 次（以腾讯云账单为准；本环境无法读取计费金额）；无付费资源创建/升级；CloudBase 体验版无新增费用。
+- **标签**：phase-7c2-case-copresence（annotated）已创建并推送（说明：Phase 7C.2 live: applicable law and verified official case evidence coexist for in-scope labor dispute answers.）；main HEAD=30d066c。
+- **文档**：README.md、docs/DEPLOYMENT.md、docs/PROGRESS.md（本记录）、docs/DECISIONS.md（新增 ADR-032）。
+- **安全/边界**：未读取/回显/覆盖 DEEPSEEK_API_KEY；未启用 WSA；未操作域名/ICP/小程序/GitHub 可见性；未删除云资源；未改 CORS；无 force push；未修改 219 例内容、未新增案例、未重新抓取网页。
