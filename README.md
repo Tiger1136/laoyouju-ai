@@ -32,7 +32,12 @@
 - **Web**：/laws 分区展示“国家法律法规与司法解释（A 级）”与“地方裁审参考（C 级，仅山东省）”；/cases 区分山东省官方案例并标注发布机关/适用地域；/ask 国家法律、山东地方指引、官方案例使用不同标题与文字标签；/ask 保持 noindex，sitemap/robots 不变；
 - **门禁全绿**：content:validate（36/219/1308/271）、retrieval 33/33、case-corpus 14/14、shared 37/37、api 48/48、web 32/32、search 16/16，`pnpm run check` exit 0，`git diff --check` exit 0。
 
-**仍未完成**：小程序端（Phase 1D 延后）、独立域名/备案/正式搜索收录（Phase 7）、内容专业复核；当前分支未合并 main、未部署（线上仍为早期版本）。
+**2026-08-29 更新：Phase 7C 219 例版已合并至 main 并部署上线（CloudBase 体验环境，默认测试域名；仍为测试版，未做正式搜索收录）**：
+- 18 例山东官方案例、2 份山东 C 级地方裁审指引随 219 例版上线；A/B/C 产品级分层（法律=唯一依据 / 案例=类案参考 / 山东指引=仅山东、非全国规则）在 API 与 Web 生效；
+- 真实 DeepSeek Smoke Test 通过（唯一 1 次调用）：HTTP 200 / answered / 13.7s，applicableLaw 6 条全 A 级 + localGuidance C 级山东指引（明确仅适用山东、非全国统一规则）+ 八段结构完整、引用全部可解析；
+- 线上 /cases 唯一 caseId=219（山东 18）、/laws 唯一规范=36；CORS/SEO/out_of_scope/400/413 安全规则全部通过；
+- 标签 phase-7c-shandong-219 已创建；山东剩余官方批次为持续扩充 backlog。
+**仍未完成**：小程序端（Phase 1D 延后）、独立域名/备案/正式搜索收录（Phase 7）、内容专业复核；当前为默认测试域名与体验环境；独立域名/ICP 未完成。
 
 **下一阶段**：Phase 7 —— 小程序开发与搜索收录（独立域名/ICP 待办）。
 

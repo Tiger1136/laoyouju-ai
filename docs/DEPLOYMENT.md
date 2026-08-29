@@ -49,7 +49,22 @@ corepack pnpm -C functions/api run build:deploy
 
 ## 四、当前部署状态（截至记录）
 
-## 四、当前部署状态（截至记录）
+**当前（PHASE_7C 219 例版，2026-08-29 本轮）**：
+
+| 项 | 状态 |
+|---|---|
+| 云函数 | ✅ 已部署（更新 laoyouju-api；tcb fn deploy，cloudbaserc.json 无 envVariables，控制台环境变量未触碰；未读取/回显/覆盖 DEEPSEEK_API_KEY） |
+| 部署包 | esbuild 单文件 bundle（约 729KB，含 api+shared+retrieval+search+zod）+ content/laws(36：34 全国 A 级 + 2 山东 C 级指引) + content/cases(**219**) + content/sources/registry.json(271) + scf_bootstrap + 最小 package.json；本地干净目录验证通过（health 200 / 红烧肉 out_of_scope 0 sources / 无 Key 劳动问题 503）；**未包含** .env、node_modules、.git、content/raw、content/.index、.v1-bak、临时日志（build-deploy 以 rmSync 重建部署目录） |
+| 数据规模 | laws=36 / cases=**219** / provisions=1308 / registry=271（本地 content:validate PASS；线上 /cases 统计**唯一 caseId=219**、山东 caseId=18；/laws 统计唯一规范=36、含 2 份山东 C 级地方指引 ID——第一重证明；部署包文件计数 laws=36/cases=219/registry=1 为第二重证明） |
+| Web | ✅ 已部署（以真实 API 地址重建：NEXT_PUBLIC_API_BASE_URL=…service.tcloudbase.com；NEXT_PUBLIC_SITE_URL=真实测试域；65 个文件；/、/laws、/cases、/topics、/ask 全部 200） |
+| A/B/C 分层线上展示 | ✅ /laws 分区（国家法律法规与司法解释 A 级 / 地方裁审参考 C 级·仅山东省，山东卡片标签“山东省 · C级 · 地方裁审参考 · 不属于全国统一法律依据”）；/cases 分区（山东省官方案例 B 级·类案参考 + 发布机关 + 适用地域）；/ask 回答三段标题（适用法律 A 级 / 山东地区裁审参考 C 级 / 相似官方案例 B 级）+ 来源卡片分级/类型文字标签 |
+| CORS | ✅ 预检 204 + 单值精确 ACAO=网站 Origin（网关单独输出，函数不叠加）；POST 成功响应单值精确 ACAO；evil Origin 403 且不反射；无 * |
+| out_of_scope | ✅ 线上：支付宝提现手续费/怎么做红烧肉 → 200 out_of_scope（固定助手文案、sources=0，不调用模型）；空白/纯标点/超长 → 400；>8192 字节 → 413 |
+| 真实 DeepSeek Smoke Test | ✅ answered（requestId **bdc19ab0-40dc-41d2-b385-769e0626e8dd**）：“我在山东工作，公司要求我遵守竞业限制，但协议没有约定竞业补偿，这份协议有效吗？” → HTTP 200 / **13.7s** / applicableLaw 6 条全 A 级（劳动合同法 §23/§24、解释（一）§36–§39）+ localGuidance 1 条 C 级山东指引（明确“仅适用于山东省，不属于全国统一法律规则”）+ similarCases 诚实占位（未找到高度相似官方案例）；引用全部来自本次 sources；八段结构完整；无密钥/堆栈泄露。**全程仅 1 次真实 DeepSeek 调用**（先以 mock/fixture 验证捕获脚本，真实调用失败不重试） |
+| 费用 | 真实 DeepSeek 调用 1 次（以腾讯云账单为准）；无付费资源创建/升级；无其他云端费用 |
+| 备注 | 山东剩余官方批次为持续扩充 backlog（本轮未抓取/拆分/补写案例）；当前仍为默认测试域名（*.tcloudbase.com/*.tcloudbaseapp.com）与体验版环境；独立域名/ICP/正式搜索收录/小程序未完成 |
+
+> 部署过程修复：CloudBase 静态托管 CDN 对 /laws/index.html 缓存了旧对象（Phase 7B 版本），多次 tcb hosting deploy 未刷新；已删除该陈旧静态对象并显式重新上传新文件（tcb hosting deploy apps/web/out/laws/index.html laws/index.html），随后线上 /laws 恢复为新版本（36 规范/分区/标签校验通过）。仅涉及该单个静态页面对象的维护，未删除任何云资源/函数/环境。
 
 **当前（PHASE_7B 201 例版，2026-08-28 本轮）**：
 
