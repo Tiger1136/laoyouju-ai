@@ -17,6 +17,7 @@
     "test": "node tests/api.test.mjs && node tests/cases.test.mjs && node tests/limit.test.mjs"
   },
   "dependencies": {
+    "@cloudbase/node-sdk": "3.18.3",
     "@laoyouju/retrieval": "workspace:*",
     "@laoyouju/shared": "workspace:*",
     "@laoyouju/search": "workspace:*"

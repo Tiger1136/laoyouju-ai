@@ -21,6 +21,7 @@ import { loadContent } from "@laoyouju/retrieval";
 import { classifyScope, extractFacts, decomposeIssues, missingRequiredFacts, isSituationQuestion } from "../dist/analyze.js";
 import { extractCitationRefs, decideSearchUse, MAX_OUTPUT_TOKENS, DEFAULT_TIMEOUT_MS } from "../dist/ask.js";
 import { RequestGuard, limitMessage } from "../dist/limit.js";
+import { MemoryBudgetStore } from "../dist/shared-budget.js";
 import { QUESTION_MATRIX, MATRIX_COUNTS } from "./question-matrix.mjs";
 
 const LOADED_LAWS = loadContent().laws;
@@ -138,6 +139,7 @@ function mockQuestionContext() {
         maxConcurrentModels: 100000,
         killSwitch: false,
       },
+      sharedBudget: new MemoryBudgetStore(),
     }),
   };
 }
@@ -1396,6 +1398,7 @@ function createStrictLimitServer(overrides = {}) {
       ...mockQuestionContext(),
       guard: new RequestGuard({
         config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+        sharedBudget: new MemoryBudgetStore(),
       }),
       ...overrides,
     },
@@ -1434,7 +1437,7 @@ test("Phase 8：kill switch 开启时模型调用次数为 0（HTTP 429 + 无堆
   const counter = [];
   const server2 = createStrictLimitServer({
     fetchFn: mockDeepSeekFetchNoCases({ capture: counter }),
-    guard: new RequestGuard({ config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: true } }),
+    guard: new RequestGuard({ config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: true }, sharedBudget: new MemoryBudgetStore() }),
   });
   const port = await listenRandom(server2);
   const base = "http://127.0.0.1:" + port;
@@ -1458,7 +1461,7 @@ test("Phase 8：全局日额度耗尽后不调用模型（HTTP 429；并发释�
   const counter = [];
   const server2 = createStrictLimitServer({
     fetchFn: mockDeepSeekFetchNoCases({ capture: counter }),
-    guard: new RequestGuard({ config: { clientPerMinute: 100, clientPerDay: 100, globalModelPerDay: 1, maxConcurrentModels: 3, killSwitch: false } }),
+    guard: new RequestGuard({ config: { clientPerMinute: 100, clientPerDay: 100, globalModelPerDay: 1, maxConcurrentModels: 3, killSwitch: false }, sharedBudget: new MemoryBudgetStore() }),
   });
   const port = await listenRandom(server2);
   const base = "http://127.0.0.1:" + port;

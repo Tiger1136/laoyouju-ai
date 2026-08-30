@@ -54,6 +54,7 @@ import {
   rankCaseCandidates,
 } from "./cases.js";
 import { RequestGuard, limitMessage, resolveLimitConfig, type LimitDecision } from "./limit.js";
+import { CloudbaseBudgetStore, resolveSharedBudgetConfig } from "./shared-budget.js";
 import { buildMessages } from "./prompt.js";
 
 /** answered 输出上限：1200～1400 tokens（八段结构仍完整；同步链路约束下不再让模型生成双份输出）。 */
@@ -189,6 +190,11 @@ export function loadAskResources(): { index: BuiltIndex; sourceMeta: Map<string,
   return cachedResources;
 }
 
+/** Phase 8.1：构造共享预算存储（CLOUDBASE_APIKEY 未配置时 configured=false → 模型槽位安全关闭）。 */
+export function createSharedBudgetStore(): CloudbaseBudgetStore {
+  return new CloudbaseBudgetStore(resolveSharedBudgetConfig());
+}
+
 export function createDefaultAskContext(): AskContext {
   const { index, sourceMeta } = loadAskResources();
   return {
@@ -201,8 +207,11 @@ export function createDefaultAskContext(): AskContext {
     now: new Date().toISOString().slice(0, 10),
     timeoutMs: DEFAULT_TIMEOUT_MS,
     maxTokens: MAX_OUTPUT_TOKENS,
-    // Phase 8：上线保护（客户端限频/全局日额度/并发/kill switch；默认阈值可经 LIMIT_* 环境变量覆盖）。
-    guard: new RequestGuard({ config: resolveLimitConfig() }),
+    // Phase 8/8.1：上线保护（客户端限频/跨实例共享全局日额度/并发/kill switch；默认阈值可经 LIMIT_* 覆盖）。
+    guard: new RequestGuard({
+      config: resolveLimitConfig(),
+      sharedBudget: createSharedBudgetStore(),
+    }),
   };
 }
 
@@ -906,11 +915,13 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
   //     Phase 8：占用模型槽位（kill switch / 全局日额度 / 并发上限）；未获槽位不得调用 DeepSeek。
   let content: string;
   let heldModelSlot = false;
+  let heldLeaseId: string | undefined;
   if (ctx.guard !== undefined) {
-    const slot = ctx.guard.tryModelSlot();
+    const slot = await ctx.guard.tryModelSlot();
     if (!slot.allowed) {
       return limitPayload(requestId, slot);
     }
+    heldLeaseId = slot.leaseId;
     heldModelSlot = true;
   }
   try {
@@ -933,7 +944,7 @@ export async function runAsk(question: string, requestId: string, ctx: AskContex
     return { status: 502, errorCode: "UPSTREAM_ERROR", payload: errorBody(requestId, "UPSTREAM_ERROR", "上游模型服务暂时不可用，请稍后再试", true) };
   } finally {
     if (heldModelSlot) {
-      ctx.guard?.releaseModelSlot();
+      await ctx.guard?.releaseModelSlot(heldLeaseId);
     }
   }
 
