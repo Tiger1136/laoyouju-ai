@@ -14,4 +14,3 @@ allowBuilds:
 # pnpm 11 自动记录的“最低发布年龄豁免”条目（next@16.3.3 发布未满最低发布年龄，由 pnpm 维护）
 minimumReleaseAgeExclude:
   - next@16.3.3
-
