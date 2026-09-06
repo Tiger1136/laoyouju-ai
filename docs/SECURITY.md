@@ -65,7 +65,28 @@
 - **Kill switch（管理员紧急开关）**：默认关闭（服务可用）。两种触发方式：①构建期 KILL_SWITCH_BUILD=on 生成 runtime-config.json（functions/api/scripts/build-deploy.mjs），重新 tcb fn deploy 即生效；②运行时环境变量 LIMIT_KILL_SWITCH=on|true|1（控制台配置）。开启后不调用 DeepSeek，返回「服务暂时繁忙，请稍后再试。」；不影响 out_of_scope / needs_clarification 本地路径。**不读取/回显/覆盖 DEEPSEEK_API_KEY；不使用 CLI 整体覆盖 envVariables。**
 - **阈值可调**：LIMIT_CLIENT_PER_MINUTE / LIMIT_CLIENT_PER_DAY / LIMIT_GLOBAL_MODEL_PER_DAY / LIMIT_MAX_CONCURRENT_MODELS（服务端环境变量，控制台维护；缺省使用安全默认值）。
 - **存储与降级**：计数为进程级固定窗口存储（自动清扫、不永久积累）；存储异常时客户端限制降级放行（可用性优先），模型调用失败关闭（费用保护优先，返回 429）。
-- **已知局限（如实）**：①跨实例的客户端/日额度与全局日额度/并发目前按【函数实例】计数——跨实例精确共享需要 CloudBase 数据库服务端 API Key（CLOUDBASE_APIKEY，控制台配置），属 PM 决策项；②CloudBase 网关「客户端维度限频」（qpsPerClient，ClientIP）为原生跨实例能力，但 CLI 3.8.1 tcb routes edit 的 --data JSON 解析异常（连合法 JSON 也报错），未能在本轮启用，可在控制台「环境配置 → 安全控制 → 限频设置」配置；③同一公网出口 IP（NAT）的用户共享客户端额度，阈值可按需上调。
+- **已知局限（如实）**：①跨实例的客户端/日额度与全局日额度/并发目前按【函数实例】计数——跨实例精确共享需要 CloudBase 数据库服务端 API Key（CLOUDBASE_APIKEY，控制台配置），属 PM 决策项；②CloudBase 网关「客户端维度限频」（qpsPerClient，ClientIP）为原生跨实例能力，但 CLI 3.8.1 tcb routes edit 的 --data JSON 解析异常（连合法 JSON 也报错），未能在本轮启用，可在控制台「环境配置 → 安全控制 → 限频设置」配置；③同一公网出口 IP（NAT）的用户共享客户端额度，阈值可按需上调；④Phase 9 起 VPS 单机形态以 SQLite 预算库提供**跨进程/跨实例精确共享**（多进程共享同一文件时原子性由 SQLite 写锁保证）。
+
+## Phase 9：VPS/轻量服务器部署安全（信任边界、预算存储、密钥落位，2026-09-05）
+
+- **预算存储选择（BUDGET_STORE）**：显式选择 sqlite（普通 Linux 单机；better-sqlite3@12.11.1，Node >=20 <25，文件放独立持久化数据目录，绝对路径 BUDGET_SQLITE_PATH）或 cloudbase（旧环境回退，CLOUDBASE_APIKEY）。缺失、非法值（含 memory）→ 真实模型调用安全失败（429 STORE_ERROR），**绝不静默降级到内存预算**；数据库不可用/损坏/写入失败同样失败关闭。
+- **监听地址（HOST）**：默认 0.0.0.0 保留 CloudBase 平台需要；VPS 环境文件必须显式 HOST=127.0.0.1，Node 端口（默认 9000）只监听回环；Nginx 80 提供静态前端并反代 /api/ 到本机 Node；防火墙/安全组同样拒绝 9000（双重防线，healthcheck/verify 脚本断言）。
+- **真实客户端 IP 信任边界（TRUSTED_PROXY）**：只有来自受信任对端（VPS=本机 Nginx 127.0.0.1）或 CloudBase 网关（x-cloudbase-request-id/session-id 标记）的请求，才采用 X-Forwarded-For 首地址作为客户端 IP；其余一律取 socket 对端地址，避免用户伪造转发头绕过客户端限频。Nginx 配置以 $remote_addr **覆盖**外部自带 X-Forwarded-For（不拼接、不沿用转发头链），代理写入 X-Real-IP 与 X-Forwarded-Proto。
+- **密钥落位**：密钥只存在于服务器 /etc/laoyouju/laoyouju.env（0600 root:laoyouju；install.sh 首次创建、绝不覆盖）；不写入 Git、日志、命令历史、构建产物或报告；本仓库所有模板均为密钥占位。
+- **进程与加固**：systemd 专用 laoyouju（nologin）用户；NoNewPrivileges / ProtectSystem=strict / ProtectHome / PrivateTmp / ReadOnlyPaths=/opt/laoyouju / ReadWritePaths=/var/lib|log/laoyouju / CapabilityBoundingSet= 空 / Restart=on-failure（5s）；发布目录、持久化数据、环境配置、日志分离；不安装宝塔/WordPress/Hermes/OpenClaw/DeepSeek Harness 等无关软件。
+- **日志**：应用日志（journald，SystemMaxUse=64M）只记录 requestId/method/pathname/status/duration/errorCode，不记录问题正文/body/headers/环境变量；Nginx access/error 日志不输出请求体；日志轮转见 deploy/vps/README.md。
+- **本阶段安全边界**：不解析域名、不配置 HTTPS/证书、不做域名访问；只通过公网 IPv4 HTTP 受控验证；旧 CloudBase 环境与部署方案保留（不删除、不修改 cloudbaserc.json）。
+
+## Phase 9A：正式部署前安全整改（2026-09-05，追加）
+
+- **首次公网 IP 部署默认开启保护**：VPS 环境文件示例 `LIMIT_KILL_SWITCH=on`、`DEEPSEEK_API_KEY=` 留空——未获真实模型测试授权前不可能产生模型调用；授权后改 `off` 并配置密钥（仅服务器受限环境文件）。
+- **HOST 失败开放禁止**：显式非法 HOST → 进程拒绝启动（退出码 1）；未配置时保留 0.0.0.0 仅用于 CloudBase 兼容，VPS 环境文件强制 127.0.0.1。
+- **信任边界不变并加强**：TRUSTED_PROXY 仅白名单对端（本机 Nginx 127.0.0.1）的 X-Forwarded-For 被采用；Nginx 以 `$remote_addr` 覆盖外部自带转发头；契约测试与外部验证脚本均覆盖“伪造 XFF 不能绕过限流”。
+- **SQLite 完整性**：`PRAGMA quick_check` 结果必须为 ok（非 ok → 连接关闭、失败关闭）；备份必须经 quick_check 校验；恢复前校验备份并保存当前库副本，失败自动回滚。
+- **SELinux（OpenCloudOS）**：Enforcing 下仅设置最小策略（httpd_sys_content_t 上下文 + 9000 端口纳入 http_port_t），绝不关闭 SELinux；发布后对新静态文件 restorecon。
+- **外部公网验证**：真实外部验证由开发机 verify-external.ps1 执行（IP 脱敏输出）；服务器内“访问自身公网 IP”仅视为自检，不作为外部验证证据。
+
+
 
 ## CloudBase 部署安全（Phase 6）
 

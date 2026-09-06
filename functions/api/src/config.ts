@@ -4,6 +4,7 @@ import {
   TencentWSASearchProvider,
   type SearchProvider,
 } from "@laoyouju/search";
+import { normalizePeerAddress } from "./http.js";
 
 export interface DeepSeekConfig {
   apiKey: string;
@@ -40,4 +41,18 @@ export function resolveAllowedOrigins(env: NodeJS.ProcessEnv = process.env): str
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
   return [...new Set(parts)];
+}
+
+/**
+ * Phase 9：受信任反向代理地址列表（TRUSTED_PROXY，逗号分隔，如 127.0.0.1,::1）。
+ * 只有来自这些 peer 的请求才会采用 X-Forwarded-For 作为客户端 IP；
+ * 未配置时不信任任何转发头（客户端 IP 取 socket 对端地址）。
+ */
+export function resolveTrustedProxies(env: NodeJS.ProcessEnv = process.env): string[] {
+  return (env.TRUSTED_PROXY ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+    .map(normalizePeerAddress)
+    .filter((s) => s.length > 0);
 }

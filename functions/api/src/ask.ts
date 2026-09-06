@@ -54,7 +54,8 @@ import {
   rankCaseCandidates,
 } from "./cases.js";
 import { RequestGuard, limitMessage, resolveLimitConfig, type LimitDecision } from "./limit.js";
-import { CloudbaseBudgetStore, resolveSharedBudgetConfig } from "./shared-budget.js";
+import { resolveBudgetStore } from "./budget.js";
+import type { SharedBudgetStore } from "./shared-budget.js";
 import { buildMessages } from "./prompt.js";
 
 /** answered 输出上限：1200～1400 tokens（八段结构仍完整；同步链路约束下不再让模型生成双份输出）。 */
@@ -190,9 +191,13 @@ export function loadAskResources(): { index: BuiltIndex; sourceMeta: Map<string,
   return cachedResources;
 }
 
-/** Phase 8.1：构造共享预算存储（CLOUDBASE_APIKEY 未配置时 configured=false → 模型槽位安全关闭）。 */
-export function createSharedBudgetStore(): CloudbaseBudgetStore {
-  return new CloudbaseBudgetStore(resolveSharedBudgetConfig());
+/**
+ * Phase 9：构造预算存储（BUDGET_STORE 显式选择 sqlite / cloudbase）。
+ * 未配置或配置非法 → 返回 undefined → RequestGuard 对真实模型调用失败关闭（STORE_ERROR），
+ * 绝不静默降级到内存预算。
+ */
+export function createSharedBudgetStore(): SharedBudgetStore | undefined {
+  return resolveBudgetStore(process.env);
 }
 
 export function createDefaultAskContext(): AskContext {

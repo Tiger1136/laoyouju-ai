@@ -14,15 +14,17 @@
     "build:deploy": "node scripts/build-deploy.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "node tests/api.test.mjs && node tests/cases.test.mjs && node tests/limit.test.mjs"
+    "test": "node tests/api.test.mjs && node tests/cases.test.mjs && node tests/limit.test.mjs && node tests/sqlite-budget.test.mjs && node tests/sqlite-budget-race.test.mjs && node tests/listen.test.mjs"
   },
   "dependencies": {
     "@cloudbase/node-sdk": "3.18.3",
     "@laoyouju/retrieval": "workspace:*",
     "@laoyouju/shared": "workspace:*",
-    "@laoyouju/search": "workspace:*"
+    "@laoyouju/search": "workspace:*",
+    "better-sqlite3": "12.11.1"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "9.6.0",
     "@types/node": "20.19.43",
     "esbuild": "0.28.2",
     "eslint": "9.39.5",

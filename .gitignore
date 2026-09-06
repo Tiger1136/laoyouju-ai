@@ -21,8 +21,8 @@ coverage/
 # ---- 检索索引（构建产物，可由 content 完全重建，不入库）----
 content/.index/
 
-# ---- CloudBase/部署产物（构建生成，不入库）----
-deploy/
+# ---- CloudBase 部署产物（构建生成，不入库；deploy/vps 为入库的服务器部署材料）----
+deploy/api/
 .cloudbaserc.local.json
 
 # ---- CloudBase 本地缓存与临时产物 ----

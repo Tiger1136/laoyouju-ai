@@ -1,25 +1,24 @@
 import { createApiServer } from "./app.js";
-import { resolveAllowedOrigins } from "./config.js";
-
-const DEFAULT_PORT = 9000;
-
-function resolvePort(raw: string | undefined): number {
-  if (raw === undefined) {
-    return DEFAULT_PORT;
-  }
-  const parsed = Number(raw);
-  if (!Number.isInteger(parsed) || parsed < 1 || parsed > 65535) {
-    console.error(`[laoyouju-api] 无效 PORT 环境变量，使用默认端口 ${DEFAULT_PORT}`);
-    return DEFAULT_PORT;
-  }
-  return parsed;
-}
+import { resolveAllowedOrigins, resolveTrustedProxies } from "./config.js";
+import { resolveHost, resolvePort } from "./listen.js";
 
 const port = resolvePort(process.env.PORT);
+
+// Phase 9A：HOST 显式非法 → 拒绝启动（失败开放禁止；绝不回退到 0.0.0.0）。
+// 未配置 HOST 时 resolveHost 返回兼容默认 0.0.0.0（CloudBase 平台需要）。
+let host: string;
+try {
+  host = resolveHost(process.env.HOST);
+} catch (err) {
+  console.error(`[laoyouju-api] ${err instanceof Error ? err.message : String(err)}`);
+  process.exit(1);
+}
+
 const allowedOrigins = resolveAllowedOrigins(process.env);
+const trustedProxies = resolveTrustedProxies(process.env);
 
-const server = createApiServer({ allowedOrigins });
+const server = createApiServer({ allowedOrigins, trustedProxies });
 
-server.listen(port, "0.0.0.0", () => {
-  console.log(`[laoyouju-api] listening on 0.0.0.0:${port} (scaffold)`);
+server.listen(port, host, () => {
+  console.log(`[laoyouju-api] listening on ${host}:${port}`);
 });

@@ -8,6 +8,7 @@ storeDir: .pnpm-store
 confirmModulesPurge: false
 # pnpm 11 构建脚本白名单（保持最小化；unrs-resolver 自带预编译 binding，无需运行构建脚本）
 allowBuilds:
+  better-sqlite3: true
   core-js-pure: true
   esbuild: true
   unrs-resolver: false

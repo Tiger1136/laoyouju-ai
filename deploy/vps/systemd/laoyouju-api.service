@@ -1,0 +1,54 @@
+# ============================================================
+# 劳有据 AI —— API systemd 服务模板（Phase 9：轻量服务器单机）
+# 安装位置：/etc/systemd/system/laoyouju-api.service
+# 安全要点：
+#   - 专用低权限用户 laoyouju（nologin），运行 Node API（仅回环监听由环境文件 HOST=127.0.0.1 控制）；
+#   - 仅 /var/lib/laoyouju、/var/log/laoyouju 可写；/opt/laoyouju 只读（发布目录不可被运行期修改）；
+#   - 密钥通过 EnvironmentFile=/etc/laoyouju/laoyouju.env（0600 root:laoyouju）注入；
+#   - 自动重启：on-failure + 5s；日志走 journald（上限由 journald drop-in 控制）。
+# ============================================================
+[Unit]
+Description=Laoyouju AI API (Node.js)
+Documentation=file:///opt/laoyouju/current/deploy/vps/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=laoyouju
+Group=laoyouju
+WorkingDirectory=/opt/laoyouju/current
+EnvironmentFile=/etc/laoyouju/laoyouju.env
+# Phase 9A：ExecStart 由 install.sh 注入 Node 真实绝对路径（__NODE_BIN__ 占位符），不使用 /usr/bin/env 猜测。
+ExecStart=__NODE_BIN__ /opt/laoyouju/current/functions/api/dist/server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillSignal=SIGTERM
+UMask=0027
+
+# ---- 安全加固（保守组合；不启用 MemoryDenyWriteExecute —— Node/V8 JIT 需要 W+X）----
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectClock=true
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+ReadWritePaths=/var/lib/laoyouju /var/log/laoyouju
+ReadOnlyPaths=/opt/laoyouju
+
+# ---- 日志 ----
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=laoyouju-api
+
+[Install]
+WantedBy=multi-user.target

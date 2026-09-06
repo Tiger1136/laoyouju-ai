@@ -5,7 +5,11 @@ import {
   type AskSuccessResponse,
 } from "@laoyouju/shared";
 
-/** API 基础地址：读取公开变量 NEXT_PUBLIC_API_BASE_URL（构建期内联）。仅为地址，绝不包含任何密钥。 */
+/**
+ * API 基础地址：默认同源（Phase 9：VPS 生产构建不配置 NEXT_PUBLIC_API_BASE_URL 时使用相对路径 /api/...，
+ * 由 Nginx 同源反代到本机 Node API；不把公网 IP/服务器地址硬编码进代码）。
+ * 也可显式配置为绝对地址（CloudBase 跨域部署：NEXT_PUBLIC_API_BASE_URL）。仅为公开地址，绝不包含任何密钥。
+ */
 export const API_BASE_URL = (process.env.NEXT_PUBLIC_API_BASE_URL ?? "").replace(/\/+$/, "");
 
 export type AskStatus = "idle" | "loading" | "answered" | "needs_clarification" | "out_of_scope" | "error";
@@ -63,9 +67,7 @@ export function normalizeAskResponse(statusCode: number, body: unknown): AskUiSt
 }
 
 export async function submitQuestion(question: string): Promise<AskUiState> {
-  if (API_BASE_URL === "") {
-    return { status: "error", errorMessage: "问答服务尚未配置，无法提交问题。" };
-  }
+  // Phase 9：API_BASE_URL 为空时使用同源相对路径 /api/v1/ask（VPS 同源部署默认）。
   let res: Response;
   try {
     res = await fetch(`${API_BASE_URL}/api/v1/ask`, {

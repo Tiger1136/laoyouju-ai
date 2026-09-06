@@ -29,6 +29,9 @@ await build({
   sourcemap: false,
   minify: false,
   logLevel: "info",
+  // Phase 9：better-sqlite3 为原生模块，不能打入单文件 bundle；CloudBase 运行时使用
+  // BUDGET_STORE=cloudbase（或不配置=安全失败），永远不会加载该模块（sqlite-budget.ts 内惰性 import）。
+  external: ["better-sqlite3"],
 });
 
 cpSync(join(repoRoot, "content", "laws"), join(deployDir, "content", "laws"), { recursive: true });

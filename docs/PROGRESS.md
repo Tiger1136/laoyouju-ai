@@ -346,3 +346,91 @@
 - **费用**：真实 DeepSeek 调用 1 次（以腾讯云账单为准）；无付费资源创建/升级。
 - **Git**：main/59e7935 → fix/minimum-go-live-protection（0c8b54e）→ FF 合并 main → 推送 → annotated tag phase-8-minimum-go-live-protection（指向部署提交）；旧标签未移动、无 force push。
 - **安全红线**：未读取/回显/覆盖/要求重提供 DEEPSEEK_API_KEY；未使用 CLI 整体设置 envVariables；未创建或升级付费资源；未操作其他环境；未 force push；未 reset/checkout/clean 删除用户资料；未修改已有标签；真实 DeepSeek 调用恰 1 次。
+## PHASE_9_VPS_MIGRATION（腾讯云轻量应用服务器迁移适配与公网 IP 验证，2026-09-05）
+
+> 阶段定义：Phase 9 —— 将项目从 CloudBase 专用部署方式适配到已购买的腾讯云轻量应用服务器，在不解析域名的前提下通过公网 IPv4 完成 HTTP 验证。
+> **结果：PARTIAL / BLOCKED_AT_SECURE_SSH**。代码适配、本地持久化 BudgetStore、VPS/Nginx/systemd/备份/回滚部署材料、全部本地门禁与自检均完成；因本机不具备用户预先配置的安全 SSH 入口（~/.ssh/config 无别名、无主机指纹），按授权边界约定**未执行服务器部署与公网验证**，未索取/回显任何凭据。剩余工作为用户在本机完成最小安全 SSH 配置后执行（见下）。
+
+- **开始前仓库状态**：分支 fix/shared-model-budget（e295a80，与 origin 一致）；工作树干净；main=3bb64b0；Phase 8.1（f066c6f 共享跨实例预算）**未合并、未部署、仍待 PM 验收**——本阶段按其现状工作，未声称其已验收/合并/部署。
+- **Phase 8.1 现状（只读检查结论）**：functions/api/src/shared-budget.ts（CloudbaseBudgetStore + MemoryBudgetStore + beijingKey）+ limit.ts（RequestGuard 经 SharedBudgetStore 共享预算）+ ask.ts（createSharedBudgetStore → CLOUDBASE_APIKEY 判定 configured，未配置时模型槽位 STORE_ERROR 安全关闭）+ limit.test.mjs/api.test.mjs（12+7 项相关测试）；未新增独立 shared-budget 专项测试文件；未部署（线上仍为 Phase 8 版本）。
+- **本地持久化预算（Phase 9 新增）**：
+  - functions/api/src/sqlite-budget.ts：SqliteBudgetStore（better-sqlite3@12.11.1，engines 20.x–24.x，与 Node 20.19/22.12/24.19 兼容；WAL + synchronous=FULL + busy_timeout=5000 + quick_check；单条条件 UPDATE/事务内条件更新保证原子；唯一 lease_id + 到期时间；取号前同事务回收过期租约；释放幂等【仅删除成功的租约才回退槽位】；每日键沿用 beijingKey 北京时间 YYYY-MM-DD；任何打开/损坏/写入异常 → storeError=true → 模型调用 STORE_ERROR 安全关闭，绝不静默降级内存）。
+  - functions/api/src/budget.ts：BUDGET_STORE 选择器（sqlite / cloudbase；缺失/非法/memory → undefined → 安全失败）；BUDGET_SQLITE_PATH 必须非空绝对路径。
+  - functions/api/src/ask.ts：createSharedBudgetStore → resolveBudgetStore(process.env)（返回 SharedBudgetStore | undefined）。
+- **监听与代理边界**：server.ts 新增 HOST（默认 0.0.0.0 保留 CloudBase；VPS 环境文件显式 HOST=127.0.0.1）；app.ts/config.ts/http.ts 新增 TRUSTED_PROXY 信任边界（仅受信任对端或 CloudBase 网关的 X-Forwarded-For 才被采用；未信任时一律取 socket 对端地址）；Nginx 模板以 $remote_addr 覆盖外部自带转发头；前端默认同源 /api/（NEXT_PUBLIC_API_BASE_URL 未配置时不再提示“未配置”，VPS 构建不写公网 IP/域名）。
+- **部署材料（deploy/vps/，全部入库模板，无密钥/地址）**：README（安装/发布/备份/回滚/公网验证手册）、nginx/laoyouju.conf（80 静态+api 反代+XFF 覆盖+敏感路径拒绝）、systemd/laoyouju-api.service（laoyouju nologin 专用用户、NoNewPrivileges、ProtectSystem=strict、ReadOnlyPaths=/opt/laoyouju、ReadWritePaths=/var/lib|log/laoyouju、Restart=on-failure）、systemd/journald-laoyouju.conf（日志轮转上限）、env/laoyouju.env.example、scripts/{install,sync-src,publish,backup,restore,rollback,healthcheck,verify-public,firewall}.sh（幂等；发布=版本目录+原子切换+失败自动回滚；备份优先 sqlite3 在线备份；保留 3 个版本、7 份库备份）。
+- **测试（新增/回归，全部本地 mock，未调用真实 DeepSeek/CloudBase）**：api.test.mjs 63→67（+4：未信任 XFF 不生效【6+1 次 429】、受信任代理采用 XFF 按客户端桶计数、CloudBase 网关头保持可信、BUDGET_STORE 缺失/非法 → 429 STORE_ERROR 且 0 次模型调用）；sqlite-budget.test.mjs 14 项（正常申请/上限拒绝/并发竞争/租约过期回收/重复释放幂等/重启保持/多实例不超发/损坏与不可用与写失败禁止模型调用/环境变量选择安全失败/端到端 429/日期边界/落盘）；limit 12、cases 14 保持。另 sqlite-budget-race.test.mjs 1 项（4 个 worker 线程独立连接共享同一 SQLite 文件：并发 limit=2 恰 2 次、日额度 limit=3 恰 3 次，全程无存储错误）；
+- **本地验证（全部 exit 0）**：corepack pnpm run check（lint/typecheck/content:validate 36/219/1308/271/retrieval:build docs=1527/build 含 Web 静态导出 15 路由/test：shared 37、retrieval+case-corpus、search 16、web 13+export、api 67、cases 14、limit 12、sqlite-budget 14）；本地 API 冒烟（HOST=127.0.0.1、BUDGET_STORE=sqlite、TRUSTED_PROXY=127.0.0.1）：health 200 / out_of_scope 200 / 空白 400 / 无 Key 503 / 伪造 XFF 不绕过；部署包冒烟（deploy/api bundle，external better-sqlite3 动态引入，无 sk-/DEEPSEEK 值/tcloudbase URL）：health 200 / out_of_scope 200 / 无 Key 503；git diff --check 0；密钥/地址扫描干净；无端口残留（冒烟进程均已 kill，19000/19001/19002 无监听）。
+- **文件清单**：新增 functions/api/src/{sqlite-budget,budget}.ts、functions/api/tests/sqlite-budget.test.mjs、deploy/vps/**；修改 functions/api/src/{ask,app,server,config,http}.ts、functions/api/scripts/build-deploy.mjs、functions/api/tests/api.test.mjs、functions/api/package.json、apps/web/lib/api.ts（默认同源）、.env.example、.gitignore（deploy/ → deploy/api/，deploy/vps 入库）、pnpm-lock.yaml、pnpm-workspace.yaml（allowBuilds better-sqlite3: true）；文档 docs/PROGRESS.md、docs/DECISIONS.md（ADR-033）、docs/SECURITY.md、docs/DEPLOYMENT.md、README.md。
+- **未改动**：CloudbaseBudgetStore / shared-budget.ts（原样保留）、cloudbaserc.json、旧 CloudBase 部署方案、内容库（36/219/1308/271）、既有标签；未合并/推送/创建 commit（工作树改动保留待审）。
+- **BLOCKED_AT_SECURE_SSH —— 用户在本机自行完成的最小安全配置**（不要求发送任何凭据）：
+  1. ~/.ssh/config 增加别名（Host laoyouju_lh；HostName/User/IdentityFile），并 ssh laoyouju_lh 验证指纹入 known_hosts；
+  2. 服务器确认 Node 22.12.0、openssh 服务与密钥登录（禁用密码登录）；
+  3. 云控制台安全组/防火墙仅放行 22、80（不得放行 9000）；
+  4. 之后执行：bash deploy/vps/scripts/sync-src.sh laoyouju_lh → 服务器 install.sh → 编辑 /etc/laoyouju/laoyouju.env → publish.sh → healthcheck.sh → verify-public.sh（详见 deploy/vps/README.md）。
+- **未做（如实）**：未删除/修改 DNS、未配置域名与证书、未修改备案、未删除 CloudBase、未购买任何资源、未调用真实 DeepSeek、未推送/合并、未修改远端可见性。
+## PHASE_9A_PREDEPLOY_FIXES（正式部署前阻断问题整改，2026-09-05）
+
+> 阶段定义：Phase 9A —— 修正 Phase 9（PARTIAL）中阻断“正式部署”的缺陷；仅代码与部署材料整改，未登录服务器、未配置 SSH、未部署、未调用真实 DeepSeek，未修改 DNS/域名/证书/CloudBase/远端 Git。工作树 Phase 9 修改全部保留（未 reset/clean/覆盖）。
+> **代码层结果：通过（本地门禁全绿）；OpenCloudOS 实机执行尚未验证（如实标记）**；Phase 9 整体仍为 PARTIAL（未部署），本阶段不声称服务器迁移完成。
+
+- **1. Nginx 敏感路径正则**（deploy/vps/nginx/laoyouju.conf）：改为 `location ~ ^/\.(?!well-known/)`（锚定 URI 起始、点号转义、负向前瞻保留 /.well-known/）与 `location ~* \.(env|git|sqlite3|sqlite)$`；契约测试断言两者不匹配 /api/v1/health、/laws/、/cases/、/ask/、/about/methodology/、/sitemap.xml、/robots.txt、/.well-known/...，且必须拒绝 /.env、/.git/config、/x/a.sqlite3 等。
+- **2. install.sh OpenCloudOS Server 9 兼容**：检测 nginx 主配置 include 结构（conf.d 优先于 sites-enabled；Debian 系保留 sites-enabled）；发现既有“监听 80”未知站点 → 安全停止并报告（不删除/不覆盖/不改主配置）；`nginx -t` 通过后 `systemctl enable --now nginx` 并断言 `is-active`；SELinux 检测（getenforce）：Enforcing 时设置最小策略（fcontext httpd_sys_content_t + restorecon + `semanage port -a -t http_port_t -p tcp 9000`，不开放全局 httpd_can_network_connect），**绝不关闭 SELinux**（无 setenforce）；publish.sh 对新版本静态文件 restorecon 恢复上下文。
+- **3. 工具链独立安装**：ensure_tool 逐项检查/安装 nginx、rsync、sqlite3、curl、tar（Nginx 存在也不再跳过其他依赖；sqlite3 CLI 保证存在——备份/健康检查依赖）。
+- **4. systemd Node 可执行性**：install.sh 解析 Node 真实绝对路径（readlink -f），检查目录链每级 other 可执行（o+x）与文件 o+x；Node 位于 /root 私有目录 → 安全失败并报告；systemd 模板 ExecStart 改为 `__NODE_BIN__` 占位符（install.sh 注入真实路径，不再假设 /usr/bin/env node）；不破坏服务器预装 Node（不修改其权限/属主）。
+- **5. healthcheck.sh 退出码**：改为显式 `exit 0`/`exit 1` 分支并新增 SQLite quick_check 断言；契约测试（deploy-config.test.mjs）静态断言“全部通过 exit 0、任一失败 exit 1、OK 初始化 1、fail 置 0、无 exit ${OK}”，防止再次反转。
+- **6. Windows PowerShell 同步与外部验证**：新增 deploy/vps/scripts/sync-src.ps1（git ls-files -co --exclude-standard 生成文件清单 → 系统自带 tar 打包 → scp → ssh 解包；包含工作树已修改与未跟踪 Phase 9/9A 文件；按 .gitignore 排除 .git/.env*/node_modules/构建缓存/临时目录；额外排除根 .env；TEMP 临时归档 finally 精确清理；输出无公网 IP/凭据）与 verify-external.ps1（开发机外部验证；IP 仅内存变量、输出脱敏 x.x.x.*）。两者均以 UTF-8 BOM 编写并通过 Windows PowerShell 5.1 语法解析（本机实测 PARSE-OK）。
+- **7. 验证拆分**：服务器端 healthcheck.sh（服务状态/Nginx 反代/SQLite quick_check/9000 仅 127.0.0.1）+ verify-public.sh（明确标注为“服务器访问自身公网 IP 的自检，不是外部验证”）；开发机 verify-external.ps1 负责真正外部验证（80 端口同源 Origin 200＋ACAO 精确、恶意 Origin 403、伪造 XFF 第 7 次 429、9000 外部不可达）。
+- **8. HOST 失败开放修复**：新增 functions/api/src/listen.ts（resolveHost/resolvePort 纯函数）；HOST 未配置/空白 → 默认 0.0.0.0（CloudBase 兼容保留）；显式非法（形似 IP 非 IP、含空格/冒号/斜杠、非法主机名）→ 抛错，server.ts try/catch + process.exit(1) **拒绝启动**；tests/listen.test.mjs 5 项（缺失/合法回环/合法主机/非法值/修剪；PORT 语义同前：非法回退 9000）。
+- **9. SQLite 完整性收紧**：ensureReady 检查 `PRAGMA quick_check` **结果必须为 ok**（isQuickCheckOk：逐行判定，非 ok 抛错）；初始化中途失败关闭连接（不留无主句柄）；新增测试（9A quick_check 结果判定 + 既有损坏/不可用/写失败集成测试）；releaseDaily 语义边界如实注释（有下限保护递减；调用路径保证恰补偿一次；未做大重构）。
+- **10. 备份/恢复简化与修复**：backup.sh 仅使用 sqlite3 在线 `.backup` → 对备份执行 `PRAGMA quick_check` 且必须 ok，否则删除该备份并中止（删除“无 CLI 停服复制”回退）；install.sh 保证 sqlite3 CLI；restore.sh 恢复前校验备份、保存当前库可恢复副本（pre-restore-*）、恢复后健康检查失败自动还原原库并重启；publish.sh 备份失败即中止；普通发布/回滚不删除持久化数据。
+- **11. 首次公网部署默认保护**：deploy/vps/env/laoyouju.env.example：LIMIT_KILL_SWITCH=on（默认）、DEEPSEEK_API_KEY 留空；文档注明：无模型验证通过后，真实模型测试需另行授权。
+- **12. 文档修正**：deploy/vps/README.md 全面修正（PowerShell 同步/外部验证命令、`ssh laoyouju_lh` 而非 `ssh-laoyouju_lh`、OpenCloudOS 路径、SELinux 段落、kill switch 默认值、二楼验证组合）；docs/DEPLOYMENT.md、docs/SECURITY.md、docs/DECISIONS.md（ADR-034）、README.md 同步。
+- **新增契约测试**：deploy/vps/tests/deploy-config.test.mjs 16 项（Nginx 正则、healthcheck 退出码、HOST 失败关闭集成点、备份必须校验完整性、restore 自动回滚、install 双布局/独立工具/SELinux 最小策略/Node 检查、sync-src.ps1 排除敏感、verify-external.ps1 脱敏与外部检查、env kill switch 默认 on、verify-public 定位）；根 package.json `test` 串接（`pnpm run check` 覆盖）。
+- **本地验证（exit 0）**：`corepack pnpm run check` 全绿（api 67 + cases 14 + limit 12 + sqlite-budget 15 + race 1 + listen 5 + web 20+13 + shared 37 + retrieval 33+14 + search 16 + deploy-config 16）；sync-src.ps1 的打包逻辑在 Windows 本机实测：git ls-files 清单 502 文件，deploy/vps/**、functions/api/src/{budget,sqlite-budget}.ts、pnpm-lock.yaml 等 Phase 9/9A 文件全部包含；node_modules/.next/out/dist/deploy/api/_scratch/.pnpm-store/.corepack/.git 全部排除；两个 .ps1 通过 Windows PowerShell 5.1 ParseFile 校验（UTF-8 BOM）。
+- **未做（如实）**：OpenCloudOS 实机执行未完成（本机无 Linux/Bash/Nginx；启动/安装/发布/SELinux/防火墙在服务器上首次执行时验证）；未登录服务器；未部署；未调用真实 DeepSeek；未修改 DNS/域名/证书/CloudBase；未推送/合并/创建提交。
+## PHASE_9A1_SYNC_AND_NGINX_FIXES（首次部署链路剩余阻断修复，2026-09-05）
+
+> 阶段定义：Phase 9A.1 —— 修复首次部署链路中的剩余阻断问题（同步脚本运行期错误/首次同步顺序/Nginx 事务性/SELinux 端口精确解析/嵌套隐藏路径/外部限流计数/契约测试强化）。工作树 Phase 9/9A 修改全部保留；未登录服务器、未配置 SSH、未部署、未调用真实 DeepSeek、未修改任何云资源。
+> **结果：Phase 9A.1 代码层 PASS**（sync-src.ps1 -PackageOnly 在 Windows PowerShell 5.1 真实运行 exit 0；其余本地门禁全绿）；OpenCloudOS 实机执行仍未验证；Phase 9 整体仍为 PARTIAL。
+
+- **1. sync-src.ps1 运行期错误修复**：移除 `.Replace("", "/")`（JS 转义导致空串 oldValue，原为运行期抛错）；仓库绝对路径改为 `Resolve-Path -LiteralPath`（git rev-parse 输出）＋`[char]92` 字符码归一化正斜杠；新增 `-PackageOnly` 模式（真实执行：git 清单→tar→读取归档成员→必备文件 AGENTS.md/package.json/deploy/vps/scripts/install.sh 校验→禁止条目（node_modules/.git/.next/out/dist/deploy/api/_scratch/.pnpm-store/.corepack/.env）校验→临时目录 finally 清理→exit 0，全程无网络）。
+- **2. 首次同步顺序**：远端脚本（ps1 内嵌 ASCII here-string，经 `sudo bash -s -- <archive> <dest>` 执行）不再假设 laoyouju 组：`mkdir -p $(dirname DEST)`（root）→ `mktemp -d` 独立舞台目录 → 解包 + 校验 AGENTS.md/package.json/install.sh → `mv "$DEST" "$OLD"`（同文件系统原子）→ `mv "$STAGE" "$DEST"` → 删除 OLD（整体替换，不遗留已删除旧文件）；trap cleanup：失败时清理本次舞台目录并恢复 `$OLD` → `DEST` 保留原源码；全程无 chown/chmod（用户与权限由 install.sh 设置，契约测试断言无 `chown root:laoyouju`）；SSH 别名与目标路径经 `AssertSafeToken`/`AssertSafeDest` 白名单校验（已实测 `bad;rm` 别名 → exit 1）。
+- **3. Nginx 事务性**：冲突检测改为 `nginx -T` 枚举实际加载配置文件（含主 nginx.conf），除 laoyouju 外任何 `listen ... 80` → 安全停止并报告（不删除/不覆盖/不改主配置；`nginx -T` 无输出则安全停止）；安装改为暂存（TMP_NEW/TMP_OLD/OLD_PRESENT）→ 安装 → `nginx -t`，失败自动回滚（有旧则恢复、无旧则移除＋断软链），保证失败后 Nginx 配置仍处于可测试通过状态；`nginx -t` 通过后才 `systemctl enable --now nginx`＋`is-active` 断言。
+- **4. SELinux 端口精确解析**：`port_owner_of_9000()` 用 awk 逐行解析 `semanage port -l`（协议列 tcp + 端口/区间匹配），不再使用未经验证的 `grep ":9000"`；9000 已归属其他类型 → 明确报告并安全停止（die）；未归属 → `semanage port -a -t http_port_t -p tcp 9000`（失败即 die，无 `|| true`）→ 复验归属必须为 http_port_t；fcontext：`semanage fcontext -a` 输出区分“already exists/duplicate”（视为已存在）与真实错误（die）；`restorecon -RF` 后 `ls -Zd` 校验最终上下文必须含 httpd_sys_content_t；全程无 setenforce。
+- **5. 嵌套隐藏路径**：Nginx 规则改为 `location ~ (^|/)\.(?!well-known/)`——拒绝根级与嵌套任意“以 . 开头的路径段”（/.env、/.git/config、/x/.env、/x/.git/config），继续放行根级 `/.well-known/`，不拦截 /api/、/laws/、/cases/、/ask/ 与 `_next/static/chunks/a.b.js`。
+- **6. 外部限流计数**：verify-external.ps1 验证前先 `sudo systemctl restart laoyouju-api`（重置计数基线）并等待健康就绪；随后第 1 次 POST（正确 Origin）断言 200（已计入 1 次）→ 第 2..6 次逐次断言 200（循环内每次响应检查，`if ($st -ne 200)` 记录具体次数，绝不静默吞 429）→ 第 7 次更换伪造 XFF（198.51.100.20）断言必须 429；仍使用 out_of_scope 问题，保持 kill switch on，不调用真实模型。
+- **7. 契约测试强化（deploy/vps/tests/deploy-config.test.mjs，17 项）**：新增“Replace(空串) 回归陷阱”断言（fail-closed）、Resolve-Path/[char]92、-PackageOnly 分支与归档成员校验、远端无 chown/chmod（首同步 root:root）、远端 mktemp/必备文件/原子替换/trap 保留旧源码/别名路径校验、nginx -T loaded-conf 冲突检测与事务回滚（含不得在 nginx -t 未通过时继续 enable 的结构性断言）、SELinux（port_owner_of_9000 + awk -v port=9000 + 无 grep ":9000" + 占用已属其他类型 die + `if ! semanage port -a` + fcontext already-exists/真实错误区分 + ls -Zd 验证 + 无 setenforce）、verify-external 计数（restart 基线/1+5+1/逐次断言/第 7 次 429/Mask-IPv4 脱敏）、嵌套隐藏路径双向列表（含 `_next/static/chunks/a.b.js` 放行）。
+- **本地验证（Exit 0 证据）**：①`powershell -NoProfile -ExecutionPolicy Bypass -File deploy/vps/scripts/sync-src.ps1 -PackageOnly` → 输出“[sync] 仓库: E:/ds-workspace/Laoyouju / 文件数: 502（归档校验通过）/ PackageOnly 模式：打包+校验完成，未传输。退出 0”＋**EXIT=0**；②别名 `bad;rm`（注入形态）→ exit 1“SSH 别名 含非法字符”；③`%TEMP%\laoyouju-sync-*` 残留 = 0（finally 清理验证）；④两个 .ps1：BOM=True + PowerShell 5.1 Parser.ParseFile PARSE-OK（远端 here-string 26 行纯 ASCII）；⑤`node deploy/vps/tests/deploy-config.test.mjs` 17/17 exit 0；⑥`corepack pnpm -C functions/api run test` exit 0（api 67/cases 14/limit 12/sqlite-budget 15/race 1/listen 5）；⑦`corepack pnpm run check` exit 0；⑧`git diff --check` exit 0；⑨敏感扫描：无 sk-、无 DEEPSEEK_API_KEY 值、无真实服务器地址（全部为 127.0.0.1/0.0.0.0/RFC 测试网段）。
+- **未做（如实）**：OpenCloudOS 实机执行（install.sh/publish.sh/nginx -t/systemd/semanage/restorecon/firewall 在服务器上的首次执行）未验证；sync-src.ps1 的 scp/ssh 段与 verify-external.ps1 真实外部访问未执行（无安全 SSH 入口）；Linux/Bash 脚本仍为静态审查＋契约断言（本机无 bash）。
+## PHASE_9B_LIVE_DEPLOYMENT_AND_PUBLIC_VERIFICATION（轻量服务器实机部署与公网验证，2026-09-05）
+
+> 结果：**PASS**（本地预检→同步→安装→发布→SQLite 实机→服务器本机检查→Windows 外部公网验证全部通过；真实 DeepSeek 调用 0 次）。
+
+- 服务器：OpenCloudOS 9.2 x86_64；内存 3.6G/磁盘 40G；自带 Node v22.12.0（Lighthouse Node.js 镜像软硬件目录 /usr/local/lighthouse/softwares/...，位 750 root:root，服务用户不可执行——未修改 vendor，仅复制独立运行时）。
+- 供应商默认项处理（均有备份、可恢复）：①Lighthouse 镜像自带示例应用 myapp.service(My Node.js App, 占 80) → 备份至 /root/laoyouju-lh-backup-<ts>/（unit+app+RESTORE.md）后 stop+disable（vendor 目录未动）；②OpenCloudOS dnf nginx 1.29.8 默认欢迎 server 块（主配置内）→ 备份 nginx.conf.lj-orig-<ts> 后以“去默认 server 块”的基础配置替换 → nginx -t 通过后 install.sh 事务式安装。
+- 运行时：Node v22.14.0（nodejs.org 官方 tarball，SHA-256 校验）→ /opt/laoyouju/runtime/node-22.14.0（vendor 未动）；pnpm 11.24.0 经官方 npm 安装；corepack 签名键失配（pnpm 新轮换键不在捆绑键内）→ 以 /usr/local/bin/corepack 委托脚本转 pnpm（vendor corepack 未动，可撤销）。
+- 发布：/opt/laoyouju/releases/20260905-224205（仅 1 个版本保留）+ current；better-sqlite3 预编译下载失败（GitHub 连接 000）→ 自动回退 node-gyp 本地编译（gcc-c++/make/python3 已装）→ Done；构建顺序修正（干净环境先 -r build 再 typecheck，避免 shared dist 缺失）；发布权限修正（705→755：`chmod -R a+rX`，组位为空曾被组匹配拒绝导致 CHDIR 失败）。
+- 状态：laoyouju-api active+enabled（ExecStart=运行时 node 绝对路径；仅 127.0.0.1:9000）；nginx active+enabled，80 提供静态+同源 /api/ 反代（nginx -t 通过）；SELinux Disabled（未改，无策略变更）；firewalld 未启用（无系统防火墙变更）；**云安全组（用户腾讯云控制台人工确认，脱敏记录）：入站规则为 22、80、443 与 ICMP；未开放 9000；未对云防火墙执行任何修改**；环境文件 600 root:laoyouju（HOST=127.0.0.1/BUDGET_STORE=sqlite/BUDGET_SQLITE_PATH=/var/lib/laoyouju/budget/budget.sqlite3/TRUSTED_PROXY=127.0.0.1/ALLOWED_ORIGINS=http://<已配置，脱敏>/LIMIT_KILL_SWITCH=on/DEEPSEEK_API_KEY 空）。
+- SQLite 实机：以 laoyouju 用户执行 dist 版 check-budget-store（ensureReady READY exit 0）；文件在 /var/lib/laoyouju/budget（发布目录内 0 个）；quick_check=ok；systemd 重启后再次 READY（持久化验证）；全程 0 次真实模型调用/0 额度记录。
+- 外部公网验证（Windows 开发机 verify-external.ps1）：15/15 PASS（静态 8 路由 200、同源 health 200+ACAO 精确、恶意 Origin 403、out_of_scope 200 不调用模型、1..6 次 200 且第 7 次伪造 XFF 429、公网 :9000 HTTP 探测无健康响应）；服务器端 healthcheck.sh 全 PASS exit 0。
+- 结论与备注：开发机出口为透明代答代理（原始 TCP Connect 语义失真——对任意端口“代答成功”），故 9000 外部验证采用 HTTP 探测（不得得到健康响应）＋服务器侧仅回环绑定双重证据；云安全组属用户控制台管理——用户已人工确认入站规则为 22、80、443、ICMP（无 9000），本轮未做任何修改。
+- Git/边界：未提交、未推送、未合并；未修改 DNS/域名/证书/备案/CloudBase/远端；未读取或填写任何 DeepSeek Key；vendor Node、示例应用文件、tat/stargate/yunjing 等厂商组件均未修改（仅 myapp 服务被备份后禁用，可经备份/RESTORE.md 恢复）。
+## PHASE_9C_REAL_MODEL_SMOKE_AND_WRAPUP（真实模型启用、一次冒烟与迁移收尾，2026-09-06）
+
+> 结果：**PASS**。真实 DeepSeek 调用恰 1 次；预算 +1 精确且重启持久化；全部收尾验证通过；未修改 DNS/域名/证书/CloudBase/防火墙/远端 Git（本阶段仅允许的变更：用户在本机 SSH 终端以 read -s 隐藏输入写入 DeepSeek Key（原子更新，仅布尔确认）；LIMIT_KILL_SWITCH on→off；服务重启）。
+- 复用 Phase 9B 部署，未重装/未改造；启用前安全检查全部通过（SQLite READY+quick_check ok、0 条预算、限流 6/30、全局 100/天、并发 3、超时 15s、输出上限 1300、存储异常失败关闭、仅信任 127.0.0.1、单次调用无重试——代码未改动，依据 Phase 9B 实测与既有测试）。
+- 冒烟（唯一 1 次真实调用，失败不重试）：“用人单位未依法与劳动者签订书面劳动合同……” → HTTP 200 / 6.7s / outcome=answered；9 条可追溯来源（A=6、B=2、C=1）；正文引用的引用号为 S1、S2、S3、S4、S5、S6、S7、S8、S10（S9 未在正文引用），所有被正文引用的引用号均可在 sources 中逐条解析，unresolvedRefs 为空；applicableLaw 首条=《劳动合同法（2012修正）》第八十二条（双倍工资）；similarCases=2（含真实案例+“案例适用地域”边界说明）；含“不是律师意见/不构成”边界与 AI 标识；无 sk-/堆栈/环境变量值。
+- 预算：测试前 daily_usage 0 → 测试后 2026-09-06|1（恰 +1）；systemd 重启后仍为 1（持久化）；laoyouju 用户 check-budget-store READY（days=1）；quick_check=ok。
+- 收尾：verify-external.ps1 15/15（静态 8 路由、同源 health+ACAO、恶意 Origin 403、out_of_scope 不调用模型、1..6 次 200 且第 7 次伪造 XFF 429、公网 :9000 无健康响应）；healthcheck.sh 全 PASS；journald/Nginx 日志 sk-、环境变量值、问题正文均 0；env 600 root:laoyouju；BUDGET_STORE=sqlite/TRUSTED_PROXY=127.0.0.1/限流值保持（KILL=off，用户授权保留开启状态，额度/并发未提高）。
+- 本地：pnpm run check exit 0；git diff --check 0；HEAD e295a80 未动（未提交/推送/合并）；无代码变更（部署材料未改）。
+- 边界：未修改 DNS/域名/证书/备案/CloudBase/远端仓库；未触碰云安全组与系统防火墙（firewalld 未启用）；未购买/添加任何组件；密钥仅存在于服务器环境文件（全部输出仅布尔状态）。
+## PHASE_9D_DOC_WRAPUP_AND_LOCAL_COMMIT（迁移版本收口与本地提交，2026-09-06）
+
+> 结果：**PASS**。仅文档收口与本地提交；未登录/修改服务器，未调用 DeepSeek，未修改 DNS/域名/证书/备案/CloudBase/防火墙或任何云资源，未触碰远端 Git。
+
+- **SSH 别名统一**：全部面向用户的命令/示例/脚本注释统一为 `laoyouju_lh`（README.md、docs/DEPLOYMENT.md、docs/PROGRESS.md、deploy/vps/README.md、deploy/vps/scripts/sync-src.ps1、verify-external.ps1、sync-src.sh）；服务器真实备份目录 `/root/laoyouju-lh-backup-<ts>/` 为实际路径，保持原名；未修改本机 SSH 配置。
+- **冒烟引用表述修正**：Phase 9C 记录改为准确表述——可追溯来源 9 条（A=6/B=2/C=1）；正文引用号为 S1–S8 与 S10（S9 未在正文引用）；所有被引用的引用号均在 sources 中可解析（unresolvedRefs 为空）。
+- **防火墙人工验收事实（脱敏）**：用户已在腾讯云控制台人工确认入站规则为 22、80、443 与 ICMP；未开放 9000；未对云防火墙执行任何修改（记录于 PHASE_9B 记录与本文档）。
+- **变更范围审计**：相对 HEAD 的全部修改与未跟踪文件均属于 Phase 9 系列（VPS 迁移/SQLite 预算/代理信任边界/部署材料与契约测试/阶段文档）；无真实 Key、公网 IP、实例 ID、密码/私钥或凭据（仅 127.0.0.1/0.0.0.0/RFC 测试网段字面量）；CloudBase 回退方案（shared-budget.ts、cloudbaserc.json、build:deploy）未删改；无 Docker/Redis/云数据库/CDN/监控等组件；无商业化设计。Node 监听：HOST 显式 127.0.0.1（VPS），默认 0.0.0.0 保留 CloudBase 兼容；SQLite 预算失败关闭（STORE_ERROR→429，绝不回退内存）。
+- **本地提交（本轮唯一 Git 变更）**：`feat: deploy VPS runtime with SQLite model budget`（本地提交，未 push/merge/rebase/tag/force push；HEAD 之前为 e295a80）。

@@ -11,6 +11,7 @@ import {
   corsHeaders,
   isJsonContentType,
   isOriginAllowed,
+  normalizePeerAddress,
   preflightHeaders,
   readBodyWithLimit,
   sendJson,
@@ -24,6 +25,8 @@ export interface ApiServerOptions {
   allowedOrigins?: readonly string[];
   /** 问答上下文（默认读取环境变量并使用全局 fetch；测试可注入 mock）。 */
   askContext?: AskContext;
+  /** 受信任代理 peer 地址列表（Phase 9：只有这些对端的 X-Forwarded-For 才被采用；默认空 = 不信任转发头）。 */
+  trustedProxies?: readonly string[];
 }
 
 const HEALTH_PATH = "/v1/health";
@@ -76,6 +79,10 @@ interface AskDecision {
 export function createApiServer(options: ApiServerOptions = {}): ReturnType<typeof createServer> {
   const allowedOrigins: readonly string[] = options.allowedOrigins ?? [];
   const askContext: AskContext = options.askContext ?? createDefaultAskContext();
+  // Phase 9：信任边界——只有来自这些 peer（本机 Nginx）的转发头才被采用；未配置则一律不信任转发头。
+  const trustedProxySet = new Set(
+    (options.trustedProxies ?? []).map(normalizePeerAddress).filter((s) => s.length > 0),
+  );
 
   return createServer((req: IncomingMessage, res: ServerResponse) => {
     const requestId = randomUUID();
@@ -220,7 +227,7 @@ export function createApiServer(options: ApiServerOptions = {}): ReturnType<type
 
     // ---- POST /api/v1/ask ----
     // handleAsk 只返回结构化结果；唯一响应 writer（respond）在此提交一次。
-    void handleAsk(req, requestId, askContext)
+    void handleAsk(req, requestId, askContext, trustedProxySet)
       .then((decision) => {
         const headers =
           decision.retryAfter !== undefined
@@ -270,7 +277,12 @@ function errorDecision(
  * 处理顺序：Content-Type → body 限制 → JSON 解析 → 对象检查 → 共享 schema 校验 → 检索/模型。
  * 当前阶段：检索与 DeepSeek 生成均在服务端；缺 Key/上游异常返回稳定错误；资料不足返回诚实的 insufficient。
  */
-async function handleAsk(req: IncomingMessage, requestId: string, askContext: AskContext): Promise<AskDecision> {
+async function handleAsk(
+  req: IncomingMessage,
+  requestId: string,
+  askContext: AskContext,
+  trustedProxySet: ReadonlySet<string>,
+): Promise<AskDecision> {
   // 1. Content-Type。
   if (!isJsonContentType(req.headers["content-type"])) {
     return errorDecision(requestId, 415, "UNSUPPORTED_MEDIA_TYPE", "请求体必须是 application/json");
@@ -313,9 +325,10 @@ async function handleAsk(req: IncomingMessage, requestId: string, askContext: As
   }
 
   // 5c. Phase 8：入口客户端限频（每客户端分钟/日；无 Origin 的脚本请求同样受限）。
-  //     失败返回 HTTP 429 + Retry-After；客户端标识取网关 X-Forwarded-For 首地址（不可逆哈希存储）。
+  //     失败返回 HTTP 429 + Retry-After；客户端标识取「受信任代理」提供的 X-Forwarded-For 首地址
+  //     （不可逆哈希存储；未在 TRUSTED_PROXY 白名单中的对端不采用转发头，防止伪造转发头绕过限流）。
   if (askContext.guard !== undefined) {
-    const clientIp = clientIpOf(req);
+    const clientIp = clientIpOf(req, trustedProxySet);
     const decision = askContext.guard.checkClient(clientIp);
     if (!decision.allowed) {
       return limitDecision(requestId, decision);
@@ -332,16 +345,26 @@ async function handleAsk(req: IncomingMessage, requestId: string, askContext: As
   };
 }
 
-/** 客户端 IP（尽力而为）：X-Forwarded-For 首地址（网关标准），否则 socket 地址。 */
-function clientIpOf(req: IncomingMessage): string | undefined {
-  const fwd = req.headers["x-forwarded-for"];
-  if (typeof fwd === "string" && fwd.trim() !== "") {
-    const first = fwd.split(",")[0]?.trim();
-    if (first !== undefined && first !== "") {
-      return first;
+/**
+ * 客户端 IP（Phase 9 信任边界）：
+ * - 仅当对端在受信任代理白名单（TRUSTED_PROXY）中，或请求来自 CloudBase 网关（保留旧环境行为）时，
+ *   才采用 X-Forwarded-For 首地址作为客户端 IP；
+ * - 其他情况一律使用 socket 对端地址（不沿用可能含伪造内容的转发头链）；
+ * - 返回值为原始 IP 字符串（调用方再做不可逆哈希存储）。
+ */
+function clientIpOf(req: IncomingMessage, trustedProxySet: ReadonlySet<string>): string | undefined {
+  const peer = normalizePeerAddress(req.socket.remoteAddress);
+  const trustProxy = trustedProxySet.has(peer) || isBehindCloudBaseGateway(req);
+  if (trustProxy) {
+    const fwd = req.headers["x-forwarded-for"];
+    if (typeof fwd === "string" && fwd.trim() !== "") {
+      const first = fwd.split(",")[0]?.trim();
+      if (first !== undefined && first !== "") {
+        return first;
+      }
     }
   }
-  return req.socket.remoteAddress;
+  return peer === "" ? undefined : peer;
 }
 
 /** Phase 8：429 决策（AskDecision 携带 retryAfterSeconds 供外层写 Retry-After 头）。 */

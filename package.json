@@ -18,7 +18,7 @@
     "retrieval:query": "node packages/retrieval/dist/cli.js query",
     "lint": "corepack pnpm -r run lint",
     "typecheck": "corepack pnpm -r run typecheck",
-    "test": "corepack pnpm -r run test",
+    "test": "corepack pnpm -r run test && node deploy/vps/tests/deploy-config.test.mjs",
     "build": "corepack pnpm run content:validate && corepack pnpm run retrieval:build && corepack pnpm run typecheck && corepack pnpm -r run build",
     "check": "corepack pnpm run lint && corepack pnpm run typecheck && corepack pnpm run build && corepack pnpm run test"
   }

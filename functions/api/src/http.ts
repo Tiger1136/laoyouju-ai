@@ -119,3 +119,23 @@ export function isJsonContentType(contentType: string | undefined): boolean {
   const mediaType = contentType.split(";", 1)[0]?.trim() ?? "";
   return mediaType === "application/json";
 }
+
+/**
+ * 归一化 peer/代理地址（用于信任边界比较）：
+ * - IPv4-mapped IPv6（::ffff:127.0.0.1）→ IPv4；
+ * - localhost → 127.0.0.1；
+ * - 其他按小写去空白原样返回；空 → ""。
+ */
+export function normalizePeerAddress(addr: string | undefined): string {
+  if (addr === undefined) {
+    return "";
+  }
+  let a = addr.trim().toLowerCase();
+  if (a === "localhost") {
+    return "127.0.0.1";
+  }
+  if (a.startsWith("::ffff:")) {
+    a = a.slice(7);
+  }
+  return a;
+}

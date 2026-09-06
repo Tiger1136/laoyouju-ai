@@ -8,6 +8,24 @@
 
 ## 当前状态
 
+
+**2026-09-05 Phase 9：腾讯云轻量应用服务器迁移适配（当前分支 fix/shared-model-budget，未合并、未部署；结果 PARTIAL / BLOCKED_AT_SECURE_SSH）**：
+- 新增 SQLite 本地持久化预算存储（`functions/api/src/sqlite-budget.ts`，better-sqlite3@12.11.1；WAL+FULL、事务内条件更新原子、唯一租约+到期回收、释放幂等、重启保留每日用量、损坏/不可用/写失败→模型调用安全失败，绝不静默内存降级）；`BUDGET_STORE=sqlite|cloudbase` 显式选择，缺失/非法/memory → 安全失败；`CloudbaseBudgetStore` 与旧部署方案原样保留；
+- VPS 适配：`HOST`（默认 0.0.0.0 保留 CloudBase；VPS 显式 127.0.0.1 仅回环）、`TRUSTED_PROXY` 信任边界（仅本机 Nginx 的 X-Forwarded-For 被采用；Nginx 以 `$remote_addr` 覆盖外部自发转发头）、前端默认同源 `/api/`（不硬编码公网 IP/域名）；
+- 部署材料：`deploy/vps/`（Nginx/systemd/环境变量示例/安装-发布-备份-恢复-回滚-健康检查-公网验证-防火墙脚本 + 手册），专用 laoyouju nologin 用户、分离目录、journald 轮转；不配置域名/HTTPS；
+- 门禁：`pnpm run check` exit 0（api 67 + cases 14 + limit 12 + sqlite-budget 14 + web 13+export；content 36/219/1308/271；静态导出 15 路由）；sqlite 形态与服务端部署包本地冒烟通过（health/out_of_scope/400/503/伪造 XFF 不绕过）；产物与 Git 差异无密钥/公网地址；
+- 因本机无用户预先配置的安全 SSH 入口（无别名/指纹），未执行服务器部署与公网验证；未删除 CloudBase、未动 DNS/域名/证书、未购买资源、未调用真实 DeepSeek。用户侧唯一待办：按 `deploy/vps/README.md` 完成最小安全 SSH 配置后执行 sync-src/install/publish/healthcheck/verify-public。
+**2026-09-05 Phase 9A：正式部署前阻断问题整改（工作树保留 Phase 9 全部修改；未部署）**：
+- Nginx 敏感路径正则修复（锚定 ^/ 且转义；/api/、/laws/、/cases/、/ask/ 与 /.well-known/ 不受影响；.env、.git、SQLite 拒绝）；
+- install.sh 适配 OpenCloudOS Server 9（conf.d 布局检测、与 Debian sites-enabled 双兼容、80 端口冲突安全停止、nginx enable --now + active 断言、SELinux Enforcing 最小策略【httpd_sys_content_t + restorecon + http_port_t:9000，绝不关闭】）；nginx/rsync/sqlite3/curl/tar 相互独立安装；
+- systemd ExecStart 注入 Node 真实绝对路径（不再假设 /usr/bin/env node；/root 私有目录安全失败）；healthcheck 显式 exit 0/1 并有契约测试；
+- HOST 失败开放修复：显式非法 → 进程拒绝启动（listen.ts + 5 项测试）；SQLite quick_check 结果必须 ok、初始化失败关闭连接（+结果判定测试）；
+- 备份仅 SQLite 在线 .backup＋强制完整性校验（去掉复制代替方案）；恢复前校验备份、保存当前副本、健康失败自动回滚；
+- Windows 开发机：sync-src.ps1（git 清单＋系统自带 ssh/scp/tar，含未跟踪 Phase 文件、排除敏感/缓存、finally 清理）与 verify-external.ps1（外部公网验证、IP 脱敏、正确/恶意 Origin、伪造 XFF、9000 外部不可达）；
+- 首次公网部署 LIMIT_KILL_SWITCH=on、DEEPSEEK_API_KEY 留空（真实模型测试另行授权）；文档命令全部修正（`ssh laoyouju_lh` 等）；
+- 新增 deploy/vps/tests/deploy-config.test.mjs（16 项契约测试，随 `pnpm run check` 执行）；`pnpm run check` exit 0；Windows 本机实测 tar 清单打包（502 文件：Phase 9/9A 全部包含、敏感/缓存全部排除）与两个 .ps1 的 PowerShell 5.1 语法解析通过；
+- **未登录服务器、未部署；OpenCloudOS 实机执行未验证（如实标记）**；Phase 9 整体仍为 PARTIAL（服务器迁移未完成）。
+
 **Phase 6 已完成（CloudBase 公网测试部署 + 真实 DeepSeek Smoke Test）**：已建立可审计内容 schema、首批真实全国性官方资料、确定性 n-gram/BM25 检索、服务端 DeepSeek 生成（引用校验）、Web `/ask` 真实问答，并已部署公网测试版。
 
 - `packages/shared`：共用 API v1 契约（zod 运行时校验），回答结构为「初步说明 / 相关依据 / 下一步 / 信息边界 + AI 生成标识」，来源附带 citationRef/excerpt/reviewStatus；

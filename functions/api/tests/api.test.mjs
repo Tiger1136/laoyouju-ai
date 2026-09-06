@@ -1482,3 +1482,146 @@ test("Phase 8：全局日额度耗尽后不调用模型（HTTP 429；并发释�
   assert.equal(second.body.error.message.includes("明天再来") || second.body.error.message.includes("不可用"), true, second.body.error.message);
   assert.equal(counter.length, 1, "额度耗尽后不得再调用模型");
 });
+// ============================================================
+// Phase 9：真实客户端 IP 信任边界（TRUSTED_PROXY）
+// ============================================================
+
+test("Phase 9：未信任的 X-Forwarded-For 不生效（外部伪造转发头无法绕过客户端限流）", async () => {
+  // 无 trustedProxies（未信任任何转发头）：客户端 IP 一律取 socket 对端地址。
+  const server2 = createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      guard: new RequestGuard({
+        config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+        sharedBudget: new MemoryBudgetStore(),
+      }),
+    },
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  for (let i = 0; i < 6; i++) {
+    const r = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: { ...JSON_HEADERS, "X-Forwarded-For": "203.0.113.5" },
+      body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+    });
+    assert.equal(r.status, 200, "未信任转发头时前 6 次应 200");
+  }
+  // 换一个完全不同（伪造）的 XFF → 仍必须 429（转发头被忽略，走同一 peer 桶）。
+  const spoof = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: { ...JSON_HEADERS, "X-Forwarded-For": "198.51.100.7" },
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  await closeServer(server2);
+  assert.equal(spoof.status, 429, "伪造转发头不得绕过客户端限流");
+  assert.equal(spoof.body.error.code, "RATE_LIMITED");
+});
+
+test("Phase 9：受信任代理（127.0.0.1）的 X-Forwarded-For 才被采用（VPS 同源 Nginx 形态）", async () => {
+  const server2 = createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    trustedProxies: ["127.0.0.1"],
+    askContext: {
+      ...mockQuestionContext(),
+      guard: new RequestGuard({
+        config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+        sharedBudget: new MemoryBudgetStore(),
+      }),
+    },
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  for (let i = 0; i < 6; i++) {
+    const r = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: { ...JSON_HEADERS, "X-Forwarded-For": "203.0.113.5" },
+      body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+    });
+    assert.equal(r.status, 200, "客户端 A 前 6 次应 200");
+  }
+  // 信任代理场景：不同 XFF 属于不同客户端桶（Nginx 已覆盖外部转发头，此处模拟其提供的真实 IP）。
+  const other = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: { ...JSON_HEADERS, "X-Forwarded-For": "198.51.100.7" },
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  assert.equal(other.status, 200, "受信任代理下不同客户端 IP 独立计数");
+  for (let i = 0; i < 5; i++) {
+    const r = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: { ...JSON_HEADERS, "X-Forwarded-For": "198.51.100.7" },
+      body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+    });
+    assert.equal(r.status, 200);
+  }
+  const overflow = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: { ...JSON_HEADERS, "X-Forwarded-For": "198.51.100.7" },
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  await closeServer(server2);
+  assert.equal(overflow.status, 429, "客户端 B 第 7 次应 429");
+});
+
+test("Phase 9：CloudBase 网关转发头保持可信（旧环境回退不受影响）", async () => {
+  const server2 = createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      guard: new RequestGuard({
+        config: { clientPerMinute: 6, clientPerDay: 30, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+        sharedBudget: new MemoryBudgetStore(),
+      }),
+    },
+  });
+  const port = await listenRandom(server2);
+  const base = "http://127.0.0.1:" + port;
+  for (let i = 0; i < 6; i++) {
+    const r = await requestAt(base, "/api/v1/ask", {
+      method: "POST",
+      headers: { ...JSON_HEADERS, "X-Forwarded-For": "203.0.113.5", "X-CloudBase-Request-Id": "req-gw-" + i },
+      body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+    });
+    assert.equal(r.status, 200);
+  }
+  // 网关模式：XFF 仍被信任（不同客户端桶）。
+  const other = await requestAt(base, "/api/v1/ask", {
+    method: "POST",
+    headers: { ...JSON_HEADERS, "X-Forwarded-For": "198.51.100.7", "X-CloudBase-Request-Id": "req-gw-other" },
+    body: JSON.stringify({ question: "支付宝提现手续费是多少" }),
+  });
+  await closeServer(server2);
+  assert.equal(other.status, 200, "CloudBase 网关模式沿用平台客户端 IP 语义");
+});
+
+test("Phase 9：BUDGET_STORE 未配置/非法时真实模型调用安全失败（HTTP 429 STORE_ERROR，0 次模型调用）", async () => {
+  const counter = [];
+  const base = createDefaultAskContext();
+  const server2 = createApiServer({
+    allowedOrigins: [ALLOWED_ORIGIN],
+    askContext: {
+      ...mockQuestionContext(),
+      fetchFn: mockDeepSeekFetchNoCases({ capture: counter }),
+      guard: new RequestGuard({
+        config: { clientPerMinute: 100, clientPerDay: 100, globalModelPerDay: 100, maxConcurrentModels: 3, killSwitch: false },
+        // 未注入任何预算存储 → 与“生产环境 BUDGET_STORE 缺失/非法”同构：模型调用失败关闭。
+        sharedBudget: undefined,
+      }),
+    },
+  });
+  const port = await listenRandom(server2);
+  const base2 = "http://127.0.0.1:" + port;
+  const { status, body } = await requestAt(base2, "/api/v1/ask", {
+    method: "POST",
+    headers: { ...JSON_HEADERS, Origin: ALLOWED_ORIGIN },
+    body: JSON.stringify({ question: COMPLETE_CASE_QUESTION }),
+  });
+  await closeServer(server2);
+  assert.equal(status, 429);
+  assert.equal(body.error.code, "RATE_LIMITED");
+  assert.equal(body.error.message.includes("服务繁忙"), true, body.error.message);
+  assert.equal(counter.length, 0, "预算存储缺失时不得调用真实模型（绝不静默内存降级）");
+  void base;
+});

@@ -3,6 +3,36 @@
 > 本文件记录 CloudBase 公网测试版的部署方法、当前状态与回滚步骤。
 > 当前为**公网测试版**：默认 CloudBase 域名（`*.tcloudbase.com`）仅用于测试，不作为正式域名。
 > 独立域名、ICP 备案、正式搜索收录**尚未完成**；微信小程序**尚未开发**。
+## Phase 9：腾讯云轻量应用服务器（VPS）部署记录与操作手册（2026-09-05）
+
+> **状态：PARTIAL / BLOCKED_AT_SECURE_SSH**（未部署）。本阶段完成全部代码适配、本地持久化预算存储（SQLite）、
+> VPS/Nginx/systemd/备份/回滚部署材料与本地门禁；因本机无用户预先配置的安全 SSH 入口，未执行服务器部署与公网验证，
+> 未索取/回显任何凭据。**服务器部署与公网验证的操作方法见 `deploy/vps/README.md`**（安装/发布/备份/回滚/健康检查/公网验证/防火墙）。
+> **Phase 9A（2026-09-05）**：部署前阻断项已整改（Nginx 正则/HOST 失败关闭/SQLite 完整性/备份恢复/OpenCloudOS 安装兼容/SELinux 最小策略/Windows 同步与外部验证/healthcheck 退出码/kill switch 默认 on），
+> 详见 docs/PROGRESS.md PHASE_9A_PREDEPLOY_FIXES；**Phase 9 整体仍为 PARTIAL（服务器尚未部署）**。
+
+| 项 | 状态 |
+|---|---|
+| 部署方式 | 单机：Nginx(80) + systemd Node API(127.0.0.1:9000) + SQLite 预算库(/var/lib/laoyouju/budget)；发布目录 /opt/laoyouju/releases/<ts> + current 软链；环境文件 /etc/laoyouju/laoyouju.env (0600) |
+| 预算存储 | BUDGET_STORE=sqlite（better-sqlite3@12.11.1，WAL+FULL；原子条件更新/事务；租约到期回收；释放幂等；重启保留；损坏/不可用/写失败 → 模型调用安全失败，绝不静默内存降级）；旧环境保留 BUDGET_STORE=cloudbase |
+| 监听 | HOST=127.0.0.1（仅回环；默认 0.0.0.0 保留 CloudBase） |
+| 信任边界 | TRUSTED_PROXY=127.0.0.1（仅本机 Nginx 的 X-Forwarded-For 被采用；Nginx 以 $remote_addr 覆盖外部转发头；CloudBase 网关头保持可信） |
+| 前端 | 默认同源 /api/...（VPS 构建不配置 NEXT_PUBLIC_API_BASE_URL/SITE_URL）；静态导出 15 路由 |
+| 域名/HTTPS | 不解析域名、不配置证书；仅公网 IPv4 HTTP 受控验证 |
+| CloudBase | 未修改 cloudbaserc.json / 未部署 / 未删除（旧环境原样保留） |
+| 本地验证 | pnpm run check exit 0；api 67 + cases 14 + limit 12 + sqlite-budget 14 + web 13+export；冒烟（sqlite 形态与部署包）通过 |
+
+**部署前由用户完成的唯一下一步**（不向任何会话发送凭据）：
+
+1. 本机 `~/.ssh/config` 配置安全别名（如 `laoyouju_lh`）并用 `ssh laoyouju_lh` 验证指纹入 known_hosts；
+2. 确认服务器 Node 22.12.0 与密钥登录；云控制台安全组仅放行 22/80（不得放行 9000）；
+3. 执行（Phase 9A 修正）：开发机（Windows PowerShell）`powershell -ExecutionPolicy Bypass -File deploy\vps\scripts\sync-src.ps1 -HostAlias laoyouju_lh` → 服务器 `sudo bash /opt/laoyouju/src/deploy/vps/scripts/install.sh` → 编辑 `/etc/laoyouju/laoyouju.env`（首次保持 LIMIT_KILL_SWITCH=on、DEEPSEEK_API_KEY 留空）→ `publish.sh` → `healthcheck.sh` → 开发机 `verify-external.ps1`（外部公网验证；注意命令为 `ssh laoyouju_lh` 而不是 `ssh-laoyouju_lh`）。
+
+---
+
+（以下为原 CloudBase 部署记录，未修改）
+
+
 
 ## 一、环境与认证
 
