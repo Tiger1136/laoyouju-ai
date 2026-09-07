@@ -458,3 +458,15 @@
 - **验证（exit 0）**：`corepack pnpm run check` 全绿；`git diff --check` 0；README/NOTICE/文档本地链接检查通过；工作树敏感扫描 0 阻断。
 - **本轮 Git 变更**：`docs: correct open source release notes`（本地提交，未推送；ef154cd、f20a320 及更早提交均未改动）。
 - **待办（需用户另行授权）**：公开仓库前，需由用户另行明确授权，将旧 CloudBase 的真实模型调用关闭或确认其 kill switch 已开启，以防公开地址后产生费用。本轮未登录/未修改 CloudBase、未测试旧问答接口、未调用真实 DeepSeek、未删除旧环境。
+## PHASE_10A2_LEGACY_CLOUDBASE_MODEL_DISABLED（旧 CloudBase 真实模型调用关闭收尾，2026-09-07）
+
+> 结果：**PASS（用户控制台确认后收尾）**。本阶段未做任何 CLI/云端修改；kill switch 状态由用户在腾讯云控制台人工设置并确认；真实模型调用 0 次；旧环境、云函数与静态站点保留；未删除或新增任何云资源；仅本地提交。
+
+- **CLI 安全停止（Phase 10A.2 预检）**：既有 CloudBase CLI（@cloudbase/cli@3.8.1）无法确认“环境变量增量合并（--env-mode merge）”能力（相关命令帮助输出均无该选项；`tcb fn env` 仅剩 pull，`tcb fn deploy`/`tcb config update` 无合并开关），按授权书“无法确认增量合并即停止”规则，未执行任何云端修改、未登录、未读取或导出环境变量。
+- **用户控制台手动操作（唯一生效动作）**：用户随后在腾讯云 CloudBase 控制台，为旧 API 云函数的环境变量**手动新增 `LIMIT_KILL_SWITCH=on` 并点击保存**；未修改或删除其他环境变量；旧环境、云函数和静态托管继续保留。
+- **状态来源（如实）**：kill switch 状态属于**用户人工确认**（本阶段未登录 CloudBase、未读取/导出环境变量、未通过 CLI 或 API 独立再验证），**不得**写成 Harness 独立读取验证的结果；代码语义（limit.ts 模型槽位门禁 + 既有测试断言 kill switch 下模型调用 0 次）已于上一阶段核验。
+- **模型调用**：真实 DeepSeek 调用 0 次；未访问旧问答接口。
+- **资源边界**：未删除、未停用、未重建任何环境/云函数/静态托管/数据库/网关；未创建或新增任何云资源；未修改新轻量服务器、DNS、域名、证书、备案或防火墙。
+- **本地验证（exit 0）**：`corepack pnpm run check` 全绿；`git diff --check` 0；工作树敏感扫描 0 阻断。
+- **本轮唯一 Git 变更**：`docs: record legacy CloudBase model shutdown`（本地提交，未推送；前序提交未改动）。
+- **遗留说明**：旧 CloudBase 环境仅保留作历史演示与回退；模型调用已按用户授权关闭（控制台人工确认）。
