@@ -432,6 +432,8 @@
 - **SSH 别名统一**：全部面向用户的命令/示例/脚本注释统一为 `laoyouju_lh`（README.md、docs/DEPLOYMENT.md、docs/PROGRESS.md、deploy/vps/README.md、deploy/vps/scripts/sync-src.ps1、verify-external.ps1、sync-src.sh）；服务器真实备份目录 `/root/laoyouju-lh-backup-<ts>/` 为实际路径，保持原名；未修改本机 SSH 配置。
 - **冒烟引用表述修正**：Phase 9C 记录改为准确表述——可追溯来源 9 条（A=6/B=2/C=1）；正文引用号为 S1–S8 与 S10（S9 未在正文引用）；所有被引用的引用号均在 sources 中可解析（unresolvedRefs 为空）。
 - **防火墙人工验收事实（脱敏）**：用户已在腾讯云控制台人工确认入站规则为 22、80、443 与 ICMP；未开放 9000；未对云防火墙执行任何修改（记录于 PHASE_9B 记录与本文档）。
+- **变更范围审计**：相对 HEAD 的全部修改与未跟踪文件均属于 Phase 9 系列（VPS 迁移/SQLite 预算/代理信任边界/部署材料与契约测试/阶段文档）；无真实 Key、公网 IP、实例 ID、密码/私钥或凭据（仅 127.0.0.1/0.0.0.0/RFC 测试网段字面量）；CloudBase 回退方案（shared-budget.ts、cloudbaserc.json、build:deploy）未删改；无 Docker/Redis/云数据库/CDN/监控等组件；无商业化设计。Node 监听：HOST 显式 127.0.0.1（VPS），默认 0.0.0.0 保留 CloudBase 兼容；SQLite 预算失败关闭（STORE_ERROR→429，绝不回退内存）。
+- **本地提交（本轮唯一 Git 变更）**：`feat: deploy VPS runtime with SQLite model budget`（本地提交，未 push/merge/rebase/tag/force push；HEAD 之前为 e295a80）。
 ## PHASE_10A_OPEN_SOURCE_RELEASE_PREP（GitHub 开源发布前整理，2026-09-07）
 
 > 结果：**PASS（本地整理完成）**。仅本地提交；未 push、未 merge、未创建/修改 tag、未修改 GitHub 仓库可见性与元数据、未操作服务器/模型/云资源、未调用真实 DeepSeek。
