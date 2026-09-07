@@ -20,7 +20,7 @@ export function Footer() {
           <Link href="/ask">开始提问</Link>
         </nav>
         <p className="footer-note">
-          项目尚未上线。本站内容由 AI 辅助生成，不构成法律意见，不提供诉讼代理，不承诺案件结果。
+          项目尚未正式上线。本站内容由 AI 辅助生成，不构成法律意见，不提供诉讼代理，不承诺案件结果。
         </p>
         <p className="footer-copy">© 2026 {SITE_NAME} · 建设中</p>
       </div>

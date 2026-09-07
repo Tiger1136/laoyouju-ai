@@ -45,6 +45,7 @@ export function AskForm() {
 
   return (
     <div className="ask-form">
+      <div className="ask-panel">
       <label htmlFor="question-input" className="ask-label">
         描述你的劳动问题
       </label>
@@ -82,6 +83,7 @@ export function AskForm() {
       <p className="ask-privacy" aria-live="polite">
         你的问题仅用于本次提问，服务端日志不会记录问题原文。
       </p>
+      </div>
 
       {state.status === "answered" && state.data ? (
         <AnswerResult data={state.data} />
@@ -266,7 +268,7 @@ function GroupedSources({ sources }: { sources: SourceCitation[] }) {
 function CitationItem({ source }: { source: SourceCitation }) {
   const v = citationView(source);
   return (
-    <li className="source-item">
+    <li className={"source-item source-" + (source.sourceLevel ?? "").toLowerCase()}>
       <a href={v.url} target="_blank" rel="noopener noreferrer">
         [{v.ref}] {v.title}
       </a>

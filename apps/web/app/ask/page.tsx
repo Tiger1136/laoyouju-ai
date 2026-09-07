@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 export default function AskPage() {
   return (
     <div className="container">
-      <h1>开始提问</h1>
-      <AskForm />
+      <div className="ask-wrap">
+        <h1 className="page-title">开始提问</h1>
+        <AskForm />
+      </div>
     </div>
   );
 }

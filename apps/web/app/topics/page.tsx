@@ -4,8 +4,7 @@ import { TOPICS } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "问题场景",
-  description:
-    "劳有据 AI 覆盖的劳动争议主题：劳动关系认定、劳动合同、二倍工资、工资与加班、经济补偿与赔偿金、社会保险、工伤、女职工保护、竞业限制、劳务派遣、新就业形态与劳动仲裁等。",
+  description: "劳有据 AI 覆盖的劳动争议主题：劳动关系认定、劳动合同、二倍工资、工资与加班、经济补偿与赔偿金、社会保险、工伤、女职工保护、竞业限制、劳务派遣、新就业形态与劳动仲裁等。",
 };
 
 export default function TopicsPage() {
@@ -14,7 +13,7 @@ export default function TopicsPage() {
   return (
     <div className="container prose">
       <h1>问题场景</h1>
-      <p>
+      <p className="page-lead">
         以下为产品覆盖的劳动争议主题（全国性规则）。每个主题提供：基于本地权威知识库与联网检索线索的问答、可核验的法律依据、相似官方案例与行动建议。以下说明覆盖范围与已收录资料情况，不构成具体法律结论。
       </p>
       <ul className="topic-list">

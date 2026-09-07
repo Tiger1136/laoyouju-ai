@@ -9,8 +9,8 @@ export default function AiNoticePage() {
   return (
     <div className="container prose">
       <h1>AI 内容提示</h1>
-      <p>
-        本站内容由 AI 辅助生成：         本站内容由 AI 辅助生成：回答基于已与官方来源核对的资料，由生成模型组织语言与结构。，由生成模型组织语言与结构。
+      <p className="page-lead">
+        本站内容由 AI 辅助生成：回答基于已与官方来源核对的资料，由生成模型组织语言与结构。
       </p>
       <ul>
         <li>回答可能包含不准确或不完整的信息，请以官方发布的法律文本为准并核验来源；</li>

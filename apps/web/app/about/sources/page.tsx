@@ -32,7 +32,9 @@ export default function SourcesPage() {
   return (
     <div className="container prose">
       <h1>资料来源</h1>
-      <p>回答引用的资料只来自以下官方渠道，经与官方来源逐条核对后入库（尚待专业复核）。以下为官方首页链接，本站不会自动抓取任何网站内容。</p>
+      <p className="page-lead">
+        回答引用的资料只来自以下官方渠道，经与官方来源逐条核对后入库（尚待专业复核）。以下为官方首页链接，本站不会自动抓取任何网站内容。
+      </p>
       <ul>
         {SOURCES.map((source) => (
           <li key={source.name}>

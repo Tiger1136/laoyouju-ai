@@ -470,3 +470,12 @@
 - **本地验证（exit 0）**：`corepack pnpm run check` 全绿；`git diff --check` 0；工作树敏感扫描 0 阻断。
 - **本轮唯一 Git 变更**：`docs: record legacy CloudBase model shutdown`（本地提交，未推送；前序提交未改动）。
 - **遗留说明**：旧 CloudBase 环境仅保留作历史演示与回退；模型调用已按用户授权关闭（控制台人工确认）。
+## PHASE_10C_UI_VISUAL_POLISH（网页端视觉优化与 README 截图同步，2026-09-07）
+
+> 结果：**PASS_LOCAL**（仅本地分支 feat/ui-visual-polish；未 push、未部署、未调用真实模型、未修改任何云资源）。
+
+- **视觉规范**：集中设计变量（apps/web/app/globals.css :root）——页面背景 #F7F5F0、内容表面 #FFFFFF、军蓝主色 #18324A（辅助 #35546E）、铜金强调 #9A5D2E（仅按钮悬停/细节/标签字样，不大面积铺色）、主文字 #1F2933、次要文字 #5C6A76、边框 #DDD8CE、统一圆角/轻微阴影/1080px 版心/间距与标题字号；证据等级全站一致：A 级稳蓝（#1F4E79 系）、B 级低饱和青绿（#2A5F58 系）、C 级低饱和琥珀（#7A5B1E 系）；系统字体栈（无外部字体/图标库/新依赖）；hover/focus-visible/disabled/loading/error 状态保留；动效仅为 0.15s 颜色过渡并支持 prefers-reduced-motion（0.01ms 兜底）。
+- **页面改动**：①Header 由深蓝横条改为浅色轻导航（品牌 + 主导航 + 开始提问 CTA 胶囊）；②Footer 弱化为浅色必要链接与边界说明；③首页 Hero 去深色块，浅色双栏（左：标语+定位说明+主/次按钮；右：静态“证据路径”示意 4 步：提出问题→检索资料→分级整理→核对引用，注明“不代表实时处理进度”），场景卡片弱化，原“回答如何形成”改为“回答遵循的三条原则”；④/laws 资料卡化（标题+层级标签行、两列元数据网格、收录条文行、分组计数），/cases 同构（规则要点摘要卡、边界提示框；全部案例统一 B 级青绿标签，山东案例标签文字注明“仅山东地区口径”）；⑤/ask 提问面板卡片化、回答按 A/B/C 左缘色区分、来源卡片按等级着色（source-a/b/c）；⑥/topics、/about/*、/privacy、/terms、/ai-notice 统一页头/版心/提示框样式；⑦修正 /ai-notice 重复文案（“本站内容由 AI 辅助生成：”重复段，去重不改原意）。
+- **截图（4 张，README 路径与文件名不变，说明未改写）**：2560×1800 PNG，本地服务 + 本地 Mock DeepSeek 生成完整回答（A/B/C 来源可解析），未调用线上模型；PNG 仅含 IHDR/IDAT/IEND（无 EXIF/文本块）；另生成 375px 移动端验收截图 3 张于忽略目录 _scratch/phase10a/mobile-out（750×1624，首页/法规库/问答均 scrollWidth=375/375 无横向溢出），未提交。
+- **验证（exit 0）**：`corepack pnpm run check` 全绿；`git diff --check` 0；content:validate 36/219/1308/271 不变；/ask 的 noindex/nofollow、sitemap/robots 排除策略不变（export 测试 20 项通过）；functions/、packages/、content/、deploy/、cloudbaserc.json、README.md、pnpm-lock.yaml 零 diff；敏感扫描 0 阻断；桌面 4 图与移动 3 图人工视觉检查通过（无遮挡/截断/滚动条异常/溢出）。
+- **本轮 Git 变更（唯一）**：`style: refine web interface and screenshots`（分支 feat/ui-visual-polish，本地提交；未 push/merge/rebase/amend；前序提交未改动）。
