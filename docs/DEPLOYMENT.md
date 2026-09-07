@@ -1,8 +1,8 @@
 # DEPLOYMENT.md —— 公网测试版部署记录与操作手册
 
-> 本文件记录 CloudBase 公网测试版的部署方法、当前状态与回滚步骤。
-> 当前为**公网测试版**：默认 CloudBase 域名（`*.tcloudbase.com`）仅用于测试，不作为正式域名。
-> 独立域名、ICP 备案、正式搜索收录**尚未完成**；微信小程序**尚未开发**。
+> **现状说明（2026-09-07 更新）**：当前主要部署形态为腾讯云轻量应用服务器单机——Nginx(80) 提供静态页面并反向代理本机 Node API（Node API 仅监听回环地址），详见 `deploy/vps/README.md` 与 docs/PROGRESS.md 的 PHASE_9B/PHASE_9C；CloudBase 是保留的旧演示/回退方案，不是当前主要部署环境。
+> 微信小程序**尚未开发**（延后事项）；独立域名、ICP 备案、正式搜索收录**尚未完成**。
+> 下文 CloudBase 相关内容为**历史部署记录与回退操作手册**（原样保留），cloudbaserc.json 等回退方案未删除。
 ## Phase 9：腾讯云轻量应用服务器（VPS）部署记录与操作手册（2026-09-05）
 
 > **状态：PARTIAL / BLOCKED_AT_SECURE_SSH**（未部署）。本阶段完成全部代码适配、本地持久化预算存储（SQLite）、

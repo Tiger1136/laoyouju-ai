@@ -12,9 +12,9 @@
 
 ## 各端形态
 
-- **apps/web**：Next.js，静态导出。公开内容页在构建期生成，可被搜索引擎收录；问答交互通过 HTTP 调用后端云函数。
-- **apps/miniprogram**：微信原生小程序。问答交互通过 HTTP 调用后端云函数。
-- **functions/api**：CloudBase 云函数（Node.js/TypeScript）。唯一调用 DeepSeek 的入口，持有 DeepSeek Key（服务端环境变量）。
+- **apps/web**：Next.js，静态导出。公开内容页在构建期生成，可被搜索引擎收录；问答交互通过 HTTP 调用后端 API。当前主要产品形态为网页端。
+- **apps/miniprogram**：微信原生小程序（**尚未完成**，属延后事项，见 ADR-012 与 docs/PROGRESS.md；当前不是已交付终端）。问答交互计划同样通过 HTTP 调用后端 API。
+- **functions/api**：Node.js/TypeScript 的 HTTP API（Node 原生 http）。唯一调用 DeepSeek 的入口，持有 DeepSeek Key（服务端环境变量）。当前主要部署形态为腾讯云轻量应用服务器单机：Nginx 提供静态页面并反向代理到本机 Node API（Node API 仅监听回环地址）；CloudBase 云函数是保留的旧演示/回退方案，不是当前主要部署环境。
 
 
 ## Phase 7C-1：来源分级与权威层级表达（A/B/C）

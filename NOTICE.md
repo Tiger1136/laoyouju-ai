@@ -2,7 +2,7 @@
 
 ## 软件源代码
 
-仓库中由本项目作者编写的软件源代码（apps/、functions/、packages/、scripts/ 及根目录配置文件中属于本项目原创的部分）采用 **MIT License**，详见 [LICENSE](./LICENSE)。
+仓库中由本项目作者编写的软件源代码与部署配置（apps/、functions/、packages/、scripts/、deploy/ 及根目录配置文件中属于本项目原创的部分；含部署脚本与 Nginx/systemd/环境变量示例等配置）采用 **MIT License**，详见 [LICENSE](./LICENSE)。
 
 ## 内容与第三方资料
 
