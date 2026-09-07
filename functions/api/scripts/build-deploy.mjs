@@ -4,7 +4,7 @@
 // - 复制 content/laws、content/cases 等问答所需资料；
 // - 复制 scf_bootstrap 启动脚本；
 // - 生成最小 package.json（无 node_modules 依赖，installDependency=false）。
-// 产物：E:\ds-workspace\Laoyouju\deploy\api（已 gitignore）。
+// 产物：<仓库根>/deploy/api（已 gitignore）。
 import { build } from "esbuild";
 import { cpSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
