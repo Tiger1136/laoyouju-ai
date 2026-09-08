@@ -1367,14 +1367,174 @@ a:hover {
   margin-top: 0;
 }
 
+/* 问答右栏展示（Phase 10C.2 整理：集中维护，删除重复覆盖规则） */
+.ask-main .answer-result {
+  margin-top: 0;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+}
+
+.ask-main .answer-section {
+  margin-top: 8px;
+}
+
+.ask-main .answer-section h3 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.ask-main .answer-result p,
+.ask-main .answer-result li {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* 栏目条目：默认最多自然显示 3 行；超长栏目使用可键盘操作的“展开全文”（内容不在 CSS 中隐藏） */
+.ask-main .answer-section ul li {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.answer-item-expand {
+  margin-top: 2px;
+}
+
+.answer-item-expand[open] summary {
+  margin-bottom: 6px;
+}
+
+.answer-expand-body ul li {
+  display: block;
+  overflow: visible;
+}
+
+.answer-expand-toggle {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-navy-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.answer-expand-toggle:hover {
+  color: var(--color-navy);
+}
+
+.ask-main .ai-identity {
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.ask-main .answer-coverage,
+.ask-main .answer-coverage-source {
+  margin: 2px 0;
+}
+
+.ask-main .answer-ai-notice {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 来源区：A/B/C 分组纵向排列；组内空间足够时才两列，单卡占满整行 */
 @media (min-width: 1100px) {
-  .ask-main .source-groups {
+  .ask-main .source-group .source-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
     gap: 10px;
-    align-items: start;
   }
 }
+
+.ask-main .source-group h4 {
+  margin: 12px 0 6px;
+  font-size: 13px;
+}
+
+.ask-main .source-item {
+  padding: 7px 10px;
+  margin: 0;
+}
+
+.ask-main .source-item a {
+  font-size: 13.5px;
+}
+
+.ask-main .source-locator {
+  display: inline;
+  font-size: 12.5px;
+}
+
+.ask-main .source-meta {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 3px;
+  font-size: 11.5px;
+}
+
+.ask-main .source-link {
+  margin: 3px 0 0;
+  font-size: 12px;
+}
+
+/* 摘录在问答页隐藏（标题、来源编号与等级信息保持可见） */
+.ask-main .source-excerpt {
+  display: none;
+}
+
+/* 覆盖范围折叠（内容保留于 HTML） */
+.answer-coverage-details {
+  margin-top: 10px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px 8px;
+}
+
+.answer-coverage-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-navy-soft);
+  padding: 4px 0;
+}
+
+.answer-coverage-details[open] summary {
+  margin-bottom: 4px;
+}
+
+/* 次要栏目折叠区（顺序不变，内容保留于 HTML） */
+.answer-more {
+  margin-top: 12px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 12px 10px;
+}
+
+.answer-more summary {
+  cursor: pointer;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-navy-soft);
+  padding: 6px 0;
+}
+
+.answer-more summary:hover {
+  color: var(--color-navy);
+}
+
+.answer-more[open] summary {
+  margin-bottom: 2px;
+}
+
+.answer-more .answer-section {
+  margin-top: 8px;
+}
+
 
 /* 分组标题 + 数量：窄屏上下排列，数量不换行 */
 .group-head {
@@ -1422,293 +1582,4 @@ a:hover {
   .card-head h2 {
     font-size: 16.5px;
   }
-}
-/* 问答右栏：长条目/摘录仅展示前两行（内容保留于 HTML 与来源卡片），保证 A/B/C 栏目快速扫读 */
-.answer-section li {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.ask-main .source-excerpt {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.ask-main .answer-result {
-  padding: 16px 18px;
-}
-
-.ask-main .answer-section {
-  margin-top: 12px;
-}
-
-.ask-main .answer-section h3 {
-  font-size: 14.5px;
-}
-
-.ask-main .answer-coverage {
-  font-size: 12.5px;
-}
-
-.ask-main .answer-coverage-source {
-  font-size: 12px;
-}
-
-.ask-main .answer-ai-notice {
-  margin-top: 12px;
-  padding-top: 9px;
-  font-size: 12.5px;
-}
-
-.ask-main .source-item {
-  padding: 9px 11px;
-}
-
-.ask-main .source-excerpt {
-  margin-top: 4px;
-  font-size: 12.5px;
-}
-/* 问答右栏排版压缩（仅展示层，不改内容） */
-.ask-main .answer-result {
-  padding: 14px 16px;
-  border-radius: var(--radius);
-}
-
-.ask-main .answer-section {
-  margin-top: 10px;
-}
-
-.ask-main .answer-section h3 {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
-.ask-main .answer-result p,
-.ask-main .answer-result li {
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.ask-main .ai-identity {
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
-.ask-main .answer-coverage,
-.ask-main .answer-coverage-source {
-  margin: 4px 0;
-}
-
-.ask-main .source-group h4 {
-  margin: 10px 0 6px;
-  font-size: 13px;
-}
-
-.ask-main .source-item a {
-  font-size: 13.5px;
-}
-
-.ask-main .source-locator {
-  font-size: 12.5px;
-}
-
-.ask-main .source-meta {
-  font-size: 11.5px;
-  margin-top: 3px;
-}
-
-.ask-main .source-excerpt {
-  font-size: 12.5px;
-}
-
-.ask-main .source-link {
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.ask-main .source-item {
-  padding: 8px 10px;
-  margin: 0 0 10px;
-}
-
-@media (min-width: 1100px) {
-  .ask-main .source-item {
-    margin: 0;
-  }
-}
-/* 次要栏目折叠区（顺序不变，内容保留于 HTML） */
-.answer-more {
-  margin-top: 12px;
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 12px 10px;
-}
-
-.answer-more summary {
-  cursor: pointer;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--color-navy-soft);
-  padding: 6px 0;
-}
-
-.answer-more summary:hover {
-  color: var(--color-navy);
-}
-
-.answer-more[open] summary {
-  margin-bottom: 2px;
-}
-
-.answer-more .answer-section {
-  margin-top: 8px;
-}
-
-/* 来源卡片：标题与元数据行数限定（展示层） */
-.ask-main .source-item > a:first-child {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.ask-main .source-meta {
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-/* 问答右栏最终压缩（仅展示层，内容保留于 HTML；法规/案例页来源卡不受影响） */
-.ask-main .source-excerpt {
-  display: none;
-}
-
-.ask-main .answer-result {
-  padding: 12px 14px;
-}
-
-.ask-main .answer-section {
-  margin-top: 8px;
-}
-
-.ask-main .answer-section h3 {
-  margin-bottom: 4px;
-}
-
-.ask-main .answer-result li {
-  line-height: 1.5;
-}
-
-.ask-main .answer-coverage,
-.ask-main .answer-coverage-source {
-  margin: 2px 0;
-}
-
-.ask-main .ai-identity {
-  margin-bottom: 4px;
-}
-
-.ask-main .source-group h4 {
-  margin: 8px 0 4px;
-}
-
-.ask-main .source-item a {
-  font-size: 13px;
-}
-
-.ask-main .source-link {
-  margin-top: 2px;
-}
-
-.ask-main .answer-ai-notice {
-  margin-top: 8px;
-  padding-top: 6px;
-}
-/* 覆盖范围折叠（内容保留于 HTML） */
-.answer-coverage-details {
-  margin-top: 10px;
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 4px 12px 8px;
-}
-
-.answer-coverage-details summary {
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-navy-soft);
-  padding: 4px 0;
-}
-
-.answer-coverage-details[open] summary {
-  margin-bottom: 4px;
-}
-
-/* 桌面双栏下的紧凑规则（移动端单栏保持可读全文） */
-@media (min-width: 980px) {
-  .ask-main .answer-section {
-    margin-top: 6px;
-  }
-  .ask-main .answer-section h3 {
-    font-size: 13.5px;
-  }
-  .ask-main .answer-result li {
-    font-size: 13.5px;
-    line-height: 1.45;
-  }
-  .ask-main .answer-more summary,
-  .ask-main .answer-coverage-details summary {
-    font-size: 12.5px;
-    padding: 3px 0;
-  }
-  .ask-main .answer-ai-notice {
-    font-size: 11.5px;
-    line-height: 1.5;
-  }
-  .ask-main .source-item > a:first-child {
-    -webkit-line-clamp: 1;
-  }
-  .ask-main .source-item a {
-    font-size: 12.5px;
-  }
-  .ask-main .source-link {
-    font-size: 11.5px;
-  }
-}
-/* 末轮：来源链接单行省略、桌面端栏目条目单行、查找区间距（展示层） */
-.ask-main .source-link {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ask-main .source-locator {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (min-width: 980px) {
-  .ask-main .answer-result li {
-    -webkit-line-clamp: 1;
-  }
-  .ask-main .answer-ai-notice {
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .ask-main .source-group h4 {
-    font-size: 12.5px;
-    margin: 8px 0 4px;
-  }
-}
-
-.ask-wrap {
-  padding-top: 16px;
 }

@@ -163,6 +163,38 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
   );
   const moreSections = sections.filter((s) => !MAIN_SECTIONS.includes(s));
 
+  function expandList(section: AnswerSection) {
+    if (!section.items) {
+      return null;
+    }
+    const list = (
+      <ul>
+        {section.items.map((item, i) => (
+          <li key={i}>{item}</li>
+        ))}
+      </ul>
+    );
+    const isLong = section.items.join("").length > 90;
+    if (!isLong) {
+      return list;
+    }
+    return (
+      <>
+        {list}
+        <details className="answer-item-expand">
+          <summary className="answer-expand-toggle">展开全文</summary>
+          <div className="answer-expand-body">
+            <ul>
+              {section.items.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </details>
+      </>
+    );
+  }
+
   function renderSection(section: AnswerSection, similarCases: string[]) {
     return section.items === null ? (
       section.key === "similarCases" ? (
@@ -173,12 +205,8 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
       ) : null
     ) : (
       <div key={section.key} className={"answer-section answer-section-" + section.key + (SECTION_LEVEL[section.key] ? " answer-section-" + SECTION_LEVEL[section.key] : "")}>
-        <h3>{section.heading}{SECTION_LEVEL[section.key] ? <span className={"section-pill section-pill-" + SECTION_LEVEL[section.key]}>{SECTION_LEVEL[section.key]} 级</span> : null}</h3>
-        <ul>
-          {section.items.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+        <h3>{section.heading}{SECTION_LEVEL[section.key] ? <span className={"section-pill section-pill-" + SECTION_LEVEL[section.key]}>{String(SECTION_LEVEL[section.key]).toUpperCase()}级</span> : null}</h3>
+        {expandList(section)}
       </div>
     );
   }
@@ -186,6 +214,13 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
     <section className="answer-result answered" aria-live="polite">
       <p className="ai-identity">AI 生成 · 仅供参考，不构成法律意见</p>
       {MAIN_SECTIONS.map((section) => renderSection(section, similarCases))}
+
+      {data.sources.length > 0 && (
+        <>
+          <h3>可核验来源（按类型分组）</h3>
+          <GroupedSources sources={data.sources} />
+        </>
+      )}
 
       {moreSections.length > 0 && (
         <details className="answer-more">
@@ -201,13 +236,6 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
           来源分级：A 级·全国性法律依据 / B 级·官方案例参考（类案参考，无普遍约束力） / C 级·地方裁审参考（仅山东省，非全国统一规则）；每张来源卡片均带分级文字标签。
         </p>
       </details>
-
-      {data.sources.length > 0 && (
-        <>
-          <h3>可核验来源（按类型分组）</h3>
-          <GroupedSources sources={data.sources} />
-        </>
-      )}
 
       <p className="answer-ai-notice">{answer.aiNotice}</p>
     </section>

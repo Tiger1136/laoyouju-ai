@@ -492,3 +492,16 @@
 - **移动端验收图（忽略目录，未提交）**：mobile-home/laws/ask（750×1624）；`scrollWidth/innerWidth` 三页均 375/375（无横向溢出）；分组数量竖排、问答单栏正常。
 - **验证（exit 0）**：corepack pnpm run check 全绿；git diff --check 0；content:validate 36/219/1308/271 不变；/ask noindex、sitemap/robots 不变；后端/内容/契约/部署文件零 diff；敏感扫描 0 阻断；桌面 4 图 + 移动 3 图人工查看通过。
 - **本轮唯一 Git 变更**：`style: tighten responsive layout and evidence hierarchy`（分支 feat/ui-visual-polish；未 push/merge/rebase/amend；cf32447 未动）。
+## PHASE_10C.2_ASK_READABILITY_REFINE（问答页可读性与来源布局精修，2026-09-08）
+
+> 结果：**PASS_LOCAL**（feat/ui-visual-polish 增量；只允许 4 个文件；未 push、未部署、未调用真实模型、未修改云资源；未 amend 历史提交）。
+
+- **截断问题解决**：删除桌面端单行 line-clamp；回答栏目条目默认自然显示最多 2 行（桌面/移动一致），超长栏目在预览下方提供**可键盘操作的“展开全文”**（`<details><summary>`，点击展开完整条目；内容不藏在 CSS 中）。
+- **来源布局**：A/B/C 来源分组纵向排列、每组标题占完整宽度；卡片在组内仅当空间足够（≥1100px 且多卡）才两列（`auto-fit minmax(min(100%,320px),1fr)`），单卡占满整行；来源标题、条文定位与“查看官方来源”恢复完整可辨（不再 nowrap/省略号）；摘录继续隐藏，来源编号与等级信息保留可见。
+- **徽标大小写统一**：栏目徽标显示为 `A级 / B级 / C级`（类名仍为小写 a/b/c）。
+- **CSS 重复规则整理**：删除 globals.css 末尾四轮追加的“问答右栏…最终覆盖”重复块（原 +111/−243 减重后又整理为单块集中维护）；同样选择器合并、互相覆盖规则移除；首页/法规/案例页共享规则原样保留（其截图未重新生成，视觉不受影响——门禁与人工检查确认）。
+- **问答页结构**：保持桌面双栏（左：标题、提问面板、隐私提示、问题示例，仅桌面 sticky）/移动单栏；回答八个栏目相对顺序不变（“更多内容/覆盖范围说明”为补充折叠展示位；“来源”区块位置调整不影响答案栏目顺序）；API 请求/归一化/限流/SEO/后端与数据零改动。
+- **截图 screenshot-ask.png（2560×1800，仅此一张）**：本地服务 + Mock DeepSeek（真实模型调用 0 次）；同屏可见 导航/标题/已填问题/提问面板 + 问题识别、初步结论、A级、C级、B级 三栏目（每栏目自然 2 行 + 展开全文）+ 可核验来源区域（A 级组 [S1] 来源卡完整可读：标题、条文定位、等级、官方来源；C 级组标签与卡片标题同时入画）；无单行截断、无省略号标题；PNG 仅 IHDR/IDAT/IEND。
+- **移动端验收（忽略目录未提交）**：mobile-home/laws/ask-top/ask-answer（750×1624）；页面顶部与回答区域 `scrollWidth/innerWidth` 均 375/375（无横向溢出）；菜单探针 panel=true/noOverflow=true。
+- **验证（exit 0）**：corepack pnpm run check 全绿；git diff --check 0；content:validate 36/219/1308/271 不变；/ask noindex、sitemap/robots 不变；敏感扫描 0 阻断。
+- **本轮 Git 变更**：`style: improve ask readability and source layout`（feat/ui-visual-polish 新独立提交；未 amend/squash/rebase；未 push）。
