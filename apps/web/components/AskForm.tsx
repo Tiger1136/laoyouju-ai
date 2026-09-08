@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { AskSuccessResponse, SourceCitation } from "@laoyouju/shared";
 import { EXAMPLE_QUESTIONS, submitQuestion, type AskUiState } from "@/lib/api";
+import type { AnswerSection } from "@/lib/present";
 import {
   CLARIFICATION_FOLLOWUP_HINT,
   COVERAGE_NOTE,
@@ -12,6 +13,14 @@ import {
   groupSources,
   similarCasesOrPlaceholder,
 } from "@/lib/present";
+
+const LEVEL_CLS: Readonly<Record<string, string>> = {
+  applicableLaw: "a",
+  similarCases: "b",
+  localGuidance: "c",
+};
+
+const SECTION_LEVEL: Readonly<Record<string, string>> = LEVEL_CLS;
 
 const MAX_LENGTH = 500;
 const MIN_LENGTH = 2;
@@ -45,6 +54,8 @@ export function AskForm() {
 
   return (
     <div className="ask-form">
+      <div className="ask-layout">
+      <div className="ask-side">
       <div className="ask-panel">
       <label htmlFor="question-input" className="ask-label">
         描述你的劳动问题
@@ -85,6 +96,44 @@ export function AskForm() {
       </p>
       </div>
 
+      <div className="ask-examples">
+
+        <p className="ask-examples-title">问题示例</p>
+
+        <ul>
+
+          {EXAMPLE_QUESTIONS.map((q) => (
+
+            <li key={q}>
+
+              <button
+
+                type="button"
+
+                className="example-button"
+
+                onClick={() => fillExample(q)}
+
+                disabled={state.status === "loading"}
+
+              >
+
+                {q}
+
+              </button>
+
+            </li>
+
+          ))}
+
+        </ul>
+
+      </div>
+
+      </div>
+
+      <div className="ask-main">
+
       {state.status === "answered" && state.data ? (
         <AnswerResult data={state.data} />
       ) : state.status === "needs_clarification" && state.data ? (
@@ -96,23 +145,7 @@ export function AskForm() {
           <p>{state.errorMessage}</p>
         </div>
       ) : null}
-
-      <div className="ask-examples">
-        <p className="ask-examples-title">问题示例</p>
-        <ul>
-          {EXAMPLE_QUESTIONS.map((q) => (
-            <li key={q}>
-              <button
-                type="button"
-                className="example-button"
-                onClick={() => fillExample(q)}
-                disabled={state.status === "loading"}
-              >
-                {q}
-              </button>
-            </li>
-          ))}
-        </ul>
+      </div>
       </div>
     </div>
   );
@@ -125,34 +158,49 @@ function AnswerResult({ data }: { data: AskSuccessResponse }) {
   }
   const sections = answerSections(data);
   const similarCases = similarCasesOrPlaceholder(answer);
+  const MAIN_SECTIONS = sections.filter((s) =>
+    ["issueIdentification", "preliminaryConclusion", "applicableLaw", "localGuidance", "similarCases"].includes(s.key),
+  );
+  const moreSections = sections.filter((s) => !MAIN_SECTIONS.includes(s));
+
+  function renderSection(section: AnswerSection, similarCases: string[]) {
+    return section.items === null ? (
+      section.key === "similarCases" ? (
+        <div key={section.key} className={"answer-section answer-section-" + section.key}>
+          <h3>{section.heading}</h3>
+          <p className="answer-empty">{similarCases[0]}</p>
+        </div>
+      ) : null
+    ) : (
+      <div key={section.key} className={"answer-section answer-section-" + section.key + (SECTION_LEVEL[section.key] ? " answer-section-" + SECTION_LEVEL[section.key] : "")}>
+        <h3>{section.heading}{SECTION_LEVEL[section.key] ? <span className={"section-pill section-pill-" + SECTION_LEVEL[section.key]}>{SECTION_LEVEL[section.key]} 级</span> : null}</h3>
+        <ul>
+          {section.items.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
   return (
     <section className="answer-result answered" aria-live="polite">
       <p className="ai-identity">AI 生成 · 仅供参考，不构成法律意见</p>
-      {sections.map((section) =>
-        section.items === null ? (
-          section.key === "similarCases" ? (
-            <div key={section.key}>
-              <h3>{section.heading}</h3>
-              <p className="answer-empty">{similarCases[0]}</p>
-            </div>
-          ) : null
-        ) : (
-          <div key={section.key}>
-            <h3>{section.heading}</h3>
-            <ul>
-              {section.items.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        ),
+      {MAIN_SECTIONS.map((section) => renderSection(section, similarCases))}
+
+      {moreSections.length > 0 && (
+        <details className="answer-more">
+          <summary>更多内容：下一步行动、证据建议与信息边界</summary>
+          {moreSections.map((section) => renderSection(section, similarCases))}
+        </details>
       )}
 
-      <h3>覆盖范围说明</h3>
-      <p className="answer-coverage">{COVERAGE_NOTE}</p>
-      <p className="answer-coverage-source">
-        来源分级：A 级·全国性法律依据 / B 级·官方案例参考（类案参考，无普遍约束力） / C 级·地方裁审参考（仅山东省，非全国统一规则）；每张来源卡片均带分级文字标签。
-      </p>
+      <details className="answer-coverage-details">
+        <summary>覆盖范围说明</summary>
+        <p className="answer-coverage">{COVERAGE_NOTE}</p>
+        <p className="answer-coverage-source">
+          来源分级：A 级·全国性法律依据 / B 级·官方案例参考（类案参考，无普遍约束力） / C 级·地方裁审参考（仅山东省，非全国统一规则）；每张来源卡片均带分级文字标签。
+        </p>
+      </details>
 
       {data.sources.length > 0 && (
         <>

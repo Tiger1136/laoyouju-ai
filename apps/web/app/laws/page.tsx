@@ -16,7 +16,15 @@ export default function LawsPage() {
     <div className="container prose">
       <h1>法律法规库</h1>
       <p className="page-lead">
-        按权威层级分区展示：<strong>A 级·全国性法律规范</strong>（法律、行政法规、部门规章、司法解释与仲裁程序文件，现行有效或经修正）与 <strong>C 级·地方裁审参考</strong>（山东省高级人民法院、山东省人社厅发布的地方裁审会议纪要/诉讼指引，仅适用山东省）。每条来源均标注发文机关、文号、公布/施行日期、效力状态、适用地区与官方链接；内容状态为“已核对官方来源、尚待专业复核”。本页面不构成法律结论。
+        按权威层级分区展示：A 级·全国性法律规范与 C 级·地方裁审参考（仅山东省），每条均标注官方来源、文号、效力状态与适用地区。
+      </p>
+      <div className="evidence-legend" aria-label="证据等级图例">
+        <span className="legend-chip legend-a">A · 全国性法律依据</span>
+        <span className="legend-chip legend-b">B · 官方案例参考</span>
+        <span className="legend-chip legend-c">C · 地方裁审参考</span>
+      </div>
+      <p className="notice-box">
+        <strong>说明</strong>：内容状态为“已核对官方来源，尚待专业复核”；C 级地方裁审参考仅适用于山东省，不属于全国统一法律依据；本页面不构成法律结论。
       </p>
 
       <div className="group-head">
@@ -100,10 +108,10 @@ function LawCard({ law, showLocalWarning }: { law: CatalogLawView; showLocalWarn
           </p>
         </div>
         {law.provisions.length > 0 && (
-          <p className="provisions-line">
-            <strong>收录条文（完整拆分）：</strong>
-            {law.provisions.map((p) => p.locator).join("、")}
-          </p>
+          <details className="provisions-details">
+            <summary>收录条文（完整拆分，共 {law.provisions.length} 条）</summary>
+            <p className="provisions-line">{law.provisions.map((p) => p.locator).join("、")}</p>
+          </details>
         )}
       </div>
     </li>

@@ -16,10 +16,15 @@ export default function CasesPage() {
     <div className="container prose">
       <h1>权威案例库</h1>
       <p className="page-lead">
-        以下案例来自最高人民法院、人力资源和社会保障部等官方渠道（含全国性劳动人事争议典型案例、涉欠薪纠纷典型案例、新就业形态劳动者权益保障典型案例等）以及山东省高级人民法院等地方官方渠道（山东省官方案例，随案例标注发布机关与适用地域），已核对官方来源、尚待专业复核。本库不包含任何虚构案例。
+        以下案例来自最高人民法院、人力资源和社会保障部等全国性官方渠道及山东省等地方官方渠道，已核对官方来源、尚待专业复核；本库不包含任何虚构案例。
       </p>
+      <div className="evidence-legend" aria-label="证据等级图例">
+        <span className="legend-chip legend-a">A · 全国性法律依据</span>
+        <span className="legend-chip legend-b">B · 官方案例参考</span>
+        <span className="legend-chip legend-c">C · 地方裁审参考</span>
+      </div>
       <p className="case-disclaimer">
-        <strong>提示</strong>：所有案例均为 <strong>B 级 · 官方案例参考</strong>，仅供类案参考，不具有普遍约束力，不是制定法；案例摘要是对个案事实与裁判规则的简要概括，不等于对用户个案的结论；用户的个案适用需要结合具体事实与现行规则由专业人员判断。
+        <strong>提示</strong>：所有案例均为 B 级 · 官方案例参考，仅供类案参考，不具有普遍约束力；案例摘要不等于对用户个案的结论，个案适用需由专业人员结合具体事实判断。
       </p>
 
       <div className="group-head">
@@ -92,10 +97,10 @@ function CaseCard({ c, isShandong }: { c: CatalogCaseView; isShandong: boolean }
             <span className="meta-value"><a href={c.officialUrl} target="_blank" rel="noopener noreferrer">查看官方案例</a></span>
           </p>
         </div>
-        <p className="case-summary">
-          <strong>规则要点：</strong>
-          {c.reasoning.length > 400 ? c.reasoning.slice(0, 400) + "…" : c.reasoning}
-        </p>
+        <details className="case-summary-details">
+          <summary>规则要点（摘要）</summary>
+          <p className="case-summary">{c.reasoning.length > 400 ? c.reasoning.slice(0, 400) + "…" : c.reasoning}</p>
+        </details>
       </div>
     </li>
   );

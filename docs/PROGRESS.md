@@ -479,3 +479,16 @@
 - **截图（4 张，README 路径与文件名不变，说明未改写）**：2560×1800 PNG，本地服务 + 本地 Mock DeepSeek 生成完整回答（A/B/C 来源可解析），未调用线上模型；PNG 仅含 IHDR/IDAT/IEND（无 EXIF/文本块）；另生成 375px 移动端验收截图 3 张于忽略目录 _scratch/phase10a/mobile-out（750×1624，首页/法规库/问答均 scrollWidth=375/375 无横向溢出），未提交。
 - **验证（exit 0）**：`corepack pnpm run check` 全绿；`git diff --check` 0；content:validate 36/219/1308/271 不变；/ask 的 noindex/nofollow、sitemap/robots 排除策略不变（export 测试 20 项通过）；functions/、packages/、content/、deploy/、cloudbaserc.json、README.md、pnpm-lock.yaml 零 diff；敏感扫描 0 阻断；桌面 4 图与移动 3 图人工视觉检查通过（无遮挡/截断/滚动条异常/溢出）。
 - **本轮 Git 变更（唯一）**：`style: refine web interface and screenshots`（分支 feat/ui-visual-polish，本地提交；未 push/merge/rebase/amend；前序提交未改动）。
+## PHASE_10C.1_MOBILE_EVIDENCE_SCREENSHOT_REFINE（移动端、证据层级与 README 截图精修，2026-09-08）
+
+> 结果：**PASS_LOCAL**（本地分支 feat/ui-visual-polish 增量修复；未 push、未部署、未调用真实模型、未修改任何云资源；未 amend cf32447）。
+
+- **移动导航**：Header 改为 860px 以下“品牌 + 菜单”紧凑模式（语义化 `details/summary`，无依赖、无复杂状态；展开为纵向导航 + 开始提问）；860px 以上沿用原横向导航；键盘可操作、focus-visible 清晰；375px 菜单打开探针 `panel=true / noOverflow=true`。
+- **移动端细节**：法规/案例分组标题与数量在窄屏上下排列（`group-head` 纵向），数量 `white-space: nowrap`（消除“34 / 份”竖排）；375px 下容器边距/卡片内边距/标题字号收敛（16px 版心、卡片 14px、标题 24px），正文保持可读字号。
+- **A/B/C 辨识度**：首页证据路径卡内新增紧凑三级图例（A 全国性法律依据 / B 官方案例参考 / C 地方裁审参考，稳蓝/低饱和青绿/低饱和琥珀，铜金仅细节）；法规页、案例页复用同一套 `.evidence-legend` 与 `.level-tag` 样式；问答结构化栏目增加明确类名 `answer-section-applicableLaw|localGuidance|similarCases`（A/B/C 左缘色 + 等级徽标），来源卡按等级着色（source-a/b/c）——全部只改展示层，不改内容/顺序/契约。
+- **文字墙处理**：法规/案例页开头压缩为两句短说明，边界详情放入紧凑提示框；法规“收录条文”与案例“规则要点”改为语义化 `details/summary` 展开区（内容保留于 HTML）；列表默认展示标题/发布机关（或地区、日期）/证据等级等关键字段。
+- **问答桌面双栏**：≥980px 为左（提问面板+隐私提示+问题示例，仅桌面 sticky）/右（结构化回答+来源）双栏，移动端恢复单栏；loading/错误/限流/越界/提交逻辑零改动（AskForm 仅作容器与类名调整；`submitQuestion`/API 解析未触碰）；回答八个栏目中前五保持常显，后四（下一步/证据清单/事实确认/边界）收进“更多内容”语义化折叠区（顺序不变、内容完整），覆盖范围说明同入折叠区；长条目/来源链接元数据在问答页做行数限定（内容保留于 HTML，法规/案例页不受影响）。
+- **四张 README 截图（2560×1800，顶部构图，含统一导航）**：首页（Hero+证据路径+图例+部分场景）、法规（导航+标题+短说明+图例+完整法规卡+条文折叠）、案例（导航+标题+提示+B 级案例卡+规则要点折叠）、问答（导航+标题+已填示例问题+面板+A/B/C 三栏目+4 张来源卡 A/C/B 全部同屏）；本地服务 + 本地 Mock DeepSeek（真实模型调用 0 次）；PNG 仅 IHDR/IDAT/IEND；README 说明未改。
+- **移动端验收图（忽略目录，未提交）**：mobile-home/laws/ask（750×1624）；`scrollWidth/innerWidth` 三页均 375/375（无横向溢出）；分组数量竖排、问答单栏正常。
+- **验证（exit 0）**：corepack pnpm run check 全绿；git diff --check 0；content:validate 36/219/1308/271 不变；/ask noindex、sitemap/robots 不变；后端/内容/契约/部署文件零 diff；敏感扫描 0 阻断；桌面 4 图 + 移动 3 图人工查看通过。
+- **本轮唯一 Git 变更**：`style: tighten responsive layout and evidence hierarchy`（分支 feat/ui-visual-polish；未 push/merge/rebase/amend；cf32447 未动）。

@@ -61,6 +61,11 @@ export default function HomePage() {
                 </li>
               ))}
             </ol>
+            <div className="evidence-legend" aria-label="证据等级图例">
+              <span className="legend-chip legend-a">A · 全国性法律依据</span>
+              <span className="legend-chip legend-b">B · 官方案例参考</span>
+              <span className="legend-chip legend-c">C · 地方裁审参考</span>
+            </div>
           </aside>
         </div>
       </section>
