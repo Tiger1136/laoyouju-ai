@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="title desc">
+  <title id="title">劳有据 AI</title>
+  <desc id="desc">劳动问题，回答有依据。开源劳动问题助手。</desc>
+  <rect width="1280" height="320" rx="16" fill="#132449"/>
+  <g fill="none" stroke="#7698ff" stroke-width="0.8" transform="translate(1054 74) scale(4)">
+    <path d="M5 2H27V34H5V2Z"/>
+    <path d="M11 10H21M11 15H21M11 20H16M17 25L20 28L27 20"/>
+  </g>
+  <g font-family="PingFang SC,Microsoft YaHei,Noto Sans CJK SC,sans-serif">
+    <text x="72" y="78" fill="#a8bbef" font-size="21">开源劳动问题助手</text>
+    <text x="68" y="163" fill="#ffffff" font-size="70" font-weight="700">劳有据 AI</text>
+    <text x="72" y="224" fill="#dfe7ff" font-size="30">劳动问题，回答有依据。</text>
+    <text x="1208" y="276" text-anchor="end" fill="#a8bbef" font-size="20">laoyoujuai.cn</text>
+  </g>
+</svg>
