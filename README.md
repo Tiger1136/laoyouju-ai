@@ -20,7 +20,7 @@
   <a href="docs/ARCHITECTURE.md"><img src="https://img.shields.io/badge/Retrieval-BM25-2449c6?style=flat-square" alt="本地 BM25 检索" /></a>
 </p>
 
-> **现在可以用什么？** 免费准备单、法规、案例和专题均已上线。AI 分析在最近一次生产核验（2026-10-06）时仍暂停；免费流程不依赖模型或体验码。
+> **现在可以用什么？** 免费准备单、法规、案例和专题均已上线。2026-10-09 更新：案例库已收录 **433 篇官方案例**，支持组合筛选、分页与独立详情阅读。AI 分析在该日核验时仍暂停，免费流程不依赖模型或体验码。
 
 <a href="https://laoyoujuai.cn">
   <picture>
@@ -43,8 +43,31 @@
 
 <img src="docs/images/screenshot-prepare-result.png" width="100%" alt="实际准备单首屏：事实摘要与待确认事项，可复制或打印；使用演示选项，未填写个人信息" />
 
+## 找到相关依据，读懂案例经过
+
+官网可查阅 **95 份规范、3,481 条／项正文和 433 篇官方案例**。先按自己的问题缩小范围，再阅读条文、案例经过和处理理由，最后核对官方原文。
+
+| 想做什么 | 现在可以怎样查 |
+| --- | --- |
+| 找常用法律依据 | 《劳动合同法》《劳动法》等常用依据置前，支持关键词、主题、范围和效力筛选 |
+| 找相关案例 | 按关键词、发布地区、年份和主题组合筛选，切换重点优先或最新发布 |
+| 阅读案例详情 | 每页 20 条，进入独立详情页查看案情、处理结果、理由和官方出处；关闭 JavaScript 也能翻页阅读 |
+| 了解收录范围 | [收录覆盖页](https://laoyoujuai.cn/cases/coverage/) 展示地区、年份与主题分布，尚未收录的地区明确标出 |
+
+<a href="https://laoyoujuai.cn/cases/">
+  <img src="docs/images/screenshot-cases.png" width="100%" alt="433 篇官方案例：按发布地区、年份、主题筛选，每页 20 条并可进入独立详情页" />
+</a>
+
 <details>
-<summary><strong>再看看准备流程、法规、案例和 AI 提问页</strong></summary>
+<summary><strong>展开查看：案例详情、收录覆盖、法规和准备流程</strong></summary>
+
+**案例详情** · 在独立页面阅读案情、处理结果与理由，并核对官方原文。
+
+![官方案例详情与出处](docs/images/screenshot-case-detail.png)
+
+**收录覆盖** · 看清已收录什么、哪些地区仍待补充。
+
+![案例收录的地区、年份与主题分布](docs/images/screenshot-case-coverage.png)
 
 **免费准备流程** · 按阶段逐步整理，也可以返回修改。
 
@@ -54,17 +77,13 @@
 
 ![新版法律法规目录](docs/images/screenshot-laws.png)
 
-**官方案例** · 查看案例的争议主题、发布机关和官方原文。
-
-![新版官方案例目录](docs/images/screenshot-cases.png)
-
 **AI 提问页** · 展示输入与能力边界；此图不代表真实生成已开放。
 
 ![AI 提问界面](docs/images/screenshot-ask.png)
 
 </details>
 
-截图来自 2026-10-08 的线上页面；准备单使用演示选项，不含个人信息。首页材料夹是说明性 AI 配图，页面与流程截图均为实际界面。
+截图来自 **2026-10-09 的线上页面**；准备单使用演示选项，不含个人信息。首页材料夹是说明性 AI 配图，页面与流程截图均为实际界面。
 
 ## 回答有依据，具体意味着什么
 
@@ -80,13 +99,15 @@ AI 问答先检索已核对官方来源的资料，再由服务端 DeepSeek 根�
 
 ### 官网资料库
 
-| 40 份规范 | 1,430 条条文 | 219 个官方案例 | 275 条来源登记 |
+| 95 份规范 | 3,481 条／项正文 | 433 篇官方案例 | 544 条来源登记 |
 | :---: | :---: | :---: | :---: |
-| 38 份全国规范 + 2 份山东指引 | 按条文检索与引用 | 按主题和案情匹配 | 可追溯至官方来源 |
+| 93 份全国规范 + 2 份山东指引 | 按条文检索与引用 | 按主题和案情匹配 | 可追溯至官方来源 |
 
-官网资料统计于 **2026-10-08**，40 份规范中 39 份在该日有效。资料状态为「已核对官方来源，尚待专业法律复核」，不冒称律师审核。
+内容库统计于 **2026-10-09**，其中 94 份规范在该日有效；规范按文件及版本统计。案例较上一批新增 115 篇，共来自 77 个官方发布页面；地方发布范围涉及 19 个省区市，另有全国性发布。发布地区不等同于案发地，收录范围仍在扩充。
 
-可以直接查看 [法律法规](https://laoyoujuai.cn/laws/)、[官方案例](https://laoyoujuai.cn/cases/) 和 [来源与覆盖范围](https://laoyoujuai.cn/about/sources/)。资料数量和引用校验不代表法律结论的准确率。
+资料状态为「已核对官方来源，尚待专业法律复核」。部分历史案例为官方摘要或节选，具体收录范围以详情说明及官方原文为准。尚待核验的出处线索未计入案例数，也未进入 RAG；来源登记包含历史记录，不等于独立官方发布页面数。这不是全国法律或劳动争议案件的全量库。
+
+可以直接查看 [法律法规](https://laoyoujuai.cn/laws/)、[官方案例](https://laoyoujuai.cn/cases/)、[案例收录覆盖](https://laoyoujuai.cn/cases/coverage/) 和 [来源说明](https://laoyoujuai.cn/about/sources/)。资料数量和引用校验不代表法律结论的准确率。
 
 ## 本地运行
 
@@ -133,7 +154,7 @@ corepack pnpm run check
 | 想了解什么 | 从这里开始 |
 | --- | --- |
 | 回答怎样形成、来源如何分级 | [回答方法](https://laoyoujuai.cn/about/methodology/) · [内容复核](docs/CONTENT_REVIEW.md) |
-| 资料来源与覆盖范围 | [官网资料说明](https://laoyoujuai.cn/about/sources/) · [案例覆盖](docs/CASE_COVERAGE_AUDIT.md) |
+| 资料来源与覆盖范围 | [官网资料说明](https://laoyoujuai.cn/about/sources/) · [案例收录覆盖](https://laoyoujuai.cn/cases/coverage/) |
 | 本地架构、部署与费用控制 | [架构](docs/ARCHITECTURE.md) · [VPS 部署](deploy/vps/README.md) |
 | 安全与隐私 | [安全说明](docs/SECURITY.md) · [网站隐私说明](https://laoyoujuai.cn/privacy/) |
 | 项目记录 | [进度](docs/PROGRESS.md) · [决策记录](docs/DECISIONS.md) |
